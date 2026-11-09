@@ -1,0 +1,155 @@
+{
+  "head" : {
+    "vars" : [ "book", "bookLabel", "ordinal", "date", "isbn13" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "book" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q135107368"
+      },
+      "ordinal" : {
+        "type" : "literal",
+        "value" : "1"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2020-09-21T00:00:00Z"
+      },
+      "bookLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Dungeon Crawler Carl"
+      }
+    }, {
+      "book" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q135107369"
+      },
+      "ordinal" : {
+        "type" : "literal",
+        "value" : "2"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2021-01-02T00:00:00Z"
+      },
+      "bookLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Carl's Doomsday Scenario"
+      }
+    }, {
+      "book" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q135107371"
+      },
+      "ordinal" : {
+        "type" : "literal",
+        "value" : "3"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2021-03-19T00:00:00Z"
+      },
+      "bookLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "The Dungeon Anarchist's Cookbook"
+      }
+    }, {
+      "book" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q135107372"
+      },
+      "ordinal" : {
+        "type" : "literal",
+        "value" : "4"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2021-06-14T00:00:00Z"
+      },
+      "bookLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "The Gate of the Feral Gods"
+      }
+    }, {
+      "book" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q135107373"
+      },
+      "ordinal" : {
+        "type" : "literal",
+        "value" : "5"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2022-02-19T00:00:00Z"
+      },
+      "bookLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "The Butcher's Masquerade"
+      }
+    }, {
+      "book" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q135107375"
+      },
+      "ordinal" : {
+        "type" : "literal",
+        "value" : "6"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2023-06-14T00:00:00Z"
+      },
+      "bookLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "The Eye of the Bedlam Bride"
+      }
+    }, {
+      "book" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q135107376"
+      },
+      "ordinal" : {
+        "type" : "literal",
+        "value" : "7"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2024-11-07T00:00:00Z"
+      },
+      "bookLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "This Inevitable Ruin"
+      }
+    }, {
+      "book" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q136709701"
+      },
+      "ordinal" : {
+        "type" : "literal",
+        "value" : "8"
+      },
+      "bookLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "A Parade of Horribles"
+      }
+    } ]
+  }
+}

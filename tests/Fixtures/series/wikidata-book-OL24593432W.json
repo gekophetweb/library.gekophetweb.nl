@@ -1,0 +1,31 @@
+{
+  "head" : {
+    "vars" : [ "book", "series", "ordinal", "labelEn", "labelOriginal", "labelLatn" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "book" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q135107368"
+      },
+      "series" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q131612237"
+      },
+      "ordinal" : {
+        "type" : "literal",
+        "value" : "1"
+      },
+      "labelEn" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Dungeon Crawler Carl"
+      },
+      "labelOriginal" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Dungeon Crawler Carl"
+      }
+    } ]
+  }
+}

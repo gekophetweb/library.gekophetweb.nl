@@ -1,0 +1,2783 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:dcndl="http://ndl.go.jp/dcndl/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" version="2.0">
+  <channel>
+    <title>ベルセルク 三浦建太郎 - 国立国会図書館サーチ OpenSearch</title>
+    <link>https://ios-v2-prod-eks-alb.ndlsearch.ndl.go.jp/api/opensearch?title=%E3%83%99%E3%83%AB%E3%82%BB%E3%83%AB%E3%82%AF&amp;creator=%E4%B8%89%E6%B5%A6%E5%BB%BA%E5%A4%AA%E9%83%8E&amp;cnt=200</link>
+    <description>Search results for title=ベルセルク creator=三浦建太郎 cnt=200</description>
+    <language>ja</language>
+    <openSearch:totalResults>83</openSearch:totalResults>
+    <openSearch:startIndex>1</openSearch:startIndex>
+    <openSearch:itemsPerPage>200</openSearch:itemsPerPage>
+    <item>
+      <title>雄叫び ベルセルクポストカードブック</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000003589502</link>
+      <description><![CDATA[<p>白泉社,1998,4-592-73152-2<p><ul><li>タイトル：雄叫び ベルセルクポストカードブック</li><li>タイトル（読み）：オタケビ : ベルセルク ポストカード ブック</li><li>責任表示：三浦建太郎 著</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>文書・図像類</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000003589502</guid>
+      <pubDate>Thu, 15 Jul 2021 02:56:38 +0900</pubDate>
+      <dc:title>雄叫び ベルセルクポストカードブック</dc:title>
+      <dcndl:titleTranscription>オタケビ : ベルセルク ポストカード ブック</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>1998.8</dcterms:issued>
+      <dcndl:price>1300円</dcndl:price>
+      <dc:extent>絵はがき 1組 (32枚)</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-73152-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-73152-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000003589502</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20341504</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YKD</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000003589502"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592731528"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク : Blu-ray box : スペシャルプライス版</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027018472</link>
+      <description><![CDATA[<p>バップ,2016,<p><ul><li>タイトル：剣風伝奇ベルセルク : Blu-ray box : スペシャルプライス版</li><li>タイトル（読み）：ケンフプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作</li></ul>]]></description>
+      <author>三浦建太郎 原作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027018472</guid>
+      <pubDate>Mon, 19 Jan 2026 17:27:14 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク : Blu-ray box : スペシャルプライス版</dc:title>
+      <dcndl:titleTranscription>ケンフプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dc:publisher>バップ</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2016</dc:date>
+      <dcterms:issued>2016.4</dcterms:issued>
+      <dcndl:price>18000円</dcndl:price>
+      <dc:extent>ビデオディスク 5枚 (625分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPXY-72988</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027018472</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23047482</dc:identifier>
+      <dcndl:genre>アニメーション</dcndl:genre>
+      <dcndl:genreTranscription>アニメーション</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YL331</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027018472"/>
+      <dc:description> 2016</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009085282</link>
+      <description><![CDATA[<p>L-1,日本テレビ放送網,1998,<p><ul><li>タイトル：剣風伝奇ベルセルク Berserk</li><li>タイトル（読み）：ケンプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</li></ul>]]></description>
+      <author>三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009085282</guid>
+      <pubDate>Tue, 11 Sep 2007 23:59:01 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク Berserk</dc:title>
+      <dcndl:titleTranscription>ケンプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>L-1</dcndl:volume>
+      <dc:publisher>日本テレビ放送網</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>p1998.2</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (48分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPLY-70669</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009085282</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL311</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009085282"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009085299</link>
+      <description><![CDATA[<p>L-10,日本テレビ放送網,1998,<p><ul><li>タイトル：剣風伝奇ベルセルク Berserk</li><li>タイトル（読み）：ケンプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</li></ul>]]></description>
+      <author>三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009085299</guid>
+      <pubDate>Wed, 12 Sep 2007 00:38:00 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク Berserk</dc:title>
+      <dcndl:titleTranscription>ケンプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>L-10</dcndl:volume>
+      <dc:publisher>日本テレビ放送網</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>p1998.10</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (48分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPLY-70678</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009085299</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL311</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009085299"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009085302</link>
+      <description><![CDATA[<p>L-11,日本テレビ放送網,1998,<p><ul><li>タイトル：剣風伝奇ベルセルク Berserk</li><li>タイトル（読み）：ケンプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</li></ul>]]></description>
+      <author>三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009085302</guid>
+      <pubDate>Wed, 12 Sep 2007 00:38:16 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク Berserk</dc:title>
+      <dcndl:titleTranscription>ケンプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>L-11</dcndl:volume>
+      <dc:publisher>日本テレビ放送網</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>p1998.11</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (48分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPLY-70679</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009085302</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL311</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009085302"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009085306</link>
+      <description><![CDATA[<p>L-12,日本テレビ放送網,1998,<p><ul><li>タイトル：剣風伝奇ベルセルク Berserk</li><li>タイトル（読み）：ケンプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</li></ul>]]></description>
+      <author>三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009085306</guid>
+      <pubDate>Wed, 12 Sep 2007 00:38:32 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク Berserk</dc:title>
+      <dcndl:titleTranscription>ケンプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>L-12</dcndl:volume>
+      <dc:publisher>日本テレビ放送網</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>p1998.12</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (48分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPLY-70680</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009085306</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL311</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009085306"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009085307</link>
+      <description><![CDATA[<p>L-13,日本テレビ放送網,1999,<p><ul><li>タイトル：剣風伝奇ベルセルク Berserk</li><li>タイトル（読み）：ケンプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</li></ul>]]></description>
+      <author>三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009085307</guid>
+      <pubDate>Wed, 12 Sep 2007 00:38:47 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク Berserk</dc:title>
+      <dcndl:titleTranscription>ケンプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>L-13</dcndl:volume>
+      <dc:publisher>日本テレビ放送網</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1999</dc:date>
+      <dcterms:issued>p1999.1</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (53分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPLY-70681</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009085307</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL311</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009085307"/>
+      <dc:description> 1999</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009085283</link>
+      <description><![CDATA[<p>L-2,日本テレビ放送網,1998,<p><ul><li>タイトル：剣風伝奇ベルセルク Berserk</li><li>タイトル（読み）：ケンプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</li></ul>]]></description>
+      <author>三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009085283</guid>
+      <pubDate>Tue, 11 Sep 2007 23:59:40 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク Berserk</dc:title>
+      <dcndl:titleTranscription>ケンプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>L-2</dcndl:volume>
+      <dc:publisher>日本テレビ放送網</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>p1998.3</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (48分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPLY-70670</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009085283</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL311</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009085283"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009085287</link>
+      <description><![CDATA[<p>L-3,日本テレビ放送網,1998,<p><ul><li>タイトル：剣風伝奇ベルセルク Berserk</li><li>タイトル（読み）：ケンプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</li></ul>]]></description>
+      <author>三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009085287</guid>
+      <pubDate>Tue, 11 Sep 2007 23:59:50 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク Berserk</dc:title>
+      <dcndl:titleTranscription>ケンプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>L-3</dcndl:volume>
+      <dc:publisher>日本テレビ放送網</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>p1998.3</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (48分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPLY-70671</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009085287</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL311</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009085287"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009085291</link>
+      <description><![CDATA[<p>L-4,日本テレビ放送網,1998,<p><ul><li>タイトル：剣風伝奇ベルセルク Berserk</li><li>タイトル（読み）：ケンプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</li></ul>]]></description>
+      <author>三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009085291</guid>
+      <pubDate>Wed, 12 Sep 2007 00:00:01 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク Berserk</dc:title>
+      <dcndl:titleTranscription>ケンプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>L-4</dcndl:volume>
+      <dc:publisher>日本テレビ放送網</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>p1998.4</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (48分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPLY-70672</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009085291</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL311</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009085291"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009085293</link>
+      <description><![CDATA[<p>L-5,日本テレビ放送網,1998,<p><ul><li>タイトル：剣風伝奇ベルセルク Berserk</li><li>タイトル（読み）：ケンプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</li></ul>]]></description>
+      <author>三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009085293</guid>
+      <pubDate>Wed, 12 Sep 2007 00:00:12 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク Berserk</dc:title>
+      <dcndl:titleTranscription>ケンプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>L-5</dcndl:volume>
+      <dc:publisher>日本テレビ放送網</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>p1998.5</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (48分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPLY-70673</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009085293</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL311</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009085293"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009085294</link>
+      <description><![CDATA[<p>L-6,日本テレビ放送網,1998,<p><ul><li>タイトル：剣風伝奇ベルセルク Berserk</li><li>タイトル（読み）：ケンプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</li></ul>]]></description>
+      <author>三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009085294</guid>
+      <pubDate>Wed, 12 Sep 2007 00:00:22 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク Berserk</dc:title>
+      <dcndl:titleTranscription>ケンプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>L-6</dcndl:volume>
+      <dc:publisher>日本テレビ放送網</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>p1998.6</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (48分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPLY-70674</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009085294</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL311</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009085294"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009085295</link>
+      <description><![CDATA[<p>L-7,日本テレビ放送網,1998,<p><ul><li>タイトル：剣風伝奇ベルセルク Berserk</li><li>タイトル（読み）：ケンプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</li></ul>]]></description>
+      <author>三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009085295</guid>
+      <pubDate>Wed, 12 Sep 2007 00:36:55 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク Berserk</dc:title>
+      <dcndl:titleTranscription>ケンプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>L-7</dcndl:volume>
+      <dc:publisher>日本テレビ放送網</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>p1998.7</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (48分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPLY-70675</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009085295</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL311</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009085295"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009085297</link>
+      <description><![CDATA[<p>L-8,日本テレビ放送網,1998,<p><ul><li>タイトル：剣風伝奇ベルセルク Berserk</li><li>タイトル（読み）：ケンプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</li></ul>]]></description>
+      <author>三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009085297</guid>
+      <pubDate>Wed, 12 Sep 2007 00:37:29 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク Berserk</dc:title>
+      <dcndl:titleTranscription>ケンプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>L-8</dcndl:volume>
+      <dc:publisher>日本テレビ放送網</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>p1998.8</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (48分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPLY-70676</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009085297</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL311</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009085297"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>剣風伝奇ベルセルク Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009085298</link>
+      <description><![CDATA[<p>L-9,日本テレビ放送網,1998,<p><ul><li>タイトル：剣風伝奇ベルセルク Berserk</li><li>タイトル（読み）：ケンプウ デンキ ベルセルク</li><li>責任表示：三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</li></ul>]]></description>
+      <author>三浦建太郎 原作,高橋ナオヒト 監督,日本テレビ, バップ 製作著作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009085298</guid>
+      <pubDate>Wed, 12 Sep 2007 00:37:45 +0900</pubDate>
+      <dc:title>剣風伝奇ベルセルク Berserk</dc:title>
+      <dcndl:titleTranscription>ケンプウ デンキ ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>L-9</dcndl:volume>
+      <dc:publisher>日本テレビ放送網</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>p1998.9</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (48分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPLY-70677</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009085298</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL311</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009085298"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>劇場映画ベルセルク黄金時代篇 : Blu-ray box</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027228598</link>
+      <description><![CDATA[<p>バップ,2016,<p><ul><li>タイトル：劇場映画ベルセルク黄金時代篇 : Blu-ray box</li><li>タイトル（読み）：ゲキジョウ エイガ ベルセルク オウゴン ジダイヘン</li><li>責任表示：三浦建太郎 原作,大河内一楼 脚本,窪岡俊之 監督</li></ul>]]></description>
+      <author>三浦建太郎 原作,大河内一楼 脚本,窪岡俊之 監督</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027228598</guid>
+      <pubDate>Mon, 19 Jan 2026 17:27:48 +0900</pubDate>
+      <dc:title>劇場映画ベルセルク黄金時代篇 : Blu-ray box</dc:title>
+      <dcndl:titleTranscription>ゲキジョウ エイガ ベルセルク オウゴン ジダイヘン</dcndl:titleTranscription>
+      <dc:publisher>バップ</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2016</dc:date>
+      <dcterms:issued>2016.6</dcterms:issued>
+      <dcndl:price>13000円</dcndl:price>
+      <dc:extent>ビデオディスク 4枚 (395分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPXV-72992</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027228598</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23059200</dc:identifier>
+      <dcndl:genre>アニメーション</dcndl:genre>
+      <dcndl:genreTranscription>アニメーション</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YL337</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027228598"/>
+      <dc:description> 2016</dc:description>
+    </item>
+    <item>
+      <title>〈小説〉ベルセルク炎竜の騎士</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028287530</link>
+      <description><![CDATA[<p>白泉社,2017,978-4-592-16101-1<p><ul><li>タイトル：〈小説〉ベルセルク炎竜の騎士</li><li>タイトル（読み）：ショウセツ ベルセルク エンリュウ ノ キシ</li><li>責任表示：三浦建太郎 原作,深見真 小説</li><li>シリーズ名：YOUNG ANIMAL COMICS</li><li>NDC(10)：913.6</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,深見, 真, 1977-,三浦建太郎 原作,深見真 小説</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028287530</guid>
+      <pubDate>Thu, 15 Jul 2021 02:56:34 +0900</pubDate>
+      <dc:title>〈小説〉ベルセルク炎竜の騎士</dc:title>
+      <dcndl:titleTranscription>ショウセツ ベルセルク エンリュウ ノ キシ</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dc:creator>深見, 真, 1977-</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>フカミ, マコト, 1977-</dcndl:creatorTranscription>
+      <dcndl:seriesTitle>YOUNG ANIMAL COMICS</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2017</dc:date>
+      <dcterms:issued>2017.7</dcterms:issued>
+      <dcndl:price>780円</dcndl:price>
+      <dc:extent>187p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-16101-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028287530</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22909160</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07389878</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">KH824</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">913.6</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.lib.city.saitama.jp/bookdetail?num=2710255&amp;ctg=1"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.city.chiba.jp/licsxp-opac/WOpacTifSchCmpdDispAction.do"/>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000014348192"/>
+      <rdfs:seeAlso rdf:resource="https://www.lib-sakai.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1007000757267"/>
+      <rdfs:seeAlso rdf:resource="https://opac.libnet.pref.okayama.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1009812219246"/>
+      <rdfs:seeAlso rdf:resource="https://opac.miraionlibrary.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000002677009"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028287530"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592161011"/>
+      <dc:description> 2017</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク : 画集</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002568910</link>
+      <description><![CDATA[<p>白泉社,1997,4-592-73138-7<p><ul><li>タイトル：ベルセルク : 画集</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>NDC(9)：726.5</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002568910</guid>
+      <pubDate>Thu, 15 Jul 2021 02:56:40 +0900</pubDate>
+      <dc:title>ベルセルク : 画集</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1997</dc:date>
+      <dcterms:issued>1997.2</dcterms:issued>
+      <dcndl:price>2600円 (税込)</dcndl:price>
+      <dc:extent>121p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-73138-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-73138-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002568910</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">97053471</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">KC482</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.5</dc:subject>
+      <dc:description>折り込図1枚</dc:description>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.miyagi.jp/winj/opac/switch-detail-iccap.do?bibid=1107016126"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.pref.yamagata.jp/winj/opac/switch-detail-iccap.do?bibid=1100309271"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1197013153"/>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000000601452"/>
+      <rdfs:seeAlso rdf:resource="http://www.library.city.hiroshima.jp/winj/opac/switch-detail-iccap.do?bibid=1100875523"/>
+      <rdfs:seeAlso rdf:resource="https://opac.miraionlibrary.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1009710019944"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002568910"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14311013"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592731382"/>
+      <dc:description> 1997</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク = Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000136-I1971430859804986934</link>
+      <description><![CDATA[<p>Crunchyroll : Funimation,<p><ul><li>タイトル：ベルセルク = Berserk</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：[director, Shin Itagaki]</li></ul>]]></description>
+      <author>板垣, 伸,三浦, 建太郎,Gemba,ミルパンセ,ベルセルク製作委員会,Crunchyroll,[director, Shin Itagaki]</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000136-I1971430859804986934</guid>
+      <pubDate>Fri, 25 Sep 2026 11:13:32 +0900</pubDate>
+      <dc:title>ベルセルク = Berserk</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>板垣, 伸</dc:creator>
+      <dc:creator>三浦, 建太郎</dc:creator>
+      <dc:creator>Gemba</dc:creator>
+      <dc:creator>ミルパンセ</dc:creator>
+      <dc:creator>ベルセルク製作委員会</dc:creator>
+      <dc:creator>Crunchyroll</dc:creator>
+      <dcndl:creatorTranscription>イタガキ, シン</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>ミルパンセ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>ベルセルク セイサク イインカイ</dcndl:creatorTranscription>
+      <dc:publisher>Crunchyroll : Funimation</dc:publisher>
+      <dcndl:publicationPlace>US</dcndl:publicationPlace>
+      <dcterms:issued>[20--]</dcterms:issued>
+      <dc:identifier xsi:type="dcndl:NIIBibID">BD02054312</dc:identifier>
+      <dc:description>テレビアニメ</dc:description>
+      <dc:description>日本語音声 ; 英語吹替え ; 英語字幕付</dc:description>
+      <dc:description>Creator &amp; general supervisor: Kentarou Miura</dc:description>
+      <dc:description>Animation production: Gemba, Millepensee</dc:description>
+      <dc:description>Presented by: Berserk partnership</dc:description>
+      <dc:description>表カードに「English version by Crunchyroll」とあり</dc:description>
+      <dc:description>表カードに「Series runtime: 300 minutes」「Extras runtime: 28 minutes」とあり</dc:description>
+      <dc:description>容器の大きさ: 17cm</dc:description>
+      <dc:description>箱入 (18cm)</dc:description>
+      <dc:description>特典映像あり</dc:description>
+      <dc:description>[Blu-ray disc 1]: 13-20 + extras, [Blu-ray disc 2]: 21-24 + extras. [DVD disc 1]: 13-18, [DVD disc 2]: 19-24</dc:description>
+      <dc:description>表カード・箱に「Season II XII episodes」とあり</dc:description>
+      <dc:description>箱に「Blu-ray + DVD combo pack」とあり</dc:description>
+      <dc:description>レイティングあり</dc:description>
+      <dc:description>表カード・箱の発行者番号: CR-01459</dc:description>
+      <dc:description>ラベルの発行者番号: DV-01459A〜D</dc:description>
+      <rdfs:seeAlso rdf:resource="https://cir.nii.ac.jp/crid/1971430859804986934"/>
+      <dc:description/>
+    </item>
+    <item>
+      <title>ベルセルク = Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000136-I1971712334781718155</link>
+      <description><![CDATA[<p>Crunchyroll : Funimation,<p><ul><li>タイトル：ベルセルク = Berserk</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：[director, Shin Itagaki]</li></ul>]]></description>
+      <author>板垣, 伸,三浦, 建太郎,Gemba,ミルパンセ,ベルセルク製作委員会,Crunchyroll,[director, Shin Itagaki]</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000136-I1971712334781718155</guid>
+      <pubDate>Fri, 25 Sep 2026 11:13:32 +0900</pubDate>
+      <dc:title>ベルセルク = Berserk</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>板垣, 伸</dc:creator>
+      <dc:creator>三浦, 建太郎</dc:creator>
+      <dc:creator>Gemba</dc:creator>
+      <dc:creator>ミルパンセ</dc:creator>
+      <dc:creator>ベルセルク製作委員会</dc:creator>
+      <dc:creator>Crunchyroll</dc:creator>
+      <dcndl:creatorTranscription>イタガキ, シン</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>ミルパンセ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>ベルセルク セイサク イインカイ</dcndl:creatorTranscription>
+      <dc:publisher>Crunchyroll : Funimation</dc:publisher>
+      <dcndl:publicationPlace>US</dcndl:publicationPlace>
+      <dcterms:issued>[20--]</dcterms:issued>
+      <dc:identifier xsi:type="dcndl:NIIBibID">BD02053921</dc:identifier>
+      <dc:description>テレビアニメ</dc:description>
+      <dc:description>日本語音声 ; 英語吹替え ; 英語字幕付</dc:description>
+      <dc:description>Creator &amp; general supervisor: Kentarou Miura</dc:description>
+      <dc:description>Animation production: Gemba, Millepensee</dc:description>
+      <dc:description>Presented by: Berserk partnership</dc:description>
+      <dc:description>表カードに「English version by Crunchyroll」とあり</dc:description>
+      <dc:description>表カードに「Series runtime: 300 minutes」「Extras runtime: 6 minutes」とあり</dc:description>
+      <dc:description>容器の大きさ: 17cm</dc:description>
+      <dc:description>特典映像あり</dc:description>
+      <dc:description>[Blu-ray disc 1]: 1-9, [Blu-ray disc 2]: 10-12 + extras. [DVD disc 1]: 1-7, [DVD disc 2]: 8-12</dc:description>
+      <dc:description>表カードに「Season I XII episodes」とあり</dc:description>
+      <dc:description>レイティングあり</dc:description>
+      <dc:description>表カードの発行者番号: CR-01430</dc:description>
+      <dc:description>ラベルの発行者番号: DV-01429A〜D</dc:description>
+      <rdfs:seeAlso rdf:resource="https://cir.nii.ac.jp/crid/1971712334781718155"/>
+      <dc:description/>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I023508949</link>
+      <description><![CDATA[<p>黄金時代篇 1 覇王の卵,バップ,2012,<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 原作,大河内一楼 脚本,窪岡俊之 監督</li></ul>]]></description>
+      <author>三浦建太郎 原作,大河内一楼 脚本,窪岡俊之 監督</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I023508949</guid>
+      <pubDate>Mon, 19 Jan 2026 17:21:26 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>黄金時代篇 1 覇王の卵</dcndl:volume>
+      <dc:publisher>バップ</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2012</dc:date>
+      <dcterms:issued>2012.5</dcterms:issued>
+      <dcndl:price>5040円 (税込)</dcndl:price>
+      <dc:extent>ビデオディスク 1枚 (80分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPBV-13694</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">023508949</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22236530</dc:identifier>
+      <dcndl:genre>アニメーション</dcndl:genre>
+      <dcndl:genreTranscription>アニメーション</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YL321</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I023508949"/>
+      <dc:description> 2012</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I023992830</link>
+      <description><![CDATA[<p>黄金時代篇 2 ドルドレイ攻略,バップ,2012,<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 原作,大河内一楼 脚本,窪岡俊之 監督</li></ul>]]></description>
+      <author>三浦建太郎 原作,大河内一楼 脚本,窪岡俊之 監督</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I023992830</guid>
+      <pubDate>Mon, 19 Jan 2026 17:21:53 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>黄金時代篇 2 ドルドレイ攻略</dcndl:volume>
+      <dc:publisher>バップ</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2012</dc:date>
+      <dcterms:issued>2012.12</dcterms:issued>
+      <dcndl:price>5040円 (税込)</dcndl:price>
+      <dc:extent>ビデオディスク 1枚 (93分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPBV-13695</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">023992830</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22278547</dc:identifier>
+      <dcndl:genre>アニメーション</dcndl:genre>
+      <dcndl:genreTranscription>アニメーション</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YL321</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I023992830"/>
+      <dc:description> 2012</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I024423518</link>
+      <description><![CDATA[<p>黄金時代篇 3 降臨,バップ,2013,<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎, 白泉社 原作,大河内一楼 脚本,窪岡俊之 監督</li></ul>]]></description>
+      <author>三浦建太郎, 白泉社 原作,大河内一楼 脚本,窪岡俊之 監督</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I024423518</guid>
+      <pubDate>Mon, 19 Jan 2026 17:22:43 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dcndl:volume>黄金時代篇 3 降臨</dcndl:volume>
+      <dc:publisher>バップ</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2013</dc:date>
+      <dcterms:issued>2013.6</dcterms:issued>
+      <dcndl:price>5040円 (税込)</dcndl:price>
+      <dc:extent>ビデオディスク 1枚 (113分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">VPBV-13696</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">024423518</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22332329</dc:identifier>
+      <dcndl:genre>アニメーション</dcndl:genre>
+      <dcndl:genreTranscription>アニメーション</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YL327</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I024423518"/>
+      <dc:description> 2013</dc:description>
+    </item>
+    <item>
+      <title>ベルセルクオフィシャルガイドブック</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027603135</link>
+      <description><![CDATA[<p>白泉社,2016,978-4-592-14480-9<p><ul><li>タイトル：ベルセルクオフィシャルガイドブック</li><li>タイトル（読み）：ベルセルク オフィシャル ガイド ブック</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：YOUNG ANIMAL COMICS</li><li>NDC(9)：726.101</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027603135</guid>
+      <pubDate>Thu, 15 Jul 2021 02:56:35 +0900</pubDate>
+      <dc:title>ベルセルクオフィシャルガイドブック</dc:title>
+      <dcndl:titleTranscription>ベルセルク オフィシャル ガイド ブック</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:seriesTitle>YOUNG ANIMAL COMICS</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2016</dc:date>
+      <dcterms:issued>2016.10</dcterms:issued>
+      <dcndl:price>824円</dcndl:price>
+      <dc:extent>199p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-14480-9</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027603135</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22796791</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07373927</dc:identifier>
+      <dc:subject>漫画</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y88</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.101</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1124011076"/>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000014396514"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027603135"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592144809"/>
+      <dc:description> 2016</dc:description>
+    </item>
+    <item>
+      <title>ベルセルクビジュアル&amp;ストーリーfile</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002854682</link>
+      <description><![CDATA[<p>白泉社,1999,4-592-73169-7<p><ul><li>タイトル：ベルセルクビジュアル&ストーリーfile</li><li>タイトル（読み）：ベルセルク ビジュアル & ストーリー file</li><li>責任表示：三浦建太郎 著</li><li>NDC(9)：798.5</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002854682</guid>
+      <pubDate>Thu, 15 Jul 2021 02:56:39 +0900</pubDate>
+      <dc:title>ベルセルクビジュアル&amp;ストーリーfile</dc:title>
+      <dcndl:titleTranscription>ベルセルク ビジュアル &amp; ストーリー file</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1999</dc:date>
+      <dcterms:issued>1999.12</dcterms:issued>
+      <dcndl:price>1380円</dcndl:price>
+      <dc:extent>123p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-73169-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-73169-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002854682</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20034761</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDC9">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="http://www.library.pref.gifu.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101347054"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.city.nagoya.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1009819059119"/>
+      <rdfs:seeAlso rdf:resource="http://www.library.city.hiroshima.jp/winj/opac/switch-detail-iccap.do?bibid=1100098204"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002854682"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592731696"/>
+      <dc:description> 1999</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002440619</link>
+      <description><![CDATA[<p>10,白泉社,1995,4-592-13692-6<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002440619</guid>
+      <pubDate>Mon, 28 Mar 2022 19:39:27 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>10</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1995</dc:date>
+      <dcterms:issued>1995.9</dcterms:issued>
+      <dcndl:price>520円 (税込)</dcndl:price>
+      <dc:extent>233p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13692-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13692-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002440619</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">96002987</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC8">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329880"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006165"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115380"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002440619"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14199130"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16187457"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213692berserk01011"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592136927"/>
+      <dc:description> 1995</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002479948</link>
+      <description><![CDATA[<p>11,白泉社,1996,4-592-13693-4<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002479948</guid>
+      <pubDate>Mon, 28 Mar 2022 19:42:53 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>11</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1996</dc:date>
+      <dcterms:issued>1996.3</dcterms:issued>
+      <dcndl:price>520円 (税込)</dcndl:price>
+      <dc:extent>207p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13693-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13693-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002479948</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">96042316</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC8">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329881"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006166"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115381"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002479948"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14175931"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16187458"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213693berserk01111"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592136934"/>
+      <dc:description> 1996</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002532648</link>
+      <description><![CDATA[<p>12,白泉社,1996,4-592-13694-2<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002532648</guid>
+      <pubDate>Mon, 28 Mar 2022 19:47:12 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>12</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1996</dc:date>
+      <dcterms:issued>1996.9</dcterms:issued>
+      <dcndl:price>520円 (税込)</dcndl:price>
+      <dc:extent>200p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13694-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13694-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002532648</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">97017209</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329882"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006167"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115382"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002532648"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14175930"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16187459"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213694berserk01211"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592136941"/>
+      <dc:description> 1996</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002581346</link>
+      <description><![CDATA[<p>13,白泉社,1997,4-592-13695-0<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002581346</guid>
+      <pubDate>Mon, 28 Mar 2022 19:51:28 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>13</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1997</dc:date>
+      <dcterms:issued>1997.3</dcterms:issued>
+      <dcndl:price>520円 (税込)</dcndl:price>
+      <dc:extent>219p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13695-0</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13695-0</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002581346</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">97065907</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329883"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006168"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115383"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002581346"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14175937"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16187460"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213695berserk01311"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592136958"/>
+      <dc:description> 1997</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002654665</link>
+      <description><![CDATA[<p>14,白泉社,1997,4-592-13696-9<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 661</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002654665</guid>
+      <pubDate>Tue, 22 Mar 2022 19:25:11 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>14</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 661</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1997</dc:date>
+      <dcterms:issued>1997.9</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>228p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13696-9</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13696-9</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002654665</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">98048545</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329884"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006169"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115384"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002654665"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14179000"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16187461"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213696berserk01411"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592136965"/>
+      <dc:description> 1997</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002692082</link>
+      <description><![CDATA[<p>15,白泉社,1998,4-592-13697-7<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 675</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002692082</guid>
+      <pubDate>Tue, 22 Mar 2022 19:26:10 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>15</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 675</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>1998.1</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>1冊</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13697-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13697-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002692082</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">98075184</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329885"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006170"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115385"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002692082"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14178998"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16187462"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213697berserk01511"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592136972"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002741094</link>
+      <description><![CDATA[<p>16,白泉社,1998,4-592-13698-5<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 701</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002741094</guid>
+      <pubDate>Mon, 14 Mar 2022 19:50:08 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>16</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 701</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1998</dc:date>
+      <dcterms:issued>1998.8</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>234p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13698-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13698-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002741094</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">99025174</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329886"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006171"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115386"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002741094"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14179037"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213698berserk01611"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592136989"/>
+      <dc:description> 1998</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002788344</link>
+      <description><![CDATA[<p>17,白泉社,1999,4-592-13699-3<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 726</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002788344</guid>
+      <pubDate>Mon, 14 Mar 2022 19:57:59 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>17</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 726</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1999</dc:date>
+      <dcterms:issued>1999.4</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>1冊</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13699-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13699-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002788344</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">99077767</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329887"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006172"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002788344"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14179002"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213699berserk01711"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592136996"/>
+      <dc:description> 1999</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002848566</link>
+      <description><![CDATA[<p>18,白泉社,1999,4-592-13716-7<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002848566</guid>
+      <pubDate>Mon, 7 Mar 2022 19:38:02 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>18</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1999</dc:date>
+      <dcterms:issued>1999.10</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>217p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13716-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13716-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002848566</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20021188</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105128465"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006173"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002848566"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14199617"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16190338"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213716berserk01811"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592137160"/>
+      <dc:description> 1999</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002890219</link>
+      <description><![CDATA[<p>19,白泉社,2000,4-592-13717-5<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002890219</guid>
+      <pubDate>Mon, 7 Mar 2022 19:41:02 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>19</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2000</dc:date>
+      <dcterms:issued>2000.4</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>193p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13717-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13717-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002890219</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20060883</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105208430"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006174"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002890219"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14179063"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213717berserk01911"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592137177"/>
+      <dc:description> 2000</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000011251100</link>
+      <description><![CDATA[<p>1,白泉社,1990,4-592-13574-1<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000011251100</guid>
+      <pubDate>Mon, 15 Nov 2021 19:21:19 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>1</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1990</dc:date>
+      <dcterms:issued>1990.12</dcterms:issued>
+      <dcndl:price>476円</dcndl:price>
+      <dc:extent>221p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13574-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13574-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000011251100</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21968265</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329871"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006156"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000011251100"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16133640"/>
+      <rdfs:seeAlso rdf:resource="https://cir.nii.ac.jp/crid/1970304959827541419"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213574berserk00111"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592135746"/>
+      <dc:description> 1990</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002944706</link>
+      <description><![CDATA[<p>20,白泉社,2000,4-592-13718-3<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002944706</guid>
+      <pubDate>Mon, 28 Feb 2022 19:19:19 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>20</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2000</dc:date>
+      <dcterms:issued>2000.11</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>224p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13718-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13718-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002944706</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20111803</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105316720"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006175"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115364"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002944706"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14179097"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213718berserk02011"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592137184"/>
+      <dc:description> 2000</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000003000728</link>
+      <description><![CDATA[<p>21,白泉社,2001,4-592-13719-1<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000003000728</guid>
+      <pubDate>Mon, 28 Feb 2022 19:25:20 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>21</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2001</dc:date>
+      <dcterms:issued>2001.6</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>1冊</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13719-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13719-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000003000728</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20165622</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105424730"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101037754"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115389"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000003000728"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213719berserk02111"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592137191"/>
+      <dc:description> 2001</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000003057099</link>
+      <description><![CDATA[<p>22,白泉社,2001,4-592-13720-5<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000003057099</guid>
+      <pubDate>Mon, 21 Feb 2022 18:50:10 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>22</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2001</dc:date>
+      <dcterms:issued>2001.12</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>1冊</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13720-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13720-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000003057099</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20234105</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105551318"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101079986"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000003057099"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213720berserk02211"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592137207"/>
+      <dc:description> 2001</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000003662356</link>
+      <description><![CDATA[<p>23,白泉社,2002,4-592-13721-3<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000003662356</guid>
+      <pubDate>Mon, 21 Feb 2022 18:58:33 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>23</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2002</dc:date>
+      <dcterms:issued>2002.7</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>1冊</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13721-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13721-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000003662356</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20290685</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105649606"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1102041234"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115477"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000003662356"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213721berserk02311"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592137214"/>
+      <dc:description> 2002</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000004050548</link>
+      <description><![CDATA[<p>24,白泉社,2002,4-592-13722-1<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000004050548</guid>
+      <pubDate>Tue, 5 Oct 2021 20:06:37 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>24</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2002</dc:date>
+      <dcterms:issued>2002.12</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>192p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13722-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13722-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000004050548</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20385576</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105848595"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1103002225"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115549"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000004050548"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213722berserk02411"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592137221"/>
+      <dc:description> 2002</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000004176547</link>
+      <description><![CDATA[<p>25,白泉社,2003,4-592-13723-X<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets cimics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000004176547</guid>
+      <pubDate>Tue, 5 Oct 2021 20:10:51 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>25</dcndl:volume>
+      <dcndl:seriesTitle>Jets cimics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2003</dc:date>
+      <dcterms:issued>2003.7</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>208p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13723-X</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13723-X</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000004176547</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20445250</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105953621"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1103061161"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115577"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000004176547"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213723berserk02511"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592137238"/>
+      <dc:description> 2003</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000004329524</link>
+      <description><![CDATA[<p>26,白泉社,2003,4-592-13724-8<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets cimics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000004329524</guid>
+      <pubDate>Tue, 5 Oct 2021 20:16:47 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>26</dcndl:volume>
+      <dcndl:seriesTitle>Jets cimics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2003</dc:date>
+      <dcterms:issued>2003.12</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>1冊</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13724-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13724-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000004329524</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20536241</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1106127622"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1103102639"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115648"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000004329524"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213724berserk02611"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592137245"/>
+      <dc:description> 2003</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000007451910</link>
+      <description><![CDATA[<p>27,白泉社,2004,4-592-13725-6<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000007451910</guid>
+      <pubDate>Tue, 12 Oct 2021 19:43:06 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>27</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2004</dc:date>
+      <dcterms:issued>2004.8</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>214p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13725-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13725-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000007451910</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20657780</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1106333351"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1104056967"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115737"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000007451910"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213725berserk02711"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592137252"/>
+      <dc:description> 2004</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000007684478</link>
+      <description><![CDATA[<p>28,白泉社,2005,4-592-13726-4<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 71</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000007684478</guid>
+      <pubDate>Tue, 12 Oct 2021 19:51:00 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>28</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 71</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2005</dc:date>
+      <dcterms:issued>2005.3</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>1冊 (ページ付なし)</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13726-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13726-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000007684478</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20761338</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1106508624"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105013871"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115744"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000007684478"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213726berserk02811"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592137269"/>
+      <dc:description> 2005</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000007936540</link>
+      <description><![CDATA[<p>29,白泉社,2005,4-592-13727-2<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 195</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000007936540</guid>
+      <pubDate>Tue, 12 Oct 2021 19:57:42 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>29</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 195</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2005</dc:date>
+      <dcterms:issued>2005.10</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>211p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13727-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13727-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000007936540</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20884741</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1106677330"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105070827"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115753"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000007936540"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213727berserk02911"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592137276"/>
+      <dc:description> 2005</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000011251092</link>
+      <description><![CDATA[<p>2,白泉社,1991,4-592-13575-X<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 437</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000011251092</guid>
+      <pubDate>Mon, 15 Nov 2021 19:21:18 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>2</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 437</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1991</dc:date>
+      <dcterms:issued>1991.3</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>225p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13575-X</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13575-X</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000011251092</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21968266</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329872"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006157"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000011251092"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16137109"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213575berserk00211"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592135753"/>
+      <dc:description> 1991</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000008149357</link>
+      <description><![CDATA[<p>30,白泉社,2006,4-592-13728-0<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 232</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000008149357</guid>
+      <pubDate>Mon, 18 Oct 2021 20:42:33 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>30</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 232</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2006</dc:date>
+      <dcterms:issued>2006.4</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>163p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13728-0</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13728-0</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000008149357</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21008213</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1106845021"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1106022748"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115843"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000008149357"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213728berserk03011"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592137283"/>
+      <dc:description> 2006</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000008330757</link>
+      <description><![CDATA[<p>31,白泉社,2006,4-592-14431-7<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 267</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000008330757</guid>
+      <pubDate>Mon, 18 Oct 2021 20:48:26 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>31</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 267</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2006</dc:date>
+      <dcterms:issued>2006.10</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>1冊 (ページ付なし)</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-14431-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-14431-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000008330757</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21121026</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1107027092"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1106069099"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115846"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000008330757"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59214431berserk03111"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592144311"/>
+      <dc:description> 2006</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009196948</link>
+      <description><![CDATA[<p>32,白泉社,2007,978-4-592-14432-8<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 525</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009196948</guid>
+      <pubDate>Mon, 25 Oct 2021 20:31:13 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>32</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 525</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2007</dc:date>
+      <dcterms:issued>2007.12</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>143p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-14432-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009196948</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21349445</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1107392637"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1107087745"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115937"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009196948"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59214432berserk03211"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592144328"/>
+      <dc:description> 2007</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000009762233</link>
+      <description><![CDATA[<p>33,白泉社,2008,978-4-592-14433-5<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 593</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000009762233</guid>
+      <pubDate>Mon, 1 Nov 2021 21:30:24 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>33</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 593</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2008</dc:date>
+      <dcterms:issued>2008.10</dcterms:issued>
+      <dcndl:price>524円</dcndl:price>
+      <dc:extent>1冊 (ページ付なし)</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-14433-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000009762233</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21502787</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1107683675"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1108077494"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001101535368"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000009762233"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59214433berserk03311"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592144335"/>
+      <dc:description> 2008</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000010576954</link>
+      <description><![CDATA[<p>34,白泉社,2009,978-4-592-14434-2<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 648</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000010576954</guid>
+      <pubDate>Mon, 1 Nov 2021 21:42:49 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>34</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 648</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2009</dc:date>
+      <dcterms:issued>2009.10</dcterms:issued>
+      <dcndl:price>524円</dcndl:price>
+      <dc:extent>1冊</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-14434-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000010576954</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21656174</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1154085806"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1109071187"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001101678140"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000010576954"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59214434berserk03411"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592144342"/>
+      <dc:description> 2009</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000011011698</link>
+      <description><![CDATA[<p>35,白泉社,2010,978-4-592-14435-9<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 709</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000011011698</guid>
+      <pubDate>Mon, 8 Nov 2021 20:28:29 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>35</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 709</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2010</dc:date>
+      <dcterms:issued>2010.10</dcterms:issued>
+      <dcndl:price>524円</dcndl:price>
+      <dc:extent>170p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-14435-9</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000011011698</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21829919</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1154085808"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1110070753"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001101777381"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000011011698"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59214435berserk03511"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592144359"/>
+      <dc:description> 2010</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000011283506</link>
+      <description><![CDATA[<p>36,白泉社,2011,978-4-592-14436-6<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 767</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000011283506</guid>
+      <pubDate>Mon, 15 Nov 2021 19:24:13 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>36</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 767</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2011</dc:date>
+      <dcterms:issued>2011.9</dcterms:issued>
+      <dcndl:price>524円</dcndl:price>
+      <dc:extent>128p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-14436-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000011283506</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21986708</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1154085809"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1111067661"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001101919075"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000011283506"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59214436berserk03611"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592144366"/>
+      <dc:description> 2011</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I024354090</link>
+      <description><![CDATA[<p>37,白泉社,2013,978-4-592-14437-3<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：JETS COMICS ; 887</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I024354090</guid>
+      <pubDate>Mon, 29 Nov 2021 19:32:23 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>37</dcndl:volume>
+      <dcndl:seriesTitle>JETS COMICS ; 887</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2013</dc:date>
+      <dcterms:issued>2013.4</dcterms:issued>
+      <dcndl:price>524円</dcndl:price>
+      <dc:extent>1冊</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-14437-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">024354090</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22227105</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07296236</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1154085810"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1113039951"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001103015784"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I024354090"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59214437berserk03711"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592105039"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592144373"/>
+      <dc:description> 2013</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027429239</link>
+      <description><![CDATA[<p>38,白泉社,2016,978-4-592-14438-0<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：YOUNG ANIMAL COMICS</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027429239</guid>
+      <pubDate>Wed, 19 Jan 2022 00:39:05 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>38</dcndl:volume>
+      <dcndl:seriesTitle>YOUNG ANIMAL COMICS</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2016</dc:date>
+      <dcterms:issued>2016.7</dcterms:issued>
+      <dcndl:price>580円</dcndl:price>
+      <dc:extent>1冊</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-14438-0</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027429239</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22749377</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07368881</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1152841546"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1113392695"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001103340225"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027429239"/>
+      <rdfs:seeAlso rdf:resource="https://cir.nii.ac.jp/crid/1970867909857117450"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59214438berserk03811"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592144380"/>
+      <dc:description> 2016</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028287502</link>
+      <description><![CDATA[<p>39,白泉社,2017,978-4-592-14439-7<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：YOUNG ANIMAL COMICS</li><li>NDC(10)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028287502</guid>
+      <pubDate>Tue, 18 Jan 2022 01:56:44 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>39</dcndl:volume>
+      <dcndl:seriesTitle>YOUNG ANIMAL COMICS</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2017</dc:date>
+      <dcterms:issued>2017.7</dcterms:issued>
+      <dcndl:price>580円</dcndl:price>
+      <dc:extent>1冊(ページ付なし)</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-14439-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028287502</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22909214</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07389450</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1153021643"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1113499454"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001103432857"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028287502"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59214439berserk03911"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592144397"/>
+      <dc:description> 2017</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000011251085</link>
+      <description><![CDATA[<p>3,白泉社,1991,4-592-13576-8<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000011251085</guid>
+      <pubDate>Mon, 15 Nov 2021 19:21:17 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>3</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1991</dc:date>
+      <dcterms:issued>1991.10</dcterms:issued>
+      <dcndl:price>476円</dcndl:price>
+      <dc:extent>232p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13576-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13576-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000011251085</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21968267</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329873"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006158"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115373"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000011251085"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16414373"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213576berserk00311"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592135760"/>
+      <dc:description> 1991</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I029219057</link>
+      <description><![CDATA[<p>40,白泉社,2018,978-4-592-14440-3<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：YOUNG ANIMAL COMICS</li><li>NDC(10)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I029219057</guid>
+      <pubDate>Mon, 24 Jan 2022 19:54:17 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>40</dcndl:volume>
+      <dcndl:seriesTitle>YOUNG ANIMAL COMICS</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2018</dc:date>
+      <dcterms:issued>2018.10</dcterms:issued>
+      <dcndl:price>580円</dcndl:price>
+      <dc:extent>1冊(ページ付なし)</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-14440-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">029219057</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23124338</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07415050</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1153254311"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1113626445"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001103544822"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I029219057"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59214440berserk04011"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592144403"/>
+      <dc:description> 2018</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I031876330</link>
+      <description><![CDATA[<p>41,白泉社,2021,978-4-592-10629-6<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎</li><li>シリーズ名：Young animal comics = ヤングアニマルcomics</li><li>シリーズ名（読み）：Young animal comics = ヤング アニマル comics</li><li>NDC(10)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I031876330</guid>
+      <pubDate>Fri, 21 Jan 2022 19:20:42 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>41</dcndl:volume>
+      <dcndl:edition>キャンバスアート&amp;ドラマCD付き特装版</dcndl:edition>
+      <dcndl:seriesTitle>Young animal comics = ヤングアニマルcomics</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>Young animal comics = ヤング アニマル comics</dcndl:seriesTitleTranscription>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2021</dc:date>
+      <dcterms:issued>2021.12</dcterms:issued>
+      <dcndl:price>3600円</dcndl:price>
+      <dc:extent>1冊</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-10629-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">031876330</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23633158</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YU51</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <dc:description>出版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I031876330"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592106296"/>
+      <dc:description> 2021</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I031876365</link>
+      <description><![CDATA[<p>41,白泉社,2021,978-4-592-16691-7<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：YOUNG ANIMAL COMICS</li><li>NDC(10)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I031876365</guid>
+      <pubDate>Tue, 25 Jan 2022 19:16:13 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>41</dcndl:volume>
+      <dcndl:seriesTitle>YOUNG ANIMAL COMICS</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2021</dc:date>
+      <dcterms:issued>2021.12</dcterms:issued>
+      <dcndl:price>580円</dcndl:price>
+      <dc:extent>1冊</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-16691-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">031876365</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23634405</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07478548</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <dc:description>出版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1153926491"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1113935715"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001103818508"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I031876365"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59216691berserk04111"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592166917"/>
+      <dc:description> 2021</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I033067940</link>
+      <description><![CDATA[<p>42,白泉社,2023,978-4-592-10635-7<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 原作,スタジオ我画 漫画,森恒二 監修</li><li>シリーズ名：Young animal comics</li><li>NDC(10)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,スタジオ我画,森, 恒二,三浦建太郎 原作,スタジオ我画 漫画,森恒二 監修</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I033067940</guid>
+      <pubDate>Thu, 19 Oct 2023 18:05:27 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dc:creator>スタジオ我画</dc:creator>
+      <dc:creator>森, 恒二</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>スタジオ ガガ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>モリ, コウジ</dcndl:creatorTranscription>
+      <dcndl:volume>42</dcndl:volume>
+      <dcndl:edition>ガッツ (狂戦士の甲冑) 胸像フィギュア付き特装版</dcndl:edition>
+      <dcndl:seriesTitle>Young animal comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2023</dc:date>
+      <dcterms:issued>2023.10</dcterms:issued>
+      <dcndl:price>7264円</dcndl:price>
+      <dc:extent>176 p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-10635-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">033067940</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23895746</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <dc:description>出版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I033067940"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592106357"/>
+      <dc:description> 2023</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000001-I14211122090333</link>
+      <description><![CDATA[<p>４２,白泉社,2023,4592166922<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 原作 ; スタジオ我画 漫画 ; 森恒二 監修</li><li>シリーズ名：ＹＯＵＮＧ　ＡＮＩＭＡＬ　ＣＯＭＩＣＳ</li><li>シリーズ名（読み）：ヤング　アニマル　コミックス</li><li>NDC(10)：726.1</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎,スタジオ我画,森, 恒二,三浦建太郎 原作 ; スタジオ我画 漫画 ; 森恒二 監修</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000001-I14211122090333</guid>
+      <pubDate>Fri, 15 Dec 2023 09:58:56 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎</dc:creator>
+      <dc:creator>スタジオ我画</dc:creator>
+      <dc:creator>森, 恒二</dc:creator>
+      <dcndl:creatorTranscription>ミウラ，ケンタロウ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>スタジオ, ガガ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>モリ，コウジ</dcndl:creatorTranscription>
+      <dcndl:volume>４２</dcndl:volume>
+      <dcndl:seriesTitle>ＹＯＵＮＧ　ＡＮＩＭＡＬ　ＣＯＭＩＣＳ</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ヤング　アニマル　コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>白泉社</dc:publisher>
+      <dc:date xsi:type="dcterms:W3CDTF">2023</dc:date>
+      <dcterms:issued>２０２３．１０</dcterms:issued>
+      <dcndl:price>６５０円</dcndl:price>
+      <dc:extent>１７６ｐ ; １９ｃｍ</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4592166922</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07512785</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC8">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1154244692"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1122090333"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001103955820"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59216692berserk04211"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592166924"/>
+      <dc:description> 2023</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I034265510</link>
+      <description><![CDATA[<p>43,白泉社,2025,978-4-592-10640-1<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 原作,スタジオ我画 漫画,森恒二 監修</li><li>シリーズ名：Young animal comics = ヤングアニマルcomics</li><li>シリーズ名（読み）：Young animal comics = ヤング アニマル comics</li><li>NDC(10)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,スタジオ我画,森, 恒二,三浦建太郎 原作,スタジオ我画 漫画,森恒二 監修</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I034265510</guid>
+      <pubDate>Mon, 6 Oct 2025 19:38:05 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dc:creator>スタジオ我画</dc:creator>
+      <dc:creator>森, 恒二</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>スタジオ ガガ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>モリ, コウジ</dcndl:creatorTranscription>
+      <dcndl:volume>43</dcndl:volume>
+      <dcndl:edition>ゾッド胸像フィギュア付き特装版</dcndl:edition>
+      <dcndl:seriesTitle>Young animal comics = ヤングアニマルcomics</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>Young animal comics = ヤング アニマル comics</dcndl:seriesTitleTranscription>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2025</dc:date>
+      <dcterms:issued>2025.9</dcterms:issued>
+      <dcndl:price>8800円</dcndl:price>
+      <dc:extent>188 p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-592-10640-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">034265510</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">24169469</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <dc:description>出版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I034265510"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592106401"/>
+      <dc:description> 2025</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000001-I14211125033549</link>
+      <description><![CDATA[<p>４３,白泉社,2025,4592166930<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 原作 ; スタジオ我画 漫画 ; 森恒二 監修</li><li>シリーズ名：ＹＯＵＮＧ　ＡＮＩＭＡＬ　ＣＯＭＩＣＳ</li><li>シリーズ名（読み）：ヤング　アニマル　コミックス</li><li>NDC(10)：726.1</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎,スタジオ我画,森, 恒二,三浦建太郎 原作 ; スタジオ我画 漫画 ; 森恒二 監修</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000001-I14211125033549</guid>
+      <pubDate>Thu, 23 Oct 2025 09:02:23 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎</dc:creator>
+      <dc:creator>スタジオ我画</dc:creator>
+      <dc:creator>森, 恒二</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>スタジオ, ガガ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>モリ, コウジ</dcndl:creatorTranscription>
+      <dcndl:volume>４３</dcndl:volume>
+      <dcndl:seriesTitle>ＹＯＵＮＧ　ＡＮＩＭＡＬ　ＣＯＭＩＣＳ</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ヤング　アニマル　コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>白泉社</dc:publisher>
+      <dc:date xsi:type="dcterms:W3CDTF">2025</dc:date>
+      <dcterms:issued>２０２５．９</dcterms:issued>
+      <dcndl:price>８００円</dcndl:price>
+      <dc:extent>１８８ｐ ; １９ｃｍ</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4592166930</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07551438</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC8">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1154866296"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1125033549"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59216693berserk04311"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592166931"/>
+      <dc:description> 2025</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000011251081</link>
+      <description><![CDATA[<p>4,白泉社,1992,4-592-13577-6<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000011251081</guid>
+      <pubDate>Mon, 15 Nov 2021 19:21:16 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>4</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1992</dc:date>
+      <dcterms:issued>1992.2</dcterms:issued>
+      <dcndl:price>476円</dcndl:price>
+      <dc:extent>230p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13577-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13577-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000011251081</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21968268</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329874"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006159"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115374"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000011251081"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16416028"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213577berserk00411"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592135777"/>
+      <dc:description> 1992</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000011251073</link>
+      <description><![CDATA[<p>5,白泉社,1993,4-592-13578-4<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000011251073</guid>
+      <pubDate>Mon, 15 Nov 2021 19:21:15 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>5</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1993</dc:date>
+      <dcterms:issued>1993.3</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>235p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13578-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13578-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000011251073</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21968269</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329875"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006160"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115375"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000011251073"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16427956"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213578berserk00511"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592135784"/>
+      <dc:description> 1993</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002276078</link>
+      <description><![CDATA[<p>6,白泉社,1993,4-592-13579-2<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002276078</guid>
+      <pubDate>Mon, 4 Apr 2022 19:41:47 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>6</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1993</dc:date>
+      <dcterms:issued>1993.9</dcterms:issued>
+      <dcndl:price>520円 (税込)</dcndl:price>
+      <dc:extent>214p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13579-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13579-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002276078</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">93069150</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC8">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329876"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006161"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002276078"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14175920"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16132452"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213579berserk00611"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592135791"/>
+      <dc:description> 1993</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000011251056</link>
+      <description><![CDATA[<p>7,白泉社,1994,4-592-13580-6<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000011251056</guid>
+      <pubDate>Mon, 15 Nov 2021 19:21:14 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>7</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1994</dc:date>
+      <dcterms:issued>1994.3</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>192p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13580-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13580-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000011251056</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21968270</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329877"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006162"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115377"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000011251056"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16132455"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213552berserk00711"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592135807"/>
+      <dc:description> 1994</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002350457</link>
+      <description><![CDATA[<p>8,白泉社,1994,4-592-13690-X<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002350457</guid>
+      <pubDate>Mon, 4 Apr 2022 19:48:03 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>8</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1994</dc:date>
+      <dcterms:issued>1994.9</dcterms:issued>
+      <dcndl:price>520円 (税込)</dcndl:price>
+      <dc:extent>225p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13690-X</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13690-X</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002350457</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">94072135</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC8">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329878"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006163"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002350457"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14193906"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16136847"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213657berserk00811"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592136903"/>
+      <dc:description> 1994</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000002393519</link>
+      <description><![CDATA[<p>9,白泉社,1995,4-592-13691-8<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000002393519</guid>
+      <pubDate>Mon, 28 Mar 2022 19:36:40 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>9</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1995</dc:date>
+      <dcterms:issued>1995.3</dcterms:issued>
+      <dcndl:price>520円 (税込)</dcndl:price>
+      <dc:extent>224p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13691-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13691-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000002393519</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">95039140</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC8">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329879"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006164"/>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1001102115379"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000002393519"/>
+      <rdfs:seeAlso rdf:resource="https://dl.ndl.go.jp/pid/14175927"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16187456"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213691berserk00911"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592136910"/>
+      <dc:description> 1995</dc:description>
+    </item>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000098-Icm_itemM314105</link>
+      <description><![CDATA[<p>EPISODE:１,白泉社,2007-05-17,9784592842019<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：MyBestRemix</li><li>シリーズ名（読み）：マイベストリミックス</li></ul>]]></description>
+      <author>三浦建太郎,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000098-Icm_itemM314105</guid>
+      <pubDate>Tue, 12 Nov 2024 01:08:13 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦建太郎</dc:creator>
+      <dcndl:volume>EPISODE:１</dcndl:volume>
+      <dcndl:seriesTitle>MyBestRemix</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>マイベストリミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2007-05-17</dc:date>
+      <dcterms:issued>2007.05.17</dcterms:issued>
+      <dcndl:price>600</dcndl:price>
+      <dc:identifier xsi:type="dcndl:ISBN">9784592842019</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">9784592842019</dc:identifier>
+      <dc:description>単行本全巻ID : C254418</dc:description>
+      <dc:description>ID : M314105</dc:description>
+      <rdfs:seeAlso rdf:resource="https://mediaarts-db.artmuseums.go.jp/id/M314105"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592842019"/>
+      <dc:description> 2007-05-17</dc:description>
+    </item>
+    <item>
+      <title>Berserk / írta és rajzolta Miura Kentaró.</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000010879626</link>
+      <description><![CDATA[<p>Delta Vision,2008,<p><ul><li>タイトル：Berserk / írta és rajzolta Miura Kentaró.</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000010879626</guid>
+      <pubDate>Mon, 3 Jun 2024 20:16:20 +0900</pubDate>
+      <dc:title>Berserk / írta és rajzolta Miura Kentaró.</dc:title>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:edition>1. magyar kiad.</dcndl:edition>
+      <dc:publisher>Delta Vision</dc:publisher>
+      <dcndl:publicationPlace>HU</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2008</dc:date>
+      <dcterms:issued>[2008]-</dcterms:issued>
+      <dc:extent>v. : ill. ; 19 cm.</dc:extent>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000010879626</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">KC486</dc:subject>
+      <dc:description>Printed 'manga-style' in the authentic Japanese right-to-left format.</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000010879626"/>
+      <dc:description> 2008</dc:description>
+    </item>
+    <item>
+      <title>Berserk / Kentaro Miura.</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000010822260</link>
+      <description><![CDATA[<p>Glénat,2004,<p><ul><li>タイトル：Berserk / Kentaro Miura.</li><li>シリーズ名：Seinen manga</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000010822260</guid>
+      <pubDate>Mon, 3 Jun 2024 19:30:53 +0900</pubDate>
+      <dc:title>Berserk / Kentaro Miura.</dc:title>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:seriesTitle>Seinen manga</dcndl:seriesTitle>
+      <dc:publisher>Glénat</dc:publisher>
+      <dcndl:publicationPlace>FR</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2004</dc:date>
+      <dcterms:issued>c2004-</dcterms:issued>
+      <dc:extent>v.</dc:extent>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000010822260</dc:identifier>
+      <dc:identifier xsi:type="dcndl:OCLCNO">470477463</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcterms:DDC">741.5</dc:subject>
+      <dc:description>Related URL: Notice et cote du catalogue de la Bibliothèque nationale de France http: //catalogue.bnf.fr/ark: /12148/cb39268401k.</dc:description>
+      <dc:description>Printed 'manga-style' in the authentic Japanese right-to-left format.</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000010822260"/>
+      <dc:description> 2004</dc:description>
+    </item>
+    <item>
+      <title>Berserk.</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I031551958</link>
+      <description><![CDATA[<p>1,Crew s.r.o.,2020,9788074498749<p><ul><li>タイトル：Berserk.</li><li>責任表示：Kentaró Miura</li><li>シリーズ名：Crew manga</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,Kentaró Miura</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I031551958</guid>
+      <pubDate>Mon, 3 Jun 2024 19:45:21 +0900</pubDate>
+      <dc:title>Berserk.</dc:title>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>1</dcndl:volume>
+      <dcndl:seriesTitle>Crew manga</dcndl:seriesTitle>
+      <dc:publisher>Crew s.r.o.</dc:publisher>
+      <dcndl:publicationPlace>CZ</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2020</dc:date>
+      <dcterms:issued>2020</dcterms:issued>
+      <dc:extent>221 pages</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">9788074498749</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">9788074498749</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">031551958</dc:identifier>
+      <dc:identifier xsi:type="dcndl:OCLCNO">1200257476</dc:identifier>
+      <dcndl:genre>Manga.</dcndl:genre>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcterms:UDC">741.52(0:82-32)</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>Translated from Japanese</dc:description>
+      <dc:description>Printed in Japanese right-to-left format</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I031551958"/>
+      <rdfs:seeAlso rdf:resource="https://cir.nii.ac.jp/crid/1970586434872717348"/>
+      <dc:description> 2020</dc:description>
+    </item>
+    <item>
+      <title>Berserk.</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I030239377</link>
+      <description><![CDATA[<p>40,Glénat,2019,9782344033845<p><ul><li>タイトル：Berserk.</li><li>責任表示：Kentaro Miura.</li><li>シリーズ名：Seinen manga</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,Kentaro Miura.</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I030239377</guid>
+      <pubDate>Mon, 3 Jun 2024 19:38:49 +0900</pubDate>
+      <dc:title>Berserk.</dc:title>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>40</dcndl:volume>
+      <dcndl:edition>Édition française.</dcndl:edition>
+      <dcndl:seriesTitle>Seinen manga</dcndl:seriesTitle>
+      <dc:publisher>Glénat</dc:publisher>
+      <dcndl:publicationPlace>FR</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2019</dc:date>
+      <dcterms:issued>[2019]</dcterms:issued>
+      <dc:extent>1 volume (unpaged)</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">9782344033845</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">9782344033845</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">030239377</dc:identifier>
+      <dc:identifier xsi:type="dcndl:OCLCNO">1104226030</dc:identifier>
+      <dc:subject>Guts (Personnage fictif)--Bandes dessinées.</dc:subject>
+      <dcndl:genre>Bandes dessinées de fantasy.</dcndl:genre>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcterms:DDC">741.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>Printed 'manga-style' in the authentic Japanese right-to-left format.</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I030239377"/>
+      <dc:description> 2019</dc:description>
+    </item>
+    <item>
+      <title>Berserk.</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I030239232</link>
+      <description><![CDATA[<p>40,Dark Horse Manga,2019,1506714986<p><ul><li>タイトル：Berserk.</li><li>責任表示：by Kentaro Miura,translation, Duane Johnson,lettering and retouch, Studio Cutie</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,by Kentaro Miura,translation, Duane Johnson,lettering and retouch, Studio Cutie</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I030239232</guid>
+      <pubDate>Mon, 3 Jun 2024 19:38:42 +0900</pubDate>
+      <dc:title>Berserk.</dc:title>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>40</dcndl:volume>
+      <dcndl:edition>First edition.</dcndl:edition>
+      <dc:publisher>Dark Horse Manga</dc:publisher>
+      <dcndl:publicationPlace>US</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2019</dc:date>
+      <dcterms:issued>2019.</dcterms:issued>
+      <dc:extent>1 volume (unpaged)</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">1506714986</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">030239232</dc:identifier>
+      <dc:identifier xsi:type="dcndl:OCLCNO">1091846332</dc:identifier>
+      <dc:subject>Swordsmen--Comic books, strips, etc.</dc:subject>
+      <dcndl:genre>Action and adventure comics.</dcndl:genre>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>Printed 'manga-style' in the authentic Japanese right-to-left format.</dc:description>
+      <dc:description>Translated from the Japanese.</dc:description>
+      <dc:description>"First published in Japan in 2018 by Hakusensha, Inc., Tokyo."--Title page verso.</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I030239232"/>
+      <dc:description> 2019</dc:description>
+    </item>
+    <item>
+      <title>Berserk.</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032618533</link>
+      <description><![CDATA[<p>41,Glénat,2022,9782344053416<p><ul><li>タイトル：Berserk.</li><li>責任表示：Kentaro Miura</li><li>シリーズ名：Seinen manga</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,Kentaro Miura</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032618533</guid>
+      <pubDate>Mon, 3 Jun 2024 19:49:10 +0900</pubDate>
+      <dc:title>Berserk.</dc:title>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>41</dcndl:volume>
+      <dcndl:edition>Édition française</dcndl:edition>
+      <dcndl:seriesTitle>Seinen manga</dcndl:seriesTitle>
+      <dc:publisher>Glénat</dc:publisher>
+      <dcndl:publicationPlace>FR</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2022</dc:date>
+      <dcterms:issued>[2022]</dcterms:issued>
+      <dc:extent>1 volume (unpaged)</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">9782344053416</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">9782344053416</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032618533</dc:identifier>
+      <dc:identifier xsi:type="dcndl:OCLCNO">1334727359</dc:identifier>
+      <dc:subject>Guts (Personnage fictif)--Bandes dessinées</dc:subject>
+      <dcndl:genre>Bandes dessinées de fantasy.</dcndl:genre>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>Printed 'manga-style' in the authentic Japanese right-to-left format</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032618533"/>
+      <dc:description> 2022</dc:description>
+    </item>
+    <item>
+      <title>Berserk.</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032608596</link>
+      <description><![CDATA[<p>41,Dark Horse Books,2022,9781506733777<p><ul><li>タイトル：Berserk.</li><li>責任表示：by Kentaro Miura,translation, Duane Johnson,lettering and retouch, Studio Cutie</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,by Kentaro Miura,translation, Duane Johnson,lettering and retouch, Studio Cutie</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032608596</guid>
+      <pubDate>Mon, 3 Jun 2024 19:48:17 +0900</pubDate>
+      <dc:title>Berserk.</dc:title>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>41</dcndl:volume>
+      <dcndl:edition>First edition</dcndl:edition>
+      <dc:publisher>Dark Horse Books</dc:publisher>
+      <dcndl:publicationPlace>US</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2022</dc:date>
+      <dcterms:issued>2022</dcterms:issued>
+      <dc:extent>1 volume (unpaged)</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">9781506733777</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">9781506733777</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032608596</dc:identifier>
+      <dc:identifier xsi:type="dcndl:OCLCNO">1346933445</dc:identifier>
+      <dc:subject>Swordsmen--Comic books, strips, etc</dc:subject>
+      <dcndl:genre>Graphic novels</dcndl:genre>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcterms:DDC">741.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>Printed 'manga-style' in the authentic Japanese right-to-left format</dc:description>
+      <dc:description>Translated from the Japanese</dc:description>
+      <dc:description>"First published in Japan in 2021 by Hakusensha, Inc., Tokyo."--Title page verso</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032608596"/>
+      <dc:description> 2022</dc:description>
+    </item>
+    <item>
+      <title>Berserk.</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I033770279</link>
+      <description><![CDATA[<p>42,Glénat,2024,9782344063644<p><ul><li>タイトル：Berserk.</li><li>責任表示：une oeuvre originale de Kentaro Miura,manga, Studio Gaga,supervision, Kouji Mori</li><li>シリーズ名：Seinen manga</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,スタジオ我画,une oeuvre originale de Kentaro Miura,manga, Studio Gaga,supervision, Kouji Mori</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I033770279</guid>
+      <pubDate>Fri, 18 Apr 2025 22:45:18 +0900</pubDate>
+      <dc:title>Berserk.</dc:title>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dc:creator>スタジオ我画</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>スタジオ ガガ</dcndl:creatorTranscription>
+      <dcndl:volume>42</dcndl:volume>
+      <dcndl:edition>Édition française</dcndl:edition>
+      <dcndl:seriesTitle>Seinen manga</dcndl:seriesTitle>
+      <dc:publisher>Glénat</dc:publisher>
+      <dcndl:publicationPlace>FR</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2024</dc:date>
+      <dcterms:issued>[2024]</dcterms:issued>
+      <dc:extent>174 pages</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">9782344063644</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">9782344063644</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">033770279</dc:identifier>
+      <dc:identifier xsi:type="dcndl:OCLCNO">1453253137</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>Printed 'manga-style' in the authentic Japanese right-to-left format</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I033770279"/>
+      <dc:description> 2024</dc:description>
+    </item>
+    <item>
+      <title>Berserk</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I024854583</link>
+      <description><![CDATA[<p>Dark Horse Manga,2003,9781593070205<p><ul><li>タイトル：Berserk</li><li>責任表示：by Kentaro Miura,translation, Jason DeAngelis,lettering and retouch, Dan Nakrosis</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,by Kentaro Miura,translation, Jason DeAngelis,lettering and retouch, Dan Nakrosis</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I024854583</guid>
+      <pubDate>Mon, 3 Jun 2024 19:35:35 +0900</pubDate>
+      <dc:title>Berserk</dc:title>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:edition>First edition.</dcndl:edition>
+      <dc:publisher>Dark Horse Manga</dc:publisher>
+      <dc:publisher>Digiral Manga Publishing</dc:publisher>
+      <dcndl:publicationPlace>US</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2003</dc:date>
+      <dcterms:issued>2003-</dcterms:issued>
+      <dc:extent>volumes</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">9781593070205</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">9781593070205</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">024854583</dc:identifier>
+      <dc:identifier xsi:type="dcndl:USMARCNO">2004541107</dc:identifier>
+      <dc:identifier xsi:type="dcndl:OCLCNO">54477319</dc:identifier>
+      <dc:subject>Swordsmen--Comic books, strips, etc.</dc:subject>
+      <dcndl:genre>Graphic novels.</dcndl:genre>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcterms:LCC">PN6790.J34</dc:subject>
+      <dc:subject xsi:type="dcterms:DDC">741.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>Printed in Japanese right-to-left format.</dc:description>
+      <dc:description>Translator, letterrist and retoucher vary.</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I024854583"/>
+      <dc:description> 2003</dc:description>
+    </item>
+    <item>
+      <title>Berserk : The golden age arc : movie collection</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000136-I1970023484926463393</link>
+      <description><![CDATA[<p>VIZ Media,2016,<p><ul><li>タイトル：Berserk : The golden age arc : movie collection</li><li>責任表示：[screenplay, Ichiro Okouchi ; director, Toshiyuki Kubooka]</li></ul>]]></description>
+      <author>大河内, 一楼,Kubooka, Toshiyuki,三浦, 建太郎,Iwanaga, Hiroaki,櫻井, 孝宏,Yukinari, Toa,Studio GAGA,Studio 4℃,[screenplay, Ichiro Okouchi ; director, Toshiyuki Kubooka]</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000136-I1970023484926463393</guid>
+      <pubDate>Fri, 25 Sep 2026 11:13:32 +0900</pubDate>
+      <dc:title>Berserk : The golden age arc : movie collection</dc:title>
+      <dc:creator>大河内, 一楼</dc:creator>
+      <dc:creator>Kubooka, Toshiyuki</dc:creator>
+      <dc:creator>三浦, 建太郎</dc:creator>
+      <dc:creator>Iwanaga, Hiroaki</dc:creator>
+      <dc:creator>櫻井, 孝宏</dc:creator>
+      <dc:creator>Yukinari, Toa</dc:creator>
+      <dc:creator>Studio GAGA</dc:creator>
+      <dc:creator>Studio 4℃</dc:creator>
+      <dcndl:creatorTranscription>オオコウチ, イチロウ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>サクライ, タカヒロ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>Studio 4ドC</dcndl:creatorTranscription>
+      <dc:publisher>VIZ Media</dc:publisher>
+      <dc:publisher>Distributed by in United States and Canada by Warner Home Video</dc:publisher>
+      <dcndl:publicationPlace>US</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2016</dc:date>
+      <dcterms:issued>[2016]</dcterms:issued>
+      <dc:identifier xsi:type="dcndl:NIIBibID">BD11726295</dc:identifier>
+      <dc:subject>Animated films</dc:subject>
+      <dc:description>Content Type: two-dimensional moving image (ncrcontent), Media Type: video (ncrmedia), Carrier Type: videodisc (ncrcarrier)</dc:description>
+      <dc:description>Japanese animation</dc:description>
+      <dc:description>In English and Japanese; with optional English subtitles</dc:description>
+      <dc:description>Title from spine of container</dc:description>
+      <dc:description>Statement responsibility from end credits ([Disc 1-3])</dc:description>
+      <dc:description>"原作 三浦建太郎"--Opening credits ([Disc 1-3])</dc:description>
+      <dc:description>[Disc 1]: 2000077058, [disc 2]: 2000081967, [disc 3]: 2000081990</dc:description>
+      <dc:description>Cast: Hiroaki Iwanaga, Takahiro Sakurai, Toa Yukinari [and othres] ([Disc 1-3])</dc:description>
+      <dc:description>English cast: Marc Diraison, Kevin T. Collins, Carolyn, Keranen [and othres] ([Disc 1-3])</dc:description>
+      <dc:description>"The film is based on manga serialized in Young Animal published by Hakusensha"--End credits ([Disc 1-3])</dc:description>
+      <dc:description>[Disc 1]: end credits: original work, Kentarou Miura, Studio GAGA ; animation production, Studio4℃, English adaptation, Sean Molyneaux, Stephanie Sheh, Michael Sinterniklaas</dc:description>
+      <dc:description>[Disc 2, 3]: end credits: original work, Kentarou Miura, Studio GAGA ; animation production, Studio4℃, English adaptation, Stephanie Sheh</dc:description>
+      <dc:description>"For ages 18+ : parental advisory explicit content, TVMA"--Container</dc:description>
+      <dc:description>Blu-ray: 1080p high definition 16×9; region A</dc:description>
+      <dc:description>Issued in container (18 cm.)</dc:description>
+      <rdfs:seeAlso rdf:resource="https://cir.nii.ac.jp/crid/1970023484926463393"/>
+      <dc:description> 2016</dc:description>
+    </item>
+    <item>
+      <title>The artwork of Berserk : 大ベルセルク展</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000001-I13111153981127</link>
+      <description><![CDATA[<p>白泉社,2021,<p><ul><li>タイトル：The artwork of Berserk : 大ベルセルク展</li><li>タイトル（読み）：The artwork of Berserk : ダイ ベルセルク テン</li><li>責任表示：三浦建太郎 著 ; 白泉社ヤングアニマル編集部 編集</li></ul>]]></description>
+      <author>三浦建太郎 著 ; 白泉社ヤングアニマル編集部 編集</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000001-I13111153981127</guid>
+      <pubDate>Thu, 11 Jun 2026 14:53:59 +0900</pubDate>
+      <dc:title>The artwork of Berserk : 大ベルセルク展</dc:title>
+      <dcndl:titleTranscription>The artwork of Berserk : ダイ ベルセルク テン</dcndl:titleTranscription>
+      <dc:publisher>白泉社</dc:publisher>
+      <dc:date xsi:type="dcterms:W3CDTF">2021</dc:date>
+      <dcterms:issued>2021</dcterms:issued>
+      <dc:extent>224p, 図版 [8] 枚 ; 31cm</dc:extent>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1153981127"/>
+      <dc:description> 2021</dc:description>
+    </item>
+  </channel>
+</rss>
