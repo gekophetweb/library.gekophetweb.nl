@@ -6,6 +6,12 @@ Laravel 13 app (PHP 8.4) for a personal catalogue of physical books, music and g
 - Feature plans: [.ai/plans/](.ai/plans/)
 - Commit and branch workflow: [.ai/skills/committing-and-pushing/SKILL.md](.ai/skills/committing-and-pushing/SKILL.md)
 
+## Local dev stack
+
+`docker compose -f docker-compose.dev.yml up -d` serves the mounted checkout on
+<http://localhost:8000> with Vite on 5173; code changes are live, no rebuild needed.
+Run artisan there with `docker compose -f docker-compose.dev.yml exec app php artisan …`.
+
 ## Running tests and Pint
 
 PHP runs in Docker (the image has `intl`, which the series code needs). With the

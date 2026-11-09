@@ -101,6 +101,34 @@ docker compose exec web php artisan test --compact
 docker compose down
 ```
 
+### Development stack with live changes
+
+`docker-compose.dev.yml` runs the app on your checkout, so edits show up without a
+rebuild or restart: PHP, Blade, routes and config on the next page load (opcache and
+Laravel's caches are off); CSS and JS instantly through the Vite dev server, which also
+reloads the page when a Blade file changes. It uses the local `.env` (SQLite, no
+database container).
+
+```bash
+docker compose -f docker-compose.dev.yml up -d
+```
+
+Open <http://localhost:8000>. Vite runs on port 5173; set `DEV_APP_PORT` to move the app.
+The first start installs the npm packages into a Docker volume and takes a minute.
+
+```bash
+docker compose -f docker-compose.dev.yml exec app php artisan migrate
+```
+
+```bash
+docker compose -f docker-compose.dev.yml down
+```
+
+- Rebuild (`up -d --build`) only after changing the `Dockerfile`.
+- After changing `package.json`, reinstall the packages:
+  `docker compose -f docker-compose.dev.yml run --rm vite npm ci`.
+- If the page looks unstyled after Vite stopped uncleanly, delete `public/hot`.
+
 ### Running the tests without the stack
 
 `docker-compose.test.yml` runs the suite in the app image (PHP 8.4 + `intl`) with the
