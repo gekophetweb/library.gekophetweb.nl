@@ -1,0 +1,103 @@
+# library.gekophetweb.nl — website and database in separate containers.
+#
+#   web        nginx + PHP-FPM serving the Laravel app      (port 8080)
+#   queue      queue worker: batch-scan commits, catalogue lookups
+#   scheduler  Laravel scheduler: model pruning (shares, pairing codes), etc.
+#   db         MariaDB, private to the compose network
+#
+# web, queue and scheduler share one image built from ./Dockerfile.
+# Usage: cp .env.example .env, fill it in, then `docker compose up -d --build`.
+
+x-app: &app
+  build:
+    context: .
+    target: runtime
+  image: library-gekophetweb/app:latest
+  env_file: .env
+  environment:
+    DB_CONNECTION: mariadb
+    DB_HOST: db
+    DB_PORT: 3306
+    DB_DATABASE: ${DB_DATABASE:-library}
+    DB_USERNAME: ${DB_USERNAME:-library}
+    DB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+  volumes:
+    - app-storage:/var/www/html/storage/app
+  depends_on:
+    db:
+      condition: service_healthy
+  restart: unless-stopped
+  networks: [backend]
+
+services:
+  web:
+    <<: *app
+    environment:
+      DB_CONNECTION: mariadb
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: ${DB_DATABASE:-library}
+      DB_USERNAME: ${DB_USERNAME:-library}
+      DB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+      # Only the web container runs migrations and caches config/routes/views on boot.
+      AUTORUN_ENABLED: "true"
+      AUTORUN_LARAVEL_MIGRATION: "true"
+      AUTORUN_LARAVEL_STORAGE_LINK: "true"
+    # Default: localhost only, so the site is reachable solely through the Cloudflare
+    # Tunnel. Set APP_BIND=0.0.0.0 in .env to also allow access from the LAN.
+    ports:
+      - "${APP_BIND:-127.0.0.1}:${APP_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/healthcheck"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  queue:
+    <<: *app
+    command: ["php", "/var/www/html/artisan", "queue:work", "--tries=3", "--timeout=120"]
+    stop_signal: SIGTERM
+    healthcheck:
+      test: ["CMD", "healthcheck-queue"]
+      start_period: 10s
+
+  scheduler:
+    <<: *app
+    command: ["php", "/var/www/html/artisan", "schedule:work"]
+    stop_signal: SIGTERM
+    healthcheck:
+      test: ["CMD", "healthcheck-schedule"]
+      start_period: 10s
+
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: ${DB_DATABASE:-library}
+      MARIADB_USER: ${DB_USERNAME:-library}
+      MARIADB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?set DB_ROOT_PASSWORD in .env}
+      MARIADB_AUTO_UPGRADE: "1"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - db-data:/var/lib/mysql
+    # Bound to localhost only, for GUI clients / artisan from the host. Remove to fully isolate.
+    ports:
+      - "127.0.0.1:${FORWARD_DB_PORT:-3306}:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    restart: unless-stopped
+    networks: [backend]
+
+volumes:
+  db-data:
+  app-storage:
+
+networks:
+  backend:
