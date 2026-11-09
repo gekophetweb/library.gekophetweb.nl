@@ -1,6 +1,7 @@
 # Plan — Detect the series and volume number from an ISBN
 
-Status: **draft, not implemented**. Written 2026-11-09.
+Status: **phases 1–2 implemented 2026-11-09** (parsing, providers, manager); phases 3–6
+wait for the domain models (`series`, `SeriesVolume`, scan flow). Written 2026-11-09.
 
 Related: [`own-wishlist.md`](own-wishlist.md) (series completion counts owned vs wanted),
 [`search-title-and-creator.md`](search-title-and-creator.md) (`ComparesNames`, series
@@ -44,7 +45,7 @@ manga (test case: *ベルセルク / Berserk*, ISBNs `9784592135746`, `978459213
   `Jets comics` — Hakusensha's imprint — and the `437` next to it is the imprint
   number, not the volume. Never map these fields to `series`.
 - **Full-width digits.** NDL returns volumes as `４２`. NFKC-normalize before parsing.
-- **ISBN formats.** Old NDL records store `4-592-13574-6` (hyphenated, ISBN-10).
+- **ISBN formats.** Old NDL records store `4-592-13574-1` (hyphenated, ISBN-10, also in the `ISBN13` field).
   Normalize to hyphen-free ISBN-13 before comparing.
 - **Several records per volume.** Volumes 41–43 each appear twice (regular + special
   edition). Group by volume number, keep all ISBNs.
@@ -200,7 +201,7 @@ Before creating a series, match an existing user series by `external_id`, then b
 Record real responses once into `tests/Fixtures/series/` and replay with `Http::fake()`
 — no live calls in the test suite.
 
-- `Isbn`: hyphenated ISBN-10 `4-592-13574-6` → `9784592135746`; bad checksum rejected.
+- `Isbn`: hyphenated ISBN-10 `4-592-13574-1` (the plan first said `-6`, a bad checksum) → `9784592135746`; bad checksum rejected.
 - `VolumeNumber`: `1`, `４２`, `第12巻`, `Vol. 12`, `#3`, `3.5`.
 - `TitleVolumeParser`: `ベルセルク 41`, `ベルセルク. 1`, `Berserk Volume 1`.
 - NDL `resolve()`: `9784592135746` → `ベルセルク`, volume 1; `9784592135753` → volume 2;
@@ -243,3 +244,29 @@ Finish with `vendor/bin/pint --dirty --format agent` and `php artisan test --com
 - "Add missing volume to wishlist" from the series page — still the follow-up named in
   [`own-wishlist.md`](own-wishlist.md) §7; this plan makes it easier (volumes now carry
   ISBNs) but does not build it.
+
+## 9. Implementation notes (phases 1–2, 2026-11-09)
+
+The repository had no application code, so a fresh Laravel 13 app was scaffolded and
+only the parts of this plan that do not need the domain models were built:
+
+- `app/Support/Isbn.php`, `app/Support/Series/*` (value objects, `TitleVolumeParser`,
+  `CreatorName`, `Text`), `app/Contracts/SeriesLookup.php`,
+  `app/Services/Series/{NdlSeriesLookup,OpenLibraryWikidataSeriesLookup,SeriesLookupManager}.php`,
+  `config/series.php`.
+- The API call log did not exist yet: added `api_call_logs` + `ApiCallLog` +
+  `App\Services\ApiCallLogger`, which every provider call goes through.
+- `resolve()` takes the scan language as an ISO 639-1 string (`ja`, `en`; `jpn` and
+  `ja-JP` are mapped) until a `Language` model exists.
+- `SeriesLookupManager::resolve()` returns a `SeriesResolution` (best match first, the
+  rest as suggestions) and takes an optional catalogue title for the title-parsing
+  fallback. Empty results are not cached, so a failed call is retried on the next scan.
+- `config/cache.php` keeps `serializable_classes` locked down and allowlists only the
+  series value objects.
+- NDL paging uses `cnt` + `idx`; up to 5 pages of 200.
+- Volumes whose `dcndl:volume` is not just a number (`EPISODE:１`, `L-1`,
+  `黄金時代篇 1 …`) and records not in category `図書` are dropped.
+- Rakuten and Google Books fallbacks are config slots only: per-user API keys (§5.1 of
+  the guidelines) do not exist yet.
+
+Still open: phases 3–6 and the questions in §7.

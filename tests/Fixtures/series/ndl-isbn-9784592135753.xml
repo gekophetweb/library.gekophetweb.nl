@@ -1,0 +1,48 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:dcndl="http://ndl.go.jp/dcndl/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" version="2.0">
+  <channel>
+    <title>9784592135753 - 国立国会図書館サーチ OpenSearch</title>
+    <link>https://ios-v2-prod-eks-alb.ndlsearch.ndl.go.jp/api/opensearch?isbn=9784592135753</link>
+    <description>Search results for isbn=9784592135753</description>
+    <language>ja</language>
+    <openSearch:totalResults>1</openSearch:totalResults>
+    <openSearch:startIndex>1</openSearch:startIndex>
+    <openSearch:itemsPerPage>200</openSearch:itemsPerPage>
+    <item>
+      <title>ベルセルク</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000011251092</link>
+      <description><![CDATA[<p>2,白泉社,1991,4-592-13575-X<p><ul><li>タイトル：ベルセルク</li><li>タイトル（読み）：ベルセルク</li><li>責任表示：三浦建太郎 著</li><li>シリーズ名：Jets comics ; 437</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>三浦, 建太郎, 1966-2021,三浦建太郎 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000011251092</guid>
+      <pubDate>Mon, 15 Nov 2021 19:21:18 +0900</pubDate>
+      <dc:title>ベルセルク</dc:title>
+      <dcndl:titleTranscription>ベルセルク</dcndl:titleTranscription>
+      <dc:creator>三浦, 建太郎, 1966-2021</dc:creator>
+      <dcndl:creatorTranscription>ミウラ, ケンタロウ, 1966-2021</dcndl:creatorTranscription>
+      <dcndl:volume>2</dcndl:volume>
+      <dcndl:seriesTitle>Jets comics ; 437</dcndl:seriesTitle>
+      <dc:publisher>白泉社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">1991</dc:date>
+      <dcterms:issued>1991.3</dcterms:issued>
+      <dcndl:price>505円</dcndl:price>
+      <dc:extent>225p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-592-13575-X</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-592-13575-X</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000011251092</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21968266</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://catalog.library.metro.tokyo.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1105329872"/>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101006157"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000011251092"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16137109"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/59213575berserk00211"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784592135753"/>
+      <dc:description> 1991</dc:description>
+    </item>
+  </channel>
+</rss>
