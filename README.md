@@ -106,8 +106,10 @@ docker compose down
 `docker-compose.dev.yml` runs the app on your checkout, so edits show up without a
 rebuild or restart: PHP, Blade, routes and config on the next page load (opcache and
 Laravel's caches are off); CSS and JS instantly through the Vite dev server, which also
-reloads the page when a Blade file changes. It uses the local `.env` (SQLite, no
-database container).
+reloads the page when a Blade file changes. App settings come from the local `.env`;
+the database is MariaDB 11.4 in its own `db` container, same as production, with fixed
+dev-only credentials (`library` / `library`). GUI clients connect on `127.0.0.1:3307`
+(`DEV_DB_PORT`). `down -v` wipes the dev database.
 
 ```bash
 docker compose -f docker-compose.dev.yml up -d
@@ -124,6 +126,12 @@ docker compose -f docker-compose.dev.yml exec app php artisan migrate
 docker compose -f docker-compose.dev.yml down
 ```
 
+- `vendor/` and `node_modules/` live in Docker volumes, not in the mount: reading
+  thousands of files through a Windows bind mount made each page take over a minute.
+  A one-shot `composer` service fills `vendor/` on every `up`. After changing
+  `composer.json`/`composer.lock`, run
+  `docker compose -f docker-compose.dev.yml run --rm composer`. Keep a host-side
+  `composer install` for your IDE; the container never sees it.
 - Rebuild (`up -d --build`) only after changing the `Dockerfile`.
 - After changing `package.json`, reinstall the packages:
   `docker compose -f docker-compose.dev.yml run --rm vite npm ci`.

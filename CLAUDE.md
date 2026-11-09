@@ -9,7 +9,8 @@ Laravel 13 app (PHP 8.4) for a personal catalogue of physical books, music and g
 ## Local dev stack
 
 `docker compose -f docker-compose.dev.yml up -d` serves the mounted checkout on
-<http://localhost:8000> with Vite on 5173; code changes are live, no rebuild needed.
+<http://localhost:8000> with Vite on 5173 and MariaDB (`db`, host port 3307); code
+changes are live, no rebuild needed.
 Run artisan there with `docker compose -f docker-compose.dev.yml exec app php artisan …`.
 
 ## Running tests and Pint
