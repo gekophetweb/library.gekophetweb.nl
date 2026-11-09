@@ -101,6 +101,22 @@ docker compose exec web php artisan test --compact
 docker compose down
 ```
 
+### Running the tests without the stack
+
+`docker-compose.test.yml` runs the suite in the app image (PHP 8.4 + `intl`) with the
+checkout mounted. It needs no `.env`, no database and no running containers; the first
+run builds the image. Install the dev dependencies into `vendor/` first.
+
+```bash
+docker compose -f docker-compose.test.yml run --rm test
+```
+
+Any other command runs the same way, e.g. Pint:
+
+```bash
+docker compose -f docker-compose.test.yml run --rm test php vendor/bin/pint --dirty --format agent
+```
+
 `docker compose down -v` also deletes the database and uploaded files volumes.
 
 ### Ports and isolation

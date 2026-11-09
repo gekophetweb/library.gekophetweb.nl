@@ -16,12 +16,11 @@ docker compose exec web php vendor/bin/pest --compact
 docker compose exec web php vendor/bin/pint --dirty --format agent
 ```
 
-Without the stack, mount the checkout into the built image (dev dependencies must be
-installed in `vendor/`):
+Without the stack (no `.env` or database needed; dev dependencies must be in `vendor/`):
 
 ```sh
-docker build --target runtime -t library-gekophetweb/app:latest .
-docker run --rm -u root -e PHP_OPCACHE_ENABLE=0 -v "$PWD:/var/www/html" library-gekophetweb/app:latest php vendor/bin/pest --compact
+docker compose -f docker-compose.test.yml run --rm test
+docker compose -f docker-compose.test.yml run --rm test php vendor/bin/pint --dirty --format agent
 ```
 
 Tests never call external APIs: recorded responses live in `tests/Fixtures/` and are
