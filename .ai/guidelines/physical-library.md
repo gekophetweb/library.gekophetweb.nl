@@ -29,6 +29,9 @@ scope everything to the authenticated user.
 - SSO can be **skipped with a temporary e-mail login code**: a single-use 6-digit code,
   stored hashed, valid 10 minutes, rate-limited, with the same response whether or not
   the e-mail has an account. This is a production path too. There are **no passwords**.
+- **Anyone can register** with an e-mail code, for any address, so e-mails that no
+  configured SSO provider covers still get an account. The account is created only once
+  the code is verified.
 - See [`foundation.md`](../plans/foundation.md) phase 1.
 - In the **local/dev environment**, SSO must be **skippable**. When skipped,
   authenticate as the seeded dev user **`jaap.lam@gmail.com`**.
@@ -254,6 +257,6 @@ Rules for agents:
 These are unspecified in the source and should be confirmed before implementation:
 
 - Music and Games external providers.
-- Which SSO drivers to ship first, and who may register (see
+- Which SSO drivers to ship first (see
   [`foundation.md`](../plans/foundation.md) §9).
 - Barcode/scan format expected per category (ISBN, EAN, UPC, catalogue number).

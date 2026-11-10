@@ -79,20 +79,34 @@ code" option. There is no password anywhere.
 
 8. Migration `create_login_codes_table` — `email`, `code_hash`, `expires_at`,
    `attempts`, `used_at`, `ip`; `Prunable` after a day.
-9. Flow: enter e-mail → if a user with that e-mail exists, mail a **6-digit code** that
-   expires after **10 minutes** and works **once** → enter the code → logged in.
-   - The response is the same whether or not the e-mail exists ("If an account exists,
-     a code is on its way"), so the form cannot be used to find out who has an account.
+9. Flow: enter **any** e-mail → mail a **6-digit code** that expires after
+   **10 minutes** and works **once** → enter the code → logged in.
+   - **Any e-mail can sign up this way** (user, 2026-11-10), so people whose e-mail is
+     not covered by any configured SSO provider can still get an account. Entering a
+     correct code for an e-mail with no account **creates the account** on the spot;
+     the code proves the address, so `email_verified_at` is set.
+   - A new account lands on a short "Your name" step before the dashboard; nothing else
+     is asked.
+   - The account is only created **after** the code is verified, never when the code is
+     requested, so typing a stranger's address leaves no account behind.
+   - The response is the same for known and new e-mails ("Check your inbox for a code"),
+     so the form cannot be used to find out who has an account.
+   - Later, the user can link an SSO provider in settings; an SSO login with the same
+     verified e-mail links to this account automatically (step 6).
    - The code is stored hashed (`Hash::make`) and compared with `Hash::check`; a new
      request invalidates the previous code.
    - Max 5 wrong attempts per code, then it is burnt. Rate limits: 3 code requests per
      e-mail per 10 minutes and 10 per IP per hour (`RateLimiter`, real IP via the trusted
-     proxy, guidelines §8).
+     proxy, guidelines §8). Because anyone can now request a code for any address, these
+     limits are also what stops the form being used to flood someone's inbox — they are
+     not optional.
    - The mail (`LoginCodeMail`, queued) contains the code and a one-click signed link
      to the same verification, valid as long as the code.
 10. The e-mail code login can be switched off by an admin (`app_settings` row
     `auth.email_codes_enabled`, default on). It cannot be switched off while no SSO
-    provider is enabled, so nobody gets locked out.
+    provider is enabled, so nobody gets locked out. A second setting,
+    `auth.email_registration_enabled` (default **on**), lets an admin close sign-up by
+    e-mail code later while existing users keep logging in with codes.
 11. Mail: SMTP settings come from `.env` (`MAIL_*`). The dev stack gets a **Mailpit**
     service so codes can be read at `http://localhost:8025`.
 
@@ -189,8 +203,11 @@ and the other admin users** — the list is not filtered to "normal" users only.
 - SSO callback: a known identity logs in; an unknown identity with a matching verified
   e-mail links and logs in; an unknown e-mail is refused unless `allow_registration`;
   one user can link two providers; the session id changes on login.
-- E-mail code: `Mail::fake()` — a code is mailed to an existing user; an unknown e-mail
-  gets the same response and no mail; the code works once; an expired code, the sixth
+- E-mail code: `Mail::fake()` — a code is mailed to an existing user and to a new
+  e-mail, with the same response; requesting a code creates no user; verifying it for a
+  new e-mail creates a verified user and shows the name step; with
+  `auth.email_registration_enabled` off a new e-mail gets the same response but no mail
+  and no account; the code works once; an expired code, the sixth
   wrong attempt and a superseded code are all rejected; the rate limits trigger; the
   signed link logs in and expires with the code; codes are stored hashed.
 - E-mail codes cannot be switched off while no SSO provider is enabled.
@@ -202,10 +219,9 @@ and the other admin users** — the list is not filtered to "normal" users only.
 
 1. **SSO providers — decided 2026-11-10:** several, configurable by an admin in the app,
    plus e-mail login codes to skip SSO (phase 1). Still to confirm: which drivers to
-   ship first (planned: Google, Microsoft, GitHub, generic OIDC), and whether a new
-   person may **register** at all — through an SSO provider with `allow_registration`,
-   or by e-mail code (planned: e-mail codes only for existing users; new users come from
-   an admin or an SSO provider that allows registration).
+   ship first (planned: Google, Microsoft, GitHub, generic OIDC).
+   **Registration — decided 2026-11-10:** anyone can sign up with an e-mail code, for any
+   address (step 9); SSO providers create accounts only when `allow_registration` is on.
 2. **Admin actions.** Is the user list view-only, or can an admin also promote / demote
    admins and remove users from it?
 3. **Hidden users before this change?** The requirement reads as if admins were hidden
