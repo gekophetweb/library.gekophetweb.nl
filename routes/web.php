@@ -57,6 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
     Route::put('settings/api-keys/{provider}', [SettingsController::class, 'updateApiKey'])->name('settings.api-keys.update');
     Route::delete('settings/api-keys/{provider}', [SettingsController::class, 'destroyApiKey'])->name('settings.api-keys.destroy');
+    Route::post('settings/tokens', [SettingsController::class, 'storeToken'])->name('settings.tokens.store');
+    Route::delete('settings/tokens/{token}', [SettingsController::class, 'destroyToken'])->whereNumber('token')->name('settings.tokens.destroy');
     Route::delete('settings/identities/{identity}', [SettingsController::class, 'destroyIdentity'])->name('settings.identities.destroy');
 
     Route::middleware('can:admin')->prefix('admin')->name('admin.')->group(function () {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\UpdateCollectionObject;
 use App\Enums\CategoryKind;
 use App\Http\Requests\UpdateCollectionObjectRequest;
 use App\Models\Artist;
@@ -10,10 +11,8 @@ use App\Models\Language;
 use App\Models\Platform;
 use App\Models\Publisher;
 use App\Models\Series;
-use App\Support\Series\VolumeNumber;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class CollectionObjectController extends Controller
@@ -40,37 +39,9 @@ class CollectionObjectController extends Controller
         ]);
     }
 
-    public function update(UpdateCollectionObjectRequest $request, CollectionObject $object): RedirectResponse
+    public function update(UpdateCollectionObjectRequest $request, CollectionObject $object, UpdateCollectionObject $update): RedirectResponse
     {
-        abort_unless($object->user_id === $request->user()->id, 404);
-
-        $data = $request->validated();
-
-        DB::transaction(function () use ($object, $data) {
-            $object->update([
-                'name' => $data['name'],
-                'name_romanized' => $data['name_romanized'],
-                'name_english' => $data['name_english'] ?? null,
-                'sub_category_id' => $data['sub_category_id'] ?? null,
-                'publisher_id' => $data['publisher_id'] ?? null,
-                'release_date' => $data['release_date'] ?? null,
-                'serie_id' => $data['serie_id'] ?? null,
-            ]);
-
-            $object->languages()->sync($data['languages']);
-            $object->genres()->sync($data['genres'] ?? []);
-
-            // Category-specific details go to their own table only (§3.3).
-            match ($object->category->kind) {
-                CategoryKind::Books => $object->bookDetail()->updateOrCreate([], [
-                    'artist_id' => $data['artist_id'] ?? null,
-                    'volume' => ($volume = VolumeNumber::parse($data['volume'] ?? null)) ? (string) $volume : null,
-                    'volume_sort' => $volume?->toFloat(),
-                ]),
-                CategoryKind::Music => $object->musicDetail()->updateOrCreate([], ['artist_id' => $data['artist_id'] ?? null]),
-                CategoryKind::Games => $object->gameDetail()->updateOrCreate([], ['platform_id' => $data['platform_id'] ?? null]),
-            };
-        });
+        $update->handle($object, $request->validated());
 
         return redirect()->route('objects.show', $object)->with('status', 'Saved.');
     }

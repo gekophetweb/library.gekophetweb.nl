@@ -24,6 +24,7 @@ class SettingsController extends Controller
                 ->get(),
             'apiKeyProviders' => ApiKeyProvider::cases(),
             'savedApiKeys' => $request->user()->apiKeys()->pluck('updated_at', 'provider'),
+            'tokens' => $request->user()->tokens()->latest()->get(),
         ]);
     }
 
@@ -53,6 +54,25 @@ class SettingsController extends Controller
         $request->user()->apiKeys()->where('provider', $provider->value)->delete();
 
         return redirect()->route('settings.edit')->with('status', "{$provider->label()} key removed.");
+    }
+
+    /** A token for the phone app. The plain text is shown once, right after creating it. */
+    public function storeToken(Request $request): RedirectResponse
+    {
+        $validated = $request->validate(['name' => ['required', 'string', 'max:100']]);
+
+        $token = $request->user()->createToken(trim($validated['name']));
+
+        return redirect()->route('settings.edit')
+            ->with('token', $token->plainTextToken)
+            ->with('status', 'Token created. Copy it now: it is not shown again.');
+    }
+
+    public function destroyToken(Request $request, int $token): RedirectResponse
+    {
+        $request->user()->tokens()->whereKey($token)->firstOrFail()->delete();
+
+        return redirect()->route('settings.edit')->with('status', 'Token revoked.');
     }
 
     public function destroyIdentity(Request $request, UserIdentity $identity): RedirectResponse
