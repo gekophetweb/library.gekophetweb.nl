@@ -152,10 +152,12 @@ and which volumes does it have?"), resolved by scan language by `SeriesLookupMan
 
 - **Japanese**: NDL Search (国立国会図書館) OpenSearch → Rakuten `seriesName` → title parsing
 - **English / Latin script**: Open Library → Wikidata → Google Books `seriesInfo` →
-  title parsing
+  Hardcover.app → title parsing (Google Books and Hardcover cover translated manga,
+  where Open Library and Wikidata have no volume data)
 
-NDL, Open Library and Wikidata need **no API key** and are not per-user keys; only the
-Rakuten / Google Books fallbacks use the user's stored keys (§5.1). See
+NDL, Open Library and Wikidata need **no API key** and are not per-user keys; Rakuten,
+Google Books and Hardcover use the user's stored keys (§5.1) and are skipped when the
+user has none. See
 [`series-detection-from-isbn.md`](../plans/series-detection-from-isbn.md).
 
 ### 5.1 Per-user API keys

@@ -94,7 +94,7 @@ interface SeriesLookup
 | Scan language | `resolve()` order | `volumes()` |
 |---|---|---|
 | Japanese | NDL → Rakuten `seriesName` → title parsing | NDL |
-| English (and other Latin-script) | Open Library → Wikidata → Google Books `seriesInfo` → title parsing | Wikidata |
+| English (and other Latin-script) | Open Library → Wikidata → Google Books `seriesInfo` → Hardcover → title parsing | Wikidata, then Google Books / Hardcover when Wikidata has no volume items (translated manga) |
 
 The chain stops at the first match with `Confidence::High`; lower-confidence matches
 are kept as suggestions. Resolved by a `SeriesLookupManager`, mirroring how
@@ -234,11 +234,15 @@ Answered by the user on 2026-11-10:
 
 1. **Batch confidence — auto-apply.** High-confidence series matches in a batch scan
    are applied automatically; lower-confidence ones stay suggestions.
-2. **Translated manga — still open.** For English editions of manga (e.g. the English
-   *Berserk*), Open Library has one work per volume and no series, and Wikidata has the
-   series but no volume items. Options: (a) accept title parsing (`Berserk Volume 1`)
-   plus manual linking for now, or (b) make Google Books and/or Hardcover required
-   providers, which needs per-user API keys (guidelines §5.1) first.
+2. **Translated manga — Google Books and Hardcover become real providers.** For English
+   editions of manga (e.g. the English *Berserk*), Open Library has one work per volume
+   and no series, and Wikidata has the series but no volume items, so title parsing
+   alone is not enough. Google Books (`seriesInfo`, `series/membership/get`) and
+   Hardcover.app (GraphQL) are built as full providers in the English chain, not just
+   config slots. Both use the user's own key/token, so **per-user API keys (guidelines
+   §5.1) are a prerequisite** and come first. Without a key, the chain skips that
+   provider and falls through to title parsing + manual linking. Record real responses
+   for an English *Berserk* volume as fixtures before writing the providers.
 3. **Special editions — separate entries.** A special edition (NDL `dcndl:edition`
    set) is its own volume entry with its own ISBNs, next to the regular edition of the
    same number. Owning one does not mark the other as owned.
@@ -250,7 +254,6 @@ Answered by the user on 2026-11-10:
 ## 8. Out of scope
 
 - Series detection for Music and Games.
-- Hardcover provider (kept as a slot in the chain only).
 - "Add missing volume to wishlist" from the series page — still the follow-up named in
   [`own-wishlist.md`](own-wishlist.md) §7; this plan makes it easier (volumes now carry
   ISBNs) but does not build it.
@@ -279,6 +282,7 @@ only the parts of this plan that do not need the domain models were built:
 - Rakuten and Google Books fallbacks are config slots only: per-user API keys (§5.1 of
   the guidelines) do not exist yet.
 
-Still open: phases 3–6 and question 2 in §7. Decision 3 (special editions as separate
+Still open: phases 3–6, per-user API keys, and the Google Books + Hardcover providers
+(§7, decision 2). Decision 3 (special editions as separate
 entries) reverses what phase 2 built: `NdlSeriesLookup::volumes()` still merges editions
 by volume number and needs reworking to group by volume + edition.
