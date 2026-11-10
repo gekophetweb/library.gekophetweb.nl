@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\SsoProviderController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\DevLoginController;
 use App\Http\Controllers\Auth\EmailCodeController;
 use App\Http\Controllers\Auth\LoginController;
@@ -40,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('settings/identities/{identity}', [SettingsController::class, 'destroyIdentity'])->name('settings.identities.destroy');
 
     Route::middleware('can:admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('users', [UserController::class, 'index'])->name('users.index');
+
         Route::put('sso/settings', [SsoProviderController::class, 'updateSettings'])->name('sso.settings');
         Route::get('sso/{provider}/test', [SsoController::class, 'test'])->name('sso.test');
         Route::resource('sso', SsoProviderController::class)
