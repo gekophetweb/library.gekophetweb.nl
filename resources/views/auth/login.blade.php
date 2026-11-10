@@ -27,4 +27,11 @@
             <p class="text-xs text-stone-500">No account yet? Entering your address creates one.</p>
         </form>
     @endif
+
+    @if ($devLogin)
+        <form method="POST" action="{{ route('login.dev') }}" class="mt-6 border-t border-dashed border-stone-300 pt-6 dark:border-stone-700">
+            @csrf
+            <button class="{{ $button }}">Sign in as dev user (local only)</button>
+        </form>
+    @endif
 </x-auth-card>

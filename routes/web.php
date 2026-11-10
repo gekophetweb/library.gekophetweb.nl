@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\SsoProviderController;
+use App\Http\Controllers\Auth\DevLoginController;
 use App\Http\Controllers\Auth\EmailCodeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\SsoController;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'show'])->name('login');
+    Route::post('login/dev', DevLoginController::class)->name('login.dev');
 
     Route::post('login/code', [EmailCodeController::class, 'request'])->name('login.code.request');
     Route::get('login/code', [EmailCodeController::class, 'show'])->name('login.code');
