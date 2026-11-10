@@ -86,21 +86,31 @@ it('lists all 43 Berserk volumes, contiguous and without noise', function () {
 
     // The search also returns the light novel, art books, guidebooks, DVDs and
     // translations (Dark Horse, Glénat, …): all filtered out.
-    expect($volumes)->toHaveCount(43)
-        ->and($volumes->map(fn (SeriesVolumeData $v) => (string) $v->volume)->all())
+    expect($volumes->reject(fn (SeriesVolumeData $v) => $v->isSpecialEdition())
+        ->map(fn (SeriesVolumeData $v) => (string) $v->volume)->values()->all())
         ->toBe(array_map('strval', range(1, 43)));
 });
 
-it('merges special editions into one volume with every ISBN', function () {
+it('keeps special editions as separate entries, right after the regular edition', function () {
     $series = ndl()->resolve(Isbn::fromString('9784592135746'), 'ja')->series;
-    $volumes = ndl()->volumes($series)->keyBy(fn (SeriesVolumeData $v) => (string) $v->volume);
+    $volumes = ndl()->volumes($series);
 
-    expect($volumes['41']->isbns)->toHaveCount(2)
-        ->and($volumes['41']->hasIsbn(Isbn::fromString('9784592166917')))->toBeTrue()
-        ->and($volumes['41']->hasIsbn(Isbn::fromString('9784592106296')))->toBeTrue()
-        ->and($volumes['1']->hasIsbn(Isbn::fromString('9784592135746')))->toBeTrue()
-        ->and($volumes['1']->releaseDate)->toBe('1990-12')
-        ->and($volumes['43']->releaseDate)->toBe('2025-09');
+    expect($volumes)->toHaveCount(46)
+        ->and($volumes->slice(40, 6)->map(fn (SeriesVolumeData $v) => [(string) $v->volume, $v->isSpecialEdition()])->values()->all())
+        ->toBe([['41', false], ['41', true], ['42', false], ['42', true], ['43', false], ['43', true]]);
+
+    $regular = $volumes[40];
+    $special = $volumes[41];
+
+    expect($regular->edition)->toBeNull()
+        ->and($regular->isbns)->toHaveCount(1)
+        ->and($regular->hasIsbn(Isbn::fromString('9784592166917')))->toBeTrue()
+        ->and($special->edition)->toBe('キャンバスアート&ドラマCD付き特装版')
+        ->and($special->isbns)->toHaveCount(1)
+        ->and($special->hasIsbn(Isbn::fromString('9784592106296')))->toBeTrue()
+        ->and($volumes[0]->hasIsbn(Isbn::fromString('9784592135746')))->toBeTrue()
+        ->and($volumes[0]->releaseDate)->toBe('1990-12')
+        ->and($volumes[45]->releaseDate)->toBe('2025-09');
 });
 
 it('writes an API call log row for every request', function () {

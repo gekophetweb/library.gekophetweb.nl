@@ -94,7 +94,7 @@ it('returns an empty resolution when nothing is found', function () {
 it('lists volumes through the provider that owns the series', function () {
     $series = seriesManager()->resolve(Isbn::fromString('9784592135746'), 'ja')->best()->series;
 
-    expect(seriesManager()->volumes($series))->toHaveCount(43);
+    expect(seriesManager()->volumes($series))->toHaveCount(46); // 43 + 3 special editions
 });
 
 it('costs one volumes() call for a batch of scans of the same series', function () {

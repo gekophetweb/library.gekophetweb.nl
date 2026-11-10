@@ -283,6 +283,9 @@ only the parts of this plan that do not need the domain models were built:
   the guidelines) do not exist yet.
 
 Still open: phases 3–6, per-user API keys, and the Google Books + Hardcover providers
-(§7, decision 2). Decision 3 (special editions as separate
-entries) reverses what phase 2 built: `NdlSeriesLookup::volumes()` still merges editions
-by volume number and needs reworking to group by volume + edition.
+(§7, decision 2).
+
+Decision 3 was applied on 2026-11-10: `NdlSeriesLookup::volumes()` groups by volume
+number + `dcndl:edition`, so Berserk lists 46 entries (43 regular + special editions of
+41–43), each regular edition followed by its special edition. `SeriesVolumeData` carries
+the `edition` label (null = regular) and `isSpecialEdition()`.

@@ -125,21 +125,25 @@ class NdlSeriesLookup implements SeriesLookup
                 && ($publisherKey === '' || Text::key($record['publisher']) === $publisherKey))
             ->map(fn (array $record) => $record + ['volume_number' => VolumeNumber::parse($record['volume'])])
             ->filter(fn (array $record) => $record['volume_number'] !== null)
-            // Regular and special editions of one volume → one entry with all ISBNs.
-            ->groupBy(fn (array $record) => (string) $record['volume_number'])
-            ->map(function (Collection $editions) {
-                $isbns = $editions->flatMap(fn (array $record) => $record['isbns'])
+            // A special edition (`dcndl:edition` set) is its own entry; records of the
+            // same volume and edition (reprints) are merged.
+            ->groupBy(fn (array $record) => $record['volume_number'].'|'.$record['edition'])
+            ->map(function (Collection $records) {
+                $isbns = $records->flatMap(fn (array $record) => $record['isbns'])
                     ->unique(fn (Isbn $isbn) => $isbn->value)
                     ->values()
                     ->all();
 
                 return new SeriesVolumeData(
-                    volume: $editions->first()['volume_number'],
+                    volume: $records->first()['volume_number'],
                     isbns: $isbns,
-                    releaseDate: $editions->pluck('issued')->filter()->sort()->first(),
+                    releaseDate: $records->pluck('issued')->filter()->sort()->first(),
+                    edition: $records->first()['edition'],
                 );
             })
-            ->sort(fn (SeriesVolumeData $a, SeriesVolumeData $b) => $a->volume->compare($b->volume))
+            // By volume, the regular edition before its special editions.
+            ->sort(fn (SeriesVolumeData $a, SeriesVolumeData $b) => $a->volume->compare($b->volume)
+                ?: [$a->isSpecialEdition(), $a->edition] <=> [$b->isSpecialEdition(), $b->edition])
             ->values();
     }
 
