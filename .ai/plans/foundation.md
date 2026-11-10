@@ -31,24 +31,94 @@ Each phase ends with its tests green and its own commit on a `feature/*` branch.
 
 ## 2. Phase 1 — Authentication and roles
 
-1. **SSO** as the only production login (§2), with the local-only bypass
-   (`app()->environment('local')` + `config('auth.dev_sso_bypass')`) signing in as the
-   dev user from config / seeder. The SSO provider is an open item (§9) — build the
-   bypass and the user model first, leave the provider behind one config switch.
-2. Migration `add_is_admin_to_users_table` — `boolean('is_admin')->default(false)`.
+Requirement (user, 2026-11-10): **several SSO providers can be chosen and set up**, and
+SSO can be **skipped by logging in with a temporary code sent by e-mail**.
+
+The login page shows one button per enabled SSO provider plus an "E-mail me a login
+code" option. There is no password anywhere.
+
+### 1a. SSO providers, configured in the app
+
+1. Laravel Socialite, plus `socialiteproviders/microsoft` and a generic OpenID Connect
+   driver, so an admin can add, for example, Google + Microsoft + a self-hosted
+   Authentik / Keycloak.
+2. Migration `create_sso_providers_table`:
+
+   | column | notes |
+   |---|---|
+   | `driver` | `google`, `microsoft`, `github`, `oidc` — a PHP enum `SsoDriver`: closed set, each case is code |
+   | `name` | button label, e.g. "Work account" |
+   | `client_id` | |
+   | `client_secret` | `encrypted` cast |
+   | `settings` | JSON, driver-specific: Microsoft `tenant`, OIDC `issuer` (discovery URL), `scopes` |
+   | `enabled` | boolean |
+   | `allow_registration` | boolean, default false: may an unknown e-mail create an account via this provider? |
+   | `sort` | button order |
+
+3. `App\Services\Auth\SsoProviderFactory` builds the Socialite driver at runtime from a
+   row (`Socialite::buildProvider(...)`), so providers are data, not `config/services.php`
+   entries. Redirect URL per provider: `/auth/sso/{provider}/callback`, built from
+   `APP_URL` (guidelines §8).
+4. Admin UI `/admin/sso` (`can:admin`): list, add, edit, enable/disable, reorder, and a
+   "Test login" button. The callback URL to register at the identity provider is shown
+   with a copy button. The secret is write-only: never rendered back.
+5. Migration `create_user_identities_table` — `user_id`, `sso_provider_id`, `subject`
+   (the provider's stable user id), `email`; unique on `['sso_provider_id', 'subject']`.
+   One user can link several providers.
+6. Callback flow (`SsoCallbackController`):
+   - known `(provider, subject)` → log that user in;
+   - else a user with the same **verified** e-mail → link the identity and log in;
+   - else, if `allow_registration` → create the user and identity;
+   - else → back to the login page with "No account for this e-mail".
+   - `session()->regenerate()` on every successful login; the OAuth `state` is checked by
+     Socialite.
+7. Settings → "Linked sign-in methods": a user sees, links and unlinks their identities.
+   They cannot unlink the last one if e-mail codes are off.
+
+### 1b. Skip SSO: e-mail login code
+
+8. Migration `create_login_codes_table` — `email`, `code_hash`, `expires_at`,
+   `attempts`, `used_at`, `ip`; `Prunable` after a day.
+9. Flow: enter e-mail → if a user with that e-mail exists, mail a **6-digit code** that
+   expires after **10 minutes** and works **once** → enter the code → logged in.
+   - The response is the same whether or not the e-mail exists ("If an account exists,
+     a code is on its way"), so the form cannot be used to find out who has an account.
+   - The code is stored hashed (`Hash::make`) and compared with `Hash::check`; a new
+     request invalidates the previous code.
+   - Max 5 wrong attempts per code, then it is burnt. Rate limits: 3 code requests per
+     e-mail per 10 minutes and 10 per IP per hour (`RateLimiter`, real IP via the trusted
+     proxy, guidelines §8).
+   - The mail (`LoginCodeMail`, queued) contains the code and a one-click signed link
+     to the same verification, valid as long as the code.
+10. The e-mail code login can be switched off by an admin (`app_settings` row
+    `auth.email_codes_enabled`, default on). It cannot be switched off while no SSO
+    provider is enabled, so nobody gets locked out.
+11. Mail: SMTP settings come from `.env` (`MAIL_*`). The dev stack gets a **Mailpit**
+    service so codes can be read at `http://localhost:8025`.
+
+### 1c. Dev bypass and bootstrap
+
+12. The local-only bypass from the guidelines (§2) stays: in `local` with
+    `config('auth.dev_sso_bypass')` on, a "Sign in as dev user" button logs in as the
+    seeded dev user. Never available outside `local`.
+13. First admin: with no providers set up yet, the first login is by e-mail code. The
+    command `users:make-admin {email}` creates the user if needed and makes them admin;
+    after that the admin sets up SSO in `/admin/sso`.
+
+### 1d. Roles
+
+14. Migration `add_is_admin_to_users_table` — `boolean('is_admin')->default(false)`.
    A boolean, not a roles table: there is one privileged role and nothing else asks
    for more. Cast to `bool` on `User`.
-3. Gate `admin` (`fn (User $user) => $user->is_admin`) and a `can:admin` middleware
+15. Gate `admin` (`fn (User $user) => $user->is_admin`) and a `can:admin` middleware
    group for admin routes.
-4. Artisan command `users:make-admin {email}` to promote the first admin (there is no
-   UI to become admin from nothing). The seeded dev user is an admin.
 
 ## 3. Phase 2 — Admin user list
 
 Requirement (user, 2026-11-10): **in the user list, administrators can see themselves
 and the other admin users** — the list is not filtered to "normal" users only.
 
-5. `app/Http/Controllers/Admin/UserController.php@index`, route `GET /admin/users`
+16. `app/Http/Controllers/Admin/UserController.php@index`, route `GET /admin/users`
    (`admin.users.index`) behind `auth` + `can:admin`.
    - Lists **every** user, admins included, the signed-in admin included. No
      `where('is_admin', false)` and no `whereKeyNot(auth()->id())`.
@@ -57,34 +127,34 @@ and the other admin users** — the list is not filtered to "normal" users only.
      created at.
    - Ordered admins first, then by name; paginated 25.
    - A filter All / Admins / Users (`?role=`), default All.
-6. The list is **read-only towards collections**: an admin sees *that* a user exists and
+17. The list is **read-only towards collections**: an admin sees *that* a user exists and
    how many items they have, never the items themselves. Everything else stays scoped to
    the owner (§1, §7).
-7. Promoting / demoting from the list (`PATCH /admin/users/{user}`) — see open
+18. Promoting / demoting from the list (`PATCH /admin/users/{user}`) — see open
    question 2. If built: an admin cannot remove their **own** admin flag, and the last
    admin cannot be demoted, so the app can never end up with no admin.
-8. Non-admins get 403 on `/admin/*`; the nav link only renders for admins.
+19. Non-admins get 403 on `/admin/*`; the nav link only renders for admins.
 
 ## 4. Phase 3 — Core catalogue data (§3)
 
-9. `categories` (self-referencing `parent_id`) seeded Books → Manga, Novels; Music → CD,
+20. `categories` (self-referencing `parent_id`) seeded Books → Manga, Novels; Music → CD,
    Vinyl, Tape, Minidisc; Games (§3.2). `languages`, `genres` (with `category_id`),
    `publishers`, `artists`, `platforms`.
-10. `objects` (`CollectionObject`) with the shared fields from §3.1, `barcode`,
+21. `objects` (`CollectionObject`) with the shared fields from §3.1, `barcode`,
     `user_id`, `category_id`, `sub_category_id`, `serie_id`; pivots `object_language`
     and `genre_object` (genre must belong to the object's category — validated).
-11. Extension tables `book_details` (`artist_id`, `volume`), `music_details`
+22. Extension tables `book_details` (`artist_id`, `volume`), `music_details`
     (`artist_id`), `game_details` (`platform_id`).
-12. `series` (`user_id`, name triple, `artist_id`, `publisher_id`) and `series_volumes`.
+23. `series` (`user_id`, name triple, `artist_id`, `publisher_id`) and `series_volumes`.
     Use the column shapes from [`series-detection-from-isbn.md`](series-detection-from-isbn.md)
     phase 3 from the start (decimal `volume_sort`, `edition`, `isbns`,
     `external_source` / `external_id`), so no follow-up migration is needed.
-13. `#[Scope] ownedBy(User)` on every user-owned model; Form Requests carry the required
+24. `#[Scope] ownedBy(User)` on every user-owned model; Form Requests carry the required
     fields from §7.
 
 ## 5. Phase 4 — Library pages
 
-14. Dashboard (categories with counts), category page (series + standalone items),
+25. Dashboard (categories with counts), category page (series + standalone items),
     series page (volumes), item page with edit form. These are the pages the wishlist,
     search and share plans extend — keep their view data in support classes
     (`CategoryShelf`, `CategoryCounts`, `SeriesShelf`) from day one so the share plan's
@@ -92,16 +162,16 @@ and the other admin users** — the list is not filtered to "normal" users only.
 
 ## 6. Phase 5 — Scanning and per-user keys
 
-15. `CatalogueLookup` contract + Rakuten and Google Books providers (§5), every call
+26. `CatalogueLookup` contract + Rakuten and Google Books providers (§5), every call
     through `ApiCallLogger` (§4.3).
-16. Per-user API keys in settings, encrypted casts (§5.1). Also unblocks the Google
+27. Per-user API keys in settings, encrypted casts (§5.1). Also unblocks the Google
     Books / Hardcover series providers.
-17. Scanner modal (category, subcategory, language), single scan and batch scan with a
+28. Scanner modal (category, subcategory, language), single scan and batch scan with a
     queued commit (§4).
 
 ## 7. Phase 6 — Public API
 
-18. Sanctum tokens for the phone app, `api/v1` resources for objects, series, categories
+29. Sanctum tokens for the phone app, `api/v1` resources for objects, series, categories
     (§6), all user-scoped.
 
 ---
@@ -113,13 +183,29 @@ and the other admin users** — the list is not filtered to "normal" users only.
   login; no collection item of another user is rendered on the page.
 - If promote/demote is built: an admin cannot demote themselves; the last admin cannot
   be demoted; a non-admin cannot call the endpoint.
-- SSO bypass works only in `local` with the flag on, never in `production`.
+- SSO providers: a row per driver builds the right Socialite driver; disabled providers
+  get no button and their redirect/callback 404; the secret is encrypted in the
+  database and never rendered; callbacks are faked (`Socialite::fake()` / mocked user).
+- SSO callback: a known identity logs in; an unknown identity with a matching verified
+  e-mail links and logs in; an unknown e-mail is refused unless `allow_registration`;
+  one user can link two providers; the session id changes on login.
+- E-mail code: `Mail::fake()` — a code is mailed to an existing user; an unknown e-mail
+  gets the same response and no mail; the code works once; an expired code, the sixth
+  wrong attempt and a superseded code are all rejected; the rate limits trigger; the
+  signed link logs in and expires with the code; codes are stored hashed.
+- E-mail codes cannot be switched off while no SSO provider is enabled.
+- Dev bypass works only in `local` with the flag on, never in `production`.
 - Ownership scoping: another user's objects, series and artists never leak through any
   page or API endpoint.
 
 ## 9. Open questions (confirm before implementing)
 
-1. **SSO provider** for production (§9 of the guidelines).
+1. **SSO providers — decided 2026-11-10:** several, configurable by an admin in the app,
+   plus e-mail login codes to skip SSO (phase 1). Still to confirm: which drivers to
+   ship first (planned: Google, Microsoft, GitHub, generic OIDC), and whether a new
+   person may **register** at all — through an SSO provider with `allow_registration`,
+   or by e-mail code (planned: e-mail codes only for existing users; new users come from
+   an admin or an SSO provider that allows registration).
 2. **Admin actions.** Is the user list view-only, or can an admin also promote / demote
    admins and remove users from it?
 3. **Hidden users before this change?** The requirement reads as if admins were hidden

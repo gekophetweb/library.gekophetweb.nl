@@ -23,7 +23,13 @@ scope everything to the authenticated user.
 
 ## 2. Authentication
 
-- Login is via **SSO** (single sign-on). Treat SSO as the only production auth path.
+- Login is via **SSO** (single sign-on) with **several providers**, which an admin sets
+  up in the app (driver, client id, encrypted secret, enabled) — providers are data, not
+  `config/services.php` entries. One user can link several providers.
+- SSO can be **skipped with a temporary e-mail login code**: a single-use 6-digit code,
+  stored hashed, valid 10 minutes, rate-limited, with the same response whether or not
+  the e-mail has an account. This is a production path too. There are **no passwords**.
+- See [`foundation.md`](../plans/foundation.md) phase 1.
 - In the **local/dev environment**, SSO must be **skippable**. When skipped,
   authenticate as the seeded dev user **`jaap.lam@gmail.com`**.
 - Gate the skip behind an environment check (e.g. `app()->environment('local')`
@@ -248,5 +254,6 @@ Rules for agents:
 These are unspecified in the source and should be confirmed before implementation:
 
 - Music and Games external providers.
-- Which SSO provider is used in production.
+- Which SSO drivers to ship first, and who may register (see
+  [`foundation.md`](../plans/foundation.md) §9).
 - Barcode/scan format expected per category (ISBN, EAN, UPC, catalogue number).
