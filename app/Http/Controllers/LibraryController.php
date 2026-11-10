@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Language;
 use App\Models\Series;
 use App\Support\Library\CategoryCounts;
 use App\Support\Library\CategoryShelf;
@@ -15,7 +16,11 @@ class LibraryController extends Controller
 {
     public function dashboard(Request $request): View
     {
-        return view('library.dashboard', ['categories' => CategoryCounts::for($request->user()->objects()->getQuery())]);
+        return view('library.dashboard', [
+            'categories' => CategoryCounts::for($request->user()->objects()->getQuery()),
+            'scanCategories' => Category::query()->whereNull('parent_id')->with('children')->orderBy('sort')->orderBy('id')->get(),
+            'languages' => Language::query()->orderBy('name')->get(),
+        ]);
     }
 
     public function category(Request $request, Category $category): View

@@ -8,6 +8,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\SsoController;
 use App\Http\Controllers\CollectionObjectController;
 use App\Http\Controllers\LibraryController;
+use App\Http\Controllers\ScanBatchController;
+use App\Http\Controllers\ScanController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WelcomeNameController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +38,15 @@ Route::middleware('auth')->group(function () {
     Route::get('library/series/{series}', [LibraryController::class, 'series'])->name('library.series');
     Route::get('objects/{object}', [CollectionObjectController::class, 'show'])->name('objects.show');
     Route::put('objects/{object}', [CollectionObjectController::class, 'update'])->name('objects.update');
+
+    Route::post('scan', [ScanController::class, 'start'])->name('scan.start');
+    Route::get('scan/single', [ScanController::class, 'single'])->name('scan.single');
+    Route::post('scan/single/lookup', [ScanController::class, 'lookup'])->middleware('throttle:60,1')->name('scan.single.lookup');
+    Route::post('scan/single/add', [ScanController::class, 'add'])->name('scan.single.add');
+    Route::get('scan/batches/{batch}', [ScanBatchController::class, 'show'])->name('scan.batches.show');
+    Route::post('scan/batches/{batch}/items', [ScanBatchController::class, 'storeItem'])->name('scan.batches.items.store');
+    Route::delete('scan/batches/{batch}/items/{item}', [ScanBatchController::class, 'destroyItem'])->name('scan.batches.items.destroy');
+    Route::post('scan/batches/{batch}/commit', [ScanBatchController::class, 'commit'])->name('scan.batches.commit');
 
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 

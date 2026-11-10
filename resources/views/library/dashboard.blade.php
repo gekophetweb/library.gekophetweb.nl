@@ -1,5 +1,8 @@
 <x-layout title="Library">
-    <h1 class="mb-6 text-2xl font-semibold">Your library</h1>
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <h1 class="text-2xl font-semibold">Your library</h1>
+        <x-scanner-dialog :categories="$scanCategories" :languages="$languages" />
+    </div>
 
     <ul class="grid gap-4 sm:grid-cols-3">
         @foreach ($categories as $category)
