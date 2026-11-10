@@ -32,6 +32,18 @@ class User extends Authenticatable
         ];
     }
 
+    /** @return HasMany<CollectionObject, $this> */
+    public function objects(): HasMany
+    {
+        return $this->hasMany(CollectionObject::class);
+    }
+
+    /** @return HasMany<Series, $this> */
+    public function series(): HasMany
+    {
+        return $this->hasMany(Series::class);
+    }
+
     /** @return HasMany<UserIdentity, $this> */
     public function identities(): HasMany
     {

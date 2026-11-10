@@ -12,6 +12,8 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
+        $this->call(CatalogueSeeder::class);
+
         // The dev user the local SSO bypass signs in as (guidelines §2).
         $user = User::firstOrNew(['email' => config('auth.dev_user_email')]);
         $user->name ??= 'Dev User';

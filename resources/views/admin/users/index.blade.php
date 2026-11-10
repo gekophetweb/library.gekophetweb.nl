@@ -16,6 +16,7 @@
                 <tr>
                     <th class="px-4 py-3 font-medium">Name</th>
                     <th class="px-4 py-3 font-medium">E-mail</th>
+                    <th class="px-4 py-3 text-right font-medium">Total items</th>
                     <th class="px-4 py-3 font-medium">Joined</th>
                 </tr>
             </thead>
@@ -33,10 +34,11 @@
                             @endif
                         </td>
                         <td class="px-4 py-3 text-stone-600 dark:text-stone-400">{{ $user->email }}</td>
+                        <td class="px-4 py-3 text-right tabular-nums" data-total="{{ $user->objects_count }}">{{ number_format($user->objects_count) }}</td>
                         <td class="px-4 py-3 text-stone-600 dark:text-stone-400">{{ $user->created_at?->toFormattedDateString() }}</td>
                     </tr>
                 @empty
-                    <tr><td colspan="3" class="px-4 py-6 text-center text-stone-500">No users match this filter.</td></tr>
+                    <tr><td colspan="4" class="px-4 py-6 text-center text-stone-500">No users match this filter.</td></tr>
                 @endforelse
             </tbody>
         </table>
