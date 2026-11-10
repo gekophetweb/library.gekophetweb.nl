@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\DevLoginController;
 use App\Http\Controllers\Auth\EmailCodeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\SsoController;
+use App\Http\Controllers\CollectionObjectController;
+use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WelcomeNameController;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +31,11 @@ Route::get('auth/sso/{provider}', [SsoController::class, 'redirect'])->name('sso
 Route::get('auth/sso/{provider}/callback', [SsoController::class, 'callback'])->name('sso.callback');
 
 Route::middleware('auth')->group(function () {
-    Route::view('/', 'home')->name('home');
+    Route::get('/', [LibraryController::class, 'dashboard'])->name('home');
+    Route::get('library/categories/{category}', [LibraryController::class, 'category'])->name('library.category');
+    Route::get('library/series/{series}', [LibraryController::class, 'series'])->name('library.series');
+    Route::get('objects/{object}', [CollectionObjectController::class, 'show'])->name('objects.show');
+    Route::put('objects/{object}', [CollectionObjectController::class, 'update'])->name('objects.update');
 
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
