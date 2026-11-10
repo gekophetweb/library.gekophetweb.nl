@@ -48,7 +48,8 @@ manga (test case: *ベルセルク / Berserk*, ISBNs `9784592135746`, `978459213
 - **ISBN formats.** Old NDL records store `4-592-13574-1` (hyphenated, ISBN-10, also in the `ISBN13` field).
   Normalize to hyphen-free ISBN-13 before comparing.
 - **Several records per volume.** Volumes 41–43 each appear twice (regular + special
-  edition). Group by volume number, keep all ISBNs.
+  edition). The special edition carries `dcndl:edition` (e.g. `ゾッド胸像フィギュア付き特装版`);
+  the regular one has none. Keep them as **separate entries** (§7, decision 3).
 - **Noise in series searches.** The NDL title search also returns the light novel, art
   books, guidebooks and foreign translations. Filter strictly (§4.2).
 - **One English book, many ISBNs.** DCC book 1 has 16 ISBNs in Open Library. Link
@@ -83,7 +84,8 @@ interface SeriesLookup
   `Confidence $confidence`, `string $source`.
 - `SeriesReference` — `source` (`ndl`, `wikidata`, …), `external_id`, name triple
   (`name`, `name_romanized`, `name_english`), creator name, publisher name.
-- `SeriesVolumeData` — `VolumeNumber`, title, ISBNs (array), release date.
+- `SeriesVolumeData` — `VolumeNumber`, edition label (null for the regular edition),
+  title, ISBNs (array), release date.
 - `VolumeNumber` — decimal-capable value object (`1`, `3.5`), parsed from strings like
   `1`, `４２`, `第12巻`, `Vol. 12`, `#3`, `(12)`.
 
@@ -134,7 +136,8 @@ Before creating a series, match an existing user series by `external_id`, then b
   - `dc:title` equals the series title exactly (after NFKC),
   - the publisher matches (or the ISBN publisher prefix matches, e.g. `4592`),
   - `dcndl:volume` parses to a number,
-  - and group by volume number, merging ISBNs (special editions).
+  - and group by volume number **plus edition** (`dcndl:edition`, empty for the regular
+    edition): a special edition is its own entry with its own ISBNs (§7, decision 3).
 - Ignore `dcndl:seriesTitle` for series purposes; optionally store it as the imprint.
 
 ### 4.3 Common rules
@@ -174,19 +177,21 @@ Before creating a series, match an existing user series by `external_id`, then b
     to `decimal(6,2)` (or add `volume_sort`) so `3.5` side stories fit. Keep the display
     string separate from the sortable number.
 12. `SeriesVolume` gets an `isbns` JSON column (or a child table) so a scan can be
-    matched to a known volume by any of its edition ISBNs.
+    matched to a known volume by any of its ISBNs, and a nullable `edition` string.
+    Unique on `['series_id', 'volume_sort', 'edition']` — a special edition is its own
+    row (§7, decision 3).
 
 ### Phase 4 — Scan integration
 13. Single scan: after the catalogue lookup, call `SeriesLookupManager::resolve()`.
     Show the result in the "add to collection" prompt as a **pre-filled, editable**
     series + volume, with the source shown ("from NDL").
-14. Batch scan: resolve per item inside the queued job. High confidence → apply;
-    otherwise attach as a suggestion visible on the item page.
+14. Batch scan: resolve per item inside the queued job. High confidence → apply
+    automatically (§7, decision 1); otherwise attach as a suggestion visible on the item page.
 15. When a series is linked for the first time, dispatch `SyncSeriesVolumes` (queued).
 
 ### Phase 5 — Series sync
 16. `app/Jobs/SyncSeriesVolumes.php` — `volumes()` → upsert `SeriesVolume` rows by
-    volume number, merge ISBNs, never delete volumes the user owns.
+    volume number + edition, merge ISBNs, never delete volumes the user owns.
 17. Hook the existing series "sync" button to the same job.
 18. Schedule a periodic re-sync for ongoing series (e.g. weekly) to pick up new volumes.
 
@@ -207,7 +212,8 @@ Record real responses once into `tests/Fixtures/series/` and replay with `Http::
 - NDL `resolve()`: `9784592135746` → `ベルセルク`, volume 1; `9784592135753` → volume 2;
   `Jets comics` is **not** the series.
 - NDL `volumes()`: Berserk → 43 volumes, 1..43 contiguous, light novel / art book /
-  guidebook / translations filtered out, special editions merged.
+  guidebook / translations filtered out; volumes 41–43 also have a separate special
+  edition entry (46 entries in all).
 - Open Library + Wikidata: DCC book 1 ISBN `9780593820247` → series *Dungeon Crawler
   Carl*, volume 1; `volumes()` → 8 books in order.
 - Manager: Japanese scan never calls Open Library; English scan never calls NDL;
@@ -222,20 +228,24 @@ Finish with `vendor/bin/pint --dirty --format agent` and `php artisan test --com
 
 ---
 
-## 7. Open questions (confirm before implementing)
+## 7. Decisions and open questions
 
-1. **Batch confidence.** Auto-apply high-confidence series matches in batch mode, or
-   always leave them as suggestions?
-2. **Translated manga** (e.g. the English *Berserk* editions). The English chain has
-   little data for manga volumes; accept title parsing + manual linking, or add
-   Hardcover / Google Books as required providers?
-3. **Special editions** (Berserk 41–43 twice). Treat as the same volume (owning either
-   counts as owned), or as separate entries?
-4. **Romanized names.** Prefer the Wikidata English/romaji label, then a kana
-   transliteration suggestion, then empty — is that the desired order?
-5. **Provider list in the guidelines.** Adding NDL, Open Library and Wikidata changes
-   §5 of [`physical-library.md`](../guidelines/physical-library.md); update it once this
-   plan is approved.
+Answered by the user on 2026-11-10:
+
+1. **Batch confidence — auto-apply.** High-confidence series matches in a batch scan
+   are applied automatically; lower-confidence ones stay suggestions.
+2. **Translated manga — still open.** For English editions of manga (e.g. the English
+   *Berserk*), Open Library has one work per volume and no series, and Wikidata has the
+   series but no volume items. Options: (a) accept title parsing (`Berserk Volume 1`)
+   plus manual linking for now, or (b) make Google Books and/or Hardcover required
+   providers, which needs per-user API keys (guidelines §5.1) first.
+3. **Special editions — separate entries.** A special edition (NDL `dcndl:edition`
+   set) is its own volume entry with its own ISBNs, next to the regular edition of the
+   same number. Owning one does not mark the other as owned.
+4. **Romanized names — confirmed.** Wikidata English / romaji label first, then a kana
+   transliteration as an editable suggestion, then empty.
+5. **Provider list — done.** NDL, Open Library and Wikidata are added to §5 of
+   [`physical-library.md`](../guidelines/physical-library.md).
 
 ## 8. Out of scope
 
@@ -269,4 +279,6 @@ only the parts of this plan that do not need the domain models were built:
 - Rakuten and Google Books fallbacks are config slots only: per-user API keys (§5.1 of
   the guidelines) do not exist yet.
 
-Still open: phases 3–6 and the questions in §7.
+Still open: phases 3–6 and question 2 in §7. Decision 3 (special editions as separate
+entries) reverses what phase 2 built: `NdlSeriesLookup::volumes()` still merges editions
+by volume number and needs reworking to group by volume + edition.

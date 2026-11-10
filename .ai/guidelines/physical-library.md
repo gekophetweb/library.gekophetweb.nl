@@ -147,6 +147,17 @@ resolved by category, so new providers can be added without touching call sites.
 Where a category has multiple providers (Books), support querying them in a defined
 order and merging/deduplicating results.
 
+**Series lookup (Books)** is a separate contract, `SeriesLookup` ("which series is this
+and which volumes does it have?"), resolved by scan language by `SeriesLookupManager`:
+
+- **Japanese**: NDL Search (国立国会図書館) OpenSearch → Rakuten `seriesName` → title parsing
+- **English / Latin script**: Open Library → Wikidata → Google Books `seriesInfo` →
+  title parsing
+
+NDL, Open Library and Wikidata need **no API key** and are not per-user keys; only the
+Rakuten / Google Books fallbacks use the user's stored keys (§5.1). See
+[`series-detection-from-isbn.md`](../plans/series-detection-from-isbn.md).
+
 ### 5.1 Per-user API keys
 
 Each user links **their own API keys** for these providers through **user settings**.
