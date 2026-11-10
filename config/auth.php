@@ -114,4 +114,19 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Local development login
+    |--------------------------------------------------------------------------
+    |
+    | In the local environment only, with the bypass switched on, the login page offers
+    | "Sign in as dev user", which signs in as this seeded user without SSO or an e-mail
+    | code. Never available outside `local`, whatever the flag says.
+    |
+    */
+
+    'dev_sso_bypass' => (bool) env('AUTH_DEV_SSO_BYPASS', false),
+
+    'dev_user_email' => env('AUTH_DEV_USER_EMAIL', 'jaap.lam@gmail.com'),
+
 ];
