@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ApiKeyProvider;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -42,6 +43,18 @@ class User extends Authenticatable
     public function series(): HasMany
     {
         return $this->hasMany(Series::class);
+    }
+
+    /** @return HasMany<UserApiKey, $this> */
+    public function apiKeys(): HasMany
+    {
+        return $this->hasMany(UserApiKey::class);
+    }
+
+    /** This user's own key for $provider, or null when none is set. */
+    public function apiKey(ApiKeyProvider $provider): ?string
+    {
+        return $this->apiKeys()->where('provider', $provider->value)->first()?->key;
     }
 
     /** @return HasMany<UserIdentity, $this> */

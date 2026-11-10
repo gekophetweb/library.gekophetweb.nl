@@ -20,6 +20,43 @@
         </form>
     </section>
 
+    <section class="mb-10 max-w-2xl">
+        <h2 class="mb-1 text-lg font-semibold">API keys</h2>
+        <p class="mb-4 text-sm text-stone-600 dark:text-stone-400">Lookups use your own keys. A saved key is never shown again; enter a new one to replace it.</p>
+        @error('key') <p class="mb-3 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+        <ul class="divide-y divide-stone-200 rounded-lg border border-stone-200 bg-white dark:divide-stone-800 dark:border-stone-800 dark:bg-stone-900">
+            @foreach ($apiKeyProviders as $provider)
+                @php($saved = $savedApiKeys->has($provider->value))
+                <li class="space-y-2 px-4 py-3">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="font-medium">{{ $provider->label() }}</span>
+                        @if ($saved)
+                            <span class="rounded bg-emerald-100 px-2 py-0.5 text-xs text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200">Key saved</span>
+                        @endif
+                    </div>
+                    <p class="text-sm text-stone-500">{{ $provider->hint() }}</p>
+                    <div class="flex flex-wrap gap-2">
+                        <form method="POST" action="{{ route('settings.api-keys.update', $provider->value) }}" class="flex flex-1 gap-2">
+                            @csrf
+                            @method('PUT')
+                            <label for="key-{{ $provider->value }}" class="sr-only">{{ $provider->label() }} key</label>
+                            <input id="key-{{ $provider->value }}" name="key" type="password" autocomplete="off" required maxlength="500"
+                                   placeholder="{{ $saved ? 'New key' : 'Key' }}" class="{{ $input }} min-w-0 flex-1">
+                            <button class="{{ $secondary }}">Save</button>
+                        </form>
+                        @if ($saved)
+                            <form method="POST" action="{{ route('settings.api-keys.destroy', $provider->value) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button class="{{ $secondary }}">Remove</button>
+                            </form>
+                        @endif
+                    </div>
+                </li>
+            @endforeach
+        </ul>
+    </section>
+
     <section class="max-w-2xl">
         <h2 class="mb-1 text-lg font-semibold">Linked sign-in methods</h2>
         <p class="mb-4 text-sm text-stone-600 dark:text-stone-400">You can also always sign in with a code sent to {{ $user->email }}, unless an admin switched e-mail codes off.</p>
