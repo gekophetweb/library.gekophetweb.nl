@@ -137,8 +137,10 @@ and the other admin users** — the list is not filtered to "normal" users only.
    - Lists **every** user, admins included, the signed-in admin included. No
      `where('is_admin', false)` and no `whereKeyNot(auth()->id())`.
    - Columns: name, email, an **Admin** badge, a **You** marker on the current user's
-     row, item count (owned items only, once [`own-wishlist.md`](own-wishlist.md) lands),
-     created at.
+     row, **Total items** — the number of items that user owns, all categories together
+     (user, 2026-11-10) — and created at. One `withCount` query, no N+1. Once
+     [`own-wishlist.md`](own-wishlist.md) lands the total counts owned items only;
+     wishlist items are not included.
    - Ordered admins first, then by name; paginated 25.
    - A filter All / Admins / Users (`?role=`), default All.
 17. The list is **read-only towards collections**: an admin sees *that* a user exists and
