@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\SsoProvider;
 use App\Support\Auth\LoginSettings;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class LoginController extends Controller
     public function show(): View
     {
         return view('auth.login', [
-            'providers' => collect(),
+            'providers' => SsoProvider::query()->enabled()->ordered()->get(),
             'emailCodes' => LoginSettings::emailCodesEnabled(),
         ]);
     }

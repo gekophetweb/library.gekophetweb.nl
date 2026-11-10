@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\SsoProviderController;
 use App\Http\Controllers\Auth\EmailCodeController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\SsoController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WelcomeNameController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +21,10 @@ Route::middleware('guest')->group(function () {
         ->name('login.code.link');
 });
 
+// Guests log in here; signed-in users link a provider; admins test one.
+Route::get('auth/sso/{provider}', [SsoController::class, 'redirect'])->name('sso.redirect');
+Route::get('auth/sso/{provider}/callback', [SsoController::class, 'callback'])->name('sso.callback');
+
 Route::middleware('auth')->group(function () {
     Route::view('/', 'home')->name('home');
 
@@ -25,4 +32,16 @@ Route::middleware('auth')->group(function () {
 
     Route::get('welcome/name', [WelcomeNameController::class, 'show'])->name('welcome.name');
     Route::post('welcome/name', [WelcomeNameController::class, 'store'])->name('welcome.name.store');
+
+    Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
+    Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
+    Route::delete('settings/identities/{identity}', [SettingsController::class, 'destroyIdentity'])->name('settings.identities.destroy');
+
+    Route::middleware('can:admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::put('sso/settings', [SsoProviderController::class, 'updateSettings'])->name('sso.settings');
+        Route::get('sso/{provider}/test', [SsoController::class, 'test'])->name('sso.test');
+        Route::resource('sso', SsoProviderController::class)
+            ->parameters(['sso' => 'provider'])
+            ->except('show');
+    });
 });
