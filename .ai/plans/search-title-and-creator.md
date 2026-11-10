@@ -1,6 +1,8 @@
 # Plan — Search by title and by author / artist name
 
-Status: **implemented 2026-08-27**. Written 2026-08-27.
+Status: **not built in this repository** (checked 2026-11-10). Written 2026-08-27
+against an earlier codebase where it was implemented; the files named below do not
+exist here yet. Execute after [`foundation.md`](foundation.md).
 
 Related: [`own-wishlist.md`](own-wishlist.md) — see §8.
 
@@ -181,5 +183,6 @@ above — do whichever plan lands second as a small follow-up commit.
   later, but it is not part of the requested scope.
 - Relevance ranking. Results are ordered by name; "starts with the term" scoring is a
   later refinement if the flat ordering proves noisy.
-- Search over catalogue providers (finding items you do *not* own). That is the scanner's
-  job and a different feature.
+- Search over catalogue providers (finding items you do *not* own). A different
+  feature, now planned in [`search-catalogue-not-owned.md`](search-catalogue-not-owned.md)
+  as a fourth `SearchScope` case on the same search box.

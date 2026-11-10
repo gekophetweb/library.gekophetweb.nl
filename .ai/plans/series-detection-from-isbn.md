@@ -7,7 +7,8 @@ Related: [`own-wishlist.md`](own-wishlist.md) (series completion counts owned vs
 [`search-title-and-creator.md`](search-title-and-creator.md) (`ComparesNames`, series
 name triple).
 
-> The application code is not in this repository. Class, table and column names below
+> The application code is not in this repository; [`foundation.md`](foundation.md)
+> builds it and creates the series tables in the phase-3 shape below. Class, table and column names below
 > that already exist (`SeriesVolume`, `SeriesShelf`, `book_details.volume`,
 > `series.artist_id`, the API call log, `CatalogueLookup`) are taken from the earlier
 > plans — **check them against the code before implementing**, especially column types.

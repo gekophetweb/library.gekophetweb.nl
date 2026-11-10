@@ -1,6 +1,8 @@
 # Plan — Own / Wishlist status per item
 
-Status: **implemented 2026-08-27**. Written 2026-08-27.
+Status: **not built in this repository** (checked 2026-11-10). Written 2026-08-27
+against an earlier codebase where it was implemented; the files named below do not
+exist here yet. Execute after [`foundation.md`](foundation.md).
 
 ---
 
@@ -140,3 +142,7 @@ Finish with `vendor/bin/pint --dirty --format agent` and
 that is not owned could become a wishlist `CollectionObject` in one click, without a
 scan — it reuses everything above but adds a new creation path, so it belongs in a
 separate change.
+
+Adding books you do not own from a catalogue search is planned in
+[`search-catalogue-not-owned.md`](search-catalogue-not-owned.md), which uses the same
+wishlist create path.

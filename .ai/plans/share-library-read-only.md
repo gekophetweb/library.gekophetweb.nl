@@ -1,6 +1,15 @@
 # Plan — Share a library with viewers who have no account
 
-Status: **implemented 2026-09-20**. Written 2026-09-20.
+Status: **not built in this repository** (checked 2026-11-10). Written 2026-09-20
+against an earlier codebase where it was implemented; the files named below do not
+exist here yet, and §11 records how it was built there. Execute after
+[`foundation.md`](foundation.md) and [`own-wishlist.md`](own-wishlist.md).
+
+> **Open question (2026-11-10).** The request "share options with only read rights" is
+> covered by this plan's read-only links. If sharing with a **named account** that gets
+> read-only access is also wanted (§10 keeps it out of scope), that is a second share
+> type to add here: a `library_share_user` pivot to an existing user, checked through the
+> same `exposes()` gate.
 
 Related: [`own-wishlist.md`](own-wishlist.md) — shared links show wishlist items the same
 way the owner sees them.
