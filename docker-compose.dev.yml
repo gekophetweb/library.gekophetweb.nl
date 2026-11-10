@@ -63,6 +63,15 @@ services:
       DB_DATABASE: library
       DB_USERNAME: library
       DB_PASSWORD: library
+      # Login-code mails go to Mailpit: read them at http://localhost:8025.
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+      MAIL_SCHEME: ""
+      MAIL_USERNAME: ""
+      MAIL_PASSWORD: ""
+      # No queue worker in the dev stack: run queued jobs (such as mails) in the request.
+      QUEUE_CONNECTION: sync
     volumes:
       - .:/var/www/html
       - vendor:/var/www/html/vendor
@@ -73,6 +82,15 @@ services:
         condition: service_completed_successfully
       db:
         condition: service_healthy
+      mailpit:
+        condition: service_started
+    restart: unless-stopped
+
+  # Catches every mail the app sends; web UI on http://localhost:8025.
+  mailpit:
+    image: axllent/mailpit:v1.27
+    ports:
+      - "127.0.0.1:${DEV_MAILPIT_PORT:-8025}:8025"
     restart: unless-stopped
 
   db:
