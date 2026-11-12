@@ -14,6 +14,12 @@ class MusicDetail extends Model
 
     public $incrementing = false;
 
+    /** @return BelongsTo<CollectionObject, $this> */
+    public function object(): BelongsTo
+    {
+        return $this->belongsTo(CollectionObject::class, 'object_id');
+    }
+
     /** @return BelongsTo<Artist, $this> */
     public function artist(): BelongsTo
     {

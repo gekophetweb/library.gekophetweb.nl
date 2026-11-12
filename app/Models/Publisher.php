@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\SearchesNames;
 use Database\Factories\PublisherFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Publisher extends Model
 {
     /** @use HasFactory<PublisherFactory> */
-    use HasFactory;
+    use HasFactory, SearchesNames;
 
     /** @return HasMany<CollectionObject, $this> */
     public function objects(): HasMany

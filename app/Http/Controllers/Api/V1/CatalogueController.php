@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Actions\UpdateCollectionObject;
 use App\Enums\OwnershipStatus;
+use App\Enums\SearchScope;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateCollectionObjectRequest;
 use App\Http\Resources\V1\CategoryResource;
@@ -20,7 +21,7 @@ use Illuminate\Validation\Rule;
 /** The phone app's view of the catalogue (guidelines §6). Everything is scoped to the token's user. */
 class CatalogueController extends Controller
 {
-    private const array OBJECT_RELATIONS = ['category', 'subCategory', 'languages', 'genres', 'serie', 'publisher', 'bookDetail.artist', 'musicDetail.artist', 'gameDetail.platform'];
+    public const array OBJECT_RELATIONS = ['category', 'subCategory', 'languages', 'genres', 'serie', 'publisher', 'bookDetail.artist', 'musicDetail.artist', 'gameDetail.platform'];
 
     public function user(Request $request): array
     {
@@ -44,10 +45,15 @@ class CatalogueController extends Controller
             'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
             // Absent means both, so older phone-app builds see no change.
             'ownership' => ['nullable', Rule::enum(OwnershipStatus::class)],
+            // Titles and creator names; search_by=title keeps it to titles and barcodes.
+            'search' => ['nullable', 'string', 'max:255'],
+            'search_by' => ['nullable', Rule::enum(SearchScope::class)],
         ]);
+        $term = CollectionObject::normalizeSearchTerm($filters['search'] ?? null);
 
         return CollectionObjectResource::collection(
             CollectionObject::query()->ownedBy($request->user())
+                ->when($term, fn ($query, $term) => $query->matchingSearch($term, $request->enum('search_by', SearchScope::class) ?? SearchScope::All))
                 ->when($filters['ownership'] ?? null, fn ($query, $ownership) => $query->where('ownership', $ownership))
                 ->when($filters['category_id'] ?? null, fn ($query, $id) => $query->where('category_id', $id))
                 ->when($filters['series_id'] ?? null, fn ($query, $id) => $query->where('serie_id', $id))

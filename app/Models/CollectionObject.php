@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Enums\OwnershipStatus;
+use App\Enums\SearchScope;
+use App\Models\Concerns\SearchesNames;
+use App\Support\Isbn;
 use Database\Factories\CollectionObjectFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -26,7 +29,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class CollectionObject extends Model
 {
     /** @use HasFactory<CollectionObjectFactory> */
-    use HasFactory;
+    use HasFactory, SearchesNames;
 
     protected function casts(): array
     {
@@ -61,6 +64,50 @@ class CollectionObject extends Model
     public function isOwned(): bool
     {
         return $this->ownership === OwnershipStatus::Owned;
+    }
+
+    /**
+     * The item's own titles, its series' titles, or its exact barcode (as typed, or as the
+     * normalised ISBN-13).
+     *
+     * @param  Builder<self>  $query
+     */
+    #[Scope]
+    protected function matchingTitle(Builder $query, string $term): void
+    {
+        $barcodes = array_unique(array_filter([str_replace(' ', '', $term), Isbn::tryFrom($term)?->value]));
+
+        $query->where(fn (Builder $query) => $query
+            ->whereNameLike($term)
+            ->orWhereHas('serie', fn (Builder $series) => $series->whereNameLike($term))
+            ->orWhereIn($this->qualifyColumn('barcode'), $barcodes));
+    }
+
+    /**
+     * A book's author, a record's artist, or the artist of the item's series.
+     *
+     * @param  Builder<self>  $query
+     */
+    #[Scope]
+    protected function matchingCreator(Builder $query, string $term): void
+    {
+        $artist = fn (Builder $artists) => $artists->whereNameLike($term);
+
+        $query->where(fn (Builder $query) => $query
+            ->whereHas('bookDetail.artist', $artist)
+            ->orWhereHas('musicDetail.artist', $artist)
+            ->orWhereHas('serie.artist', $artist));
+    }
+
+    /** @param  Builder<self>  $query */
+    #[Scope]
+    protected function matchingSearch(Builder $query, string $term, SearchScope $scope = SearchScope::All): void
+    {
+        $query->where(fn (Builder $query) => match ($scope) {
+            SearchScope::Title => $query->matchingTitle($term),
+            SearchScope::Creator => $query->matchingCreator($term),
+            SearchScope::All => $query->matchingTitle($term)->orWhere(fn (Builder $query) => $query->matchingCreator($term)),
+        });
     }
 
     /** @return BelongsTo<User, $this> */
