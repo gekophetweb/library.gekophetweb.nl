@@ -37,6 +37,8 @@ class SeriesResource extends JsonResource
             'creator' => $this->artist ? ['id' => $this->artist->id, 'name' => $this->artist->name] : null,
             'external_source' => $this->external_source,
             'external_id' => $this->external_id,
+            'syncable' => $this->isSyncable(),
+            'synced_at' => $this->synced_at?->toIso8601String(),
             'items_count' => $this->whenCounted('objects'),
             'wanted_count' => $this->whenCounted('wanted'),
             $this->mergeWhen($this->shelf !== null, fn () => [

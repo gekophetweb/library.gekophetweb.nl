@@ -27,4 +27,18 @@ final readonly class SeriesReference
     {
         return "{$this->source}:{$this->externalId}";
     }
+
+    /** @return array<string, string|null> for the session and the suggestion column */
+    public function toArray(): array
+    {
+        return get_object_vars($this);
+    }
+
+    /** @param  array<string, string|null>  $data */
+    public static function fromArray(array $data): self
+    {
+        $fields = ['source', 'externalId', 'name', 'nameRomanized', 'nameEnglish', 'nameTranscription', 'creator', 'publisher'];
+
+        return new self(...array_intersect_key($data, array_flip($fields)));
+    }
 }

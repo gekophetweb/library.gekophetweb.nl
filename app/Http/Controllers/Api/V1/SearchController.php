@@ -9,6 +9,7 @@ use App\Http\Requests\StoreWishlistItemRequest;
 use App\Http\Resources\V1\ArtistResource;
 use App\Http\Resources\V1\CollectionObjectResource;
 use App\Http\Resources\V1\SeriesResource;
+use App\Jobs\DetectObjectSeries;
 use App\Services\Catalogue\CatalogueSearchManager;
 use App\Support\Catalogue\CatalogueResult;
 use App\Support\Search\SearchResults;
@@ -55,6 +56,10 @@ class SearchController extends Controller
     public function storeWishlist(StoreWishlistItemRequest $request, AddScannedObject $add): JsonResponse
     {
         $object = $add->handle($request->user(), $request->setup(), $request->result());
+
+        if ($object->wasRecentlyCreated) {
+            DetectObjectSeries::dispatch($object, $request->setup()->language->code);
+        }
 
         return (new CollectionObjectResource($object->load(CatalogueController::OBJECT_RELATIONS)))
             ->response()

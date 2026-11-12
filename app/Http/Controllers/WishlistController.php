@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Scan\AddScannedObject;
 use App\Http\Requests\StoreWishlistItemRequest;
+use App\Jobs\DetectObjectSeries;
 use Illuminate\Http\RedirectResponse;
 
 /**
@@ -16,6 +17,10 @@ class WishlistController extends Controller
     public function store(StoreWishlistItemRequest $request, AddScannedObject $add): RedirectResponse
     {
         $object = $add->handle($request->user(), $request->setup(), $request->result());
+
+        if ($object->wasRecentlyCreated) {
+            DetectObjectSeries::dispatch($object, $request->setup()->language->code);
+        }
 
         $status = match (true) {
             ! $object->wasRecentlyCreated && $object->isOwned() => "You already own {$object->name}.",
