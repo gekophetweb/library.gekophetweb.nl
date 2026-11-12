@@ -22,6 +22,8 @@ class UpdateCollectionObject
                 'publisher_id' => $data['publisher_id'] ?? null,
                 'release_date' => $data['release_date'] ?? null,
                 'serie_id' => $data['serie_id'] ?? null,
+                // Never silently demote a wanted item (or promote one) when the field is left out.
+                'ownership' => $data['ownership'] ?? $object->ownership,
             ]);
 
             $object->languages()->sync($data['languages']);

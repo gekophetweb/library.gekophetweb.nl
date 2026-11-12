@@ -2,13 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\OwnershipStatus;
 use App\Models\Category;
 use App\Models\Language;
 use App\Support\Scan\ScanSetup;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-/** The scanner dialog: a category (and sub-category if it has any), a language, a mode (§4). */
+/** The scanner dialog: a category (and sub-category if it has any), a language, a mode (§4), own or wishlist. */
 class StartScanRequest extends FormRequest
 {
     /**
@@ -27,7 +28,16 @@ class StartScanRequest extends FormRequest
             ],
             'language_id' => ['required', Rule::exists('languages', 'id')],
             'mode' => ['required', 'in:single,batch'],
+            // Optional: a scan is normally an acquisition, so it defaults to owned.
+            'ownership' => ['nullable', Rule::enum(OwnershipStatus::class)],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        if (! $this->filled('ownership')) {
+            $this->merge(['ownership' => OwnershipStatus::Owned->value]);
+        }
     }
 
     /** @return array<string, string> */
@@ -45,6 +55,7 @@ class StartScanRequest extends FormRequest
             Category::query()->findOrFail($this->integer('category_id')),
             $this->filled('sub_category_id') ? Category::query()->findOrFail($this->integer('sub_category_id')) : null,
             Language::query()->findOrFail($this->integer('language_id')),
+            $this->enum('ownership', OwnershipStatus::class) ?? OwnershipStatus::Owned,
         );
     }
 }

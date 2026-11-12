@@ -3,6 +3,7 @@
 namespace App\Actions\Scan;
 
 use App\Enums\CategoryKind;
+use App\Enums\OwnershipStatus;
 use App\Models\Artist;
 use App\Models\CollectionObject;
 use App\Models\Publisher;
@@ -13,8 +14,10 @@ use App\Support\Series\TitleVolumeParser;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Adds a scanned item to a user's collection from a catalogue result (or details typed by
- * hand). Idempotent: a barcode the user already has returns the existing item.
+ * Adds a scanned item to a user's collection (owned or wishlist) from a catalogue result
+ * or details typed by hand. Idempotent: a barcode the user already has returns the
+ * existing item — promoted to owned when it was wanted and this is an Own scan. An owned
+ * item is never demoted by a Wishlist scan.
  */
 class AddScannedObject
 {
@@ -25,7 +28,7 @@ class AddScannedObject
         $existing = CollectionObject::query()->ownedBy($user)->where('barcode', $result->barcode)->first();
 
         if ($existing !== null) {
-            return $existing;
+            return self::promoteIfAcquired($existing, $setup->ownership);
         }
 
         return DB::transaction(function () use ($user, $setup, $result) {
@@ -33,6 +36,7 @@ class AddScannedObject
                 'category_id' => $setup->category->id,
                 'sub_category_id' => $setup->subCategory?->id,
                 'barcode' => $result->barcode,
+                'ownership' => $setup->ownership,
                 'name' => $result->name,
                 // Required (§7). The catalogues rarely give a romanization; the original
                 // title stands in until the user edits it.
@@ -58,6 +62,19 @@ class AddScannedObject
 
             return $object;
         });
+    }
+
+    /**
+     * Scanning a wanted item in Own mode is the acquisition: flip it to owned. Never the
+     * other way round. Check `wasChanged('ownership')` on the result to tell the user.
+     */
+    public static function promoteIfAcquired(CollectionObject $existing, OwnershipStatus $scannedAs): CollectionObject
+    {
+        if ($scannedAs === OwnershipStatus::Owned && ! $existing->isOwned()) {
+            $existing->update(['ownership' => OwnershipStatus::Owned]);
+        }
+
+        return $existing;
     }
 
     private function publisher(string $name): Publisher

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\OwnershipStatus;
 use App\Models\CollectionObject;
 use App\Rules\GenreFitsCategory;
 use App\Support\Series\VolumeNumber;
@@ -48,6 +49,8 @@ class UpdateCollectionObjectRequest extends FormRequest
             }],
             'artist_id' => ['nullable', Rule::exists('artists', 'id')],
             'platform_id' => ['nullable', Rule::exists('platforms', 'id')],
+            // Optional: an edit that leaves it out keeps the current status.
+            'ownership' => ['nullable', Rule::enum(OwnershipStatus::class)],
         ];
     }
 

@@ -13,7 +13,8 @@ use Throwable;
 
 /**
  * Commits a batch scan (guidelines §4.2): looks every pending item up and adds the ones
- * found. Runs on the queue; re-running only touches items still pending.
+ * found, owned or to the wishlist as the batch says. Runs on the queue; re-running only
+ * touches items still pending.
  */
 class ProcessScanBatch implements ShouldQueue
 {
@@ -31,10 +32,15 @@ class ProcessScanBatch implements ShouldQueue
         $context = $this->batch->context();
 
         $this->batch->items()->where('status', 'pending')->each(function (ScanBatchItem $item) use ($catalogue, $add, $user, $setup, $context) {
-            $owned = CollectionObject::query()->ownedBy($user)->where('barcode', $item->barcode)->first();
+            $existing = CollectionObject::query()->ownedBy($user)->where('barcode', $item->barcode)->first();
 
-            if ($owned !== null) {
-                $item->update(['status' => 'already_owned', 'object_id' => $owned->id]);
+            if ($existing !== null) {
+                // No lookup needed: promote a wanted item on an Own batch, else report it.
+                $promoted = AddScannedObject::promoteIfAcquired($existing, $setup->ownership)->wasChanged('ownership');
+                $item->update([
+                    'status' => $promoted ? 'promoted' : ($existing->isOwned() ? 'already_owned' : 'already_wanted'),
+                    'object_id' => $existing->id,
+                ]);
 
                 return;
             }

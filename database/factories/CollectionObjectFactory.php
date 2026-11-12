@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\CategoryKind;
+use App\Enums\OwnershipStatus;
 use App\Models\Category;
 use App\Models\CollectionObject;
 use App\Models\Publisher;
@@ -26,12 +27,19 @@ class CollectionObjectFactory extends Factory
             'category_id' => Category::factory(),
             'sub_category_id' => null,
             'barcode' => fake()->unique()->ean13(),
+            'ownership' => OwnershipStatus::Owned,
             'name' => $title,
             'name_romanized' => $title,
             'name_english' => null,
             'publisher_id' => Publisher::factory(),
             'release_date' => fake()->date(),
         ];
+    }
+
+    /** Wanted, not owned yet. */
+    public function wishlisted(): static
+    {
+        return $this->state(['ownership' => OwnershipStatus::Wishlist]);
     }
 
     /** A manga: category Books, sub-category Manga. */

@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('library/series/{series}', [LibraryController::class, 'series'])->name('library.series');
     Route::get('objects/{object}', [CollectionObjectController::class, 'show'])->name('objects.show');
     Route::put('objects/{object}', [CollectionObjectController::class, 'update'])->name('objects.update');
+    Route::patch('objects/{object}/ownership', [CollectionObjectController::class, 'updateOwnership'])->name('objects.ownership');
 
     Route::post('scan', [ScanController::class, 'start'])->name('scan.start');
     Route::get('scan/single', [ScanController::class, 'single'])->name('scan.single');

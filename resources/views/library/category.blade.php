@@ -12,7 +12,7 @@
         </nav>
     @endif
 
-    @if ($shelf->series->isEmpty() && $shelf->standalone->isEmpty())
+    @if ($shelf->series->isEmpty() && $shelf->standalone->isEmpty() && $shelf->wishlist->isEmpty())
         <p class="text-stone-500">Nothing here yet.</p>
     @endif
 
@@ -25,7 +25,12 @@
                         <a href="{{ route('library.series', $series) }}" class="flex flex-wrap items-baseline justify-between gap-2 px-4 py-3 hover:bg-stone-50 dark:hover:bg-stone-800">
                             <span><span class="font-medium">{{ $series->name }}</span>
                                 @if ($series->artist) <span class="text-sm text-stone-500">· {{ $series->artist->name }}</span> @endif</span>
-                            <span class="text-sm text-stone-500">{{ trans_choice(':count item|:count items', $series->items_count) }}</span>
+                            <span class="text-sm text-stone-500">
+                                {{ $series->items_count }} owned
+                                @if ($series->wanted_count)
+                                    · {{ $series->wanted_count }} wanted
+                                @endif
+                            </span>
                         </a>
                     </li>
                 @endforeach
@@ -37,6 +42,13 @@
         <section>
             <h2 class="mb-3 text-lg font-semibold">{{ $shelf->series->isEmpty() ? 'Items' : 'Other items' }}</h2>
             <x-object-list :objects="$shelf->standalone" />
+        </section>
+    @endif
+
+    @if ($shelf->wishlist->isNotEmpty())
+        <section class="mt-8" id="wishlist">
+            <h2 class="mb-3 text-lg font-semibold">Wishlist <span class="text-sm font-normal text-stone-500">· {{ $shelf->wishlist->count() }} wanted</span></h2>
+            <x-object-list :objects="$shelf->wishlist" />
         </section>
     @endif
 </x-layout>
