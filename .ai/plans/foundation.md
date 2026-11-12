@@ -1,6 +1,7 @@
 # Plan — Foundation: auth, admin user list and the core catalogue
 
-Status: **not started**. Written 2026-11-10.
+Status: **implemented 2026-11-10** on `feature/foundation` (phases 1–6, 204 tests). Written
+2026-11-10. See §10 for what differs from the text below.
 
 Every other plan in this folder assumes an application that is **not in this
 repository**: `objects` / `CollectionObject`, categories, series, artists, publishers,
@@ -229,3 +230,29 @@ and the other admin users** — the list is not filtered to "normal" users only.
 3. **Hidden users before this change?** The requirement reads as if admins were hidden
    from the list somewhere. If that refers to an existing app elsewhere, its code should
    be brought into this repository instead of rebuilding phases 1–6.
+
+## 10. As built (2026-11-10)
+
+- **Admin user list is view-only** (open question 2 unanswered): no promote / demote /
+  delete. "Total items" counts all of a user's objects until the wishlist lands.
+- **SSO drivers:** Google and GitHub through Socialite; Microsoft and generic OIDC through
+  one in-house discovery-based OIDC client (`App\Services\Auth\OidcProvider`, PKCE).
+  Microsoft sends no `email_verified` claim, so a Microsoft login never links or signs up
+  by e-mail: those users link Microsoft from settings first.
+- **Admin "Test login"** also works for a disabled provider, so a set-up can be checked
+  before it is switched on.
+- **Categories carry a `kind`** (`books` / `music` / `games`, PHP enum `CategoryKind`) that
+  picks the detail table; sub-categories copy it and stay pure data.
+- **`series_volumes.edition` is `''`** for the regular edition (not NULL), so the unique
+  `(series_id, volume_sort, edition)` index holds on MariaDB.
+- **No manual "create item" form and no delete** yet: items come from scanning.
+- **Catalogue fixtures for Rakuten and Google Books are hand-written** from the documented
+  formats (keyless Google Books answered 429, Rakuten needs an application ID); see
+  `tests/Fixtures/catalogue/README.md` for re-recording. Google Books is called keyless
+  when the user has no key.
+- **Batch scans** keep barcodes only on the working list; the lookup runs in the queued
+  commit job. Scanned items get `name_romanized` = original title when no provider gives
+  one. No camera scanning in the web UI (hardware scanners type into the field).
+- **Phone-app tokens** are created and revoked in settings (shown once); no pairing flow.
+- The dev stack runs queued jobs synchronously and catches mail in Mailpit
+  (<http://localhost:8025>).

@@ -1,9 +1,13 @@
 <?php
 
+use App\Models\SsoProvider;
+use App\Services\Auth\SsoDriverFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
+use Laravel\Socialite\Contracts\Provider;
+use Laravel\Socialite\Two\User;
 use Tests\TestCase;
 
 pest()->extend(TestCase::class)
@@ -87,5 +91,48 @@ function fakeSeriesApis(): void
         }
 
         return Factory::response('Unexpected request: '.$url, 500);
+    });
+}
+
+/*
+|--------------------------------------------------------------------------
+| SSO
+|--------------------------------------------------------------------------
+|
+| Swaps the SSO driver factory for one whose provider "redirects" to a fake identity
+| provider and returns $user from the callback, so no OAuth round trip is needed.
+|
+*/
+
+function fakeSsoUser(string $id, ?string $email, array $raw = [], string $name = 'Sso Person'): User
+{
+    return (new User)
+        ->setRaw($raw + ['sub' => $id, 'email' => $email])
+        ->map(['id' => $id, 'email' => $email, 'name' => $name, 'nickname' => null]);
+}
+
+function fakeSso(User $user): void
+{
+    app()->instance(SsoDriverFactory::class, new class($user) implements SsoDriverFactory
+    {
+        public function __construct(private User $user) {}
+
+        public function for(SsoProvider $provider): Provider
+        {
+            return new class($this->user) implements Provider
+            {
+                public function __construct(private User $user) {}
+
+                public function redirect()
+                {
+                    return redirect()->away('https://idp.test/authorize');
+                }
+
+                public function user()
+                {
+                    return $this->user;
+                }
+            };
+        }
     });
 }

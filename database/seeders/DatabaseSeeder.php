@@ -10,16 +10,15 @@ class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call(CatalogueSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // The dev user the local SSO bypass signs in as (guidelines §2).
+        $user = User::firstOrNew(['email' => config('auth.dev_user_email')]);
+        $user->name ??= 'Dev User';
+        $user->email_verified_at ??= now();
+        $user->is_admin = true;
+        $user->save();
     }
 }
