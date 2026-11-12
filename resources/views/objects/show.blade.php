@@ -6,10 +6,15 @@
     $selectedLanguages = collect(old('languages', $object->languages->pluck('id')->all()))->map(fn ($id) => (int) $id);
     $selectedGenres = collect(old('genres', $object->genres->pluck('id')->all()))->map(fn ($id) => (int) $id);
 @endphp
-<x-layout :title="$object->name">
-    <a href="{{ $object->serie ? route('library.series', $object->serie) : route('library.category', $object->category) }}" class="text-sm text-stone-500 underline">
-        {{ $object->serie?->name ?? $object->category->name }}
-    </a>
+<x-layout :title="$object->name" :share="$share ?? null">
+    @php
+        $back = $object->serie ? $links->series($object->serie) : $links->category($object->category);
+    @endphp
+    @if ($back)
+        <a href="{{ $back }}" class="text-sm text-stone-500 underline">
+            {{ $object->serie?->name ?? $object->category->name }}
+        </a>
+    @endif
     <h1 class="mt-1 text-2xl font-semibold">{{ $object->name }}</h1>
     @if ($object->name_romanized !== $object->name) <p class="text-stone-500">{{ $object->name_romanized }}</p> @endif
     @if ($object->name_english) <p class="text-stone-500">{{ $object->name_english }}</p> @endif
@@ -36,6 +41,12 @@
             <dd>{{ $value }}</dd>
         @endforeach
     </dl>
+
+    {{-- Viewers of a share link get the details only: nothing below this line writes. --}}
+    @if ($links->canEdit())
+    @if ($artist)
+        <p class="-mt-3 mb-6 text-sm"><a href="{{ $links->artist($artist) }}" class="underline">More by {{ $artist->name }}</a></p>
+    @endif
 
     <form method="POST" action="{{ route('objects.ownership', $object) }}" class="mb-4">
         @csrf
@@ -147,4 +158,5 @@
             <button class="rounded-md bg-stone-900 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300">Save</button>
         </form>
     </details>
+    @endif
 </x-layout>

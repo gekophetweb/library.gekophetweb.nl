@@ -1,9 +1,8 @@
 # Plan — Share a library with viewers who have no account
 
-Status: **not built in this repository** (checked 2026-11-10). Written 2026-09-20
-against an earlier codebase where it was implemented; the files named below do not
-exist here yet, and §11 records how it was built there. Execute after
-[`foundation.md`](foundation.md) and [`own-wishlist.md`](own-wishlist.md).
+Status: **implemented 2026-11-12** on `feature/share-library-read-only`. Written
+2026-09-20 against an earlier codebase; §11 records how it was built there, §12 how it
+was built in this repository.
 
 > **Open question (2026-11-10).** The request "share options with only read rights" is
 > covered by this plan's read-only links. If sharing with a **named account** that gets
@@ -212,3 +211,31 @@ changed nothing for owners.
 - **Owner-facing copy is branched, not rewritten.** "You own 3 of 5 volumes" and "1 on
   your wishlist" stay exactly as they were for the owner — existing tests assert on that
   wording — and viewers get a neutral variant.
+
+## 12. As built in this repository (2026-11-12)
+
+- **Open question (named-account sharing)** was not answered; only the read-only
+  capability links are built. A `library_share_user` pivot remains the way to add it.
+- §11's deviations carry over: stateless `LibraryLinks` (reads the share off the
+  request), `View::share('links', …)`, one `scope` field (`library` / `category:7` /
+  `series:3`), `Relation::morphMap` (not enforced), owner wording kept and a neutral
+  variant for viewers, and no category breadcrumb on a series link.
+- **One share controller,** `Share\SharedLibraryController` (`index` / `category` /
+  `series` / `object`), instead of four. It reuses `library/category`, `library/series`
+  and `objects/show` with `CategoryCounts`, `CategoryShelf` and `SeriesShelf`, which
+  already took a pre-scoped builder (phase 4's extraction was already done).
+- **The token is 32 characters;** the middleware rejects any other length before querying,
+  compares with `hash_equals`, sets `URL::defaults(['shareToken' => …])` and forgets the
+  route parameter so controllers only get the bound models.
+- **Viewers never see the account nav,** even when signed in: the layout's `:share` prop
+  replaces it with "{owner}'s collection · read only", adds `noindex, nofollow` and
+  `referrer: no-referrer`, and hides session status messages. The item page hides the
+  ownership toggle, the edit form and the new "More by {artist}" link; artist pages stay
+  owner-only (`LibraryLinks::artist()` returns null for viewers).
+- **Owner UI:** "Shared links" section in settings (`#shares`) with create (scope, label,
+  expiry date — the link works through the end of that day) and copy / revoke per link;
+  "Share {category}" / "Share this series" buttons on those pages
+  (`components/share-button`).
+- **Pruning was not scheduled anywhere before;** `routes/console.php` now schedules
+  `model:prune` daily, which also prunes the foundation's `LoginCode`s.
+- Tests: `tests/Feature/Sharing/ShareLinkTest.php` (8) and `ManageSharesTest.php` (6).

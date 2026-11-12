@@ -11,7 +11,9 @@ use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ScanBatchController;
 use App\Http\Controllers\ScanController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Settings\LibraryShareController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\Share\SharedLibraryController;
 use App\Http\Controllers\WelcomeNameController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +31,18 @@ Route::middleware('guest')->group(function () {
         ->middleware(['signed', 'throttle:20,1'])
         ->name('login.code.link');
 });
+
+// Read-only share links (plan share-library-read-only): GET only, no account needed, and
+// nothing here reads the signed-in user. Must stay reachable without Cloudflare Access.
+Route::middleware(['share', 'throttle:60,1'])
+    ->prefix('s/{shareToken}')->name('share.')
+    ->controller(SharedLibraryController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('categories/{category}', 'category')->name('category');
+        Route::get('series/{series}', 'series')->name('series');
+        Route::get('objects/{object}', 'object')->name('object');
+    });
 
 // Guests log in here; signed-in users link a provider; admins test one.
 Route::get('auth/sso/{provider}', [SsoController::class, 'redirect'])->name('sso.redirect');
@@ -66,6 +80,8 @@ Route::middleware('auth')->group(function () {
     Route::post('settings/tokens', [SettingsController::class, 'storeToken'])->name('settings.tokens.store');
     Route::delete('settings/tokens/{token}', [SettingsController::class, 'destroyToken'])->whereNumber('token')->name('settings.tokens.destroy');
     Route::delete('settings/identities/{identity}', [SettingsController::class, 'destroyIdentity'])->name('settings.identities.destroy');
+    Route::post('settings/shares', [LibraryShareController::class, 'store'])->name('settings.shares.store');
+    Route::delete('settings/shares/{share}', [LibraryShareController::class, 'destroy'])->name('settings.shares.destroy');
 
     Route::middleware('can:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('users', [UserController::class, 'index'])->name('users.index');

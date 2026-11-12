@@ -1,16 +1,33 @@
-<x-layout :title="$shelf->series->name">
-    <a href="{{ route('home') }}" class="text-sm text-stone-500 underline">Library</a>
-    <h1 class="mt-1 text-2xl font-semibold">{{ $shelf->series->name }}</h1>
-    @if ($shelf->series->name_romanized && $shelf->series->name_romanized !== $shelf->series->name)
-        <p class="text-stone-500">{{ $shelf->series->name_romanized }}</p>
-    @endif
+<x-layout :title="$shelf->series->name" :share="$share ?? null">
+    <div class="flex flex-wrap items-start justify-between gap-3">
+        <div>
+            @if ($links->hasHome())
+                <a href="{{ $links->home() }}" class="text-sm text-stone-500 underline">Library</a>
+            @endif
+            <h1 class="mt-1 text-2xl font-semibold">{{ $shelf->series->name }}</h1>
+            @if ($shelf->series->name_romanized && $shelf->series->name_romanized !== $shelf->series->name)
+                <p class="text-stone-500">{{ $shelf->series->name_romanized }}</p>
+            @endif
+        </div>
+        @if ($links->canEdit())
+            <x-share-button :scope="'series:'.$shelf->series->id" label="Share this series" />
+        @endif
+    </div>
 
     @if ($shelf->volumes->isNotEmpty())
         @php($wanted = $shelf->volumes->where('state', 'wanted')->count())
         <p class="mb-4 mt-2 text-sm text-stone-600 dark:text-stone-400">
-            You own {{ $shelf->ownedCount }} of {{ $shelf->volumes->count() }} volumes
-            @if ($wanted)
-                · {{ $wanted }} on your wishlist
+            {{-- The owner's wording stays as it was; viewers get a neutral variant. --}}
+            @if ($links->isShared())
+                {{ $shelf->ownedCount }} of {{ $shelf->volumes->count() }} volumes owned
+                @if ($wanted)
+                    · {{ $wanted }} on the wishlist
+                @endif
+            @else
+                You own {{ $shelf->ownedCount }} of {{ $shelf->volumes->count() }} volumes
+                @if ($wanted)
+                    · {{ $wanted }} on your wishlist
+                @endif
             @endif
         </p>
 
@@ -23,7 +40,7 @@
                         'border-amber-300 bg-amber-50 dark:border-amber-800 dark:bg-amber-950' => $entry['state'] === 'wanted',
                         'border-dashed border-stone-300 text-stone-500 dark:border-stone-700' => $entry['state'] === 'missing'])>
                     @if ($entry['object'])
-                        <a href="{{ route('objects.show', $entry['object']) }}" class="font-medium underline-offset-2 hover:underline">Vol. {{ $volume->volume_number }}</a>
+                        <a href="{{ $links->object($entry['object']) }}" class="font-medium underline-offset-2 hover:underline">Vol. {{ $volume->volume_number }}</a>
                     @else
                         <span class="font-medium">Vol. {{ $volume->volume_number }}</span>
                     @endif

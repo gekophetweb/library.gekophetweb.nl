@@ -1,13 +1,26 @@
-@props(['title' => null])
+@props(['title' => null, 'share' => null])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title ? $title.' · ' : '' }}{{ config('app.name') }}</title>
+    @if ($share)
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="referrer" content="no-referrer">
+    @endif
+    <title>{{ $title ? $title.' · ' : '' }}{{ $share ? $share->user->name.'’s collection' : config('app.name') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-stone-50 text-stone-900 antialiased dark:bg-stone-950 dark:text-stone-100">
+    @if ($share)
+        {{-- A share link: no account nav, nothing to act on, even for a signed-in visitor. --}}
+        <header class="border-b border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900">
+            <p class="mx-auto max-w-5xl px-4 py-3 text-sm">
+                <span class="font-semibold">{{ $share->user->name }}’s collection</span>
+                <span class="text-stone-500">· read only</span>
+            </p>
+        </header>
+    @else
     @auth
         <header class="border-b border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900">
             <nav class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 text-sm">
@@ -35,9 +48,10 @@
             </nav>
         </header>
     @endauth
+    @endif
 
     <main class="mx-auto max-w-5xl px-4 py-8">
-        @if (session('status'))
+        @if (! $share && session('status'))
             <p role="status" class="mb-6 rounded-md bg-emerald-50 px-4 py-3 text-sm text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200">{{ session('status') }}</p>
         @endif
 
