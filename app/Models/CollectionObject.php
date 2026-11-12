@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OwnershipStatus;
 use Database\Factories\CollectionObjectFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -14,12 +15,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * One physical item in a user's collection (guidelines §3.1). Category-specific data lives
- * in bookDetail / musicDetail / gameDetail.
+ * One physical item in a user's collection (guidelines §3.1): owned, or on the wishlist.
+ * Category-specific data lives in bookDetail / musicDetail / gameDetail.
  */
 #[Table('objects')]
 #[Fillable([
-    'category_id', 'sub_category_id', 'barcode', 'name', 'name_romanized', 'name_english',
+    'category_id', 'sub_category_id', 'barcode', 'ownership', 'name', 'name_romanized', 'name_english',
     'publisher_id', 'release_date', 'serie_id',
 ])]
 class CollectionObject extends Model
@@ -29,7 +30,7 @@ class CollectionObject extends Model
 
     protected function casts(): array
     {
-        return ['release_date' => 'date'];
+        return ['release_date' => 'date', 'ownership' => OwnershipStatus::class];
     }
 
     /** @param  Builder<self>  $query */
@@ -37,6 +38,29 @@ class CollectionObject extends Model
     protected function ownedBy(Builder $query, User $user): void
     {
         $query->where($this->qualifyColumn('user_id'), $user->id);
+    }
+
+    /**
+     * Items the user has, not the ones they only want.
+     *
+     * @param  Builder<self>  $query
+     */
+    #[Scope]
+    protected function owned(Builder $query): void
+    {
+        $query->where($this->qualifyColumn('ownership'), OwnershipStatus::Owned->value);
+    }
+
+    /** @param  Builder<self>  $query */
+    #[Scope]
+    protected function wishlisted(Builder $query): void
+    {
+        $query->where($this->qualifyColumn('ownership'), OwnershipStatus::Wishlist->value);
+    }
+
+    public function isOwned(): bool
+    {
+        return $this->ownership === OwnershipStatus::Owned;
     }
 
     /** @return BelongsTo<User, $this> */

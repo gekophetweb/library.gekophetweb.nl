@@ -7,6 +7,7 @@
     <h1 class="mb-1 mt-1 text-2xl font-semibold">Scan one item</h1>
     <p class="mb-6 text-sm text-stone-500">
         {{ collect([$setup->category->name, $setup->subCategory?->name, $setup->language->name])->filter()->join(' · ') }}
+        · <span data-ownership="{{ $setup->ownership->value }}" class="font-medium">{{ $setup->ownership === App\Enums\OwnershipStatus::Owned ? 'Adding to your collection' : 'Adding to your wishlist' }}</span>
     </p>
 
     <form method="POST" action="{{ route('scan.single.lookup') }}" class="mb-8 flex max-w-md gap-2">
@@ -21,8 +22,14 @@
         <section class="max-w-xl rounded-lg border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900">
             <p class="mb-3 font-mono text-sm text-stone-500">{{ $pending['barcode'] }}</p>
 
-            @if ($owned)
-                <p>This is already in your collection: <a href="{{ route('objects.show', $owned) }}" class="font-medium underline">{{ $owned->name }}</a>.</p>
+            @if ($existing && ($pending['can_promote'] ?? false))
+                <p class="mb-3">This is on your wishlist: <a href="{{ route('objects.show', $existing) }}" class="font-medium underline">{{ $existing->name }}</a>.</p>
+                <form method="POST" action="{{ route('scan.single.add') }}">
+                    @csrf
+                    <button class="{{ $primary }}">Mark as owned</button>
+                </form>
+            @elseif ($existing)
+                <p>This is already {{ $existing->isOwned() ? 'in your collection' : 'on your wishlist' }}: <a href="{{ route('objects.show', $existing) }}" class="font-medium underline">{{ $existing->name }}</a>.</p>
             @elseif ($result)
                 <div class="mb-4 flex gap-4">
                     @if ($result->coverUrl)
@@ -37,7 +44,7 @@
                 </div>
                 <form method="POST" action="{{ route('scan.single.add') }}">
                     @csrf
-                    <button class="{{ $primary }}">Add to collection</button>
+                    <button class="{{ $primary }}">{{ $setup->ownership->value === 'owned' ? 'Add to collection' : 'Add to wishlist' }}</button>
                 </form>
             @else
                 <p class="mb-3 font-medium">
@@ -64,7 +71,7 @@
                             <input id="name_romanized" name="name_romanized" required maxlength="255" value="{{ old('name_romanized') }}" class="{{ $input }}">
                             @error('name_romanized') <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
                         </div>
-                        <button class="{{ $primary }}">Add to collection</button>
+                        <button class="{{ $primary }}">{{ $setup->ownership->value === 'owned' ? 'Add to collection' : 'Add to wishlist' }}</button>
                     </form>
                 @endunless
             @endif

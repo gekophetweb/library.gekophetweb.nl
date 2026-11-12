@@ -5,7 +5,7 @@
     Scan items
 </button>
 
-<dialog id="scanner-dialog" @if ($errors->hasAny(['category_id', 'sub_category_id', 'language_id', 'mode'])) open @endif
+<dialog id="scanner-dialog" @if ($errors->hasAny(['category_id', 'sub_category_id', 'language_id', 'mode', 'ownership'])) open @endif
         class="w-full max-w-md rounded-xl border border-stone-200 bg-white p-6 text-stone-900 backdrop:bg-stone-950/50 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-100">
     <h2 class="mb-4 text-lg font-semibold">What are you scanning?</h2>
 
@@ -54,6 +54,13 @@
             <label class="mr-4 text-sm"><input type="radio" name="mode" value="single" @checked(old('mode', 'single') === 'single')> One item</label>
             <label class="text-sm"><input type="radio" name="mode" value="batch" @checked(old('mode') === 'batch')> Many items (batch)</label>
             @error('mode') <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+        </fieldset>
+
+        <fieldset>
+            <legend class="mb-1 block text-sm font-medium">Add as</legend>
+            <label class="mr-4 text-sm"><input type="radio" name="ownership" value="owned" @checked(old('ownership', 'owned') === 'owned')> I own these</label>
+            <label class="text-sm"><input type="radio" name="ownership" value="wishlist" @checked(old('ownership') === 'wishlist')> Wishlist</label>
+            @error('ownership') <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
         </fieldset>
 
         <div class="flex justify-end gap-3">

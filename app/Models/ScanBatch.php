@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OwnershipStatus;
 use App\Support\Catalogue\CatalogueContext;
 use App\Support\Scan\ScanSetup;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /** A batch scan. Its items are a working list until the batch is committed. */
-#[Fillable(['category_id', 'sub_category_id', 'language_id', 'status', 'committed_at', 'finished_at'])]
+#[Fillable(['category_id', 'sub_category_id', 'language_id', 'ownership', 'status', 'committed_at', 'finished_at'])]
 class ScanBatch extends Model
 {
     public const string DRAFT = 'draft';
@@ -23,7 +24,7 @@ class ScanBatch extends Model
 
     protected function casts(): array
     {
-        return ['committed_at' => 'datetime', 'finished_at' => 'datetime'];
+        return ['committed_at' => 'datetime', 'finished_at' => 'datetime', 'ownership' => OwnershipStatus::class];
     }
 
     /** @return BelongsTo<User, $this> */
@@ -63,7 +64,7 @@ class ScanBatch extends Model
 
     public function setup(): ScanSetup
     {
-        return new ScanSetup($this->category, $this->subCategory, $this->language);
+        return new ScanSetup($this->category, $this->subCategory, $this->language, $this->ownership ?? OwnershipStatus::Owned);
     }
 
     public function context(): CatalogueContext

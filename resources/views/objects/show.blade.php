@@ -15,6 +15,12 @@
     @if ($object->name_english) <p class="text-stone-500">{{ $object->name_english }}</p> @endif
 
     <dl class="my-6 grid max-w-2xl grid-cols-[max-content_1fr] gap-x-6 gap-y-2 text-sm">
+        <dt class="text-stone-500">Status</dt>
+        <dd>
+            <span data-ownership="{{ $object->ownership->value }}" @class(['rounded-full px-2 py-0.5 text-xs font-medium',
+                'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200' => $object->isOwned(),
+                'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200' => ! $object->isOwned()])>{{ $object->ownership->label() }}</span>
+        </dd>
         @foreach (array_filter([
             'Category' => collect([$object->category->name, $object->subCategory?->name])->filter()->join(' › '),
             'Series' => $object->serie ? $object->serie->name.($object->bookDetail?->volume ? ' · vol. '.$object->bookDetail->volume : '') : null,
@@ -31,6 +37,15 @@
         @endforeach
     </dl>
 
+    <form method="POST" action="{{ route('objects.ownership', $object) }}" class="mb-4">
+        @csrf
+        @method('PATCH')
+        <input type="hidden" name="ownership" value="{{ $object->isOwned() ? 'wishlist' : 'owned' }}">
+        <button class="rounded-md border border-stone-300 px-4 py-2 text-sm hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800">
+            {{ $object->isOwned() ? 'Move to wishlist' : 'Mark as owned' }}
+        </button>
+    </form>
+
     <details class="max-w-2xl rounded-lg border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900" @if ($errors->any()) open @endif>
         <summary class="cursor-pointer font-medium">Edit</summary>
 
@@ -45,6 +60,16 @@
                     @error($field) <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
                 </div>
             @endforeach
+
+            <div>
+                <label for="ownership" class="{{ $label }}">Status</label>
+                <select id="ownership" name="ownership" class="{{ $input }}">
+                    @foreach (App\Enums\OwnershipStatus::cases() as $status)
+                        <option value="{{ $status->value }}" @selected(old('ownership', $object->ownership->value) === $status->value)>{{ $status->label() }}</option>
+                    @endforeach
+                </select>
+                @error('ownership') <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+            </div>
 
             @if ($options['subCategories']->isNotEmpty())
                 <div>

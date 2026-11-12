@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OwnershipStatus;
 use App\Jobs\ProcessScanBatch;
 use App\Models\CollectionObject;
 use App\Models\ScanBatch;
@@ -40,8 +41,15 @@ class ScanBatchController extends Controller
             throw ValidationException::withMessages(['barcode' => "{$barcode} is already on this list."]);
         }
 
-        if (CollectionObject::query()->ownedBy($request->user())->where('barcode', $barcode)->exists()) {
+        $existing = CollectionObject::query()->ownedBy($request->user())->where('barcode', $barcode)->first();
+
+        // A wanted item may go on an Own list: committing it promotes it to owned.
+        if ($existing?->isOwned()) {
             throw ValidationException::withMessages(['barcode' => "{$barcode} is already in your collection."]);
+        }
+
+        if ($existing !== null && $batch->ownership === OwnershipStatus::Wishlist) {
+            throw ValidationException::withMessages(['barcode' => "{$barcode} is already on your wishlist."]);
         }
 
         $batch->items()->create(['barcode' => $barcode]);

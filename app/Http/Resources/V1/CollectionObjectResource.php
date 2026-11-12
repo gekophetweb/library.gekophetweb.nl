@@ -20,6 +20,7 @@ class CollectionObjectResource extends JsonResource
         return [
             'id' => $this->id,
             'barcode' => $this->barcode,
+            'ownership' => $this->ownership->value,
             'name' => $this->name,
             'name_romanized' => $this->name_romanized,
             'name_english' => $this->name_english,

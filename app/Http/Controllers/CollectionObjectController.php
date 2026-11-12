@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\UpdateCollectionObject;
 use App\Enums\CategoryKind;
+use App\Enums\OwnershipStatus;
 use App\Http\Requests\UpdateCollectionObjectRequest;
 use App\Models\Artist;
 use App\Models\CollectionObject;
@@ -13,6 +14,7 @@ use App\Models\Publisher;
 use App\Models\Series;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class CollectionObjectController extends Controller
@@ -44,5 +46,16 @@ class CollectionObjectController extends Controller
         $update->handle($object, $request->validated());
 
         return redirect()->route('objects.show', $object)->with('status', 'Saved.');
+    }
+
+    /** The one-click "Mark as owned" / "Move to wishlist" button. */
+    public function updateOwnership(Request $request, CollectionObject $object): RedirectResponse
+    {
+        abort_unless($object->user_id === $request->user()->id, 404);
+
+        $ownership = $request->validate(['ownership' => ['required', Rule::enum(OwnershipStatus::class)]])['ownership'];
+        $object->update(['ownership' => $ownership]);
+
+        return redirect()->route('objects.show', $object)->with('status', $object->isOwned() ? 'Marked as owned.' : 'Moved to your wishlist.');
     }
 }

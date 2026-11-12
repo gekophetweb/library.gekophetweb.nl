@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Scan\AddScannedObject;
+use App\Enums\OwnershipStatus;
 use App\Http\Requests\StartScanRequest;
 use App\Models\Category;
 use App\Models\CollectionObject;
@@ -19,7 +20,8 @@ use Illuminate\View\View;
 
 /**
  * Single-item scanning (guidelines §4.1): look the barcode up, say whether it is already
- * in the collection, otherwise offer to add it. The scanner set-up lives in the session.
+ * in the collection, otherwise offer to add it (owned or to the wishlist). A wanted item
+ * scanned in Own mode is offered as "mark as owned". The scanner set-up lives in the session.
  */
 class ScanController extends Controller
 {
@@ -32,6 +34,7 @@ class ScanController extends Controller
                 'category_id' => $setup->category->id,
                 'sub_category_id' => $setup->subCategory?->id,
                 'language_id' => $setup->language->id,
+                'ownership' => $setup->ownership,
             ]);
             $batch->user()->associate($request->user())->save();
 
@@ -42,6 +45,7 @@ class ScanController extends Controller
             'category_id' => $setup->category->id,
             'sub_category_id' => $setup->subCategory?->id,
             'language_id' => $setup->language->id,
+            'ownership' => $setup->ownership->value,
         ]);
         $request->session()->forget('scan.pending');
 
@@ -62,7 +66,7 @@ class ScanController extends Controller
             'setup' => $setup,
             'pending' => $pending,
             'result' => isset($pending['result']) ? CatalogueResult::fromArray($pending['result']) : null,
-            'owned' => isset($pending['owned_id']) ? CollectionObject::query()->ownedBy($request->user())->find($pending['owned_id']) : null,
+            'existing' => isset($pending['existing_id']) ? CollectionObject::query()->ownedBy($request->user())->find($pending['existing_id']) : null,
         ]);
     }
 
@@ -72,10 +76,16 @@ class ScanController extends Controller
         $barcode = trim((string) $request->validate(['barcode' => ['required', 'string', 'max:64']])['barcode']);
         $barcode = Isbn::tryFrom($barcode)?->value ?? preg_replace('/\s+/', '', $barcode);
 
-        $owned = CollectionObject::query()->ownedBy($request->user())->where('barcode', $barcode)->first();
+        $existing = CollectionObject::query()->ownedBy($request->user())->where('barcode', $barcode)->first();
 
-        if ($owned !== null) {
-            $request->session()->put('scan.pending', ['barcode' => $barcode, 'owned_id' => $owned->id]);
+        if ($existing !== null) {
+            // Already owned, or already wanted in Wishlist mode: nothing to add. A wanted
+            // item in Own mode can be promoted from the page.
+            $request->session()->put('scan.pending', [
+                'barcode' => $barcode,
+                'existing_id' => $existing->id,
+                'can_promote' => ! $existing->isOwned() && $setup->ownership === OwnershipStatus::Owned,
+            ]);
 
             return redirect()->route('scan.single');
         }
@@ -98,6 +108,17 @@ class ScanController extends Controller
         $setup = $this->setup($request) ?? abort(409, 'Choose what to scan first.');
         $pending = $request->session()->get('scan.pending') ?? abort(409, 'Scan something first.');
 
+        if (isset($pending['existing_id'])) {
+            abort_unless($pending['can_promote'] ?? false, 409, 'This is already in your collection.');
+            $object = AddScannedObject::promoteIfAcquired(
+                CollectionObject::query()->ownedBy($request->user())->findOrFail($pending['existing_id']),
+                $setup->ownership,
+            );
+            $request->session()->forget('scan.pending');
+
+            return redirect()->route('objects.show', $object)->with('status', 'Moved from your wishlist to your collection.');
+        }
+
         if (isset($pending['result'])) {
             $result = CatalogueResult::fromArray($pending['result']);
         } else {
@@ -112,7 +133,9 @@ class ScanController extends Controller
         $object = $add->handle($request->user(), $setup, $result);
         $request->session()->forget('scan.pending');
 
-        return redirect()->route('objects.show', $object)->with('status', 'Added to your collection. Scan the next one from the dashboard.');
+        $where = $object->isOwned() ? 'your collection' : 'your wishlist';
+
+        return redirect()->route('objects.show', $object)->with('status', "Added to {$where}. Scan the next one from the dashboard.");
     }
 
     private function setup(Request $request): ?ScanSetup
@@ -127,6 +150,7 @@ class ScanController extends Controller
             Category::query()->findOrFail($stored['category_id']),
             $stored['sub_category_id'] ? Category::query()->find($stored['sub_category_id']) : null,
             Language::query()->findOrFail($stored['language_id']),
+            OwnershipStatus::tryFrom($stored['ownership'] ?? '') ?? OwnershipStatus::Owned,
         );
     }
 }

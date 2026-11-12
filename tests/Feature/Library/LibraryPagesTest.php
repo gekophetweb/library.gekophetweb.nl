@@ -35,7 +35,7 @@ it('shows the categories with the user\'s counts on the dashboard', function () 
 
     $this->actingAs($this->user)->get(route('home'))
         ->assertOk()
-        ->assertSeeInOrder(['Books', '2 items', 'Music', '0 items', 'Games', '0 items']);
+        ->assertSeeInOrder(['Books', '2 owned', 'Music', '0 owned', 'Games', '0 owned']);
 });
 
 it('lists series and standalone items on a category page', function () {
@@ -47,7 +47,7 @@ it('lists series and standalone items on a category page', function () {
     $this->actingAs($this->user)->get(route('library.category', $this->books))
         ->assertOk()
         ->assertSee('ベルセルク')
-        ->assertSee('2 items')
+        ->assertSee('2 owned')
         ->assertSee('Kafka on the Shore')
         ->assertDontSee('ベルセルク 1');
 });

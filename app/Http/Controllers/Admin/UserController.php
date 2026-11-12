@@ -18,7 +18,7 @@ class UserController extends Controller
         $role = $request->validate(['role' => ['nullable', 'in:all,admins,users']])['role'] ?? 'all';
 
         $users = User::query()
-            ->withCount('objects')
+            ->withCount(['objects' => fn ($query) => $query->owned()])
             ->when($role === 'admins', fn ($query) => $query->where('is_admin', true))
             ->when($role === 'users', fn ($query) => $query->where('is_admin', false))
             ->orderByDesc('is_admin')
