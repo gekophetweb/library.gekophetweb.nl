@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Series\DetectSeries;
+use App\Actions\Series\LinkSeries;
 use App\Actions\UpdateCollectionObject;
 use App\Enums\CategoryKind;
 use App\Enums\OwnershipStatus;
@@ -12,6 +14,7 @@ use App\Models\Language;
 use App\Models\Platform;
 use App\Models\Publisher;
 use App\Models\Series;
+use App\Support\Series\SeriesReference;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -57,5 +60,25 @@ class CollectionObjectController extends Controller
         $object->update(['ownership' => $ownership]);
 
         return redirect()->route('objects.show', $object)->with('status', $object->isOwned() ? 'Marked as owned.' : 'Moved to your wishlist.');
+    }
+
+    /** Accept the series suggestion a batch scan or wishlist add left on the item. */
+    public function acceptSeriesSuggestion(Request $request, CollectionObject $object, LinkSeries $link): RedirectResponse
+    {
+        abort_unless($object->user_id === $request->user()->id, 404);
+        $suggestion = $object->series_suggestion ?? abort(404);
+
+        $series = $link->toReference($object, SeriesReference::fromArray($suggestion['reference']), DetectSeries::suggestedVolume($suggestion));
+
+        return redirect()->route('objects.show', $object)->with('status', "Added to the series {$series->name}.");
+    }
+
+    public function dismissSeriesSuggestion(Request $request, CollectionObject $object): RedirectResponse
+    {
+        abort_unless($object->user_id === $request->user()->id, 404);
+
+        $object->update(['series_suggestion' => null]);
+
+        return redirect()->route('objects.show', $object);
     }
 }

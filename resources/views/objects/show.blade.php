@@ -48,6 +48,31 @@
         <p class="-mt-3 mb-6 text-sm"><a href="{{ $links->artist($artist) }}" class="underline">More by {{ $artist->name }}</a></p>
     @endif
 
+    @if ($object->series_suggestion && ! $object->serie)
+        @php
+            $suggested = $object->series_suggestion;
+        @endphp
+        <div class="mb-6 max-w-2xl rounded-lg border border-sky-200 bg-sky-50 p-4 text-sm dark:border-sky-900 dark:bg-sky-950" data-series-suggestion>
+            <p class="mb-3">
+                This looks like
+                @if ($suggested['volume']) volume {{ $suggested['volume'] }} of @endif
+                <span class="font-medium">{{ $suggested['reference']['name'] }}</span>
+                <span class="text-stone-500">(from {{ ['ndl' => 'NDL', 'wikidata' => 'Wikidata', 'openlibrary' => 'Open Library', 'title' => 'the title'][$suggested['source']] ?? $suggested['source'] }}, not certain)</span>.
+            </p>
+            <div class="flex gap-2">
+                <form method="POST" action="{{ route('objects.series-suggestion.accept', $object) }}">
+                    @csrf
+                    <button class="rounded-md bg-stone-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300">Add to this series</button>
+                </form>
+                <form method="POST" action="{{ route('objects.series-suggestion.dismiss', $object) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button class="rounded-md border border-stone-300 px-3 py-1.5 text-sm dark:border-stone-700">Not this series</button>
+                </form>
+            </div>
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('objects.ownership', $object) }}" class="mb-4">
         @csrf
         @method('PATCH')

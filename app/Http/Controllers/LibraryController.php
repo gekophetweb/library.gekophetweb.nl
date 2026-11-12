@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SyncSeriesVolumes;
 use App\Models\Artist;
 use App\Models\Category;
 use App\Models\Language;
@@ -10,6 +11,7 @@ use App\Support\Library\CategoryCounts;
 use App\Support\Library\CategoryShelf;
 use App\Support\Library\SeriesShelf;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -39,6 +41,17 @@ class LibraryController extends Controller
         abort_unless($series->user_id === $request->user()->id, 404);
 
         return view('library.series', ['shelf' => SeriesShelf::build($series, $request->user()->objects()->getQuery())]);
+    }
+
+    /** "Fetch volumes": refresh the series' volume list from its source, on the queue. */
+    public function syncSeries(Request $request, Series $series): RedirectResponse
+    {
+        abort_unless($series->user_id === $request->user()->id, 404);
+        abort_unless($series->isSyncable(), 409, 'This series is not linked to a catalogue.');
+
+        SyncSeriesVolumes::dispatch($series);
+
+        return redirect()->route('library.series', $series)->with('status', 'Fetching the volume list. Reload in a moment to see it.');
     }
 
     /** An author's or artist's page: the user's own series and items by them. */

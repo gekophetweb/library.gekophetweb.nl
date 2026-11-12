@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\SearchesNames;
+use App\Support\Series\SeriesReference;
 use Database\Factories\SeriesFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -65,5 +66,36 @@ class Series extends Model
     public function volumes(): HasMany
     {
         return $this->hasMany(SeriesVolume::class)->orderBy('volume_sort')->orderBy('edition');
+    }
+
+    /** Sources whose volume list can be fetched (SeriesLookup::volumes()). */
+    public const array SYNCABLE_SOURCES = ['ndl', 'wikidata'];
+
+    public function isSyncable(): bool
+    {
+        return in_array($this->external_source, self::SYNCABLE_SOURCES, true) && filled($this->external_id);
+    }
+
+    /**
+     * The external series this one is linked to, rebuilt for SeriesLookup::volumes(). Built
+     * from the stored external ID, not the (user-editable) name: NDL's ID is
+     * "title|creator|publisher", which is exactly what its volume search needs.
+     */
+    public function reference(): ?SeriesReference
+    {
+        if (! filled($this->external_source) || ! filled($this->external_id)) {
+            return null;
+        }
+
+        if ($this->external_source === 'ndl') {
+            [$title, $creator, $publisher] = array_pad(explode('|', $this->external_id, 3), 3, '');
+
+            return new SeriesReference('ndl', $this->external_id, $title, creator: $creator ?: null, publisher: $publisher ?: null);
+        }
+
+        return new SeriesReference(
+            $this->external_source, $this->external_id, $this->name, $this->name_romanized, $this->name_english,
+            creator: $this->artist?->name, publisher: $this->publisher?->name,
+        );
     }
 }

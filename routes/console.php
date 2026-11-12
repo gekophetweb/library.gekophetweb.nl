@@ -11,3 +11,6 @@ Artisan::command('inspire', function () {
 // Prunable models: used login codes and lapsed share links. Runs on the `scheduler`
 // service (guidelines §8).
 Schedule::command('model:prune')->daily();
+
+// Pick up newly published volumes of linked series.
+Schedule::command('series:sync')->weekly();

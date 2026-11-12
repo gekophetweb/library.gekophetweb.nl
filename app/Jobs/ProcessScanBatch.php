@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Actions\Scan\AddScannedObject;
+use App\Actions\Series\DetectSeries;
 use App\Models\CollectionObject;
 use App\Models\ScanBatch;
 use App\Models\ScanBatchItem;
@@ -24,14 +25,14 @@ class ProcessScanBatch implements ShouldQueue
 
     public function __construct(public ScanBatch $batch) {}
 
-    public function handle(CatalogueLookupManager $catalogue, AddScannedObject $add): void
+    public function handle(CatalogueLookupManager $catalogue, AddScannedObject $add, DetectSeries $series): void
     {
         $this->batch->update(['status' => ScanBatch::PROCESSING]);
         $user = $this->batch->user;
         $setup = $this->batch->setup();
         $context = $this->batch->context();
 
-        $this->batch->items()->where('status', 'pending')->each(function (ScanBatchItem $item) use ($catalogue, $add, $user, $setup, $context) {
+        $this->batch->items()->where('status', 'pending')->each(function (ScanBatchItem $item) use ($catalogue, $add, $series, $user, $setup, $context) {
             $existing = CollectionObject::query()->ownedBy($user)->where('barcode', $item->barcode)->first();
 
             if ($existing !== null) {
@@ -57,6 +58,7 @@ class ProcessScanBatch implements ShouldQueue
                 } else {
                     $object = $add->handle($user, $setup, $outcome->result);
                     $item->update(['status' => 'added', 'object_id' => $object->id]);
+                    $this->detectSeries($series, $object, $setup->language->code);
                 }
             } catch (Throwable $e) {
                 report($e);
@@ -65,5 +67,18 @@ class ProcessScanBatch implements ShouldQueue
         });
 
         $this->batch->update(['status' => ScanBatch::DONE, 'finished_at' => now()]);
+    }
+
+    /**
+     * High confidence is applied, anything less becomes a suggestion on the item page
+     * (plan series-detection-from-isbn §7 decision 1). A failure here leaves the item added.
+     */
+    private function detectSeries(DetectSeries $series, CollectionObject $object, string $language): void
+    {
+        try {
+            $series->handle($object, $language);
+        } catch (Throwable $e) {
+            report($e);
+        }
     }
 }

@@ -10,10 +10,12 @@ use App\Http\Requests\UpdateCollectionObjectRequest;
 use App\Http\Resources\V1\CategoryResource;
 use App\Http\Resources\V1\CollectionObjectResource;
 use App\Http\Resources\V1\SeriesResource;
+use App\Jobs\SyncSeriesVolumes;
 use App\Models\Category;
 use App\Models\CollectionObject;
 use App\Models\Series;
 use App\Support\Library\SeriesShelf;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Validation\Rule;
@@ -89,5 +91,19 @@ class CatalogueController extends Controller
 
         return (new SeriesResource($series->load('artist')))
             ->withShelf(SeriesShelf::build($series, $request->user()->objects()->getQuery()));
+    }
+
+    /** `POST /api/v1/series/{series}/sync`: refresh the volume list on the queue. */
+    public function syncSeries(Request $request, Series $series): JsonResponse
+    {
+        abort_unless($series->user_id === $request->user()->id, 404);
+
+        if (! $series->isSyncable()) {
+            return response()->json(['message' => 'This series is not linked to a catalogue.'], 422);
+        }
+
+        SyncSeriesVolumes::dispatch($series);
+
+        return response()->json(['data' => ['status' => 'queued']], 202);
     }
 }

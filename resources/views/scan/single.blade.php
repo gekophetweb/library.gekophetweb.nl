@@ -44,6 +44,9 @@
                 </div>
                 <form method="POST" action="{{ route('scan.single.add') }}">
                     @csrf
+                    @if ($setup->category->topLevel()->kind === App\Enums\CategoryKind::Books)
+                        <x-scan-series-fields :suggestion="$pending['series'] ?? null" />
+                    @endif
                     <button class="{{ $primary }}">{{ $setup->ownership->value === 'owned' ? 'Add to collection' : 'Add to wishlist' }}</button>
                 </form>
             @else
@@ -71,6 +74,9 @@
                             <input id="name_romanized" name="name_romanized" required maxlength="255" value="{{ old('name_romanized') }}" class="{{ $input }}">
                             @error('name_romanized') <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
                         </div>
+                        @if ($setup->category->topLevel()->kind === App\Enums\CategoryKind::Books)
+                            <x-scan-series-fields :suggestion="$pending['series'] ?? null" />
+                        @endif
                         <button class="{{ $primary }}">{{ $setup->ownership->value === 'owned' ? 'Add to collection' : 'Add to wishlist' }}</button>
                     </form>
                 @endunless

@@ -10,9 +10,23 @@
             @endif
         </div>
         @if ($links->canEdit())
-            <x-share-button :scope="'series:'.$shelf->series->id" label="Share this series" />
+            <div class="flex flex-wrap items-center gap-2">
+                @if ($shelf->series->isSyncable())
+                    <form method="POST" action="{{ route('library.series.sync', $shelf->series) }}">
+                        @csrf
+                        <button class="rounded-md border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800">Fetch volumes</button>
+                    </form>
+                @endif
+                <x-share-button :scope="'series:'.$shelf->series->id" label="Share this series" />
+            </div>
         @endif
     </div>
+    @if ($links->canEdit() && $shelf->series->isSyncable())
+        <p class="mt-1 text-xs text-stone-500" data-synced>
+            Volume list from {{ ['ndl' => 'NDL', 'wikidata' => 'Wikidata'][$shelf->series->external_source] }}
+            · {{ $shelf->series->synced_at ? 'updated '.$shelf->series->synced_at->diffForHumans() : 'not fetched yet' }}
+        </p>
+    @endif
 
     @if ($shelf->volumes->isNotEmpty())
         @php($wanted = $shelf->volumes->where('state', 'wanted')->count())

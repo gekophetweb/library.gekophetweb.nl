@@ -1,7 +1,8 @@
 # Plan — Detect the series and volume number from an ISBN
 
-Status: **phases 1–2 implemented 2026-11-09** (parsing, providers, manager); phases 3–6
-wait for the domain models (`series`, `SeriesVolume`, scan flow). Written 2026-11-09.
+Status: **phases 1–2 implemented 2026-11-09; phases 3–6 implemented 2026-11-12** on
+`feature/series-detection-sync` (see §10). Still open: the Google Books and Hardcover
+series providers (§7 decision 2). Written 2026-11-09.
 
 Related: [`own-wishlist.md`](own-wishlist.md) (series completion counts owned vs wanted),
 [`search-title-and-creator.md`](search-title-and-creator.md) (`ComparesNames`, series
@@ -290,3 +291,46 @@ Decision 3 was applied on 2026-11-10: `NdlSeriesLookup::volumes()` groups by vol
 number + `dcndl:edition`, so Berserk lists 46 entries (43 regular + special editions of
 41–43), each regular edition followed by its special edition. `SeriesVolumeData` carries
 the `edition` label (null = regular) and `isSpecialEdition()`.
+
+## 10. Implementation notes (phases 3–6, 2026-11-12)
+
+- **Phase 3 needed no migration:** the foundation migration already created `series`
+  with `external_source` / `external_id` (unique per user), and `series_volumes` with
+  `volume_number` (display), decimal `volume_sort`, `edition` (`''` = regular), `isbns`
+  and the `(series_id, volume_sort, edition)` unique index. One migration was added:
+  `objects.series_suggestion` (JSON) for matches not sure enough to apply.
+- **`App\Actions\Series\LinkSeries`** puts an item in a series: matches the user's series
+  by `external_source` + `external_id`, then by name (any of the name triple, via
+  `Text::key()`), else creates it with the reference's artist and publisher. A hand-made
+  series of the same name gets the source attached so it can sync. Another user's series
+  is never reused. A newly linked syncable series (`ndl`, `wikidata`) that was never
+  synced dispatches `SyncSeriesVolumes`.
+- **`Series::reference()`** rebuilds the `SeriesReference` for `volumes()` from the stored
+  external ID, not the editable name: NDL's ID is `title|creator|publisher`, exactly what
+  its volume search needs.
+- **Single scan (step 13):** the lookup resolves the series for books with a valid ISBN
+  and stores the best match in the pending scan; the add form shows "Series" + "Volume"
+  pre-filled with the source ("from NDL"). Left as suggested → linked to the source;
+  renamed → a series of that name without a source; emptied → no series.
+- **Batch scan (step 14):** `ProcessScanBatch` runs `DetectSeries` per added item. A
+  high-confidence match is applied (decision 1); otherwise it is stored as
+  `series_suggestion`, which the item page offers to accept ("Add to this series") or
+  dismiss. A detection failure is reported and leaves the item added.
+- **Wishlist adds** from catalogue search (web and API) queue `DetectObjectSeries`, the
+  same detection, so the user does not wait on it.
+- **Phase 5:** `SyncSeriesVolumes` (queued, unique per series for 10 minutes) upserts
+  volumes through the series relation by `volume_sort` + edition, merges ISBNs, never
+  deletes, and leaves `synced_at` alone on an empty answer (a failed call looks the same).
+  No sync button existed; the series page now has "Fetch volumes" plus "Volume list from
+  NDL · updated …" for linked series. `series:sync` re-queues series last synced 7+ days
+  ago and is scheduled weekly.
+- **Phase 6:** `SeriesResource` adds `syncable` and `synced_at` (`external_source` /
+  `external_id` and per-volume `volume_number` were already there);
+  `POST /api/v1/series/{series}/sync` answers 202, or 422 for an unlinked series.
+- **Not built — Google Books and Hardcover series providers (decision 2):** the plan asks
+  for real recorded responses for an English *Berserk* volume first, and neither API can
+  be recorded without the user's key (Google Books answers 429 keyless). The English chain
+  is still Open Library + Wikidata → title parsing. Rakuten `seriesName` was also left
+  out: the recorded fixture shows it holds the imprint (`ジェッツコミックス`), the same
+  pitfall as NDL's `dcndl:seriesTitle`.
+- Tests: `tests/Feature/Series/SeriesScanTest.php` (14 tests).

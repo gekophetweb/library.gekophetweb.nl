@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 #[Table('objects')]
 #[Fillable([
     'category_id', 'sub_category_id', 'barcode', 'ownership', 'name', 'name_romanized', 'name_english',
-    'publisher_id', 'release_date', 'serie_id',
+    'publisher_id', 'release_date', 'serie_id', 'series_suggestion',
 ])]
 class CollectionObject extends Model
 {
@@ -33,7 +33,7 @@ class CollectionObject extends Model
 
     protected function casts(): array
     {
-        return ['release_date' => 'date', 'ownership' => OwnershipStatus::class];
+        return ['release_date' => 'date', 'ownership' => OwnershipStatus::class, 'series_suggestion' => 'array'];
     }
 
     /** @param  Builder<self>  $query */
