@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\ResolveLibraryShare;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -16,6 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
         // Reached through a Cloudflare Tunnel: trust forwarded headers so https URLs,
         // signed URLs and request()->ip() reflect the real client.
         $middleware->trustProxies(at: '*');
+
+        $middleware->alias(['share' => ResolveLibraryShare::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

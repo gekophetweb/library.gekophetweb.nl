@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ApiKeyProvider;
+use App\Models\Category;
+use App\Models\LibraryShare;
+use App\Models\Series;
 use App\Models\SsoProvider;
 use App\Models\UserIdentity;
 use App\Support\Auth\LoginSettings;
@@ -25,6 +28,9 @@ class SettingsController extends Controller
             'apiKeyProviders' => ApiKeyProvider::cases(),
             'savedApiKeys' => $request->user()->apiKeys()->pluck('updated_at', 'provider'),
             'tokens' => $request->user()->tokens()->latest()->get(),
+            'shares' => LibraryShare::query()->whereBelongsTo($request->user())->with('shareable')->latest()->get(),
+            'shareCategories' => Category::query()->whereNull('parent_id')->orderBy('sort')->orderBy('id')->get(),
+            'shareSeries' => Series::query()->ownedBy($request->user())->orderBy('name')->get(),
         ]);
     }
 
