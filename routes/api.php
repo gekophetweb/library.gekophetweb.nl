@@ -13,5 +13,6 @@ Route::prefix('v1')->middleware(['auth:sanctum', 'throttle:120,1'])->group(funct
     Route::patch('objects/{object}', [CatalogueController::class, 'updateObject']);
     Route::get('series', [CatalogueController::class, 'series']);
     Route::get('series/{series}', [CatalogueController::class, 'showSeries']);
-    Route::get('search', SearchController::class);
+    Route::get('search', SearchController::class)->middleware('throttle:catalogue-search');
+    Route::post('wishlist', [SearchController::class, 'storeWishlist']);
 });

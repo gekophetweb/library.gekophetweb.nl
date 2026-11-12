@@ -1,6 +1,7 @@
 # Plan — Search for books you do not own yet, and add them to the wishlist
 
-Status: **not started**. Written 2026-11-10.
+Status: **implemented 2026-11-12** on `feature/search-catalogue-not-owned`. Written
+2026-11-10. See §7 for what differs from the text below.
 
 Depends on: [`foundation.md`](foundation.md) (catalogue providers, per-user keys) and
 [`own-wishlist.md`](own-wishlist.md) (wishlist items). Related:
@@ -88,3 +89,39 @@ Recorded responses in `tests/Fixtures/catalogue/`, replayed with `Http::fake()`.
 
 - Music and Games catalogue search (no provider yet).
 - Price / availability lookups.
+
+## 7. As built (2026-11-12)
+
+- **Open questions (§5) were not answered;** built on the plan's own reading: question 1
+  as "search the external catalogues and add to the wishlist", question 2 left out (no
+  "add missing volume" on the series page).
+- **A separate contract, `App\Contracts\CatalogueSearch`,** instead of a `search()` on
+  `CatalogueLookup`: NDL and Open Library only search, they do no barcode lookup.
+  `RakutenBooksLookup` and `GoogleBooksLookup` implement both; `NdlCatalogueSearch` and
+  `OpenLibraryCatalogueSearch` are new. Results reuse `CatalogueResult` with the ISBN-13
+  as `barcode`; results without an ISBN are dropped.
+- **Queries:** Rakuten asks `title=` then `author=`; NDL `title=` then `creator=` and keeps
+  printed books (`図書`) only; Google Books a plain `q=` (it covers title and author, where
+  `intitle:`/`inauthor:` would be AND); Open Library `search.json?q=` and the first valid
+  ISBN-13 of the work.
+- **`CatalogueSearchManager`** picks the chain from `catalogue.search.books_order`
+  (`ja`: rakuten → ndl, else google_books → openlibrary), skips keyed providers without
+  the user's key (reported as `missingKeys`), merges by ISBN-13 and caches for an hour per
+  user + term + category + language + providers used. Timeout 6 s per call.
+- **Web:** the header scope select gets "Not owned yet"; that scope renders
+  `search/catalogue.blade.php` with category, an "Add as" sub-category and language
+  (defaulting to Books and the last scan's language, else Japanese). Owned / On wishlist
+  badges link to the item; "Add to wishlist" posts to `POST /wishlist`
+  (`WishlistController`, `StoreWishlistItemRequest`) through `AddScannedObject`, so adding
+  twice returns the existing item and an owned item is never demoted.
+- **Series detection is not run** on add: `AddScannedObject` does not call
+  `SeriesLookupManager` yet (that is series-detection phases 3–6). The volume number is
+  parsed from the title as for scans.
+- **API:** `GET /api/v1/search?scope=catalogue&q=…&category_id=…&language_id=…` (the plan
+  said `search_by=catalogue`; `scope` matches the web request) returns `data.catalogue[]`
+  with `ownership` (`owned` / `wishlist` / null) and `object_id`; `POST /api/v1/wishlist`
+  answers 201 when created, 200 when the book was already there.
+- **Rate limit** `catalogue-search`: 20 catalogue searches per minute per user; searching
+  your own library is not limited.
+- Tests: `tests/Feature/Catalogue/CatalogueSearchTest.php` (16 tests); recorded NDL and
+  Open Library fixtures listed in `tests/Fixtures/catalogue/README.md`.

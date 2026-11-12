@@ -1,0 +1,166 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:dcndl="http://ndl.go.jp/dcndl/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" version="2.0">
+  <channel>
+    <title>ベルセルク - 国立国会図書館サーチ OpenSearch</title>
+    <link>https://ios-v2-prod-eks-alb.ndlsearch.ndl.go.jp/api/opensearch?title=%E3%83%99%E3%83%AB%E3%82%BB%E3%83%AB%E3%82%AF&amp;cnt=5</link>
+    <description>Search results for title=ベルセルク cnt=5</description>
+    <language>ja</language>
+    <openSearch:totalResults>184</openSearch:totalResults>
+    <openSearch:startIndex>1</openSearch:startIndex>
+    <openSearch:itemsPerPage>5</openSearch:itemsPerPage>
+    <item>
+      <title>アニソン録プラス。 Shiro's ani-songbook</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I029040997</link>
+      <description><![CDATA[<p>King Record,2018,<p><ul><li>タイトル：アニソン録プラス。 Shiro's ani-songbook</li><li>タイトル（読み）：アニソンロク プラス</li><li>責任表示：鷺巣詩郎 [作曲・編曲]</li></ul>]]></description>
+      <author>鷺巣詩郎 [作曲・編曲]</author>
+      <category>録音資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I029040997</guid>
+      <pubDate>Tue, 27 Nov 2018 00:45:46 +0900</pubDate>
+      <dc:title>アニソン録プラス。 Shiro's ani-songbook</dc:title>
+      <dcndl:titleTranscription>アニソンロク プラス</dcndl:titleTranscription>
+      <dc:publisher>King Record</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2018</dc:date>
+      <dcterms:issued>2018.8</dcterms:issued>
+      <dcndl:price>9074円</dcndl:price>
+      <dc:extent>録音ディスク 4枚 (314分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">KICA-2529</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">029040997</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23135323</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YMC11</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I029040997"/>
+      <dc:description> 2018</dc:description>
+    </item>
+    <item>
+      <title>あらびき団アンコール あの素晴らしい芸をもう一度</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000010659488</link>
+      <description><![CDATA[<p>v.1,East West plus,2009,<p><ul><li>タイトル：あらびき団アンコール あの素晴らしい芸をもう一度</li><li>タイトル（読み）：アラビキダン アンコール</li><li>シリーズ名：あらびき団アンコールbox</li></ul>]]></description>
+      <author/>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000010659488</guid>
+      <pubDate>Thu, 18 Feb 2010 00:35:29 +0900</pubDate>
+      <dc:title>あらびき団アンコール あの素晴らしい芸をもう一度</dc:title>
+      <dcndl:titleTranscription>アラビキダン アンコール</dcndl:titleTranscription>
+      <dcndl:volume>v.1</dcndl:volume>
+      <dcndl:seriesTitle>あらびき団アンコールbox</dcndl:seriesTitle>
+      <dc:publisher>East West plus</dc:publisher>
+      <dc:publisher>YOSHIMOTO R and C (発売)</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2009</dc:date>
+      <dcterms:issued>2009.12</dcterms:issued>
+      <dc:extent>ビデオディスク 1枚 (80分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">YRBY-90189</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000010659488</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21708961</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL321</dc:subject>
+      <dc:description>初回限定</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000010659488"/>
+      <dc:description> 2009</dc:description>
+    </item>
+    <item>
+      <title>異世界ギルドの英雄師弟(ベルセルク)</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027604979</link>
+      <description><![CDATA[<p>講談社,2016,978-4-06-381559-7<p><ul><li>タイトル：異世界ギルドの英雄師弟(ベルセルク)</li><li>タイトル（読み）：イセカイ ギルド ノ ベルセルク</li><li>責任表示：あさのハジメ [著]</li><li>シリーズ名：講談社ラノベ文庫 ; あ-9-5-1</li><li>シリーズ名（読み）：コウダンシャ ラノベ ブンコ ; ア-9-5-1</li><li>NDC(9)：913.6</li></ul>]]></description>
+      <author>あさの, ハジメ,あさのハジメ [著]</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027604979</guid>
+      <pubDate>Fri, 14 Oct 2016 19:45:20 +0900</pubDate>
+      <dc:title>異世界ギルドの英雄師弟(ベルセルク)</dc:title>
+      <dcndl:titleTranscription>イセカイ ギルド ノ ベルセルク</dcndl:titleTranscription>
+      <dc:creator>あさの, ハジメ</dc:creator>
+      <dcndl:creatorTranscription>アサノ, ハジメ</dcndl:creatorTranscription>
+      <dcndl:seriesTitle>講談社ラノベ文庫 ; あ-9-5-1</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>コウダンシャ ラノベ ブンコ ; ア-9-5-1</dcndl:seriesTitleTranscription>
+      <dc:publisher>講談社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2016</dc:date>
+      <dcterms:issued>2016.9</dcterms:issued>
+      <dcndl:price>640円</dcndl:price>
+      <dc:extent>296p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-06-381559-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027604979</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22795791</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">33504717</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">KH811</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">913.6</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.lib.city.saitama.jp/bookdetail?num=2619525&amp;ctg=1"/>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000014178463"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027604979"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/0638155900100011000X"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784063815597"/>
+      <dc:description> 2016</dc:description>
+    </item>
+    <item>
+      <title>異世界ギルドの英雄師弟(ベルセルク)</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027852003</link>
+      <description><![CDATA[<p>2,講談社,2017,978-4-06-381586-3<p><ul><li>タイトル：異世界ギルドの英雄師弟(ベルセルク)</li><li>タイトル（読み）：イセカイ ギルド ノ ベルセルク</li><li>責任表示：あさのハジメ [著]</li><li>シリーズ名：講談社ラノベ文庫 ; あ-9-5-2</li><li>シリーズ名（読み）：コウダンシャ ラノベ ブンコ ; ア-9-5-2</li><li>NDC(9)：913.6</li></ul>]]></description>
+      <author>あさの, ハジメ,あさのハジメ [著]</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027852003</guid>
+      <pubDate>Tue, 21 Feb 2017 19:11:52 +0900</pubDate>
+      <dc:title>異世界ギルドの英雄師弟(ベルセルク)</dc:title>
+      <dcndl:titleTranscription>イセカイ ギルド ノ ベルセルク</dcndl:titleTranscription>
+      <dc:creator>あさの, ハジメ</dc:creator>
+      <dcndl:creatorTranscription>アサノ, ハジメ</dcndl:creatorTranscription>
+      <dcndl:volume>2</dcndl:volume>
+      <dcndl:seriesTitle>講談社ラノベ文庫 ; あ-9-5-2</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>コウダンシャ ラノベ ブンコ ; ア-9-5-2</dcndl:seriesTitleTranscription>
+      <dc:publisher>講談社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2017</dc:date>
+      <dcterms:issued>2017.2</dcterms:issued>
+      <dcndl:price>620円</dcndl:price>
+      <dc:extent>267p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-06-381586-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027852003</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22847961</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">33556550</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">KH811</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">913.6</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.lib.city.saitama.jp/bookdetail?num=2658664&amp;ctg=1"/>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000014246711"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027852003"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/0638158600100011000R"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784063815863"/>
+      <dc:description> 2017</dc:description>
+    </item>
+    <item>
+      <title>異世界ギルドの英雄師弟(ベルセルク)</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028292361</link>
+      <description><![CDATA[<p>3,講談社,2017,978-4-06-381616-7<p><ul><li>タイトル：異世界ギルドの英雄師弟(ベルセルク)</li><li>タイトル（読み）：イセカイ ギルド ノ ベルセルク</li><li>責任表示：あさのハジメ [著]</li><li>シリーズ名：講談社ラノベ文庫 ; あ-9-5-3</li><li>シリーズ名（読み）：コウダンシャ ラノベ ブンコ ; ア-9-5-3</li><li>NDC(10)：913.6</li></ul>]]></description>
+      <author>あさの, ハジメ,あさのハジメ [著]</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028292361</guid>
+      <pubDate>Tue, 4 Jul 2017 20:43:15 +0900</pubDate>
+      <dc:title>異世界ギルドの英雄師弟(ベルセルク)</dc:title>
+      <dcndl:titleTranscription>イセカイ ギルド ノ ベルセルク</dcndl:titleTranscription>
+      <dc:creator>あさの, ハジメ</dc:creator>
+      <dcndl:creatorTranscription>アサノ, ハジメ</dcndl:creatorTranscription>
+      <dcndl:volume>3</dcndl:volume>
+      <dcndl:seriesTitle>講談社ラノベ文庫 ; あ-9-5-3</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>コウダンシャ ラノベ ブンコ ; ア-9-5-3</dcndl:seriesTitleTranscription>
+      <dc:publisher>講談社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2017</dc:date>
+      <dcterms:issued>2017.6</dcterms:issued>
+      <dcndl:price>620円</dcndl:price>
+      <dc:extent>250p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-06-381616-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028292361</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22907996</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">33624064</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">KH811</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">913.6</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.lib.city.saitama.jp/bookdetail?num=2704186&amp;ctg=1"/>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000014330498"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028292361"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/06A0000000000003601B"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784063816167"/>
+      <dc:description> 2017</dc:description>
+    </item>
+  </channel>
+</rss>

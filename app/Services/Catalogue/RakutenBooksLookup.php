@@ -3,17 +3,19 @@
 namespace App\Services\Catalogue;
 
 use App\Contracts\CatalogueLookup;
+use App\Contracts\CatalogueSearch;
 use App\Enums\ApiKeyProvider;
 use App\Enums\CategoryKind;
 use App\Services\ApiCallLogger;
 use App\Support\Catalogue\CatalogueContext;
 use App\Support\Catalogue\CatalogueResult;
+use App\Support\Isbn;
 use App\Support\Series\Text;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Factory as Http;
 
 /** Rakuten Books "Book Search" (20170404, formatVersion 2). Needs the user's application ID. */
-class RakutenBooksLookup implements CatalogueLookup
+class RakutenBooksLookup implements CatalogueLookup, CatalogueSearch
 {
     public function __construct(private readonly Http $http, private readonly ApiCallLogger $logger) {}
 
@@ -34,14 +36,43 @@ class RakutenBooksLookup implements CatalogueLookup
 
     public function lookup(string $barcode, CatalogueContext $context): ?CatalogueResult
     {
-        $query = ['format' => 'json', 'formatVersion' => 2, 'isbn' => $barcode];
+        $item = $this->request(['isbn' => $barcode], 'lookup', $context, config('catalogue.timeout'))[0] ?? null;
+
+        return is_array($item) ? $this->result($item, $barcode) : null;
+    }
+
+    /** By title, then by author (the API has no "either" search). */
+    public function search(string $term, CatalogueContext $context, int $limit): array
+    {
+        $results = [];
+
+        foreach (['title', 'author'] as $field) {
+            foreach ($this->request([$field => $term, 'hits' => min($limit, 30)], 'search', $context, config('catalogue.search.timeout')) as $item) {
+                $isbn = is_array($item) ? Isbn::tryFrom($item['isbn'] ?? null) : null;
+
+                if ($isbn !== null && ($result = $this->result($item, $isbn->value))) {
+                    $results[$isbn->value] ??= $result;
+                }
+            }
+        }
+
+        return array_values($results);
+    }
+
+    /**
+     * @param  array<string, scalar>  $params
+     * @return list<mixed> the `Items`, empty on any failure
+     */
+    private function request(array $params, string $operation, CatalogueContext $context, int $timeout): array
+    {
+        $query = ['format' => 'json', 'formatVersion' => 2] + $params;
 
         try {
             $response = $this->logger->send(
                 provider: $this->name(),
-                operation: 'lookup',
+                operation: $operation,
                 query: http_build_query($query), // the application ID stays out of the log
-                request: fn () => $this->http->timeout(config('catalogue.timeout'))->acceptJson()
+                request: fn () => $this->http->timeout($timeout)->acceptJson()
                     ->get(config('catalogue.providers.rakuten.endpoint'), $query + [
                         'applicationId' => $context->user->apiKey(ApiKeyProvider::Rakuten),
                     ]),
@@ -49,12 +80,16 @@ class RakutenBooksLookup implements CatalogueLookup
                 category: $context->category->kind->value,
             );
         } catch (ConnectionException) {
-            return null;
+            return [];
         }
 
-        $item = $response->successful() ? $response->json('Items.0') : null;
+        return $response->successful() ? array_values((array) $response->json('Items')) : [];
+    }
 
-        if (! is_array($item) || Text::clean($item['title'] ?? null) === null) {
+    /** @param  array<string, mixed>  $item */
+    private function result(array $item, string $barcode): ?CatalogueResult
+    {
+        if (Text::clean($item['title'] ?? null) === null) {
             return null;
         }
 
