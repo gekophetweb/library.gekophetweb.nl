@@ -13,6 +13,7 @@ use App\Http\Controllers\ScanController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WelcomeNameController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -38,7 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::get('library/categories/{category}', [LibraryController::class, 'category'])->name('library.category');
     Route::get('library/series/{series}', [LibraryController::class, 'series'])->name('library.series');
     Route::get('library/artists/{artist}', [LibraryController::class, 'artist'])->name('library.artist');
-    Route::get('search', [SearchController::class, 'index'])->name('search.index');
+    Route::get('search', [SearchController::class, 'index'])->middleware('throttle:catalogue-search')->name('search.index');
+    Route::post('wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
     Route::get('objects/{object}', [CollectionObjectController::class, 'show'])->name('objects.show');
     Route::put('objects/{object}', [CollectionObjectController::class, 'update'])->name('objects.update');
     Route::patch('objects/{object}/ownership', [CollectionObjectController::class, 'updateOwnership'])->name('objects.ownership');

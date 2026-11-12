@@ -106,7 +106,8 @@ class CollectionObject extends Model
         $query->where(fn (Builder $query) => match ($scope) {
             SearchScope::Title => $query->matchingTitle($term),
             SearchScope::Creator => $query->matchingCreator($term),
-            SearchScope::All => $query->matchingTitle($term)->orWhere(fn (Builder $query) => $query->matchingCreator($term)),
+            // The catalogue scope searches outside the collection; here it means "anything".
+            SearchScope::All, SearchScope::Catalogue => $query->matchingTitle($term)->orWhere(fn (Builder $query) => $query->matchingCreator($term)),
         });
     }
 
