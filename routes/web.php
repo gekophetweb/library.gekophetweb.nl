@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\SsoProviderController;
+use App\Http\Controllers\Admin\SuggestionController as AdminSuggestionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\DevLoginController;
 use App\Http\Controllers\Auth\EmailCodeController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Settings\LibraryShareController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Share\SharedLibraryController;
+use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\WelcomeNameController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -86,8 +88,13 @@ Route::middleware('auth')->group(function () {
     Route::post('settings/shares', [LibraryShareController::class, 'store'])->name('settings.shares.store');
     Route::delete('settings/shares/{share}', [LibraryShareController::class, 'destroy'])->name('settings.shares.destroy');
 
+    Route::get('suggestions', [SuggestionController::class, 'index'])->name('suggestions.index');
+    Route::post('suggestions', [SuggestionController::class, 'store'])->middleware('throttle:10,1')->name('suggestions.store');
+
     Route::middleware('can:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('users', [UserController::class, 'index'])->name('users.index');
+        Route::get('suggestions', [AdminSuggestionController::class, 'index'])->name('suggestions.index');
+        Route::patch('suggestions/{suggestion}', [AdminSuggestionController::class, 'update'])->name('suggestions.update');
 
         Route::put('sso/settings', [SsoProviderController::class, 'updateSettings'])->name('sso.settings');
         Route::get('sso/{provider}/test', [SsoController::class, 'test'])->name('sso.test');

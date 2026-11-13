@@ -58,6 +58,12 @@ class User extends Authenticatable
         return $this->apiKeys()->where('provider', $provider->value)->first()?->key;
     }
 
+    /** @return HasMany<Suggestion, $this> */
+    public function suggestions(): HasMany
+    {
+        return $this->hasMany(Suggestion::class);
+    }
+
     /** @return HasMany<UserIdentity, $this> */
     public function identities(): HasMany
     {

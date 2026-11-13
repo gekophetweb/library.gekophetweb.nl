@@ -28,6 +28,12 @@
                 @can('admin')
                     <a href="{{ route('admin.users.index') }}" class="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">Users</a>
                     <a href="{{ route('admin.sso.index') }}" class="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">Sign-in</a>
+                    @php($newSuggestions = App\Models\Suggestion::query()->where('status', App\Enums\SuggestionStatus::New)->count())
+                    <a href="{{ route('admin.suggestions.index') }}" class="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">Suggestions
+                        @if ($newSuggestions)
+                            <span data-new-suggestions="{{ $newSuggestions }}" class="ml-0.5 rounded-full bg-sky-100 px-1.5 text-xs text-sky-800 dark:bg-sky-950 dark:text-sky-200">{{ $newSuggestions }}<span class="sr-only"> new</span></span>
+                        @endif
+                    </a>
                 @endcan
                 <form method="GET" action="{{ route('search.index') }}" role="search" class="flex min-w-0 items-center gap-1">
                     <label for="nav-search" class="sr-only">Search your library</label>
@@ -40,7 +46,8 @@
                         @endforeach
                     </select>
                 </form>
-                <a href="{{ route('settings.edit') }}" class="ml-auto text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">{{ auth()->user()->name }}</a>
+                <a href="{{ route('suggestions.index') }}" class="ml-auto text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">Suggest something</a>
+                <a href="{{ route('settings.edit') }}" class="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">{{ auth()->user()->name }}</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button class="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">Log out</button>
