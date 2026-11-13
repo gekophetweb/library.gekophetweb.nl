@@ -11,7 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Resolves `{shareToken}` for the read-only share routes. An unknown token and a lapsed
  * one both 404, so a viewer cannot tell them apart. The share goes on the request (read
- * back by LibraryLinks); no user is ever logged in, so nothing under /s can act.
+ * back by LibraryLinks). Pages under /s never act, signed in or not; the signed-in user is
+ * read only to check a personal share's recipient (plan share-with-account).
  */
 class ResolveLibraryShare
 {
@@ -27,6 +28,14 @@ class ResolveLibraryShare
 
         // hash_equals: the lookup is by index, but make the final comparison constant-time.
         abort_unless($share !== null && hash_equals($share->token, $token), 404);
+
+        // A personal share: a guest signs in first and comes back here; any other account
+        // gets the same 404 as an unknown token.
+        if ($share->isPersonal() && $request->user() === null) {
+            return redirect()->guest(route('login'));
+        }
+
+        abort_unless($share->admits($request->user()), 404);
 
         $request->attributes->set(self::ATTRIBUTE, $share);
         URL::defaults(['shareToken' => $token]);
