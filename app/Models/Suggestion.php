@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * A message in the suggestion box (plan suggestion-box). The sender sees their own;
@@ -64,6 +65,12 @@ class Suggestion extends Model
     public function voters(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'suggestion_votes')->withTimestamps();
+    }
+
+    /** Oldest first. @return HasMany<SuggestionComment, $this> */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(SuggestionComment::class)->oldest()->oldest('id');
     }
 
     /** Sender, admins, and — once it is on the board — everyone. */

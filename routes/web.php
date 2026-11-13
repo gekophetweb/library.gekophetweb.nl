@@ -15,6 +15,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Settings\LibraryShareController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Share\SharedLibraryController;
+use App\Http\Controllers\SuggestionCommentController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\SuggestionVoteController;
 use App\Http\Controllers\WelcomeNameController;
@@ -94,6 +95,9 @@ Route::middleware('auth')->group(function () {
     Route::get('suggestions', [SuggestionController::class, 'index'])->name('suggestions.index');
     Route::post('suggestions', [SuggestionController::class, 'store'])->middleware('throttle:10,1')->name('suggestions.store');
     Route::get('suggestions/board', [SuggestionVoteController::class, 'index'])->name('suggestions.board');
+    Route::get('suggestions/{suggestion}', [SuggestionCommentController::class, 'show'])->whereNumber('suggestion')->name('suggestions.show');
+    Route::post('suggestions/{suggestion}/comments', [SuggestionCommentController::class, 'store'])->middleware('throttle:20,1')->name('suggestions.comments.store');
+    Route::delete('suggestions/{suggestion}/comments/{comment}', [SuggestionCommentController::class, 'destroy'])->scopeBindings()->name('suggestions.comments.destroy');
     Route::post('suggestions/{suggestion}/vote', [SuggestionVoteController::class, 'store'])->middleware('throttle:60,1')->name('suggestions.vote');
     Route::delete('suggestions/{suggestion}/vote', [SuggestionVoteController::class, 'destroy'])->middleware('throttle:60,1')->name('suggestions.unvote');
 

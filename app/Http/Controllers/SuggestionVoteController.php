@@ -13,7 +13,7 @@ class SuggestionVoteController extends Controller
     public function index(Request $request): View
     {
         return view('suggestions.board', [
-            'suggestions' => Suggestion::query()->onBoard()->withVotesFor($request->user())
+            'suggestions' => Suggestion::query()->onBoard()->withVotesFor($request->user())->withCount('comments')
                 ->orderByDesc('votes_count')->latest()->latest('id')
                 ->paginate(25),
         ]);

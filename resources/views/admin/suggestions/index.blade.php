@@ -37,6 +37,7 @@
                     @endif
                 </div>
                 <p class="whitespace-pre-line text-sm">{{ $suggestion->body }}</p>
+                <a href="{{ route('suggestions.show', $suggestion) }}" class="inline-block text-xs text-stone-600 underline dark:text-stone-400" data-thread-link>{{ trans_choice('{0} Comment|{1} 1 comment|[2,*] :count comments', $suggestion->comments_count) }}</a>
                 <form method="POST" action="{{ route('admin.suggestions.update', $suggestion) }}" class="grid gap-2 sm:grid-cols-[10rem_1fr_auto] sm:items-start">
                     @csrf
                     @method('PATCH')

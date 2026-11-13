@@ -27,6 +27,7 @@
                 <div class="min-w-0 space-y-2">
                     <span class="rounded px-2 py-0.5 text-xs {{ $suggestion->status->badgeClasses() }}">{{ $suggestion->status->label() }}</span>
                     <p class="whitespace-pre-line text-sm">{{ $suggestion->body }}</p>
+                    <a href="{{ route('suggestions.show', $suggestion) }}" class="inline-block text-xs text-stone-600 underline dark:text-stone-400" data-thread-link>{{ trans_choice('{0} Comment|{1} 1 comment|[2,*] :count comments', $suggestion->comments_count) }}</a>
                     @if ($suggestion->admin_reply)
                         <div class="rounded-md bg-stone-50 px-3 py-2 text-sm dark:bg-stone-950">
                             <p class="mb-1 text-xs font-medium text-stone-500">Reply from the admins</p>
