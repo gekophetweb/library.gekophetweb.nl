@@ -18,6 +18,7 @@
                     <th class="px-4 py-3 font-medium">E-mail</th>
                     <th class="px-4 py-3 text-right font-medium">Total items</th>
                     <th class="px-4 py-3 font-medium">Joined</th>
+                    <th class="px-4 py-3 font-medium"><span class="sr-only">Actions</span></th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-stone-200 dark:divide-stone-800">
@@ -36,9 +37,21 @@
                         <td class="px-4 py-3 text-stone-600 dark:text-stone-400">{{ $user->email }}</td>
                         <td class="px-4 py-3 text-right tabular-nums" data-total="{{ $user->objects_count }}">{{ number_format($user->objects_count) }}</td>
                         <td class="px-4 py-3 text-stone-600 dark:text-stone-400">{{ $user->created_at?->toFormattedDateString() }}</td>
+                        <td class="px-4 py-3 text-right">
+                            @unless ($you)
+                                <form method="POST" action="{{ route('admin.users.role', $user) }}" data-role-form>
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" name="is_admin" value="{{ $user->is_admin ? 0 : 1 }}">
+                                    <button class="rounded-md border border-stone-300 px-3 py-1 text-xs hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800">
+                                        {{ $user->is_admin ? 'Remove admin' : 'Make admin' }}
+                                    </button>
+                                </form>
+                            @endunless
+                        </td>
                     </tr>
                 @empty
-                    <tr><td colspan="4" class="px-4 py-6 text-center text-stone-500">No users match this filter.</td></tr>
+                    <tr><td colspan="5"class="px-4 py-6 text-center text-stone-500">No users match this filter.</td></tr>
                 @endforelse
             </tbody>
         </table>
