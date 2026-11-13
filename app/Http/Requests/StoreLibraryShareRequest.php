@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Series;
 use Closure;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 /**
@@ -46,6 +47,11 @@ class StoreLibraryShareRequest extends FormRequest
                 },
             ],
             'label' => ['nullable', 'string', 'max:100'],
+            'recipient_email' => ['nullable', 'email', 'max:255', function (string $attribute, mixed $value, Closure $fail) {
+                if (Str::lower((string) $value) === Str::lower($this->user()->email)) {
+                    $fail('That is your own address.');
+                }
+            }],
             'expires_at' => ['nullable', 'date', 'after:today'],
         ];
     }

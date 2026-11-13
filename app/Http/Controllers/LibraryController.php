@@ -7,6 +7,7 @@ use App\Jobs\SyncSeriesVolumes;
 use App\Models\Artist;
 use App\Models\Category;
 use App\Models\Language;
+use App\Models\LibraryShare;
 use App\Models\Series;
 use App\Models\SeriesVolume;
 use App\Support\Library\CategoryCounts;
@@ -26,6 +27,8 @@ class LibraryController extends Controller
             'categories' => CategoryCounts::for($request->user()->objects()->getQuery()),
             'scanCategories' => Category::query()->whereNull('parent_id')->with('children')->orderBy('sort')->orderBy('id')->get(),
             'languages' => Language::query()->orderBy('name')->get(),
+            'sharedWithMe' => LibraryShare::query()->usable()->sharedWith($request->user())
+                ->with(['user', 'shareable'])->latest()->get(),
         ]);
     }
 

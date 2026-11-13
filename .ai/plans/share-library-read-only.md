@@ -215,7 +215,8 @@ changed nothing for owners.
 ## 12. As built in this repository (2026-11-12)
 
 - **Open question (named-account sharing)** was not answered; only the read-only
-  capability links are built. A `library_share_user` pivot remains the way to add it.
+  capability links are built here. Added later by [`share-with-account.md`](share-with-account.md)
+  as a `recipient_email` on the share row rather than a pivot.
 - §11's deviations carry over: stateless `LibraryLinks` (reads the share off the
   request), `View::share('links', …)`, one `scope` field (`library` / `category:7` /
   `series:3`), `Relation::morphMap` (not enforced), owner wording kept and a neutral
