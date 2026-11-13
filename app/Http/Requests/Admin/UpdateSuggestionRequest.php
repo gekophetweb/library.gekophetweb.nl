@@ -17,6 +17,7 @@ class UpdateSuggestionRequest extends FormRequest
         return [
             'status' => ['required', Rule::enum(SuggestionStatus::class)],
             'admin_reply' => ['nullable', 'string', 'max:5000'],
+            'is_public' => ['sometimes', 'boolean'],
         ];
     }
 }

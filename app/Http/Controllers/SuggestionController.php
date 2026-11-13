@@ -13,7 +13,7 @@ class SuggestionController extends Controller
     public function index(Request $request): View
     {
         return view('suggestions.index', [
-            'suggestions' => $request->user()->suggestions()->latest()->latest('id')->get(),
+            'suggestions' => $request->user()->suggestions()->withCount('voters as votes_count')->latest()->latest('id')->get(),
         ]);
     }
 

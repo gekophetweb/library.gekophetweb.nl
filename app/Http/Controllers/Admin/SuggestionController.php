@@ -16,12 +16,18 @@ class SuggestionController extends Controller
 {
     public function index(Request $request): View
     {
-        $request->validate(['status' => ['nullable', Rule::enum(SuggestionStatus::class)]]);
+        $request->validate([
+            'status' => ['nullable', Rule::enum(SuggestionStatus::class)],
+            'sort' => ['nullable', 'in:newest,votes'],
+        ]);
         $status = $request->enum('status', SuggestionStatus::class);
+        $sort = $request->input('sort', 'newest');
 
         $suggestions = Suggestion::query()
             ->with('user')
+            ->withCount('voters as votes_count')
             ->when($status, fn ($query) => $query->where('status', $status))
+            ->when($sort === 'votes', fn ($query) => $query->orderByDesc('votes_count'))
             ->latest()
             ->latest('id')
             ->paginate(25)
@@ -30,6 +36,7 @@ class SuggestionController extends Controller
         return view('admin.suggestions.index', [
             'suggestions' => $suggestions,
             'status' => $status,
+            'sort' => $sort,
             'statuses' => SuggestionStatus::cases(),
         ]);
     }
@@ -38,6 +45,8 @@ class SuggestionController extends Controller
     {
         $suggestion->status = $request->enum('status', SuggestionStatus::class);
         $suggestion->admin_reply = $request->validated('admin_reply') ?: null;
+        // An unticked checkbox sends nothing: absent means off the board.
+        $suggestion->is_public = $request->boolean('is_public');
         $suggestion->save();
 
         return back()->with('status', 'Suggestion updated.');

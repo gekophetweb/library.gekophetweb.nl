@@ -3,6 +3,8 @@
         $primary = 'rounded-md bg-stone-900 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300';
     @endphp
 
+    <x-suggestion-tabs current="mine" />
+
     <h1 class="mb-2 text-2xl font-semibold">Suggest something</h1>
     <p class="mb-6 text-sm text-stone-600 dark:text-stone-400">An idea, something that bugs you, a feature you miss: the admins read every message.</p>
 
@@ -23,6 +25,9 @@
                     <div class="flex flex-wrap items-center gap-2 text-xs">
                         <span class="rounded px-2 py-0.5 {{ $suggestion->status->badgeClasses() }}">{{ $suggestion->status->label() }}</span>
                         <span class="text-stone-500">{{ $suggestion->created_at?->toFormattedDateString() }}</span>
+                        @if ($suggestion->is_public)
+                            <span class="text-stone-500" data-on-board>· On the board · {{ trans_choice(':count vote|:count votes', $suggestion->votes_count) }}</span>
+                        @endif
                     </div>
                     <p class="whitespace-pre-line text-sm">{{ $suggestion->body }}</p>
                     @if ($suggestion->admin_reply)
