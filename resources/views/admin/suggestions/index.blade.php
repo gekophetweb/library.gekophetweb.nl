@@ -10,11 +10,14 @@
         <nav class="flex flex-wrap gap-1 rounded-md border border-stone-200 bg-white p-1 text-sm dark:border-stone-800 dark:bg-stone-900" aria-label="Filter suggestions">
             @foreach ($filters as $value => $label)
                 @php($active = ($status?->value ?? '') === $value)
-                <a href="{{ route('admin.suggestions.index', $value === '' ? [] : ['status' => $value]) }}"
+                <a href="{{ route('admin.suggestions.index', array_filter(['status' => $value ?: null, 'sort' => $sort === 'votes' ? 'votes' : null])) }}"
                    @class(['rounded px-3 py-1', 'bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900' => $active, 'hover:bg-stone-100 dark:hover:bg-stone-800' => ! $active])
                    @if ($active) aria-current="page" @endif>{{ $label }}</a>
             @endforeach
         </nav>
+        <a href="{{ route('admin.suggestions.index', array_filter(['status' => $status?->value, 'sort' => $sort === 'votes' ? null : 'votes'])) }}" class="text-sm underline" data-sort-toggle>
+            {{ $sort === 'votes' ? 'Sort by newest' : 'Sort by votes' }}
+        </a>
     </div>
 
     @if ($errors->any())
@@ -29,6 +32,9 @@
                     <span class="font-medium text-stone-900 dark:text-stone-100">{{ $suggestion->user->name }}</span>
                     <span class="text-stone-500">{{ $suggestion->user->email }}</span>
                     <span class="text-stone-500">· {{ $suggestion->created_at?->toFormattedDateString() }}</span>
+                    @if ($suggestion->is_public)
+                        <span class="text-stone-500" data-on-board>· On the board · {{ trans_choice(':count vote|:count votes', $suggestion->votes_count) }}</span>
+                    @endif
                 </div>
                 <p class="whitespace-pre-line text-sm">{{ $suggestion->body }}</p>
                 <form method="POST" action="{{ route('admin.suggestions.update', $suggestion) }}" class="grid gap-2 sm:grid-cols-[10rem_1fr_auto] sm:items-start">
@@ -43,6 +49,10 @@
                     <label class="sr-only" for="reply-{{ $suggestion->id }}">Reply to the sender</label>
                     <textarea id="reply-{{ $suggestion->id }}" name="admin_reply" rows="2" maxlength="5000" placeholder="Reply (optional, the sender sees it)" class="{{ $input }}">{{ $suggestion->admin_reply }}</textarea>
                     <button class="{{ $secondary }}">Save</button>
+                    <label class="flex items-center gap-2 text-sm sm:col-start-2">
+                        <input type="checkbox" name="is_public" value="1" @checked($suggestion->is_public)>
+                        Show on the board, without the sender's name, for everyone to vote on
+                    </label>
                 </form>
             </li>
         @empty

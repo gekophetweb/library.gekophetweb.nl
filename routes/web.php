@@ -16,6 +16,7 @@ use App\Http\Controllers\Settings\LibraryShareController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Share\SharedLibraryController;
 use App\Http\Controllers\SuggestionController;
+use App\Http\Controllers\SuggestionVoteController;
 use App\Http\Controllers\WelcomeNameController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -92,6 +93,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('suggestions', [SuggestionController::class, 'index'])->name('suggestions.index');
     Route::post('suggestions', [SuggestionController::class, 'store'])->middleware('throttle:10,1')->name('suggestions.store');
+    Route::get('suggestions/board', [SuggestionVoteController::class, 'index'])->name('suggestions.board');
+    Route::post('suggestions/{suggestion}/vote', [SuggestionVoteController::class, 'store'])->middleware('throttle:60,1')->name('suggestions.vote');
+    Route::delete('suggestions/{suggestion}/vote', [SuggestionVoteController::class, 'destroy'])->middleware('throttle:60,1')->name('suggestions.unvote');
 
     Route::middleware('can:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('users', [UserController::class, 'index'])->name('users.index');
