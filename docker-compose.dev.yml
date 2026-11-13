@@ -1,0 +1,141 @@
+# Local development stack — your checkout is mounted, so edits show up without
+# rebuilding or restarting anything:
+#
+#   PHP, Blade, routes, config   → next page load
+#   CSS / JS / Blade              → via the Vite dev server (HMR / auto-reload)
+#
+#   docker compose -f docker-compose.dev.yml up -d      # http://localhost:8000
+#   docker compose -f docker-compose.dev.yml logs -f
+#   docker compose -f docker-compose.dev.yml exec app php artisan migrate
+#   docker compose -f docker-compose.dev.yml down
+#
+# Uses the local .env for app settings, but the database is MariaDB in its own `db`
+# container, same version as production. Its credentials below are for this local stack
+# only. Separate from docker-compose.yml, which is the production stack and needs real
+# passwords in .env. Only rebuild the image (`up -d --build`) after changing the Dockerfile.
+#
+#   Wipe the dev database:  docker compose -f docker-compose.dev.yml down -v
+#
+# Speed: file access through a Windows bind mount is slow (~ms per file), and Laravel
+# reads thousands of vendor/ files per request. So vendor/ and node_modules/ live in
+# Docker volumes, filled by the `composer` and `vite` services; only your own code goes
+# through the mount. After changing composer.json / composer.lock:
+#
+#   docker compose -f docker-compose.dev.yml run --rm composer
+
+services:
+  # One-shot: installs vendor/ (with dev dependencies) into the `vendor` volume, then exits.
+  composer:
+    image: composer:2
+    working_dir: /app
+    command: ["composer", "install", "--no-interaction", "--prefer-dist", "--ignore-platform-reqs"]
+    volumes:
+      - .:/app
+      - vendor:/app/vendor
+      - composer-cache:/tmp/cache
+
+  app:
+    build:
+      context: .
+      target: runtime
+    image: library-gekophetweb/app:latest
+    env_file: .env
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      SHOW_WELCOME_MESSAGE: "false"
+      # Cache compiled PHP, but check every file's timestamp on each request so edits
+      # are picked up at once (the image default never re-checks).
+      PHP_OPCACHE_ENABLE: "1"
+      PHP_OPCACHE_VALIDATE_TIMESTAMPS: "1"
+      PHP_OPCACHE_REVALIDATE_FREQ: "0"
+      # Run pending migrations on start; never cache config/routes/views in dev.
+      AUTORUN_ENABLED: "true"
+      AUTORUN_LARAVEL_MIGRATION: "true"
+      AUTORUN_LARAVEL_CONFIG_CACHE: "false"
+      AUTORUN_LARAVEL_ROUTE_CACHE: "false"
+      AUTORUN_LARAVEL_VIEW_CACHE: "false"
+      AUTORUN_LARAVEL_EVENT_CACHE: "false"
+      # Override the SQLite settings in .env.
+      DB_CONNECTION: mariadb
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: library
+      DB_USERNAME: library
+      DB_PASSWORD: library
+      # Login-code mails go to Mailpit: read them at http://localhost:8025.
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+      MAIL_SCHEME: ""
+      MAIL_USERNAME: ""
+      MAIL_PASSWORD: ""
+      # No queue worker in the dev stack: run queued jobs (such as mails) in the request.
+      QUEUE_CONNECTION: sync
+    volumes:
+      - .:/var/www/html
+      - vendor:/var/www/html/vendor
+    ports:
+      - "127.0.0.1:${DEV_APP_PORT:-8000}:8080"
+    depends_on:
+      composer:
+        condition: service_completed_successfully
+      db:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+    restart: unless-stopped
+
+  # Catches every mail the app sends; web UI on http://localhost:8025.
+  mailpit:
+    image: axllent/mailpit:v1.27
+    ports:
+      - "127.0.0.1:${DEV_MAILPIT_PORT:-8025}:8025"
+    restart: unless-stopped
+
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: library
+      MARIADB_USER: library
+      MARIADB_PASSWORD: library
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_AUTO_UPGRADE: "1"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - dev-db-data:/var/lib/mysql
+    # For GUI clients from the host; 3307 so it never clashes with a production stack.
+    ports:
+      - "127.0.0.1:${DEV_DB_PORT:-3307}:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+    restart: unless-stopped
+
+  vite:
+    image: node:22-alpine
+    working_dir: /app
+    environment:
+      VITE_IN_DOCKER: "1"
+    # Install inside the container: node_modules from Windows has the wrong native
+    # binaries for Linux, so it lives in its own volume.
+    # npm ci never rewrites package-lock.json; it runs only while the volume is empty.
+    # After changing package.json: docker compose -f docker-compose.dev.yml run --rm vite npm ci
+    command: ["sh", "-c", "[ -x node_modules/.bin/vite ] || npm ci --no-audit --no-fund; exec npm run dev"]
+    volumes:
+      - .:/app
+      - node-modules:/app/node_modules
+    ports:
+      - "127.0.0.1:5173:5173"
+    restart: unless-stopped
+
+volumes:
+  vendor:
+  composer-cache:
+  node-modules:
+  dev-db-data:

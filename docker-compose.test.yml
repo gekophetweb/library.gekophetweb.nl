@@ -1,0 +1,27 @@
+# Test runner — separate from docker-compose.yml so it needs no .env or database
+# passwords (Compose interpolates a whole file before running any service).
+#
+#   docker compose -f docker-compose.test.yml run --rm test            # Pest
+#   docker compose -f docker-compose.test.yml run --rm test php vendor/bin/pint --dirty --format agent
+#
+# Uses the app image (PHP 8.4 + intl) with the checkout mounted, so local edits and the
+# dev dependencies in vendor/ are used. Tests run on in-memory SQLite (phpunit.xml) and
+# never call external APIs.
+
+services:
+  test:
+    build:
+      context: .
+      target: runtime
+    image: library-gekophetweb/app:latest
+    # root: Pest writes its run history into the mounted vendor/ directory.
+    user: root
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    environment:
+      APP_ENV: testing
+      SHOW_WELCOME_MESSAGE: "false"
+      # The image caches compiled PHP without timestamp checks; off so edits are seen.
+      PHP_OPCACHE_ENABLE: "0"
+    command: ["php", "vendor/bin/pest", "--compact"]

@@ -1,6 +1,8 @@
 # Plan — Search by title and by author / artist name
 
-Status: **implemented 2026-08-27**. Written 2026-08-27.
+Status: **implemented 2026-11-12** on `feature/search-title-and-creator`. Written
+2026-08-27 against an earlier codebase, so several file names below do not match this
+repository; see §10 for what was built where.
 
 Related: [`own-wishlist.md`](own-wishlist.md) — see §8.
 
@@ -181,5 +183,30 @@ above — do whichever plan lands second as a small follow-up commit.
   later, but it is not part of the requested scope.
 - Relevance ranking. Results are ordered by name; "starts with the term" scoring is a
   later refinement if the flat ordering proves noisy.
-- Search over catalogue providers (finding items you do *not* own). That is the scanner's
-  job and a different feature.
+- Search over catalogue providers (finding items you do *not* own). A different
+  feature, now planned in [`search-catalogue-not-owned.md`](search-catalogue-not-owned.md)
+  as a fourth `SearchScope` case on the same search box.
+
+## 10. As built (2026-11-12)
+
+- **§1 was stale for this repository:** the API had no `search` parameter, and there was
+  no artist page and no `Artist::reachableBy()`. All three were added: `search` +
+  `search_by` on `GET /api/v1/objects`, `Artist::reachableBy(User)` (via the user's
+  book details, music details or series), and an artist page at
+  `GET /library/artists/{artist}` (`library.artist`, 404 for an artist the user has
+  nothing by). Creator results link there instead of `artists.edit`.
+- **LIKE escaping** uses `!` as the escape character (`… like ? escape '!'`), because a
+  backslash literal is parsed differently by MariaDB and the SQLite test database.
+- **Whitespace fallback** strips ASCII and ideographic (U+3000) spaces from the stored
+  name when the term has none. The term itself is trimmed and whitespace runs, including
+  U+3000, collapse to one space.
+- **Shared builder:** `App\Support\Search\SearchResults::for()` serves both the web page
+  and `GET /api/v1/search` (`{data: {objects, series, artists}, meta}`; items paginate 25,
+  series and artists cap at 10).
+- **Wishlist interaction (§8)** is in: wanted items carry a "Wanted" badge in results, and
+  the API `ownership` filter composes with `search` / `search_by`. Series counts in
+  results are owned items only.
+- `SearchesNames` is on `CollectionObject`, `Series`, `Artist` and `Publisher`.
+- Tests: `tests/Feature/Library/SearchTest.php` (16 tests).
+- Phone-app changelog note: `search` on `/api/v1/objects` now also matches creator
+  names; pass `search_by=title` for titles and barcodes only.

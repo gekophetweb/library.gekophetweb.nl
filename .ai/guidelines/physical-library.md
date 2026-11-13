@@ -23,7 +23,16 @@ scope everything to the authenticated user.
 
 ## 2. Authentication
 
-- Login is via **SSO** (single sign-on). Treat SSO as the only production auth path.
+- Login is via **SSO** (single sign-on) with **several providers**, which an admin sets
+  up in the app (driver, client id, encrypted secret, enabled) — providers are data, not
+  `config/services.php` entries. One user can link several providers.
+- SSO can be **skipped with a temporary e-mail login code**: a single-use 6-digit code,
+  stored hashed, valid 10 minutes, rate-limited, with the same response whether or not
+  the e-mail has an account. This is a production path too. There are **no passwords**.
+- **Anyone can register** with an e-mail code, for any address, so e-mails that no
+  configured SSO provider covers still get an account. The account is created only once
+  the code is verified.
+- See [`foundation.md`](../plans/foundation.md) phase 1.
 - In the **local/dev environment**, SSO must be **skippable**. When skipped,
   authenticate as the seeded dev user **`jaap.lam@gmail.com`**.
 - Gate the skip behind an environment check (e.g. `app()->environment('local')`
@@ -147,6 +156,19 @@ resolved by category, so new providers can be added without touching call sites.
 Where a category has multiple providers (Books), support querying them in a defined
 order and merging/deduplicating results.
 
+**Series lookup (Books)** is a separate contract, `SeriesLookup` ("which series is this
+and which volumes does it have?"), resolved by scan language by `SeriesLookupManager`:
+
+- **Japanese**: NDL Search (国立国会図書館) OpenSearch → Rakuten `seriesName` → title parsing
+- **English / Latin script**: Open Library → Wikidata → Google Books `seriesInfo` →
+  Hardcover.app → title parsing (Google Books and Hardcover cover translated manga,
+  where Open Library and Wikidata have no volume data)
+
+NDL, Open Library and Wikidata need **no API key** and are not per-user keys; Rakuten,
+Google Books and Hardcover use the user's stored keys (§5.1) and are skipped when the
+user has none. See
+[`series-detection-from-isbn.md`](../plans/series-detection-from-isbn.md).
+
 ### 5.1 Per-user API keys
 
 Each user links **their own API keys** for these providers through **user settings**.
@@ -235,5 +257,6 @@ Rules for agents:
 These are unspecified in the source and should be confirmed before implementation:
 
 - Music and Games external providers.
-- Which SSO provider is used in production.
+- Which SSO drivers to ship first (see
+  [`foundation.md`](../plans/foundation.md) §9).
 - Barcode/scan format expected per category (ISBN, EAN, UPC, catalogue number).

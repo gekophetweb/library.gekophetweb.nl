@@ -1,6 +1,8 @@
 # Plan — Own / Wishlist status per item
 
-Status: **implemented 2026-08-27**. Written 2026-08-27.
+Status: **implemented 2026-11-12** on `feature/own-wishlist`. Written 2026-08-27 against
+an earlier codebase, so several file names below do not match this repository; see §8
+for what was built where.
 
 ---
 
@@ -140,3 +142,33 @@ Finish with `vendor/bin/pint --dirty --format agent` and
 that is not owned could become a wishlist `CollectionObject` in one click, without a
 scan — it reuses everything above but adds a new creation path, so it belongs in a
 separate change.
+
+Adding books you do not own from a catalogue search is planned in
+[`search-catalogue-not-owned.md`](search-catalogue-not-owned.md), which uses the same
+wishlist create path.
+
+## 8. As built (2026-11-12)
+
+- **One migration** (`add_ownership_to_objects_and_scan_batches`) adds `ownership` to
+  both `objects` and `scan_batches`.
+- **Scan set-up:** `StartScanRequest` takes an optional `ownership` (defaults to owned,
+  invalid values rejected) and `ScanSetup` carries it. There is no scan API in this
+  repository, so the phone-app `already_owned` / `existing` payload from step 9 has no
+  counterpart yet; the web single scan shows "Mark as owned" for a wanted item scanned in
+  Own mode, and "already on your wishlist" in Wishlist mode.
+- **Promotion** lives in `AddScannedObject::promoteIfAcquired()`, shared by the single
+  scan and `ProcessScanBatch`. An Own batch accepts a wanted barcode on its list and
+  reports it as `promoted`; a Wishlist batch refuses barcodes already in the collection
+  or on the wishlist (`already_wanted` if one slips through).
+- **Item page:** status badge, a one-click toggle (`PATCH objects/{object}/ownership`)
+  and a Status select in the edit form. `UpdateCollectionObject` keeps the current status
+  when the field is left out (web form and API PATCH alike).
+- **Library pages:** `CategoryCounts` gives `items_count` (owned) and `wanted_count`;
+  `CategoryShelf` keeps series and standalone lists owned-only and adds `wishlist`;
+  `SeriesShelf` matches owned items first, then wanted items, giving volumes the states
+  owned / wanted / missing (`itemCount` is owned items, plus `wantedCount`).
+- **Admin user list** "Total items" and the API series `items_count` count owned items
+  only; the series list also returns `wanted_count`.
+- **API:** `ownership` on `CollectionObjectResource`, `?ownership=` filter on
+  `GET /api/v1/objects` (absent = both).
+- Tests: `tests/Feature/Library/WishlistTest.php` (20 tests).
