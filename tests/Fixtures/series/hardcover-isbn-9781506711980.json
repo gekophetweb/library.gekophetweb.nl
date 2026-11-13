@@ -1,0 +1,13 @@
+{
+  "data": {
+    "editions": [
+      {
+        "book": {
+          "title": "Berserk Deluxe Edition, Vol. 1",
+          "contributions": [{"author": {"name": "Kentaro Miura"}}],
+          "book_series": [{"position": 1, "series": {"id": 4242, "name": "Berserk Deluxe Edition"}}]
+        }
+      }
+    ]
+  }
+}

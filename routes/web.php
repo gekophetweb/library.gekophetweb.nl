@@ -15,7 +15,9 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Settings\LibraryShareController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Share\SharedLibraryController;
+use App\Http\Controllers\SuggestionCommentController;
 use App\Http\Controllers\SuggestionController;
+use App\Http\Controllers\SuggestionVoteController;
 use App\Http\Controllers\WelcomeNameController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::get('library/categories/{category}', [LibraryController::class, 'category'])->name('library.category');
     Route::get('library/series/{series}', [LibraryController::class, 'series'])->name('library.series');
     Route::post('library/series/{series}/sync', [LibraryController::class, 'syncSeries'])->middleware('throttle:10,1')->name('library.series.sync');
+    Route::post('library/series/{series}/wishlist', [LibraryController::class, 'wishMissing'])->name('library.series.wish-missing');
+    Route::post('library/series/{series}/volumes/{volume}/wishlist', [LibraryController::class, 'wishMissing'])->scopeBindings()->name('library.series.volumes.wish');
     Route::get('library/artists/{artist}', [LibraryController::class, 'artist'])->name('library.artist');
     Route::get('search', [SearchController::class, 'index'])->middleware('throttle:catalogue-search')->name('search.index');
     Route::post('wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
@@ -80,6 +84,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
+    Route::put('settings/notifications', [SettingsController::class, 'updateNotifications'])->name('settings.notifications');
     Route::put('settings/api-keys/{provider}', [SettingsController::class, 'updateApiKey'])->name('settings.api-keys.update');
     Route::delete('settings/api-keys/{provider}', [SettingsController::class, 'destroyApiKey'])->name('settings.api-keys.destroy');
     Route::post('settings/tokens', [SettingsController::class, 'storeToken'])->name('settings.tokens.store');
@@ -90,9 +95,16 @@ Route::middleware('auth')->group(function () {
 
     Route::get('suggestions', [SuggestionController::class, 'index'])->name('suggestions.index');
     Route::post('suggestions', [SuggestionController::class, 'store'])->middleware('throttle:10,1')->name('suggestions.store');
+    Route::get('suggestions/board', [SuggestionVoteController::class, 'index'])->name('suggestions.board');
+    Route::get('suggestions/{suggestion}', [SuggestionCommentController::class, 'show'])->whereNumber('suggestion')->name('suggestions.show');
+    Route::post('suggestions/{suggestion}/comments', [SuggestionCommentController::class, 'store'])->middleware('throttle:20,1')->name('suggestions.comments.store');
+    Route::delete('suggestions/{suggestion}/comments/{comment}', [SuggestionCommentController::class, 'destroy'])->scopeBindings()->name('suggestions.comments.destroy');
+    Route::post('suggestions/{suggestion}/vote', [SuggestionVoteController::class, 'store'])->middleware('throttle:60,1')->name('suggestions.vote');
+    Route::delete('suggestions/{suggestion}/vote', [SuggestionVoteController::class, 'destroy'])->middleware('throttle:60,1')->name('suggestions.unvote');
 
     Route::middleware('can:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('users', [UserController::class, 'index'])->name('users.index');
+        Route::patch('users/{user}/role', [UserController::class, 'updateRole'])->name('users.role');
         Route::get('suggestions', [AdminSuggestionController::class, 'index'])->name('suggestions.index');
         Route::patch('suggestions/{suggestion}', [AdminSuggestionController::class, 'update'])->name('suggestions.update');
 

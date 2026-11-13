@@ -23,7 +23,7 @@
     </div>
     @if ($links->canEdit() && $shelf->series->isSyncable())
         <p class="mt-1 text-xs text-stone-500" data-synced>
-            Volume list from {{ ['ndl' => 'NDL', 'wikidata' => 'Wikidata'][$shelf->series->external_source] }}
+            Volume list from {{ \App\Models\Series::sourceLabel($shelf->series->external_source) }}
             · {{ $shelf->series->synced_at ? 'updated '.$shelf->series->synced_at->diffForHumans() : 'not fetched yet' }}
         </p>
     @endif
@@ -44,6 +44,13 @@
                 @endif
             @endif
         </p>
+        @php($missing = $shelf->volumes->where('state', 'missing')->count())
+        @if ($missing > 1 && $links->canEdit() && ($canWish ?? false))
+            <form method="POST" action="{{ route('library.series.wish-missing', $shelf->series) }}" class="-mt-2 mb-4" data-wish-missing>
+                @csrf
+                <button class="rounded-md border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800">Add all {{ $missing }} missing volumes to wishlist</button>
+            </form>
+        @endif
 
         <ol class="mb-8 grid grid-cols-[repeat(auto-fill,minmax(9rem,1fr))] gap-2">
             @foreach ($shelf->volumes as $entry)
@@ -62,6 +69,12 @@
                         <span class="block text-xs">{{ $volume->edition }}</span>
                     @endif
                     <span class="block text-xs">{{ ['owned' => 'Owned', 'wanted' => 'Wanted', 'missing' => 'Missing'][$entry['state']] }}</span>
+                    @if ($entry['state'] === 'missing' && $links->canEdit() && ($canWish ?? false))
+                        <form method="POST" action="{{ route('library.series.volumes.wish', [$shelf->series, $volume]) }}" class="mt-1" data-wish-volume>
+                            @csrf
+                            <button class="text-xs text-stone-700 underline dark:text-stone-300">Add to wishlist</button>
+                        </form>
+                    @endif
                 </li>
             @endforeach
         </ol>

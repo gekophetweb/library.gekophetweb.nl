@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSuggestionRequest;
+use App\Support\Suggestions\SuggestionMailer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -13,13 +14,13 @@ class SuggestionController extends Controller
     public function index(Request $request): View
     {
         return view('suggestions.index', [
-            'suggestions' => $request->user()->suggestions()->latest()->latest('id')->get(),
+            'suggestions' => $request->user()->suggestions()->withCount(['voters as votes_count', 'comments'])->latest()->latest('id')->get(),
         ]);
     }
 
-    public function store(StoreSuggestionRequest $request): RedirectResponse
+    public function store(StoreSuggestionRequest $request, SuggestionMailer $mailer): RedirectResponse
     {
-        $request->user()->suggestions()->create($request->validated());
+        $mailer->created($request->user()->suggestions()->create($request->validated()));
 
         return redirect()->route('suggestions.index')->with('status', 'Thanks! Your suggestion has been sent.');
     }

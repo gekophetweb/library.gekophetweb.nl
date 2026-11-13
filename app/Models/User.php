@@ -16,7 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
  * There are no passwords: users log in through an SSO provider or an e-mail login code.
  * `is_admin` is deliberately not fillable — it is only ever set explicitly.
  */
-#[Fillable(['name', 'email'])]
+#[Fillable(['name', 'email', 'suggestion_emails'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -31,6 +31,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'is_admin' => 'boolean',
+            'suggestion_emails' => 'boolean',
         ];
     }
 

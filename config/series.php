@@ -1,5 +1,7 @@
 <?php
 
+use App\Services\Series\GoogleBooksSeriesLookup;
+use App\Services\Series\HardcoverSeriesLookup;
 use App\Services\Series\NdlSeriesLookup;
 use App\Services\Series\OpenLibraryWikidataSeriesLookup;
 
@@ -12,14 +14,15 @@ return [
     |
     | SeriesLookupManager tries these in order and stops at the first match with
     | high confidence. Keys are ISO 639-1 codes; `default` covers every other
-    | language. Slots for later fallbacks that need the user's own API keys:
-    | Rakuten `seriesName` (ja), Google Books `seriesInfo` (default), Hardcover.
+    | language. Google Books and Hardcover need the user's own key and are
+    | skipped without one (plan series-google-hardcover). Rakuten `seriesName`
+    | is not used: it holds the imprint, not the series.
     |
     */
 
     'chains' => [
         'ja' => [NdlSeriesLookup::class],
-        'default' => [OpenLibraryWikidataSeriesLookup::class],
+        'default' => [OpenLibraryWikidataSeriesLookup::class, GoogleBooksSeriesLookup::class, HardcoverSeriesLookup::class],
     ],
 
     /*
@@ -47,6 +50,14 @@ return [
         ],
         'wikidata' => [
             'endpoint' => env('SERIES_WIKIDATA_ENDPOINT', 'https://query.wikidata.org/sparql'),
+        ],
+        'google_books' => [
+            'endpoint' => env('SERIES_GOOGLE_BOOKS_ENDPOINT', 'https://www.googleapis.com/books/v1'),
+            'page_size' => 40,
+            'max_pages' => 5,
+        ],
+        'hardcover' => [
+            'endpoint' => env('SERIES_HARDCOVER_ENDPOINT', 'https://api.hardcover.app/v1/graphql'),
         ],
     ],
 

@@ -16,7 +16,9 @@ use Illuminate\Support\Str;
 
 /**
  * A read-only link to a user's library, one category or one series, for people without
- * an account (plan share-library-read-only). Revoking is deleting the row.
+ * an account (plan share-library-read-only). Revoking is deleting the row. With a
+ * `recipient_email` it is personal: it opens only for the account with that address
+ * (plan share-with-account).
  *
  * The token is stored in plaintext on purpose: the owner re-copies the link from
  * settings, and anyone with database access already has the library it exposes.
@@ -24,7 +26,7 @@ use Illuminate\Support\Str;
  * `exposes()` is the single gate: route-model binding is global, so it is the only thing
  * between a token and someone else's data.
  */
-#[Fillable(['label', 'expires_at'])]
+#[Fillable(['label', 'expires_at', 'recipient_email'])]
 #[Hidden(['token'])]
 class LibraryShare extends Model
 {
@@ -50,6 +52,29 @@ class LibraryShare extends Model
     protected function usable(Builder $query): void
     {
         $query->where(fn (Builder $query) => $query->whereNull('expires_at')->orWhere('expires_at', '>', now()));
+    }
+
+    /** Shares made for $user's e-mail address (plan share-with-account). @param  Builder<self>  $query */
+    #[Scope]
+    protected function sharedWith(Builder $query, User $user): void
+    {
+        $query->where('recipient_email', Str::lower($user->email));
+    }
+
+    /** For one person only, rather than anyone with the link. */
+    public function isPersonal(): bool
+    {
+        return $this->recipient_email !== null;
+    }
+
+    /**
+     * Whether $viewer may open this share. A link share opens for anyone; a personal one
+     * only for the signed-in account with the recipient's e-mail address.
+     */
+    public function admits(?User $viewer): bool
+    {
+        return ! $this->isPersonal()
+            || ($viewer !== null && hash_equals($this->recipient_email, Str::lower($viewer->email)));
     }
 
     /** Lapsed a month ago or more: nobody can use them and the owner has had time to see it. */

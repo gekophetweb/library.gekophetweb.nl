@@ -20,6 +20,19 @@
         </form>
     </section>
 
+    <section class="mb-10 max-w-2xl" id="notifications">
+        <h2 class="mb-3 text-lg font-semibold">E-mail</h2>
+        <form method="POST" action="{{ route('settings.notifications') }}" class="flex flex-wrap items-center gap-3">
+            @csrf
+            @method('PUT')
+            <label class="flex items-center gap-2 text-sm">
+                <input type="checkbox" name="suggestion_emails" value="1" @checked($user->suggestion_emails)>
+                E-mail me about suggestions: replies and comments on mine{{ $user->is_admin ? ', and every new suggestion' : '' }}
+            </label>
+            <button class="{{ $secondary }}">Save</button>
+        </form>
+    </section>
+
     <section class="mb-10 max-w-2xl">
         <h2 class="mb-1 text-lg font-semibold">API keys</h2>
         <p class="mb-4 text-sm text-stone-600 dark:text-stone-400">Lookups use your own keys. A saved key is never shown again; enter a new one to replace it.</p>
@@ -98,7 +111,7 @@
 
     <section class="mb-10 max-w-2xl" id="shares">
         <h2 class="mb-1 text-lg font-semibold">Shared links</h2>
-        <p class="mb-4 text-sm text-stone-600 dark:text-stone-400">Anyone with a link can browse what it covers, read only, without an account. Revoke a link to stop it working.</p>
+        <p class="mb-4 text-sm text-stone-600 dark:text-stone-400">Anyone with a link can browse what it covers, read only, without an account — unless you share it with one e-mail address: then only the account with that address can open it. Revoke a share to stop it working.</p>
 
         @if (session('share_url'))
             <div class="mb-4 rounded-md border border-emerald-300 bg-emerald-50 p-3 text-sm dark:border-emerald-800 dark:bg-emerald-950">
@@ -108,7 +121,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('settings.shares.store') }}" class="mb-4 grid gap-3 sm:grid-cols-[1fr_1fr_auto_auto] sm:items-end">
+        <form method="POST" action="{{ route('settings.shares.store') }}" class="mb-4 grid gap-3 sm:grid-cols-2 sm:items-end">
             @csrf
             <div>
                 <label for="share-scope" class="mb-1 block text-sm font-medium">What to share</label>
@@ -136,8 +149,13 @@
                 <label for="share-expires" class="mb-1 block text-sm font-medium">Expires <span class="font-normal text-stone-500">(optional)</span></label>
                 <input id="share-expires" name="expires_at" type="date" value="{{ old('expires_at') }}" class="{{ $input }}">
             </div>
-            <button class="{{ $secondary }} py-2">Create link</button>
+            <div>
+                <label for="share-recipient" class="mb-1 block text-sm font-medium">Only for <span class="font-normal text-stone-500">(optional e-mail)</span></label>
+                <input id="share-recipient" name="recipient_email" type="email" maxlength="255" value="{{ old('recipient_email') }}" placeholder="Leave empty for anyone with the link" class="{{ $input }}">
+            </div>
+            <button class="{{ $secondary }} py-2 sm:col-span-2 sm:justify-self-start">Create share</button>
         </form>
+        @error('recipient_email') <p class="mb-3 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
         @error('scope_id') <p class="mb-3 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
         @error('scope_type') <p class="mb-3 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
         @error('expires_at') <p class="mb-3 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
@@ -150,6 +168,7 @@
                             <p class="font-medium">{{ $share->label ?? $share->scopeLabel() }}</p>
                             <p class="text-sm text-stone-500">
                                 @if ($share->label) {{ $share->scopeLabel() }} · @endif
+                                @if ($share->isPersonal()) <span data-recipient>Only for {{ $share->recipient_email }}</span> · @endif
                                 @if ($share->expires_at === null) Never expires
                                 @elseif ($share->isUsable()) Expires {{ $share->expires_at->toFormattedDateString() }}
                                 @else <span class="text-red-600 dark:text-red-400">Expired {{ $share->expires_at->toFormattedDateString() }}</span>

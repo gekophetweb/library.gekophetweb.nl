@@ -2,7 +2,9 @@
 
 namespace App\Services\Series;
 
+use App\Contracts\KeyedSeriesLookup;
 use App\Contracts\SeriesLookup;
+use App\Models\User;
 use App\Support\Isbn;
 use App\Support\Series\Confidence;
 use App\Support\Series\SeriesMatch;
@@ -18,7 +20,8 @@ use Illuminate\Support\Collection;
 /**
  * Picks the provider chain for the scan language (config/series.php), stops at the
  * first high-confidence match and keeps the rest as suggestions. Call sites depend on
- * this class only, so providers can be added in config.
+ * this class only, so providers can be added in config. Keyed providers (Google Books,
+ * Hardcover) get the user's own key, and are skipped when there is no user or no key.
  */
 class SeriesLookupManager
 {
@@ -35,15 +38,19 @@ class SeriesLookupManager
      * @param  string|null  $knownTitle  Title from the catalogue lookup, used for the
      *                                   title-parsing fallback when every provider misses.
      */
-    public function resolve(Isbn $isbn, string $language, ?string $knownTitle = null): SeriesResolution
+    public function resolve(Isbn $isbn, string $language, ?string $knownTitle = null, ?User $user = null): SeriesResolution
     {
         $language = $this->normalizeLanguage($language);
+        $chain = $this->chainFor($language, $user);
+        // Which keyed providers took part is part of the answer: a user who adds a key
+        // later must not get the cached keyless result.
+        $keyed = collect($chain)->filter(fn (SeriesLookup $p) => $p instanceof KeyedSeriesLookup)->map->name()->implode(',');
 
         /** @var list<SeriesMatch> $matches */
         $matches = $this->rememberUnlessEmpty(
-            "series:resolve:{$language}:{$isbn->value}",
+            "series:resolve:{$language}:{$isbn->value}".($keyed !== '' ? ":{$keyed}" : ''),
             config('series.cache.resolve_ttl'),
-            fn () => $this->runChain($isbn, $language),
+            fn () => $this->runChain($chain, $isbn, $language),
         );
 
         if ($matches === [] && ($fallback = $this->fromTitle($knownTitle)) !== null) {
@@ -54,9 +61,9 @@ class SeriesLookupManager
     }
 
     /** @return Collection<int, SeriesVolumeData> */
-    public function volumes(SeriesReference $series): Collection
+    public function volumes(SeriesReference $series, ?User $user = null): Collection
     {
-        $provider = collect($this->allProviders())->first(fn (SeriesLookup $p) => $p->supports($series));
+        $provider = collect($this->allProviders($user))->first(fn (SeriesLookup $p) => $p->supports($series));
 
         if ($provider === null) {
             return collect();
@@ -96,20 +103,22 @@ class SeriesLookupManager
     }
 
     /** @return list<SeriesLookup> */
-    public function chainFor(string $language): array
+    public function chainFor(string $language, ?User $user = null): array
     {
         $chains = config('series.chains');
-        $classes = $chains[$this->normalizeLanguage($language)] ?? $chains['default'] ?? [];
 
-        return array_map(fn (string $class) => $this->container->make($class), $classes);
+        return $this->instantiate($chains[$this->normalizeLanguage($language)] ?? $chains['default'] ?? [], $user);
     }
 
-    /** @return list<SeriesMatch> */
-    private function runChain(Isbn $isbn, string $language): array
+    /**
+     * @param  list<SeriesLookup>  $chain
+     * @return list<SeriesMatch>
+     */
+    private function runChain(array $chain, Isbn $isbn, string $language): array
     {
         $matches = [];
 
-        foreach ($this->chainFor($language) as $provider) {
+        foreach ($chain as $provider) {
             $match = $provider->resolve($isbn, $language);
 
             if ($match === null) {
@@ -151,11 +160,38 @@ class SeriesLookupManager
     }
 
     /** @return list<SeriesLookup> */
-    private function allProviders(): array
+    private function allProviders(?User $user): array
     {
-        $classes = collect(config('series.chains'))->flatten()->unique()->values()->all();
+        return $this->instantiate(collect(config('series.chains'))->flatten()->unique()->values()->all(), $user);
+    }
 
-        return array_map(fn (string $class) => $this->container->make($class), $classes);
+    /**
+     * Builds the providers; a keyed one gets $user's key, or is left out without one.
+     *
+     * @param  list<class-string<SeriesLookup>>  $classes
+     * @return list<SeriesLookup>
+     */
+    private function instantiate(array $classes, ?User $user): array
+    {
+        $providers = [];
+
+        foreach ($classes as $class) {
+            $provider = $this->container->make($class);
+
+            if ($provider instanceof KeyedSeriesLookup) {
+                $key = $user?->apiKey($provider->requiredKey());
+
+                if ($key === null || $key === '') {
+                    continue;
+                }
+
+                $provider = $provider->withKey($key);
+            }
+
+            $providers[] = $provider;
+        }
+
+        return $providers;
     }
 
     private function normalizeLanguage(string $language): string

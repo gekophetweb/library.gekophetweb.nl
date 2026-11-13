@@ -19,4 +19,19 @@
             </li>
         @endforeach
     </ul>
+
+    @if ($sharedWithMe->isNotEmpty())
+        <section class="mt-10" data-shared-with-me>
+            <h2 class="mb-3 text-lg font-semibold">Shared with you</h2>
+            <ul class="divide-y divide-stone-200 rounded-lg border border-stone-200 bg-white dark:divide-stone-800 dark:border-stone-800 dark:bg-stone-900">
+                @foreach ($sharedWithMe as $share)
+                    <li class="px-4 py-3">
+                        <a href="{{ $share->url() }}" class="font-medium underline-offset-2 hover:underline">{{ $share->user->name }}’s {{ $share->isWholeLibrary() ? 'collection' : $share->scopeLabel() }}</a>
+                        @if ($share->label) <span class="text-sm text-stone-500">· {{ $share->label }}</span> @endif
+                        @if ($share->expires_at) <span class="text-sm text-stone-500">· until {{ $share->expires_at->toFormattedDateString() }}</span> @endif
+                    </li>
+                @endforeach
+            </ul>
+        </section>
+    @endif
 </x-layout>
