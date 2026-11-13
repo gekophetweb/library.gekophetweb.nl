@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSuggestionCommentRequest;
 use App\Models\Suggestion;
 use App\Models\SuggestionComment;
+use App\Support\Suggestions\SuggestionMailer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -28,13 +29,14 @@ class SuggestionCommentController extends Controller
         ]);
     }
 
-    public function store(StoreSuggestionCommentRequest $request, Suggestion $suggestion): RedirectResponse
+    public function store(StoreSuggestionCommentRequest $request, Suggestion $suggestion, SuggestionMailer $mailer): RedirectResponse
     {
         abort_unless($suggestion->isVisibleTo($request->user()), 404);
 
         $comment = new SuggestionComment($request->validated());
         $comment->user()->associate($request->user());
         $suggestion->comments()->save($comment);
+        $mailer->commented($comment);
 
         return redirect()->to(route('suggestions.show', $suggestion).'#comment-'.$comment->id)->with('status', 'Comment added.');
     }

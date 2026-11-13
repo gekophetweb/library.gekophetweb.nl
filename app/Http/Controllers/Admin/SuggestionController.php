@@ -6,6 +6,7 @@ use App\Enums\SuggestionStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateSuggestionRequest;
 use App\Models\Suggestion;
+use App\Support\Suggestions\SuggestionMailer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -41,13 +42,14 @@ class SuggestionController extends Controller
         ]);
     }
 
-    public function update(UpdateSuggestionRequest $request, Suggestion $suggestion): RedirectResponse
+    public function update(UpdateSuggestionRequest $request, Suggestion $suggestion, SuggestionMailer $mailer): RedirectResponse
     {
         $suggestion->status = $request->enum('status', SuggestionStatus::class);
         $suggestion->admin_reply = $request->validated('admin_reply') ?: null;
         // An unticked checkbox sends nothing: absent means off the board.
         $suggestion->is_public = $request->boolean('is_public');
         $suggestion->save();
+        $mailer->updated($suggestion, $request->user());
 
         return back()->with('status', 'Suggestion updated.');
     }

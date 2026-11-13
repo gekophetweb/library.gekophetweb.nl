@@ -43,6 +43,14 @@ class SettingsController extends Controller
         return redirect()->route('settings.edit')->with('status', 'Saved.');
     }
 
+    /** The one opt-out for suggestion e-mails (plan suggestion-notifications). */
+    public function updateNotifications(Request $request): RedirectResponse
+    {
+        $request->user()->update(['suggestion_emails' => $request->boolean('suggestion_emails')]);
+
+        return redirect()->to(route('settings.edit').'#notifications')->with('status', 'E-mail settings saved.');
+    }
+
     public function updateApiKey(Request $request, string $provider): RedirectResponse
     {
         $provider = ApiKeyProvider::tryFrom($provider) ?? abort(404);
