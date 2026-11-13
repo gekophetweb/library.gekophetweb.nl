@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Series\WishMissingVolumes;
 use App\Jobs\SyncSeriesVolumes;
 use App\Models\Artist;
 use App\Models\Category;
 use App\Models\Language;
 use App\Models\Series;
+use App\Models\SeriesVolume;
 use App\Support\Library\CategoryCounts;
 use App\Support\Library\CategoryShelf;
 use App\Support\Library\SeriesShelf;
@@ -36,11 +38,29 @@ class LibraryController extends Controller
         ]);
     }
 
-    public function series(Request $request, Series $series): View
+    public function series(Request $request, Series $series, WishMissingVolumes $wish): View
     {
         abort_unless($series->user_id === $request->user()->id, 404);
 
-        return view('library.series', ['shelf' => SeriesShelf::build($series, $request->user()->objects()->getQuery())]);
+        return view('library.series', [
+            'shelf' => SeriesShelf::build($series, $request->user()->objects()->getQuery()),
+            'canWish' => $wish->canWish($series),
+        ]);
+    }
+
+    /** Put one missing volume, or every missing one, on the wishlist. */
+    public function wishMissing(Request $request, Series $series, WishMissingVolumes $wish, ?SeriesVolume $volume = null): RedirectResponse
+    {
+        abort_unless($series->user_id === $request->user()->id, 404);
+        abort_unless($wish->canWish($series), 409, 'This series has no item to copy the category from.');
+
+        $added = $wish->handle($series, $volume ? collect([$volume]) : null);
+
+        return redirect()->route('library.series', $series)->with('status', match ($added->count()) {
+            0 => 'Nothing to add: those volumes are already in your library.',
+            1 => "Added {$added->first()->name} to your wishlist.",
+            default => "Added {$added->count()} volumes to your wishlist.",
+        });
     }
 
     /** "Fetch volumes": refresh the series' volume list from its source, on the queue. */

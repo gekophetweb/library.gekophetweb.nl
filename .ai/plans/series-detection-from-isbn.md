@@ -257,7 +257,7 @@ Answered by the user on 2026-11-10:
 
 - Series detection for Music and Games.
 - "Add missing volume to wishlist" from the series page — still the follow-up named in
-  [`own-wishlist.md`](own-wishlist.md) §7; this plan makes it easier (volumes now carry
+  ISBNs) but does not build it. Built later by [`series-missing-to-wishlist.md`](series-missing-to-wishlist.md).
   ISBNs) but does not build it.
 
 ## 9. Implementation notes (phases 1–2, 2026-11-09)

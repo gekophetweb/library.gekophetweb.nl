@@ -233,7 +233,8 @@ and the other admin users** — the list is not filtered to "normal" users only.
 
 ## 10. As built (2026-11-10)
 
-- **Admin user list is view-only** (open question 2 unanswered): no promote / demote /
+- **Admin user list was view-only** (open question 2 unanswered); promote / demote was
+  added later by plan `admin-manage-roles`. No
   delete. "Total items" counts all of a user's objects until the wishlist lands.
 - **SSO drivers:** Google and GitHub through Socialite; Microsoft and generic OIDC through
   one in-house discovery-based OIDC client (`App\Services\Auth\OidcProvider`, PKCE).
