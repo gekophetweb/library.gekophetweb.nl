@@ -84,6 +84,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
+    Route::put('settings/notifications', [SettingsController::class, 'updateNotifications'])->name('settings.notifications');
     Route::put('settings/api-keys/{provider}', [SettingsController::class, 'updateApiKey'])->name('settings.api-keys.update');
     Route::delete('settings/api-keys/{provider}', [SettingsController::class, 'destroyApiKey'])->name('settings.api-keys.destroy');
     Route::post('settings/tokens', [SettingsController::class, 'storeToken'])->name('settings.tokens.store');

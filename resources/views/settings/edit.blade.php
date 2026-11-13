@@ -20,6 +20,19 @@
         </form>
     </section>
 
+    <section class="mb-10 max-w-2xl" id="notifications">
+        <h2 class="mb-3 text-lg font-semibold">E-mail</h2>
+        <form method="POST" action="{{ route('settings.notifications') }}" class="flex flex-wrap items-center gap-3">
+            @csrf
+            @method('PUT')
+            <label class="flex items-center gap-2 text-sm">
+                <input type="checkbox" name="suggestion_emails" value="1" @checked($user->suggestion_emails)>
+                E-mail me about suggestions: replies and comments on mine{{ $user->is_admin ? ', and every new suggestion' : '' }}
+            </label>
+            <button class="{{ $secondary }}">Save</button>
+        </form>
+    </section>
+
     <section class="mb-10 max-w-2xl">
         <h2 class="mb-1 text-lg font-semibold">API keys</h2>
         <p class="mb-4 text-sm text-stone-600 dark:text-stone-400">Lookups use your own keys. A saved key is never shown again; enter a new one to replace it.</p>
