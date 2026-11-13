@@ -102,7 +102,7 @@ class ScanController extends Controller
         // Books: which series and volume is this? Shown pre-filled and editable (plan
         // series-detection-from-isbn §5 step 13), whatever the confidence.
         $match = ! $outcome->invalidBarcode && $setup->category->topLevel()->kind === CategoryKind::Books
-            ? $series->resolve($outcome->result?->barcode ?? $barcode, $setup->language->code, $outcome->result?->name)->best()
+            ? $series->resolve($outcome->result?->barcode ?? $barcode, $setup->language->code, $outcome->result?->name, $request->user())->best()
             : null;
 
         $request->session()->put('scan.pending', [

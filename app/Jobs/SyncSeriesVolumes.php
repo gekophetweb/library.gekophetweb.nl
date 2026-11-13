@@ -40,7 +40,7 @@ class SyncSeriesVolumes implements ShouldBeUnique, ShouldQueue
             return;
         }
 
-        $volumes = $lookup->volumes($reference);
+        $volumes = $lookup->volumes($reference, $this->series->user);
 
         if ($volumes->isEmpty()) {
             return;

@@ -1,0 +1,15 @@
+{
+  "kind": "books#series#membership",
+  "member": [
+    {
+      "kind": "books#volume",
+      "id": "gbVolBerserkDx3",
+      "volumeInfo": {
+        "title": "Berserk Deluxe Volume 3",
+        "publishedDate": "2019-08-20",
+        "industryIdentifiers": [{"type": "ISBN_13", "identifier": "9781506712000"}],
+        "seriesInfo": {"volumeSeries": [{"seriesId": "gbSeriesBerserkDx", "orderNumber": 3}]}
+      }
+    }
+  ]
+}

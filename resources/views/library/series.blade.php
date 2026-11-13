@@ -23,7 +23,7 @@
     </div>
     @if ($links->canEdit() && $shelf->series->isSyncable())
         <p class="mt-1 text-xs text-stone-500" data-synced>
-            Volume list from {{ ['ndl' => 'NDL', 'wikidata' => 'Wikidata'][$shelf->series->external_source] }}
+            Volume list from {{ \App\Models\Series::sourceLabel($shelf->series->external_source) }}
             · {{ $shelf->series->synced_at ? 'updated '.$shelf->series->synced_at->diffForHumans() : 'not fetched yet' }}
         </p>
     @endif

@@ -1,8 +1,9 @@
 # Plan — Detect the series and volume number from an ISBN
 
 Status: **phases 1–2 implemented 2026-11-09; phases 3–6 implemented 2026-11-12** on
-`feature/series-detection-sync` (see §10). Still open: the Google Books and Hardcover
-series providers (§7 decision 2). Written 2026-11-09.
+`feature/series-detection-sync` (see §10). The Google Books and Hardcover series
+providers (§7 decision 2) followed in [`series-google-hardcover.md`](series-google-hardcover.md)
+on 2026-11-13, against hand-written fixtures. Written 2026-11-09.
 
 Related: [`own-wishlist.md`](own-wishlist.md) (series completion counts owned vs wanted),
 [`search-title-and-creator.md`](search-title-and-creator.md) (`ComparesNames`, series
@@ -329,8 +330,8 @@ the `edition` label (null = regular) and `isSpecialEdition()`.
   `POST /api/v1/series/{series}/sync` answers 202, or 422 for an unlinked series.
 - **Not built — Google Books and Hardcover series providers (decision 2):** the plan asks
   for real recorded responses for an English *Berserk* volume first, and neither API can
-  be recorded without the user's key (Google Books answers 429 keyless). The English chain
-  is still Open Library + Wikidata → title parsing. Rakuten `seriesName` was also left
+  be recorded without the user's key (Google Books answers 429 keyless). Built later by
+  [`series-google-hardcover.md`](series-google-hardcover.md). Rakuten `seriesName` was also left
   out: the recorded fixture shows it holds the imprint (`ジェッツコミックス`), the same
   pitfall as NDL's `dcndl:seriesTitle`.
 - Tests: `tests/Feature/Series/SeriesScanTest.php` (14 tests).

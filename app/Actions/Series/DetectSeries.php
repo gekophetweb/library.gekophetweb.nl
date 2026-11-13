@@ -4,6 +4,7 @@ namespace App\Actions\Series;
 
 use App\Enums\CategoryKind;
 use App\Models\CollectionObject;
+use App\Models\User;
 use App\Services\Series\SeriesLookupManager;
 use App\Support\Isbn;
 use App\Support\Series\SeriesMatch;
@@ -37,22 +38,26 @@ class DetectSeries
         return $resolution;
     }
 
-    /** Resolution only, for the single scan's pre-filled form. Empty for anything but a book with an ISBN, or one already in a series. */
-    public function resolve(CollectionObject|string $objectOrBarcode, string $language, ?string $title = null): SeriesResolution
+    /**
+     * Resolution only, for the single scan's pre-filled form. Empty for anything but a book
+     * with an ISBN, or one already in a series. $user (the item's owner when an item is
+     * given) supplies the keys for Google Books and Hardcover.
+     */
+    public function resolve(CollectionObject|string $objectOrBarcode, string $language, ?string $title = null, ?User $user = null): SeriesResolution
     {
         if ($objectOrBarcode instanceof CollectionObject) {
             if ($objectOrBarcode->serie_id !== null || $objectOrBarcode->category->topLevel()->kind !== CategoryKind::Books) {
                 return new SeriesResolution;
             }
 
-            [$barcode, $title] = [$objectOrBarcode->barcode, $objectOrBarcode->name];
+            [$barcode, $title, $user] = [$objectOrBarcode->barcode, $objectOrBarcode->name, $objectOrBarcode->user];
         } else {
             $barcode = $objectOrBarcode;
         }
 
         $isbn = Isbn::tryFrom($barcode);
 
-        return $isbn === null ? new SeriesResolution : $this->series->resolve($isbn, $language, $title);
+        return $isbn === null ? new SeriesResolution : $this->series->resolve($isbn, $language, $title, $user);
     }
 
     /** @return array{reference: array<string, string|null>, volume: ?string, source: string, confidence: string} */
