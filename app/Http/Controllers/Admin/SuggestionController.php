@@ -25,7 +25,7 @@ class SuggestionController extends Controller
 
         $suggestions = Suggestion::query()
             ->with('user')
-            ->withCount('voters as votes_count')
+            ->withCount(['voters as votes_count', 'comments'])
             ->when($status, fn ($query) => $query->where('status', $status))
             ->when($sort === 'votes', fn ($query) => $query->orderByDesc('votes_count'))
             ->latest()
