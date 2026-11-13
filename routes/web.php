@@ -93,6 +93,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('can:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('users', [UserController::class, 'index'])->name('users.index');
+        Route::patch('users/{user}/role', [UserController::class, 'updateRole'])->name('users.role');
         Route::get('suggestions', [AdminSuggestionController::class, 'index'])->name('suggestions.index');
         Route::patch('suggestions/{suggestion}', [AdminSuggestionController::class, 'update'])->name('suggestions.update');
 
