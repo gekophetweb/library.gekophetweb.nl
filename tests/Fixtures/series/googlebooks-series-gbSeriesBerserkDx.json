@@ -1,0 +1,6 @@
+{
+  "kind": "books#series",
+  "series": [
+    {"seriesId": "gbSeriesBerserkDx", "seriesType": "COLLECTED_EDITION", "title": "Berserk Deluxe", "bannerImageUrl": "", "imageUrl": ""}
+  ]
+}

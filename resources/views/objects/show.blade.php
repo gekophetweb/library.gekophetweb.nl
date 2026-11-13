@@ -57,7 +57,7 @@
                 This looks like
                 @if ($suggested['volume']) volume {{ $suggested['volume'] }} of @endif
                 <span class="font-medium">{{ $suggested['reference']['name'] }}</span>
-                <span class="text-stone-500">(from {{ ['ndl' => 'NDL', 'wikidata' => 'Wikidata', 'openlibrary' => 'Open Library', 'title' => 'the title'][$suggested['source']] ?? $suggested['source'] }}, not certain)</span>.
+                <span class="text-stone-500">(from {{ \App\Models\Series::sourceLabel($suggested['source']) }}, not certain)</span>.
             </p>
             <div class="flex gap-2">
                 <form method="POST" action="{{ route('objects.series-suggestion.accept', $object) }}">

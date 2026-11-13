@@ -90,6 +90,36 @@ function fakeSeriesApis(): void
             });
         }
 
+        // Hand-written fixtures (tests/Fixtures/series/README.md).
+        if (str_contains($url, 'googleapis.com/books/v1/volumes')) {
+            $isbn = str_replace('isbn:', '', $query['q'] ?? '');
+            $file = __DIR__."/Fixtures/series/googlebooks-isbn-{$isbn}.json";
+
+            return Factory::response(is_file($file) ? file_get_contents($file) : ['kind' => 'books#volumes', 'totalItems' => 0]);
+        }
+
+        if (str_contains($url, 'googleapis.com/books/v1/series/membership/get')) {
+            $page = ($query['page_token'] ?? null) === 'page2' ? 'page2' : 'page1';
+            $file = __DIR__."/Fixtures/series/googlebooks-membership-{$query['series_id']}-{$page}.json";
+
+            return Factory::response(is_file($file) ? file_get_contents($file) : ['kind' => 'books#series#membership']);
+        }
+
+        if (str_contains($url, 'googleapis.com/books/v1/series/get')) {
+            $file = __DIR__."/Fixtures/series/googlebooks-series-{$query['series_id']}.json";
+
+            return Factory::response(is_file($file) ? file_get_contents($file) : ['kind' => 'books#series']);
+        }
+
+        if (str_contains($url, 'api.hardcover.app')) {
+            $variables = $request['variables'] ?? [];
+            $file = isset($variables['isbn'])
+                ? __DIR__."/Fixtures/series/hardcover-isbn-{$variables['isbn']}.json"
+                : __DIR__.'/Fixtures/series/hardcover-volumes-'.($variables['id'] ?? '').'.json';
+
+            return Factory::response(is_file($file) ? file_get_contents($file) : ['data' => ['editions' => [], 'series_by_pk' => null]]);
+        }
+
         return Factory::response('Unexpected request: '.$url, 500);
     });
 }

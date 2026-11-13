@@ -1,0 +1,28 @@
+{
+  "kind": "books#volumes",
+  "totalItems": 1,
+  "items": [
+    {
+      "kind": "books#volume",
+      "id": "gbVolBerserkDx1",
+      "volumeInfo": {
+        "title": "Berserk Deluxe Volume 1",
+        "authors": ["Kentaro Miura"],
+        "publisher": "Dark Horse Comics",
+        "publishedDate": "2019-02-26",
+        "industryIdentifiers": [
+          {"type": "ISBN_10", "identifier": "1506711987"},
+          {"type": "ISBN_13", "identifier": "9781506711980"}
+        ],
+        "seriesInfo": {
+          "kind": "books#volume_series_info",
+          "bookDisplayNumber": "1",
+          "volumeSeries": [
+            {"seriesId": "gbSeriesBerserkDx", "seriesBookType": "COLLECTED_EDITION", "orderNumber": 1}
+          ]
+        },
+        "language": "en"
+      }
+    }
+  ]
+}

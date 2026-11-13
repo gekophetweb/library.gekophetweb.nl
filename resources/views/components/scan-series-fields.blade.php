@@ -1,14 +1,13 @@
 @props(['suggestion' => null])
 @php
     $input = 'block w-full rounded-md border border-stone-300 px-3 py-2 text-sm dark:border-stone-700 dark:bg-stone-950';
-    $sources = ['ndl' => 'NDL', 'wikidata' => 'Wikidata', 'openlibrary' => 'Open Library', 'title' => 'the title'];
 @endphp
 {{-- Series + volume, pre-filled from the series lookup and editable. Empty the series to add the book on its own. --}}
 <fieldset class="mb-4 grid gap-3 sm:grid-cols-[1fr_8rem]">
     <legend class="mb-1 text-sm font-medium">
         Series
         @if ($suggestion)
-            <span class="font-normal text-stone-500" data-series-source="{{ $suggestion['source'] }}">· from {{ $sources[$suggestion['source']] ?? $suggestion['source'] }}</span>
+            <span class="font-normal text-stone-500" data-series-source="{{ $suggestion['source'] }}">· from {{ \App\Models\Series::sourceLabel($suggestion['source']) }}</span>
         @endif
     </legend>
     <div>

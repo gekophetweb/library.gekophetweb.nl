@@ -69,7 +69,21 @@ class Series extends Model
     }
 
     /** Sources whose volume list can be fetched (SeriesLookup::volumes()). */
-    public const array SYNCABLE_SOURCES = ['ndl', 'wikidata'];
+    public const array SYNCABLE_SOURCES = ['ndl', 'wikidata', 'google_books', 'hardcover'];
+
+    /** How a series source (or a match's source) is named to the user. */
+    public static function sourceLabel(string $source): string
+    {
+        return [
+            'ndl' => 'NDL',
+            'wikidata' => 'Wikidata',
+            'openlibrary' => 'Open Library',
+            'openlibrary+wikidata' => 'Open Library + Wikidata',
+            'google_books' => 'Google Books',
+            'hardcover' => 'Hardcover',
+            'title' => 'the title',
+        ][$source] ?? $source;
+    }
 
     public function isSyncable(): bool
     {

@@ -270,8 +270,9 @@ SESSION_SECURE_COOKIE=true
 
 - [`.ai/guidelines/physical-library.md`](.ai/guidelines/physical-library.md) — domain
   model, scanning workflow, providers, API and conventions.
-- [`.ai/plans/`](.ai/plans/) — design plans: implemented (own/wishlist, search,
-  read-only sharing) and draft
-  ([series detection from ISBN](.ai/plans/series-detection-from-isbn.md)).
+- [`.ai/plans/`](.ai/plans/) — design plans, each with an "As built" section: own /
+  wishlist, search, sharing (links and named accounts), series detection (incl. Google
+  Books + Hardcover and wishing missing volumes), the suggestion box (votes, comments,
+  e-mail, API) and admin roles.
 - [`.ai/skills/deploying-laravel-cloud/`](.ai/skills/deploying-laravel-cloud/) —
   deploying to Laravel Cloud.

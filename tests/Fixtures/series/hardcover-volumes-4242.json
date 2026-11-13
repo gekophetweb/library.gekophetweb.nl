@@ -1,0 +1,12 @@
+{
+  "data": {
+    "series_by_pk": {
+      "book_series": [
+        {"position": 1, "book": {"title": "Berserk Deluxe Edition, Vol. 1", "release_date": "2019-02-26", "editions": [{"isbn_13": "9781506711980"}]}},
+        {"position": 2, "book": {"title": "Berserk Deluxe Edition, Vol. 2", "release_date": "2019-05-14", "editions": [{"isbn_13": "9781506711997"}, {"isbn_13": "not-an-isbn"}]}},
+        {"position": 3, "book": {"title": "Berserk Deluxe Edition, Vol. 3", "release_date": "2019-08-20", "editions": [{"isbn_13": "9781506712000"}]}},
+        {"position": null, "book": {"title": "Berserk Official Guidebook", "release_date": "2016-10-25", "editions": []}}
+      ]
+    }
+  }
+}
