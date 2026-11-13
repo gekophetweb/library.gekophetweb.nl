@@ -43,7 +43,7 @@ class AddScannedObject
                 'name_romanized' => $result->nameRomanized ?? $result->name,
                 'name_english' => $result->nameEnglish,
                 'publisher_id' => $result->publisher ? $this->publisher($result->publisher)->id : null,
-                'release_date' => self::date($result->releaseDate),
+                'release_date' => self::normalizeDate($result->releaseDate),
             ]);
             $object->user()->associate($user)->save();
             $object->languages()->attach($setup->language);
@@ -88,7 +88,7 @@ class AddScannedObject
     }
 
     /** "1990" / "1990-12" / "1990-12-05" → a date on the first of the unknown parts. */
-    private static function date(?string $date): ?string
+    public static function normalizeDate(?string $date): ?string
     {
         if ($date === null || ! preg_match('/^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?/', $date, $m)) {
             return null;
