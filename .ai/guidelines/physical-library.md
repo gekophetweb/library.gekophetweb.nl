@@ -233,13 +233,15 @@ Rules for agents:
   `x-app` anchor, not a second process inside `web`.
 - Persistent files live in `storage/app` (volume `app-storage`); anything written
   elsewhere in the container is lost on rebuild.
-- The Docker host is reached **only through a Cloudflare Tunnel** (`cloudflared` on the
-  host → `http://localhost:8080`). Consequences:
+- The Docker host is reached **only through a Cloudflare Tunnel**: the `cloudflared`
+  service in `docker-compose.yml` (token in `CLOUDFLARE_TUNNEL_TOKEN` in `.env`,
+  ingress → `http://web:8080` over the compose network). Consequences:
   - Never add a published port, reverse proxy or certificate setup for public access;
     TLS terminates at Cloudflare.
-  - `web` is published on `${APP_BIND:-127.0.0.1}:${APP_PORT:-8080}`. Keep the
-    localhost default; LAN access is an opt-in via `APP_BIND=0.0.0.0` in `.env`
-    (documented in the README). The database stays on `127.0.0.1` always.
+  - The tunnel token lives only in `.env`; never commit it or bake it into the image.
+  - `web` is also published on `${APP_BIND:-127.0.0.1}:${APP_PORT:-8080}` for the host
+    itself. Keep the localhost default; LAN access is an opt-in via `APP_BIND=0.0.0.0`
+    in `.env` (documented in the README). The database stays on `127.0.0.1` always.
   - The app must trust proxies (`trustProxies(at: '*')` in `bootstrap/app.php`) so
     `https` URLs, signed URLs and `request()->ip()` are correct — rate limits on share
     links (`throttle:60,1`) depend on the real client IP.

@@ -166,27 +166,43 @@ docker compose -f docker-compose.test.yml run --rm test php vendor/bin/pint --di
 ## Public access via Cloudflare Tunnel
 
 The machine running Docker is **not reachable directly from the internet**. Public
-traffic reaches it only through a **Cloudflare Tunnel**: `cloudflared` on that machine
-opens an outbound connection to Cloudflare, and Cloudflare forwards requests for
-`library.gekophetweb.nl` down the tunnel to the `web` container.
+traffic reaches it only through a **Cloudflare Tunnel**: the `cloudflared` container
+in `docker-compose.yml` opens an outbound connection to Cloudflare, and Cloudflare
+forwards requests for `library.gekophetweb.nl` down the tunnel to the `web` container.
 
 ```
-browser / phone app ──HTTPS──▶ Cloudflare edge ──tunnel──▶ cloudflared (Docker host)
+browser / phone app ──HTTPS──▶ Cloudflare edge ──tunnel──▶ cloudflared (container)
                                                               └─HTTP─▶ web :8080 ──▶ db
 ```
 
+- **Token.** Create the tunnel in the Zero Trust dashboard (Networks → Tunnels →
+  Create a tunnel → Cloudflared). Copy the token from the install command it shows
+  (the long string after `--token` / `service install`) into `.env`:
+
+  ```dotenv
+  CLOUDFLARE_TUNNEL_TOKEN=eyJh...
+  ```
+
+  Compose refuses to start without it. The token is the tunnel's only credential:
+  keep `.env` out of git, and rotate the token in the dashboard if it leaks.
+- **Ingress rule.** In the tunnel's public hostname settings, map
+  `library.gekophetweb.nl` to `http://web:8080`: `cloudflared` reaches `web` by its
+  service name over the compose network, so this works whatever `APP_BIND`/`APP_PORT`
+  are. TLS ends at Cloudflare; the hop from `cloudflared` to `web` is plain HTTP inside
+  Docker.
 - **No inbound ports.** Don't forward 80/443 on the router or open firewall ports;
   the tunnel is outbound only. The database is never exposed through the tunnel.
-- **Ingress rule.** In the tunnel's public hostname settings (Zero Trust dashboard →
-  Networks → Tunnels), map `library.gekophetweb.nl` to `http://localhost:8080` (or to
-  `${APP_PORT}` if you changed it). TLS ends at Cloudflare; the hop from `cloudflared`
-  to `web` is plain HTTP on the same machine.
-- **Localhost only by default.** `web` binds to `127.0.0.1`, so the site is reachable
-  only through the tunnel (and from a browser on the Docker host itself). See
+- **Restarts.** `cloudflared` has `restart: unless-stopped` like the other containers,
+  so the tunnel comes back after a reboot. Check it with
+  `docker compose logs cloudflared` (look for "Registered tunnel connection").
+- **Moving from a host install.** If `cloudflared` used to run as a host service
+  (`cloudflared service install <token>`), uninstall it (`cloudflared service
+  uninstall`) once the container is up. Otherwise both connect as replicas of the same
+  tunnel, and the host one can't resolve `web:8080`, so some requests fail.
+- **Localhost only by default.** `web` is also published on `127.0.0.1:8080` for a
+  browser on the Docker host itself. See
   [Choosing who can reach the website](#choosing-who-can-reach-the-website) to also
   allow access from the LAN.
-- **Run `cloudflared` as a service** (`cloudflared service install <token>`) so the
-  tunnel comes back after a reboot, just like the containers (`restart: unless-stopped`).
 
 ### Choosing who can reach the website
 
@@ -203,9 +219,9 @@ Two settings in `.env` control where the `web` container is published on the hos
 APP_BIND=127.0.0.1
 ```
 
-The site answers only on `http://localhost:8080` on the Docker host itself, which is
-where `cloudflared` connects. Other machines on the LAN get "connection refused";
-everyone uses `https://library.gekophetweb.nl`.
+Besides the tunnel, the site answers only on `http://localhost:8080` on the Docker host
+itself. Other machines on the LAN get "connection refused"; everyone uses
+`https://library.gekophetweb.nl`.
 
 **Option 2 — tunnel + LAN.** To also open the site to other devices on your network
 (e.g. the phone app over Wi-Fi while testing):
