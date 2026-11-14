@@ -21,6 +21,13 @@
 #   */15 * * * * /opt/library.gekophetweb.nl/scripts/update.sh >> /var/log/library-update.log 2>&1
 #   30 4 * * 0   /opt/library.gekophetweb.nl/scripts/update.sh --force >> /var/log/library-update.log 2>&1
 # ---------------------------------------------------------------------------
+
+# Started as `sh scripts/update.sh`? sh (dash on Debian/Ubuntu) ignores the bash line at
+# the top and can't run the rest, so start again under bash. Plain POSIX up to here.
+if [ -z "${BASH_VERSION:-}" ]; then
+    exec bash "$0" "$@"
+fi
+
 set -Eeuo pipefail
 
 # cron starts with a minimal PATH; make sure git and docker are found.
