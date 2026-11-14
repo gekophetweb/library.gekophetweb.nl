@@ -1,7 +1,6 @@
 <?php
 
 use App\Actions\Scan\AddScannedObject;
-use App\Enums\ApiKeyProvider;
 use App\Enums\OwnershipStatus;
 use App\Models\Category;
 use App\Models\CollectionObject;
@@ -10,7 +9,6 @@ use App\Models\ScanBatch;
 use App\Models\Series;
 use App\Models\SeriesVolume;
 use App\Models\User;
-use App\Models\UserApiKey;
 use App\Support\Catalogue\CatalogueResult;
 use App\Support\Scan\ScanSetup;
 use Database\Seeders\CatalogueSeeder;
@@ -20,8 +18,7 @@ use Laravel\Sanctum\Sanctum;
 
 beforeEach(function () {
     $this->seed(CatalogueSeeder::class);
-    $this->user = User::factory()->create();
-    UserApiKey::factory()->for($this->user)->create(['provider' => ApiKeyProvider::Rakuten, 'key' => 'app-123']);
+    $this->user = User::factory()->withApiKeys()->create();
     $this->books = Category::query()->where('slug', 'books')->sole();
     $this->manga = Category::query()->where('slug', 'manga')->sole();
     $this->ja = Language::query()->where('code', 'ja')->sole();

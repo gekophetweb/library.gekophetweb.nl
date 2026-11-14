@@ -158,6 +158,18 @@ class ScanBatchController extends Controller
         return null;
     }
 
+    /** Looks up the items whose catalogues didn't answer last time, again. */
+    public function retry(Request $request, ScanBatch $batch): RedirectResponse
+    {
+        $this->authorizeBatch($request, $batch);
+        abort_unless($batch->status === ScanBatch::DONE, 409, 'This batch is not finished yet.');
+
+        $count = $batch->retryFailed();
+
+        return redirect()->route('scan.batches.show', $batch)
+            ->with('status', $count ? "Trying {$count} ".str('item')->plural($count).' again…' : 'Nothing to try again.');
+    }
+
     private function authorizeBatch(Request $request, ScanBatch $batch): void
     {
         abort_unless($batch->user_id === $request->user()->id, 404);

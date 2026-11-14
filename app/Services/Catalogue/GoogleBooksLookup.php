@@ -9,6 +9,7 @@ use App\Enums\CategoryKind;
 use App\Services\ApiCallLogger;
 use App\Support\Catalogue\CatalogueContext;
 use App\Support\Catalogue\CatalogueResult;
+use App\Support\Catalogue\CatalogueUnavailable;
 use App\Support\Isbn;
 use App\Support\Series\Text;
 use Illuminate\Http\Client\ConnectionException;
@@ -39,7 +40,7 @@ class GoogleBooksLookup implements CatalogueLookup, CatalogueSearch
 
     public function lookup(string $barcode, CatalogueContext $context): ?CatalogueResult
     {
-        $info = $this->request(['q' => 'isbn:'.$barcode], 'lookup', $context, config('catalogue.timeout'))[0]['volumeInfo'] ?? null;
+        $info = $this->request(['q' => 'isbn:'.$barcode], 'lookup', $context, config('catalogue.timeout'), strict: true)[0]['volumeInfo'] ?? null;
 
         return is_array($info) ? $this->result($info, $barcode) : null;
     }
@@ -66,9 +67,11 @@ class GoogleBooksLookup implements CatalogueLookup, CatalogueSearch
 
     /**
      * @param  array<string, scalar>  $query
-     * @return list<array<string, mixed>> the `items`, empty on any failure
+     * @return list<array<string, mixed>> the `items`; empty on a failure, or with $strict throws
+     *
+     * @throws CatalogueUnavailable
      */
-    private function request(array $query, string $operation, CatalogueContext $context, int $timeout): array
+    private function request(array $query, string $operation, CatalogueContext $context, int $timeout, bool $strict = false): array
     {
         $key = $context->user->apiKey(ApiKeyProvider::GoogleBooks);
 
@@ -83,7 +86,12 @@ class GoogleBooksLookup implements CatalogueLookup, CatalogueSearch
                 category: $context->category->kind->value,
             );
         } catch (ConnectionException) {
-            return [];
+            return $strict ? throw CatalogueUnavailable::from($this->name()) : [];
+        }
+
+        // Keyless use answers 429 (a daily quota of zero): that is "can't say", not "unknown".
+        if ($strict && ! $response->successful()) {
+            throw CatalogueUnavailable::from($this->name(), $response->status());
         }
 
         return $response->successful() ? array_values(array_filter((array) $response->json('items'), 'is_array')) : [];

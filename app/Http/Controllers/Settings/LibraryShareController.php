@@ -28,7 +28,7 @@ class LibraryShareController extends Controller
 
         $share->save();
 
-        return redirect()->to(route('settings.edit').'#shares')
+        return redirect()->route('settings.shares')
             ->with('status', $share->isPersonal()
                 ? "Shared with {$share->recipient_email}: they see it under \"Shared with you\" once signed in with that address, read only."
                 : 'Share link created: anyone with the link can view it, read only.')
@@ -41,6 +41,6 @@ class LibraryShareController extends Controller
 
         $share->delete();
 
-        return redirect()->to(route('settings.edit').'#shares')->with('status', 'Share link revoked. It no longer works.');
+        return redirect()->route('settings.shares')->with('status', 'Share link revoked. It no longer works.');
     }
 }

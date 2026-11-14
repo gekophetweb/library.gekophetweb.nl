@@ -8,6 +8,7 @@ use App\Models\UserApiKey;
 use App\Services\Catalogue\CatalogueLookupManager;
 use App\Support\Catalogue\CatalogueContext;
 use Database\Seeders\CatalogueSeeder;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -16,11 +17,35 @@ function catalogueFixture(string $name): string
     return file_get_contents(base_path('tests/Fixtures/catalogue/'.$name));
 }
 
-/** Rakuten answers the Berserk fixture, Google Books the DCC fixture; anything else is empty. */
-function fakeCatalogueApis(bool $googleQuotaExceeded = false): void
+/**
+ * Rakuten answers the Berserk fixture, Google Books the DCC fixture, NDL and Open Library
+ * their recorded Berserk 1 answers; anything else is empty. $ndlDown makes NDL time out.
+ */
+function fakeCatalogueApis(bool $googleQuotaExceeded = false, bool $ndlDown = false, bool $openLibraryDown = false): void
 {
-    Http::fake(function (Request $request) use ($googleQuotaExceeded) {
+    Http::fake(function (Request $request) use ($googleQuotaExceeded, $ndlDown, $openLibraryDown) {
         parse_str((string) parse_url($request->url(), PHP_URL_QUERY), $query);
+
+        if (str_contains($request->url(), 'ndlsearch.ndl.go.jp')) {
+            if ($ndlDown) {
+                throw new ConnectionException('cURL error 28: Operation timed out');
+            }
+
+            // Like the real NDL: the record for 9784592135746 (listed by its ISBN-10).
+            return Http::response(($query['isbn'] ?? '') !== ''
+                ? catalogueFixture('ndl-isbn-9784592135746.xml')
+                : '<rss><channel></channel></rss>');
+        }
+
+        if (str_contains($request->url(), 'openlibrary.org')) {
+            if ($openLibraryDown) {
+                return Http::response('Service unavailable', 503);
+            }
+
+            return Http::response(($query['isbn'] ?? '') === '9784592135746'
+                ? catalogueFixture('openlibrary-isbn-9784592135746.json')
+                : ['numFound' => 0, 'docs' => []]);
+        }
 
         if (str_contains($request->url(), 'app.rakuten.co.jp')) {
             return Http::response(($query['isbn'] ?? '') === '9784592135746'
@@ -70,14 +95,55 @@ it('looks a Japanese book up at Rakuten with the user\'s key', function () {
     Http::assertSent(fn (Request $request) => str_contains($request->url(), 'applicationId=app-123'));
 });
 
-it('skips Rakuten without a key and says so', function () {
-    fakeCatalogueApis();
+it('skips Rakuten without a key, says so, and still finds a Japanese book at NDL', function () {
+    fakeCatalogueApis(googleQuotaExceeded: true);
+
+    $outcome = app(CatalogueLookupManager::class)->lookup('9784592135746', bookContext('ja'));
+
+    // The bug this guards: keyless, the only provider left was Google Books (quota 0).
+    expect($outcome->result->source)->toBe('ndl')
+        ->and($outcome->result->barcode)->toBe('9784592135746')
+        ->and($outcome->result->name)->toBe('ベルセルク 1')
+        ->and($outcome->result->publisher)->toBe('白泉社')
+        ->and($outcome->missingKeys)->toBe([ApiKeyProvider::Rakuten])
+        ->and($outcome->failed())->toBeFalse();
+    Http::assertNotSent(fn (Request $request) => str_contains($request->url(), 'rakuten'));
+});
+
+it('only takes the NDL record with exactly the scanned ISBN', function () {
+    fakeCatalogueApis(googleQuotaExceeded: true);
+
+    // NDL answers the 9784592135746 record whatever ISBN is asked for (see the fake).
+    $outcome = app(CatalogueLookupManager::class)->lookup('9784592135753', bookContext('ja'));
+
+    expect($outcome->result)->toBeNull()
+        ->and($outcome->failed())->toBeFalse(); // NDL answered: really not found
+});
+
+it('reports a lookup as failed, not as not found, when no catalogue answers', function () {
+    fakeCatalogueApis(googleQuotaExceeded: true, ndlDown: true);
 
     $outcome = app(CatalogueLookupManager::class)->lookup('9784592135746', bookContext('ja'));
 
     expect($outcome->result)->toBeNull()
-        ->and($outcome->missingKeys)->toBe([ApiKeyProvider::Rakuten]);
-    Http::assertNotSent(fn (Request $request) => str_contains($request->url(), 'rakuten'));
+        ->and($outcome->failed())->toBeTrue()
+        ->and($outcome->unavailable)->toBe(['ndl', 'google_books'])
+        ->and($outcome->unavailableNames())->toBe('NDL and Google Books');
+});
+
+it('finds a book at Open Library without keys when Google Books is over its quota', function () {
+    fakeCatalogueApis(googleQuotaExceeded: true);
+
+    $outcome = app(CatalogueLookupManager::class)->lookup('9784592135746', bookContext('en'));
+
+    expect($outcome->result->source)->toBe('openlibrary')
+        ->and($outcome->result->name)->toBe('ベルセルク 1')
+        ->and($outcome->result->creator)->toBe('三浦建太郎')
+        // The work's publisher list spans editions, so a lookup leaves it empty.
+        ->and($outcome->result->publisher)->toBeNull();
+
+    fakeCatalogueApis(googleQuotaExceeded: true, openLibraryDown: true);
+    expect(app(CatalogueLookupManager::class)->lookup('9784592135746', bookContext('en'))->failed())->toBeTrue();
 });
 
 it('looks an English book up at Google Books, keyless or with the user\'s key', function () {
@@ -114,7 +180,7 @@ it('logs every provider call without the key', function () {
     app(CatalogueLookupManager::class)->lookup('9784592135746', bookContext('ja'));
 
     $logs = ApiCallLog::query()->orderBy('id')->get();
-    expect($logs->pluck('provider')->all())->toBe(['rakuten', 'google_books'])
+    expect($logs->pluck('provider')->all())->toBe(['rakuten', 'ndl', 'google_books'])
         ->and($logs->pluck('query')->join(' '))->not->toContain('secret-app-id')
         ->and($logs->first()->user_id)->toBe($this->user->id);
 });

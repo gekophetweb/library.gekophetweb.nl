@@ -111,6 +111,7 @@ class ScanController extends Controller
             'missing_keys' => array_map(fn ($key) => $key->label(), $outcome->missingKeys),
             'no_provider' => $outcome->noProvider,
             'invalid' => $outcome->invalidBarcode,
+            'unavailable' => $outcome->failed() ? $outcome->unavailableNames() : null,
             'series' => $match ? DetectSeries::suggestion($match) : null,
         ]);
 

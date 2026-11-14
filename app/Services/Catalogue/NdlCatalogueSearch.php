@@ -2,11 +2,14 @@
 
 namespace App\Services\Catalogue;
 
+use App\Contracts\CatalogueLookup;
 use App\Contracts\CatalogueSearch;
 use App\Enums\ApiKeyProvider;
+use App\Enums\CategoryKind;
 use App\Services\ApiCallLogger;
 use App\Support\Catalogue\CatalogueContext;
 use App\Support\Catalogue\CatalogueResult;
+use App\Support\Catalogue\CatalogueUnavailable;
 use App\Support\Isbn;
 use App\Support\Series\CreatorName;
 use App\Support\Series\Text;
@@ -15,11 +18,11 @@ use Illuminate\Http\Client\Factory as Http;
 use SimpleXMLElement;
 
 /**
- * NDL Search (国立国会図書館サーチ) OpenSearch by title, then by author. Keyless. Only
- * printed books (category 図書) with an ISBN are kept: a title search also returns CDs
- * and DVDs.
+ * NDL Search (国立国会図書館サーチ) OpenSearch by title, then by author, and by ISBN for a
+ * scan. Keyless, so Japanese books are found without any key. Only printed books
+ * (category 図書) with an ISBN are kept: a title search also returns CDs and DVDs.
  */
-class NdlCatalogueSearch implements CatalogueSearch
+class NdlCatalogueSearch implements CatalogueLookup, CatalogueSearch
 {
     private const string NS_DC = 'http://purl.org/dc/elements/1.1/';
 
@@ -41,6 +44,29 @@ class NdlCatalogueSearch implements CatalogueSearch
         return null;
     }
 
+    public function supports(CategoryKind $kind): bool
+    {
+        return $kind === CategoryKind::Books;
+    }
+
+    /**
+     * The printed book with exactly this ISBN. NDL also answers unrelated records for an
+     * unknown ISBN, and lists older books by their ISBN-10, so the match is checked here.
+     */
+    public function lookup(string $barcode, CatalogueContext $context): ?CatalogueResult
+    {
+        // NDL often takes 5-15 s; its own timeout keeps a slow answer from looking like "not found".
+        $results = $this->query(['isbn' => $barcode, 'cnt' => 10], $context, 'lookup', config('catalogue.providers.ndl.timeout'), strict: true);
+
+        foreach ($results as $result) {
+            if ($result->barcode === $barcode) {
+                return $result;
+            }
+        }
+
+        return null;
+    }
+
     public function search(string $term, CatalogueContext $context, int $limit): array
     {
         $results = [];
@@ -56,30 +82,32 @@ class NdlCatalogueSearch implements CatalogueSearch
 
     /**
      * @param  array<string, scalar>  $query
-     * @return list<CatalogueResult>
+     * @return list<CatalogueResult> empty on a failure, or with $strict throws
+     *
+     * @throws CatalogueUnavailable
      */
-    private function query(array $query, CatalogueContext $context): array
+    private function query(array $query, CatalogueContext $context, string $operation = 'search', ?int $timeout = null, bool $strict = false): array
     {
         try {
             $response = $this->logger->send(
                 provider: $this->name(),
-                operation: 'search',
+                operation: $operation,
                 query: http_build_query($query),
                 request: fn () => $this->http
                     ->withUserAgent(config('series.user_agent'))
-                    ->timeout(config('catalogue.search.timeout'))
+                    ->timeout($timeout ?? config('catalogue.search.timeout'))
                     ->get(config('series.providers.ndl.endpoint'), $query),
                 language: $context->language,
                 category: $context->category->kind->value,
             );
         } catch (ConnectionException) {
-            return [];
+            return $strict ? throw CatalogueUnavailable::from($this->name()) : [];
         }
 
         $xml = $response->successful() ? @simplexml_load_string($response->body()) : false;
 
         if ($xml === false || ! isset($xml->channel)) {
-            return [];
+            return $strict ? throw CatalogueUnavailable::from($this->name(), $response->status()) : [];
         }
 
         $results = [];

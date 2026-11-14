@@ -58,9 +58,30 @@
     @elseif ($running)
         <p class="mb-6 rounded-md bg-sky-50 px-4 py-3 text-sm text-sky-800 dark:bg-sky-950 dark:text-sky-200">Adding {{ $items->count() }} items in the background…</p>
     @else
-        <p class="mb-6 rounded-md bg-emerald-50 px-4 py-3 text-sm text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200">
-            Done: {{ $items->whereIn('status', ['added', 'promoted'])->count() }} of {{ $items->count() }} added.
-        </p>
+        @php
+            $added = $items->whereIn('status', ['added', 'promoted'])->count();
+            $failed = $items->where('status', 'failed')->count();
+            $notFound = $items->where('status', 'not_found')->count();
+        @endphp
+        <div @class([
+            'mb-6 max-w-2xl rounded-md px-4 py-3 text-sm',
+            'bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200' => $failed === 0,
+            'bg-amber-50 text-amber-900 dark:bg-amber-950 dark:text-amber-200' => $failed > 0,
+        ]) data-batch-summary>
+            <p class="font-medium">Done: {{ $added }} of {{ $items->count() }} added.</p>
+            @if ($notFound || $failed)
+                <p class="mt-1">
+                    @if ($notFound) {{ $notFound }} not found in the catalogues (add those by hand).@endif
+                    @if ($failed) {{ $failed }} could not be looked up because no catalogue answered.@endif
+                </p>
+            @endif
+            @if ($failed)
+                <form method="POST" action="{{ route('scan.batches.retry', $batch) }}" class="mt-2">
+                    @csrf
+                    <button class="rounded-md border border-amber-400 bg-white px-3 py-1.5 text-sm font-medium hover:bg-amber-100 dark:border-amber-700 dark:bg-stone-900 dark:hover:bg-stone-800">Try the {{ $failed }} failed {{ Str::plural('item', $failed) }} again</button>
+                </form>
+            @endif
+        </div>
     @endif
 
     <ul class="mb-6 max-w-2xl divide-y divide-stone-200 rounded-lg border border-stone-200 bg-white dark:divide-stone-800 dark:border-stone-800 dark:bg-stone-900">

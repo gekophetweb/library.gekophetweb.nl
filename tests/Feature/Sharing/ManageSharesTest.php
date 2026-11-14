@@ -19,7 +19,7 @@ it('mints library, category and series links that show in settings', function ()
     $this->actingAs($this->user);
 
     $this->post(route('settings.shares.store'), ['scope' => 'library', 'label' => 'For my brother'])
-        ->assertRedirect(route('settings.edit').'#shares')
+        ->assertRedirect(route('settings.shares'))
         ->assertSessionHas('share_url');
     $this->post(route('settings.shares.store'), ['scope' => 'category:'.$this->books->id, 'expires_at' => now()->addWeek()->toDateString()]);
     $this->post(route('settings.shares.store'), ['scope' => 'series:'.$this->series->id]);
@@ -32,7 +32,7 @@ it('mints library, category and series links that show in settings', function ()
         ->and($shares[1]->expires_at->isSameDay(now()->addWeek()))->toBeTrue()
         ->and($shares[2]->scopedSeries()->is($this->series))->toBeTrue();
 
-    $this->get(route('settings.edit'))
+    $this->get(route('settings.shares'))
         ->assertSee('For my brother')
         ->assertSee('Category: Books')
         ->assertSee('Series: ベルセルク')

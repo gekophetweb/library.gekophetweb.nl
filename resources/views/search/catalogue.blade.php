@@ -49,7 +49,7 @@
     @if ($outcome)
         @if (! empty($outcome->missingKeys))
             <p class="mb-4 text-sm text-amber-700 dark:text-amber-300">
-                Skipped {{ collect($outcome->missingKeys)->map->label()->join(', ') }}: no key saved. <a href="{{ route('settings.edit') }}" class="underline">Add your key in settings</a> for more results.
+                Skipped {{ collect($outcome->missingKeys)->map->label()->join(', ') }}: no key saved. <a href="{{ route('settings.api-keys') }}" class="underline">Add your key in settings</a> for more results.
             </p>
         @endif
 
