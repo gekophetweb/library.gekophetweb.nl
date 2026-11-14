@@ -1,4 +1,4 @@
-<x-layout title="Users">
+<x-admin-layout title="Users">
     <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
         <h1 class="text-2xl font-semibold">Users</h1>
         <nav class="flex gap-1 rounded-md border border-stone-200 bg-white p-1 text-sm dark:border-stone-800 dark:bg-stone-900" aria-label="Filter users">
@@ -58,4 +58,4 @@
     </div>
 
     <div class="mt-4">{{ $users->links() }}</div>
-</x-layout>
+</x-admin-layout>

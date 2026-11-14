@@ -1,4 +1,4 @@
-@props(['title' => null, 'share' => null])
+@props(['title' => null, 'share' => null, 'wide' => false])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -26,12 +26,12 @@
             <nav class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 text-sm">
                 <a href="{{ route('home') }}" class="font-semibold">{{ config('app.name') }}</a>
                 @can('admin')
-                    <a href="{{ route('admin.users.index') }}" class="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">Users</a>
-                    <a href="{{ route('admin.sso.index') }}" class="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">Sign-in</a>
+                    {{-- All management lives in the admin section; one entry point here. --}}
                     @php($newSuggestions = App\Models\Suggestion::query()->where('status', App\Enums\SuggestionStatus::New)->count())
-                    <a href="{{ route('admin.suggestions.index') }}" class="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">Suggestions
+                    <a href="{{ route('admin.home') }}" data-admin-link
+                       @class(['text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100', 'font-medium text-stone-900 dark:text-stone-100' => request()->routeIs('admin.*')])>Admin
                         @if ($newSuggestions)
-                            <span data-new-suggestions="{{ $newSuggestions }}" class="ml-0.5 rounded-full bg-sky-100 px-1.5 text-xs text-sky-800 dark:bg-sky-950 dark:text-sky-200">{{ $newSuggestions }}<span class="sr-only"> new</span></span>
+                            <span data-new-suggestions="{{ $newSuggestions }}" title="{{ $newSuggestions }} new {{ Str::plural('suggestion', $newSuggestions) }}" class="ml-0.5 rounded-full bg-sky-100 px-1.5 text-xs text-sky-800 dark:bg-sky-950 dark:text-sky-200">{{ $newSuggestions }}<span class="sr-only"> new {{ Str::plural('suggestion', $newSuggestions) }}</span></span>
                         @endif
                     </a>
                 @endcan
@@ -57,7 +57,7 @@
     @endauth
     @endif
 
-    <main class="mx-auto max-w-5xl px-4 py-8">
+    <main @class(['mx-auto px-4 py-8', 'max-w-7xl' => $wide, 'max-w-5xl' => ! $wide])>
         @if (! $share && session('status'))
             <p role="status" class="mb-6 rounded-md bg-emerald-50 px-4 py-3 text-sm text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200">{{ session('status') }}</p>
         @endif

@@ -40,6 +40,18 @@ class Category extends Model
         return $this->hasMany(Genre::class);
     }
 
+    /** Items filed under this sub-category. @return HasMany<CollectionObject, $this> */
+    public function subCategoryObjects(): HasMany
+    {
+        return $this->hasMany(CollectionObject::class, 'sub_category_id');
+    }
+
+    /** Scan batches started for this sub-category. @return HasMany<ScanBatch, $this> */
+    public function subCategoryScanBatches(): HasMany
+    {
+        return $this->hasMany(ScanBatch::class, 'sub_category_id');
+    }
+
     public function isTopLevel(): bool
     {
         return $this->parent_id === null;

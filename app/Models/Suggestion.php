@@ -55,10 +55,10 @@ class Suggestion extends Model
         $query->withCount(['voters as votes_count', 'voters as voted' => fn (Builder $query) => $query->whereKey($user->id)]);
     }
 
-    /** @return BelongsTo<User, $this> */
+    /** The sender; "[deleted user]" (never mailed) once the account is gone. @return BelongsTo<User, $this> */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault(User::deletedPlaceholder());
     }
 
     /** @return BelongsToMany<User, $this> */

@@ -33,8 +33,9 @@ class SsoProviderController extends Controller
     {
         $provider = SsoProvider::query()->create($request->providerAttributes());
 
-        return redirect()->route('admin.sso.index')
-            ->with('status', "{$provider->name} added. Register its callback URL at the identity provider.");
+        // Back to the form, where the callback URL now appears next to the setup guide.
+        return redirect()->route('admin.sso.edit', $provider)
+            ->with('status', "{$provider->name} added. Copy its callback URL below and register it at the identity provider.");
     }
 
     public function edit(SsoProvider $provider): View

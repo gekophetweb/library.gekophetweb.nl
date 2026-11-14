@@ -3,16 +3,17 @@
     $input = 'block w-full rounded-md border border-stone-300 px-3 py-2 text-sm dark:border-stone-700 dark:bg-stone-950';
     $driver = old('driver', $provider->driver?->value ?? 'google');
 @endphp
-<x-layout :title="$editing ? 'Edit '.$provider->name : 'Add SSO provider'">
+<x-admin-layout :title="$editing ? 'Edit '.$provider->name : 'Add SSO provider'">
     <h1 class="mb-6 text-2xl font-semibold">{{ $editing ? 'Edit '.$provider->name : 'Add SSO provider' }}</h1>
 
-    <form method="POST" action="{{ $editing ? route('admin.sso.update', $provider) : route('admin.sso.store') }}" class="max-w-xl space-y-4">
+    <div class="grid items-start gap-8 lg:grid-cols-[minmax(0,36rem)_minmax(0,1fr)]">
+    <form method="POST" action="{{ $editing ? route('admin.sso.update', $provider) : route('admin.sso.store') }}" class="space-y-4">
         @csrf
         @if ($editing) @method('PUT') @endif
 
         <div>
             <label for="driver" class="mb-1 block text-sm font-medium">Type</label>
-            <select id="driver" name="driver" class="{{ $input }}">
+            <select id="driver" name="driver" class="{{ $input }}" data-sso-driver-select>
                 @foreach ($drivers as $option)
                     <option value="{{ $option->value }}" @selected($driver === $option->value)>{{ $option->label() }}</option>
                 @endforeach
@@ -59,15 +60,14 @@
             <span>Allow sign-up: a verified e-mail without an account creates one</span>
         </label>
 
-        @if ($editing)
-            <p class="text-sm text-stone-500">Callback URL to register at the identity provider: <code class="break-all">{{ route('sso.callback', $provider) }}</code></p>
-        @else
-            <p class="text-sm text-stone-500">After saving, the callback URL to register at the identity provider is shown on the overview.</p>
-        @endif
-
         <div class="flex gap-3">
             <button class="rounded-md bg-stone-900 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300">Save</button>
-            <a href="{{ route('admin.sso.index') }}" class="px-4 py-2 text-sm underline">Cancel</a>
+            <a href="{{ route('admin.sso.index') }}" class="px-4 py-2 text-sm underline">{{ $editing ? 'Back to overview' : 'Cancel' }}</a>
         </div>
     </form>
-</x-layout>
+
+    <aside aria-label="Setup instructions">
+        @include('admin.sso.guides', ['callbackUrl' => $editing ? route('sso.callback', $provider) : null])
+    </aside>
+    </div>
+</x-admin-layout>

@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\Enums\ApiKeyProvider;
 use App\Models\Category;
 use App\Models\LibraryShare;
+use App\Models\LoginCode;
 use App\Models\Series;
 use App\Models\SsoProvider;
+use App\Models\User;
 use App\Models\UserIdentity;
 use App\Support\Auth\LoginSettings;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class SettingsController extends Controller
@@ -100,5 +105,47 @@ class SettingsController extends Controller
         $identity->delete();
 
         return redirect()->route('settings.edit')->with('status', 'Sign-in method unlinked.');
+    }
+
+    /**
+     * Deletes the signed-in account and everything that is only theirs (collection, series,
+     * shares, keys, tokens, sign-in links, votes). Suggestions and comments stay, shown as
+     * "[deleted user]". Confirmed by typing the account's e-mail address; the last admin
+     * can't delete their account, so the app always keeps one.
+     */
+    public function destroyAccount(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+        $typed = Str::lower(trim((string) $request->validateWithBag('deleteAccount', [
+            'confirm_email' => ['required', 'string', 'max:255'],
+        ])['confirm_email']));
+
+        if ($typed !== Str::lower($user->email)) {
+            return back()->withErrors(['confirm_email' => 'Type your e-mail address exactly to confirm.'], 'deleteAccount');
+        }
+
+        if ($user->is_admin && ! User::query()->where('is_admin', true)->whereKeyNot($user->id)->exists()) {
+            return back()->withErrors(['confirm_email' => 'You are the only admin. Make someone else an admin first (Admin → Users), so the site keeps one.'], 'deleteAccount');
+        }
+
+        // Log out first: logout() saves a fresh remember token on the user, which on an
+        // already-deleted model would insert the account again.
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        DB::transaction(function () use ($user) {
+            $user->tokens()->delete();
+            LoginCode::query()->where('email', $user->email)->delete();
+
+            if (config('session.driver') === 'database') {
+                DB::table(config('session.table', 'sessions'))->where('user_id', $user->id)->delete();
+            }
+
+            // Foreign keys cascade to the user's own data and set suggestion authors to null.
+            $user->delete();
+        });
+
+        return redirect()->route('login')->with('status', 'Your account has been deleted.');
     }
 }

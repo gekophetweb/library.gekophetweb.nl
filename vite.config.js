@@ -28,6 +28,10 @@ export default defineConfig({
             strictPort: true,
             origin: 'http://localhost:5173',
             hmr: { host: 'localhost' },
+            // Scripts are module scripts loaded cross-origin from the app on :8000 (or
+            // DEV_APP_PORT); without this Vite only allows its own origin and the browser
+            // blocks every script. Localhost only, so other sites can't read the sources.
+            cors: { origin: /^https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/ },
         }),
         watch: {
             usePolling: inDocker,

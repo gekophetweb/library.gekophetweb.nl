@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\ApiKeyProvider;
+use App\Http\Controllers\ScanBatchController;
 use App\Jobs\ProcessScanBatch;
 use App\Models\Category;
 use App\Models\CollectionObject;
@@ -132,6 +133,78 @@ it('builds a removable working list in batch mode', function () {
     Http::assertNothingSent();
 });
 
+it('adds a pasted list to the working list, one barcode per line', function () {
+    CollectionObject::factory()->for($this->user)->create(['barcode' => '9784592135753']);
+    startScan('batch');
+    $batch = ScanBatch::sole();
+    $this->post(route('scan.batches.items.store', $batch), ['barcode' => '9784088725093']);
+
+    $this->post(route('scan.batches.items.bulk', $batch), [
+        'barcodes' => "978-4-592-13574-6\r\n\n  4988601234567  \n9784088725093\n9784592135753\n9784592135746\n".str_repeat('9', 65),
+    ])
+        ->assertRedirect(route('scan.batches.show', $batch))
+        ->assertSessionHas('status', 'Added 2 items to the list.')
+        ->assertSessionHas('bulk_skipped', [
+            ['line' => '9784088725093', 'reason' => 'is already on this list'],
+            ['line' => '9784592135753', 'reason' => 'is already in your collection'],
+            ['line' => '9784592135746', 'reason' => 'is already on this list'],
+            ['line' => str_repeat('9', 65), 'reason' => 'is too long for a barcode'],
+        ])
+        // Only the lines that still need attention go back into the textarea.
+        ->assertSessionHasInput('barcodes', "9784088725093\n9784592135753\n9784592135746\n".str_repeat('9', 65));
+
+    expect($batch->items()->pluck('barcode')->all())->toBe(['9784088725093', '9784592135746', '4988601234567']);
+    Http::assertNothingSent();
+});
+
+it('offers camera scanning on both scan pages, filling the right field', function () {
+    startScan('single');
+    $this->get(route('scan.single'))
+        ->assertSee('data-camera-scanner data-mode="single" data-target="barcode"', false)
+        ->assertSee('Scan with camera');
+
+    startScan('batch');
+    $batch = ScanBatch::sole();
+    $this->get(route('scan.batches.show', $batch))
+        ->assertSee('data-camera-scanner data-mode="batch" data-target="barcodes"', false);
+
+    // A committed batch takes no more items, so no camera either.
+    $this->post(route('scan.batches.items.store', $batch), ['barcode' => '9784592135746']);
+    Queue::fake();
+    $this->post(route('scan.batches.commit', $batch));
+    $this->get(route('scan.batches.show', $batch))->assertDontSee('data-camera-scanner', false);
+});
+
+it('shows the paste box and what a pasted list skipped', function () {
+    startScan('batch');
+    $batch = ScanBatch::sole();
+    $this->post(route('scan.batches.items.store', $batch), ['barcode' => '9784592135746']);
+
+    $this->get(route('scan.batches.show', $batch))->assertSee('Paste a list instead')->assertDontSee('data-bulk-skipped', false);
+
+    $this->followingRedirects()
+        ->post(route('scan.batches.items.bulk', $batch), ['barcodes' => '9784592135746'])
+        ->assertSee('Nothing added.')
+        ->assertSee('1 line not added')
+        ->assertSee('is already on this list');
+});
+
+it('rejects an empty or oversized paste, and pastes into a committed batch', function () {
+    Queue::fake();
+    startScan('batch');
+    $batch = ScanBatch::sole();
+
+    $this->post(route('scan.batches.items.bulk', $batch), ['barcodes' => "\n  \n"])->assertSessionHasErrors('barcodes');
+    $this->post(route('scan.batches.items.bulk', $batch), [
+        'barcodes' => implode("\n", range(1, ScanBatchController::MAX_BULK_LINES + 1)),
+    ])->assertSessionHasErrors('barcodes');
+    expect($batch->items()->count())->toBe(0);
+
+    $this->post(route('scan.batches.items.bulk', $batch), ['barcodes' => '9784592135746']);
+    $this->post(route('scan.batches.commit', $batch));
+    $this->post(route('scan.batches.items.bulk', $batch), ['barcodes' => '9784088725093'])->assertStatus(409);
+});
+
 it('commits a batch to a queued job', function () {
     Queue::fake();
     startScan('batch');
@@ -170,5 +243,6 @@ it('keeps batches private to their owner', function () {
     $this->actingAs(User::factory()->create());
     $this->get(route('scan.batches.show', $batch))->assertNotFound();
     $this->post(route('scan.batches.items.store', $batch), ['barcode' => '9784592135746'])->assertNotFound();
+    $this->post(route('scan.batches.items.bulk', $batch), ['barcodes' => '9784592135746'])->assertNotFound();
     $this->post(route('scan.batches.commit', $batch))->assertNotFound();
 });
