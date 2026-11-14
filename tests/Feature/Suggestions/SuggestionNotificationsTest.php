@@ -69,7 +69,7 @@ it('mails the thread about a comment, but not its author or opted-out users', fu
 it('lets a user turn suggestion e-mails off and on', function () {
     $this->actingAs($this->sender)->get(route('settings.edit'))->assertSee('E-mail me about suggestions');
 
-    $this->put(route('settings.notifications'))->assertRedirect(route('settings.edit').'#notifications');
+    $this->put(route('settings.notifications'))->assertRedirect(route('settings.edit'));
     expect($this->sender->fresh()->suggestion_emails)->toBeFalse();
 
     $this->put(route('settings.notifications'), ['suggestion_emails' => 1]);

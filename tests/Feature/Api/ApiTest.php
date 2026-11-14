@@ -17,7 +17,7 @@ beforeEach(function () {
 
 it('creates a token in settings, shows it once and revokes it', function () {
     $this->actingAs($this->user)->post(route('settings.tokens.store'), ['name' => 'My phone'])
-        ->assertRedirect(route('settings.edit'))
+        ->assertRedirect(route('settings.tokens'))
         ->assertSessionHas('token');
 
     $plain = session('token');
@@ -25,14 +25,14 @@ it('creates a token in settings, shows it once and revokes it', function () {
     expect($token->name)->toBe('My phone')
         ->and($token->token)->not->toBe($plain);
 
-    $this->get(route('settings.edit'))->assertSee('My phone');
+    $this->get(route('settings.tokens'))->assertSee('My phone');
 
     $this->flushSession();
     $this->app['auth']->forgetGuards();
     $this->withToken($plain)->getJson('/api/v1/user')->assertOk()->assertJsonPath('data.email', $this->user->email);
 
     $this->app['auth']->forgetGuards();
-    $this->actingAs($this->user)->delete(route('settings.tokens.destroy', $token->id))->assertRedirect(route('settings.edit'));
+    $this->actingAs($this->user)->delete(route('settings.tokens.destroy', $token->id))->assertRedirect(route('settings.tokens'));
     expect($this->user->tokens()->count())->toBe(0);
 });
 

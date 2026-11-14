@@ -175,6 +175,15 @@ Each user links **their own API keys** for these providers through **user settin
 - Store keys per user, **encrypted at rest** (Laravel encrypted casts).
 - Lookups use the **authenticated user's** keys, never a shared global key.
 - Handle the "no key configured for this provider" case gracefully in the UI.
+- **Scanning needs every key**: starting a scan (`scan.start`, middleware `api-keys`)
+  sends a user with a missing key to Settings → API keys (`settings.api-keys`), and the
+  scanner dialog says which keys are missing. Each provider has its own guide page
+  (`settings.api-keys.show`, view `settings/api-keys/guides/{provider}.blade.php`)
+  explaining step by step how to get a key, with the form to save it. A new provider
+  needs a guide view. Lookups still skip a provider whose key was removed later.
+- **Settings are split into short pages** sharing `<x-settings-layout>` (its menu):
+  Profile (`settings.edit`, name and e-mail), API keys, Phone app tokens, Shared links,
+  Sign-in methods, Delete account. Each form redirects back to its own page.
 
 ---
 

@@ -12,7 +12,7 @@ it('lists the linked sign-in methods in settings', function () {
     UserIdentity::factory()->for($user)->for($provider, 'provider')->create(['email' => 'ann@work.test']);
     SsoProvider::factory()->create(['name' => 'Google']);
 
-    $this->actingAs($user)->get(route('settings.edit'))
+    $this->actingAs($user)->get(route('settings.sign-in'))
         ->assertOk()
         ->assertSee('Linked sign-in methods')
         ->assertSee('ann@work.test')
@@ -25,7 +25,7 @@ it('links a provider to the signed-in user', function () {
     fakeSso(fakeSsoUser('abc', 'ann@other.test'));
 
     $this->actingAs($user)->get(route('sso.redirect', $provider));
-    $this->get(route('sso.callback', $provider))->assertRedirect(route('settings.edit'));
+    $this->get(route('sso.callback', $provider))->assertRedirect(route('settings.sign-in'));
 
     expect($user->identities()->sole()->subject)->toBe('abc');
 });
@@ -39,7 +39,7 @@ it('refuses to link an identity that belongs to another user', function () {
 
     $this->actingAs($user)->get(route('sso.redirect', $provider));
     $this->get(route('sso.callback', $provider))
-        ->assertRedirect(route('settings.edit'))
+        ->assertRedirect(route('settings.sign-in'))
         ->assertSessionHasErrors('sso');
 
     expect($user->identities()->count())->toBe(0)
@@ -51,7 +51,7 @@ it('unlinks an identity', function () {
     $identity = UserIdentity::factory()->for($user)->create();
 
     $this->actingAs($user)->delete(route('settings.identities.destroy', $identity))
-        ->assertRedirect(route('settings.edit'));
+        ->assertRedirect(route('settings.sign-in'));
 
     expect(UserIdentity::count())->toBe(0);
 });

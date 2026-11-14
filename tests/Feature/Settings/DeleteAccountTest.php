@@ -19,7 +19,7 @@ it('deletes the account and its collection after typing the e-mail address', fun
     $this->user->createToken('phone');
     $other = CollectionObject::factory()->create();
 
-    $this->actingAs($this->user)->get(route('settings.edit'))->assertSee('Delete my account');
+    $this->actingAs($this->user)->get(route('settings.account'))->assertSee('Delete my account');
 
     $this->delete(route('settings.account.destroy'), ['confirm_email' => ' Reader@Example.test '])
         ->assertRedirect(route('login'))

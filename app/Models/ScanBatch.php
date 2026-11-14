@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\OwnershipStatus;
+use App\Jobs\ProcessScanBatch;
 use App\Support\Catalogue\CatalogueContext;
 use App\Support\Scan\ScanSetup;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -66,6 +67,28 @@ class ScanBatch extends Model
     public function isRunning(): bool
     {
         return in_array($this->status, [self::QUEUED, self::PROCESSING], true);
+    }
+
+    /** A finished batch with items whose lookup failed (no catalogue answered). */
+    public function canRetry(): bool
+    {
+        return $this->status === self::DONE && $this->items()->where('status', 'failed')->exists();
+    }
+
+    /**
+     * Puts the failed items back to pending and queues the batch again; the job only looks
+     * at pending items, so the ones already added are left alone. Returns how many.
+     */
+    public function retryFailed(): int
+    {
+        $count = $this->items()->where('status', 'failed')->update(['status' => 'pending', 'message' => null]);
+
+        if ($count > 0) {
+            $this->update(['status' => self::QUEUED, 'finished_at' => null]);
+            ProcessScanBatch::dispatch($this);
+        }
+
+        return $count;
     }
 
     public function setup(): ScanSetup

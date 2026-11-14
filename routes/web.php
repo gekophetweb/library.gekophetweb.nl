@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::post('objects/{object}/series-suggestion', [CollectionObjectController::class, 'acceptSeriesSuggestion'])->name('objects.series-suggestion.accept');
     Route::delete('objects/{object}/series-suggestion', [CollectionObjectController::class, 'dismissSeriesSuggestion'])->name('objects.series-suggestion.dismiss');
 
-    Route::post('scan', [ScanController::class, 'start'])->name('scan.start');
+    Route::post('scan', [ScanController::class, 'start'])->middleware('api-keys')->name('scan.start');
     Route::get('scan/single', [ScanController::class, 'single'])->name('scan.single');
     Route::post('scan/single/lookup', [ScanController::class, 'lookup'])->middleware('throttle:60,1')->name('scan.single.lookup');
     Route::post('scan/single/add', [ScanController::class, 'add'])->name('scan.single.add');
@@ -81,6 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::post('scan/batches/{batch}/items/bulk', [ScanBatchController::class, 'storeItems'])->name('scan.batches.items.bulk');
     Route::delete('scan/batches/{batch}/items/{item}', [ScanBatchController::class, 'destroyItem'])->name('scan.batches.items.destroy');
     Route::post('scan/batches/{batch}/commit', [ScanBatchController::class, 'commit'])->name('scan.batches.commit');
+    Route::post('scan/batches/{batch}/retry', [ScanBatchController::class, 'retry'])->middleware('throttle:10,1')->name('scan.batches.retry');
 
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -88,6 +89,12 @@ Route::middleware('auth')->group(function () {
     Route::post('welcome/name', [WelcomeNameController::class, 'store'])->name('welcome.name.store');
 
     Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
+    Route::get('settings/api-keys', [SettingsController::class, 'apiKeys'])->name('settings.api-keys');
+    Route::get('settings/api-keys/{provider}', [SettingsController::class, 'apiKeyGuide'])->name('settings.api-keys.show');
+    Route::get('settings/tokens', [SettingsController::class, 'tokens'])->name('settings.tokens');
+    Route::get('settings/shares', [SettingsController::class, 'shares'])->name('settings.shares');
+    Route::get('settings/sign-in', [SettingsController::class, 'signIn'])->name('settings.sign-in');
+    Route::get('settings/account', [SettingsController::class, 'account'])->name('settings.account');
     Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
     Route::put('settings/notifications', [SettingsController::class, 'updateNotifications'])->name('settings.notifications');
     Route::put('settings/api-keys/{provider}', [SettingsController::class, 'updateApiKey'])->name('settings.api-keys.update');
@@ -122,6 +129,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
         Route::get('scan-batches', [AdminScanBatchController::class, 'index'])->name('scan-batches.index');
+        Route::get('scan-batches/{batch}', [AdminScanBatchController::class, 'show'])->name('scan-batches.show');
+        Route::post('scan-batches/{batch}/retry', [AdminScanBatchController::class, 'retry'])->name('scan-batches.retry');
         Route::delete('scan-batches/{batch}', [AdminScanBatchController::class, 'destroy'])->name('scan-batches.destroy');
 
         Route::get('users', [UserController::class, 'index'])->name('users.index');

@@ -6,6 +6,7 @@ use App\Enums\ApiKeyProvider;
 use App\Enums\CategoryKind;
 use App\Support\Catalogue\CatalogueContext;
 use App\Support\Catalogue\CatalogueResult;
+use App\Support\Catalogue\CatalogueUnavailable;
 
 /**
  * "What is this item?" — one implementation per external catalogue (guidelines §5),
@@ -21,6 +22,10 @@ interface CatalogueLookup
     /** The user key this provider cannot work without, or null when it works keyless. */
     public function requiredKey(): ?ApiKeyProvider;
 
-    /** The item behind $barcode, or null when this provider does not know it. */
+    /**
+     * The item behind $barcode, or null when this provider answered that it does not know it.
+     *
+     * @throws CatalogueUnavailable when the provider gave no usable answer (timeout, refusal)
+     */
     public function lookup(string $barcode, CatalogueContext $context): ?CatalogueResult;
 }

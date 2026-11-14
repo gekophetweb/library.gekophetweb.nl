@@ -51,6 +51,9 @@ class ProcessScanBatch implements ShouldQueue
 
                 if ($outcome->invalidBarcode) {
                     $item->update(['status' => 'invalid', 'message' => 'Not a valid barcode for this category.']);
+                } elseif ($outcome->failed()) {
+                    // No catalogue answered at all: unknown, not "not found". Retrying can help.
+                    $item->update(['status' => 'failed', 'message' => "No answer from {$outcome->unavailableNames()}. Try again later."]);
                 } elseif ($outcome->result === null) {
                     $item->update(['status' => 'not_found', 'message' => $outcome->missingKeys
                         ? 'Not found. Adding your '.collect($outcome->missingKeys)->map->label()->join(', ').' key may help.'
