@@ -14,8 +14,8 @@ use Illuminate\View\View;
 
 /**
  * Every user's scan batches, so abandoned ones can be cleaned up (they also keep a
- * language or sub-category "in use"). Like the user list, this shows that a batch exists
- * and how many codes it has, never the scanned barcodes themselves.
+ * language or sub-category "in use") and failed ones understood: the detail page shows
+ * each scanned code with what happened to it, and can retry the failed lookups.
  */
 class ScanBatchController extends Controller
 {
@@ -36,7 +36,11 @@ class ScanBatchController extends Controller
 
         $batches = ScanBatch::query()
             ->with(['user', 'category', 'subCategory', 'language'])
-            ->withCount('items')
+            ->withCount([
+                'items',
+                'items as added_count' => fn ($query) => $query->whereIn('status', ['added', 'promoted']),
+                'items as failed_count' => fn ($query) => $query->where('status', 'failed'),
+            ])
             ->when($filters['status'] ?? null, fn ($query, $status) => $query->where('status', $status))
             ->when($filters['language'] ?? null, fn ($query, $id) => $query->where('language_id', $id))
             ->when($filters['category'] ?? null, fn ($query, $id) => $query->where(fn ($query) => $query->where('category_id', $id)->orWhere('sub_category_id', $id)))
@@ -51,6 +55,30 @@ class ScanBatchController extends Controller
             'language' => isset($filters['language']) ? Language::query()->find($filters['language']) : null,
             'category' => isset($filters['category']) ? Category::query()->find($filters['category']) : null,
         ]);
+    }
+
+    /** What was scanned and what happened to each code. */
+    public function show(ScanBatch $batch): View
+    {
+        $batch->load(['user', 'category', 'subCategory', 'language']);
+        $items = $batch->items()->with('object:id,name')->get();
+
+        return view('admin.scan-batches.show', [
+            'batch' => $batch,
+            'items' => $items,
+            'statuses' => self::STATUSES,
+            'counts' => $items->countBy('status'),
+        ]);
+    }
+
+    public function retry(ScanBatch $batch): RedirectResponse
+    {
+        abort_unless($batch->status === ScanBatch::DONE, 409, 'This batch is not finished yet.');
+
+        $count = $batch->retryFailed();
+
+        return redirect()->route('admin.scan-batches.show', $batch)
+            ->with('status', $count ? "Looking up {$count} ".str('item')->plural($count).' again…' : 'Nothing to try again.');
     }
 
     public function destroy(Request $request, ScanBatch $batch): RedirectResponse

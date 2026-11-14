@@ -55,12 +55,13 @@
                 <p class="mb-3 font-medium">
                     @if ($pending['invalid'] ?? false) Not a valid barcode for {{ $setup->category->name }}.
                     @elseif ($pending['no_provider'] ?? false) There is no lookup for {{ $setup->category->name }} yet. Add it by hand:
+                    @elseif ($pending['unavailable'] ?? null) <span data-unavailable>No answer from {{ $pending['unavailable'] }}: scan it again in a moment, or add it by hand:</span>
                     @else Not found. Add it by hand:
                     @endif
                 </p>
                 @if (! empty($pending['missing_keys']))
                     <p class="mb-3 text-sm text-amber-700 dark:text-amber-300">
-                        Skipped {{ implode(', ', $pending['missing_keys']) }}: no key saved. <a href="{{ route('settings.edit') }}" class="underline">Add your key in settings</a> for better results.
+                        Skipped {{ implode(', ', $pending['missing_keys']) }}: no key saved. <a href="{{ route('settings.api-keys') }}" class="underline">Add your key in settings</a> for better results.
                     </p>
                 @endif
                 @unless ($pending['invalid'] ?? false)

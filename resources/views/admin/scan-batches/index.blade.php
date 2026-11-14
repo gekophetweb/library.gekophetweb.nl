@@ -15,8 +15,8 @@
         </nav>
     </div>
     <p class="mb-6 max-w-2xl text-sm text-stone-600 dark:text-stone-400">
-        Every user's batch scans. Remove abandoned ones: a batch keeps its language and sub-category in use.
-        Removing a batch never removes items it already added to someone's collection.
+        Every user's batch scans. Open one to see what happened to each code. Remove abandoned ones:
+        a batch keeps its language and sub-category in use. Removing a batch never removes items it already added.
     </p>
 
     @if ($language || $category)
@@ -36,7 +36,7 @@
                     <th class="px-4 py-3 font-medium">Started</th>
                     <th class="px-4 py-3 font-medium">User</th>
                     <th class="px-4 py-3 font-medium">Scanning</th>
-                    <th class="px-4 py-3 text-right font-medium">Codes</th>
+                    <th class="px-4 py-3 text-right font-medium">Added / codes</th>
                     <th class="px-4 py-3 font-medium">Status</th>
                     <th class="px-4 py-3 font-medium"><span class="sr-only">Actions</span></th>
                 </tr>
@@ -53,7 +53,16 @@
                             {{ collect([$batch->category->name, $batch->subCategory?->name, $batch->language->name])->filter()->join(' · ') }}
                             <span class="block text-xs text-stone-500">{{ $batch->ownership?->value === 'wishlist' ? 'To wishlist' : 'To collection' }}</span>
                         </td>
-                        <td class="px-4 py-3 text-right tabular-nums">{{ number_format($batch->items_count) }}</td>
+                        <td class="px-4 py-3 text-right tabular-nums">
+                            @if ($batch->isDraft())
+                                {{ number_format($batch->items_count) }}
+                            @else
+                                {{ number_format($batch->added_count) }} / {{ number_format($batch->items_count) }}
+                            @endif
+                            @if ($batch->failed_count)
+                                <span class="block text-xs text-red-700 dark:text-red-400" data-failed="{{ $batch->failed_count }}">{{ $batch->failed_count }} failed</span>
+                            @endif
+                        </td>
                         <td class="whitespace-nowrap px-4 py-3" data-status="{{ $batch->status }}">
                             <span @class([
                                 'rounded px-2 py-0.5 text-xs',
@@ -62,7 +71,8 @@
                                 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200' => $batch->status === App\Models\ScanBatch::DONE,
                             ])>{{ $statuses[$batch->status] ?? $batch->status }}</span>
                         </td>
-                        <td class="px-4 py-3 text-right">
+                        <td class="flex justify-end gap-2 px-4 py-3">
+                            <a href="{{ route('admin.scan-batches.show', $batch) }}" class="{{ $secondary }}">Details</a>
                             <form method="POST" action="{{ route('admin.scan-batches.destroy', $batch) }}"
                                   onsubmit="return confirm('Remove this scan batch of {{ e($batch->user->name) }}?')">
                                 @csrf

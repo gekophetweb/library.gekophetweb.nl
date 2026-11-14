@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\ApiKeyProvider;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -27,6 +28,19 @@ class UserFactory extends Factory
     public function admin(): static
     {
         return $this->state(fn (array $attributes) => ['is_admin' => true]);
+    }
+
+    /** A key for every provider, so the user may scan (Rakuten's is "app-123"). */
+    public function withApiKeys(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            foreach (ApiKeyProvider::cases() as $provider) {
+                $user->apiKeys()->create([
+                    'provider' => $provider,
+                    'key' => $provider === ApiKeyProvider::Rakuten ? 'app-123' : "{$provider->value}-key",
+                ]);
+            }
+        });
     }
 
     public function unverified(): static

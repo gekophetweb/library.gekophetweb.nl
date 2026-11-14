@@ -1,7 +1,6 @@
 <?php
 
 use App\Actions\Series\DetectSeries;
-use App\Enums\ApiKeyProvider;
 use App\Jobs\DetectObjectSeries;
 use App\Jobs\SyncSeriesVolumes;
 use App\Models\Category;
@@ -11,7 +10,6 @@ use App\Models\ScanBatch;
 use App\Models\Series;
 use App\Models\SeriesVolume;
 use App\Models\User;
-use App\Models\UserApiKey;
 use Database\Seeders\CatalogueSeeder;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -31,8 +29,7 @@ const ONE_PIECE_1 = '9784088725093';
 
 beforeEach(function () {
     $this->seed(CatalogueSeeder::class);
-    $this->user = User::factory()->create();
-    UserApiKey::factory()->for($this->user)->create(['provider' => ApiKeyProvider::Rakuten, 'key' => 'app-123']);
+    $this->user = User::factory()->withApiKeys()->create();
     $this->books = Category::query()->where('slug', 'books')->sole();
     $this->manga = Category::query()->where('slug', 'manga')->sole();
     $this->ja = Language::query()->where('code', 'ja')->sole();

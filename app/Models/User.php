@@ -73,6 +73,21 @@ class User extends Authenticatable
         return $this->apiKeys()->where('provider', $provider->value)->first()?->key;
     }
 
+    /**
+     * Providers this user has not saved a key for yet. Scanning needs all of them.
+     *
+     * @return list<ApiKeyProvider>
+     */
+    public function missingApiKeys(): array
+    {
+        $saved = $this->apiKeys()->pluck('provider')->map(fn (ApiKeyProvider $provider) => $provider->value)->all();
+
+        return array_values(array_filter(
+            ApiKeyProvider::cases(),
+            fn (ApiKeyProvider $provider) => ! in_array($provider->value, $saved, true),
+        ));
+    }
+
     /** @return HasMany<Suggestion, $this> */
     public function suggestions(): HasMany
     {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsureApiKeysAreSet;
 use App\Http\Middleware\ResolveLibraryShare;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,7 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // signed URLs and request()->ip() reflect the real client.
         $middleware->trustProxies(at: '*');
 
-        $middleware->alias(['share' => ResolveLibraryShare::class]);
+        $middleware->alias(['share' => ResolveLibraryShare::class, 'api-keys' => EnsureApiKeysAreSet::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

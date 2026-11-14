@@ -9,6 +9,7 @@ use App\Enums\CategoryKind;
 use App\Services\ApiCallLogger;
 use App\Support\Catalogue\CatalogueContext;
 use App\Support\Catalogue\CatalogueResult;
+use App\Support\Catalogue\CatalogueUnavailable;
 use App\Support\Isbn;
 use App\Support\Series\Text;
 use Illuminate\Http\Client\ConnectionException;
@@ -36,7 +37,7 @@ class RakutenBooksLookup implements CatalogueLookup, CatalogueSearch
 
     public function lookup(string $barcode, CatalogueContext $context): ?CatalogueResult
     {
-        $item = $this->request(['isbn' => $barcode], 'lookup', $context, config('catalogue.timeout'))[0] ?? null;
+        $item = $this->request(['isbn' => $barcode], 'lookup', $context, config('catalogue.timeout'), strict: true)[0] ?? null;
 
         return is_array($item) ? $this->result($item, $barcode) : null;
     }
@@ -61,9 +62,11 @@ class RakutenBooksLookup implements CatalogueLookup, CatalogueSearch
 
     /**
      * @param  array<string, scalar>  $params
-     * @return list<mixed> the `Items`, empty on any failure
+     * @return list<mixed> the `Items`; empty on a failure, or with $strict throws
+     *
+     * @throws CatalogueUnavailable
      */
-    private function request(array $params, string $operation, CatalogueContext $context, int $timeout): array
+    private function request(array $params, string $operation, CatalogueContext $context, int $timeout, bool $strict = false): array
     {
         $query = ['format' => 'json', 'formatVersion' => 2] + $params;
 
@@ -80,7 +83,12 @@ class RakutenBooksLookup implements CatalogueLookup, CatalogueSearch
                 category: $context->category->kind->value,
             );
         } catch (ConnectionException) {
-            return [];
+            return $strict ? throw CatalogueUnavailable::from($this->name()) : [];
+        }
+
+        // 404 is Rakuten's "no such item"; anything else unsuccessful is "can't say".
+        if ($strict && ! $response->successful() && $response->status() !== 404) {
+            throw CatalogueUnavailable::from($this->name(), $response->status());
         }
 
         return $response->successful() ? array_values((array) $response->json('Items')) : [];

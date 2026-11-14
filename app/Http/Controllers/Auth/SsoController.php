@@ -56,7 +56,7 @@ class SsoController extends Controller
 
         $failed = match ($mode) {
             'test' => redirect()->route('admin.sso.index'),
-            'link' => redirect()->route('settings.edit'),
+            'link' => redirect()->route('settings.sign-in'),
             default => redirect()->route('login'),
         };
 
@@ -80,7 +80,7 @@ class SsoController extends Controller
         try {
             return $this->drivers->for($provider)->redirect();
         } catch (RequestException|ConnectionException|RuntimeException) {
-            return redirect()->route($mode === 'test' ? 'admin.sso.index' : ($mode === 'link' ? 'settings.edit' : 'login'))
+            return redirect()->route($mode === 'test' ? 'admin.sso.index' : ($mode === 'link' ? 'settings.sign-in' : 'login'))
                 ->withErrors(['sso' => "{$provider->name} could not be reached. Check its settings."]);
         }
     }
@@ -107,7 +107,7 @@ class SsoController extends Controller
             return $failed->withErrors(['sso' => "That {$provider->name} login is already linked to another account."]);
         }
 
-        return redirect()->route('settings.edit')->with('status', "{$provider->name} is now linked.");
+        return redirect()->route('settings.sign-in')->with('status', "{$provider->name} is now linked.");
     }
 
     private function reportTest(SsoProvider $provider, SsoProfile $profile): RedirectResponse

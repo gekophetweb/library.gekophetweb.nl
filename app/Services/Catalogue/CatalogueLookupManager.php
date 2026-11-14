@@ -6,6 +6,7 @@ use App\Contracts\CatalogueLookup;
 use App\Enums\CategoryKind;
 use App\Support\Catalogue\CatalogueContext;
 use App\Support\Catalogue\CatalogueOutcome;
+use App\Support\Catalogue\CatalogueUnavailable;
 use App\Support\Isbn;
 
 /**
@@ -18,9 +19,13 @@ class CatalogueLookupManager
     /** @var array<string, CatalogueLookup> */
     private array $providers;
 
-    public function __construct(RakutenBooksLookup $rakuten, GoogleBooksLookup $googleBooks)
-    {
-        foreach ([$rakuten, $googleBooks] as $provider) {
+    public function __construct(
+        RakutenBooksLookup $rakuten,
+        GoogleBooksLookup $googleBooks,
+        NdlCatalogueSearch $ndl,
+        OpenLibraryCatalogueSearch $openLibrary,
+    ) {
+        foreach ([$rakuten, $googleBooks, $ndl, $openLibrary] as $provider) {
             $this->providers[$provider->name()] = $provider;
         }
     }
@@ -47,6 +52,8 @@ class CatalogueLookupManager
 
         $result = null;
         $missingKeys = [];
+        $unavailable = [];
+        $answered = 0;
 
         foreach ($chain as $provider) {
             $key = $provider->requiredKey();
@@ -57,14 +64,23 @@ class CatalogueLookupManager
                 continue;
             }
 
-            $found = $provider->lookup($barcode, $context);
+            try {
+                $found = $provider->lookup($barcode, $context);
+            } catch (CatalogueUnavailable) {
+                // Timed out or refused: the next provider may still know it.
+                $unavailable[] = $provider->name();
+
+                continue;
+            }
+
+            $answered++;
 
             if ($found !== null) {
                 $result = $result?->mergedWith($found) ?? $found;
             }
         }
 
-        return new CatalogueOutcome($result, $missingKeys);
+        return new CatalogueOutcome($result, $missingKeys, unavailable: $unavailable, answered: $answered);
     }
 
     /** @return list<CatalogueLookup> */

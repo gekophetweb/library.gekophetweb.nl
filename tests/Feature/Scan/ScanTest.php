@@ -8,7 +8,6 @@ use App\Models\CollectionObject;
 use App\Models\Language;
 use App\Models\ScanBatch;
 use App\Models\User;
-use App\Models\UserApiKey;
 use Database\Seeders\CatalogueSeeder;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
@@ -17,8 +16,7 @@ use Illuminate\Testing\TestResponse;
 
 beforeEach(function () {
     $this->seed(CatalogueSeeder::class);
-    $this->user = User::factory()->create();
-    UserApiKey::factory()->for($this->user)->create(['provider' => ApiKeyProvider::Rakuten, 'key' => 'app-123']);
+    $this->user = User::factory()->withApiKeys()->create();
     $this->books = Category::query()->where('slug', 'books')->sole();
     $this->manga = Category::query()->where('slug', 'manga')->sole();
     $this->ja = Language::query()->where('code', 'ja')->sole();
@@ -47,6 +45,49 @@ function startScan(string $mode): TestResponse
 
 it('opens the scanner dialog from the dashboard', function () {
     $this->get(route('home'))->assertSee('Scan items')->assertSee(route('scan.start'));
+});
+
+it('sends a user without every API key to settings instead of scanning', function (string $mode) {
+    $this->user->apiKeys()->where('provider', ApiKeyProvider::Hardcover->value)->delete();
+
+    startScan($mode)->assertRedirect(route('settings.api-keys'));
+
+    expect(ScanBatch::count())->toBe(0)
+        ->and(session('scan.setup'))->toBeNull();
+
+    // Follow the redirect: asserting on the session errors first would keep them off the page.
+    $this->get(route('settings.api-keys'))
+        ->assertSee('Add your API keys before scanning. Still missing: Hardcover.')
+        ->assertSee('Needed to scan')
+        ->assertSee('How to get a Hardcover key')
+        ->assertSee(route('settings.api-keys.show', 'hardcover'));
+})->with(['single', 'batch']);
+
+it('shows the missing keys in the scanner dialog instead of the form', function () {
+    $this->user->apiKeys()->whereIn('provider', [ApiKeyProvider::Rakuten->value, ApiKeyProvider::GoogleBooks->value])->delete();
+
+    $this->get(route('home'))
+        ->assertSee('Add your API keys first')
+        ->assertSeeInOrder(['Rakuten Books', 'Google Books'])
+        ->assertSee(route('settings.api-keys'), false)
+        ->assertDontSee(route('scan.start'));
+});
+
+it('explains how to get every key on its own guide page', function () {
+    $overview = $this->get(route('settings.api-keys'))->assertOk()->assertDontSee('Needed to scan');
+
+    foreach (ApiKeyProvider::cases() as $provider) {
+        $overview->assertSee(route('settings.api-keys.show', $provider->value));
+
+        $this->get(route('settings.api-keys.show', $provider->value))
+            ->assertOk()
+            ->assertSee("How to get a {$provider->label()} key")
+            ->assertSee('Key saved')
+            ->assertSee($provider->setupUrl(), false)
+            ->assertSee(route('settings.api-keys.update', $provider->value), false);
+    }
+
+    $this->get(route('settings.api-keys.show', 'myspace'))->assertNotFound();
 });
 
 it('requires a sub-category when the category has them, plus a language and a mode', function () {
@@ -107,12 +148,12 @@ it('offers to add an unknown item by hand', function () {
     expect(CollectionObject::sole()->only(['barcode', 'name_romanized']))->toBe(['barcode' => '9784088725093', 'name_romanized' => 'One Piece 1']);
 });
 
-it('points to settings when a provider key is missing', function () {
-    $this->user->apiKeys()->delete();
+it('points to settings when a provider key is removed after the scan started', function () {
     startScan('single');
+    $this->user->apiKeys()->delete();
 
     $this->post(route('scan.single.lookup'), ['barcode' => '9784088725093']);
-    $this->get(route('scan.single'))->assertSee('Rakuten Books')->assertSee(route('settings.edit'));
+    $this->get(route('scan.single'))->assertSee('Rakuten Books')->assertSee(route('settings.api-keys'));
 });
 
 it('builds a removable working list in batch mode', function () {

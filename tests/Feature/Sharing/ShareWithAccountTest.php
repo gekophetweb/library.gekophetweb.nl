@@ -22,12 +22,12 @@ function personalShare(array $attributes = []): LibraryShare
 it('creates a share for one e-mail address, stored lower-cased', function () {
     $this->actingAs($this->owner)
         ->post(route('settings.shares.store'), ['scope' => 'library', 'recipient_email' => ' Friend@Example.com '])
-        ->assertRedirect(route('settings.edit').'#shares')
+        ->assertRedirect(route('settings.shares'))
         ->assertSessionHas('status', fn (string $status) => str_contains($status, 'friend@example.com'));
 
     expect(LibraryShare::query()->sole()->recipient_email)->toBe('friend@example.com');
 
-    $this->get(route('settings.edit'))->assertSee('Only for friend@example.com');
+    $this->get(route('settings.shares'))->assertSee('Only for friend@example.com');
 });
 
 it('rejects an invalid address and the owner\'s own', function () {

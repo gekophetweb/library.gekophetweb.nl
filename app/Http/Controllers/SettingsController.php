@@ -22,21 +22,58 @@ class SettingsController extends Controller
 {
     public function edit(Request $request): View
     {
+        return view('settings.edit', ['user' => $request->user()]);
+    }
+
+    public function apiKeys(Request $request): View
+    {
+        return view('settings.api-keys.index', [
+            'apiKeyProviders' => ApiKeyProvider::cases(),
+            'savedApiKeys' => $request->user()->apiKeys()->pluck('updated_at', 'provider'),
+        ]);
+    }
+
+    /** One provider's step-by-step guide to getting a key, with the form to save it. */
+    public function apiKeyGuide(Request $request, string $provider): View
+    {
+        $provider = ApiKeyProvider::tryFrom($provider) ?? abort(404);
+
+        return view('settings.api-keys.show', [
+            'provider' => $provider,
+            'saved' => $request->user()->apiKey($provider) !== null,
+        ]);
+    }
+
+    public function tokens(Request $request): View
+    {
+        return view('settings.tokens', ['tokens' => $request->user()->tokens()->latest()->get()]);
+    }
+
+    public function shares(Request $request): View
+    {
+        return view('settings.shares', [
+            'shares' => LibraryShare::query()->whereBelongsTo($request->user())->with('shareable')->latest()->get(),
+            'shareCategories' => Category::query()->whereNull('parent_id')->orderBy('sort')->orderBy('id')->get(),
+            'shareSeries' => Series::query()->ownedBy($request->user())->orderBy('name')->get(),
+        ]);
+    }
+
+    public function signIn(Request $request): View
+    {
         $identities = $request->user()->identities()->with('provider')->get();
 
-        return view('settings.edit', [
+        return view('settings.sign-in', [
             'user' => $request->user(),
             'identities' => $identities,
             'linkable' => SsoProvider::query()->enabled()->ordered()
                 ->whereNotIn('id', $identities->pluck('sso_provider_id'))
                 ->get(),
-            'apiKeyProviders' => ApiKeyProvider::cases(),
-            'savedApiKeys' => $request->user()->apiKeys()->pluck('updated_at', 'provider'),
-            'tokens' => $request->user()->tokens()->latest()->get(),
-            'shares' => LibraryShare::query()->whereBelongsTo($request->user())->with('shareable')->latest()->get(),
-            'shareCategories' => Category::query()->whereNull('parent_id')->orderBy('sort')->orderBy('id')->get(),
-            'shareSeries' => Series::query()->ownedBy($request->user())->orderBy('name')->get(),
         ]);
+    }
+
+    public function account(Request $request): View
+    {
+        return view('settings.account', ['user' => $request->user()]);
     }
 
     public function update(Request $request): RedirectResponse
@@ -53,7 +90,7 @@ class SettingsController extends Controller
     {
         $request->user()->update(['suggestion_emails' => $request->boolean('suggestion_emails')]);
 
-        return redirect()->to(route('settings.edit').'#notifications')->with('status', 'E-mail settings saved.');
+        return redirect()->route('settings.edit')->with('status', 'E-mail settings saved.');
     }
 
     public function updateApiKey(Request $request, string $provider): RedirectResponse
@@ -63,7 +100,7 @@ class SettingsController extends Controller
 
         $request->user()->apiKeys()->updateOrCreate(['provider' => $provider], ['key' => trim($validated['key'])]);
 
-        return redirect()->route('settings.edit')->with('status', "{$provider->label()} key saved.");
+        return redirect()->route('settings.api-keys')->with('status', "{$provider->label()} key saved.");
     }
 
     public function destroyApiKey(Request $request, string $provider): RedirectResponse
@@ -72,7 +109,7 @@ class SettingsController extends Controller
 
         $request->user()->apiKeys()->where('provider', $provider->value)->delete();
 
-        return redirect()->route('settings.edit')->with('status', "{$provider->label()} key removed.");
+        return redirect()->route('settings.api-keys')->with('status', "{$provider->label()} key removed.");
     }
 
     /** A token for the phone app. The plain text is shown once, right after creating it. */
@@ -82,7 +119,7 @@ class SettingsController extends Controller
 
         $token = $request->user()->createToken(trim($validated['name']));
 
-        return redirect()->route('settings.edit')
+        return redirect()->route('settings.tokens')
             ->with('token', $token->plainTextToken)
             ->with('status', 'Token created. Copy it now: it is not shown again.');
     }
@@ -91,7 +128,7 @@ class SettingsController extends Controller
     {
         $request->user()->tokens()->whereKey($token)->firstOrFail()->delete();
 
-        return redirect()->route('settings.edit')->with('status', 'Token revoked.');
+        return redirect()->route('settings.tokens')->with('status', 'Token revoked.');
     }
 
     public function destroyIdentity(Request $request, UserIdentity $identity): RedirectResponse
@@ -104,7 +141,7 @@ class SettingsController extends Controller
 
         $identity->delete();
 
-        return redirect()->route('settings.edit')->with('status', 'Sign-in method unlinked.');
+        return redirect()->route('settings.sign-in')->with('status', 'Sign-in method unlinked.');
     }
 
     /**

@@ -125,7 +125,7 @@ it('labels results the user owns or wants, ignoring other users\' items', functi
 });
 
 it('points to settings when a key is missing', function () {
-    catalogueSearch('ベルセルク')->assertSee('Rakuten')->assertSee(route('settings.edit'));
+    catalogueSearch('ベルセルク')->assertSee('Rakuten')->assertSee(route('settings.api-keys'));
 });
 
 it('never calls a provider for a blank term', function () {
@@ -167,6 +167,9 @@ describe('adding to the wishlist', function () {
             ->and($object->bookDetail->volume)->toBe('1')
             ->and($object->release_date->toDateString())->toBe('2023-06-01');
 
+        foreach (ApiKeyProvider::cases() as $provider) {
+            UserApiKey::factory()->for($this->user)->create(['provider' => $provider]);
+        }
         $this->post(route('scan.start'), ['category_id' => $this->books->id, 'sub_category_id' => $this->manga->id, 'language_id' => $this->ja->id, 'mode' => 'single']);
         $this->post(route('scan.single.lookup'), ['barcode' => '9784063815597']);
         $this->post(route('scan.single.add'));
