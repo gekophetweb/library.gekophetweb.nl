@@ -3,6 +3,7 @@
 #   web        nginx + PHP-FPM serving the Laravel app      (port 8080)
 #   queue      queue worker: batch-scan commits, catalogue lookups
 #   scheduler  Laravel scheduler: model pruning (shares, pairing codes), etc.
+#   cloudflared  Cloudflare Tunnel connector (public access, needs CLOUDFLARE_TUNNEL_TOKEN)
 #   db         MariaDB, private to the compose network
 #
 # web, queue and scheduler share one image built from ./Dockerfile.
@@ -43,8 +44,9 @@ services:
       AUTORUN_ENABLED: "true"
       AUTORUN_LARAVEL_MIGRATION: "true"
       AUTORUN_LARAVEL_STORAGE_LINK: "true"
-    # Default: localhost only, so the site is reachable solely through the Cloudflare
-    # Tunnel. Set APP_BIND=0.0.0.0 in .env to also allow access from the LAN.
+    # Not needed for the tunnel (cloudflared reaches web:8080 over the compose network).
+    # Default: localhost only, for a browser on the Docker host. Set APP_BIND=0.0.0.0 in
+    # .env to also allow access from the LAN.
     ports:
       - "${APP_BIND:-127.0.0.1}:${APP_PORT:-8080}:8080"
     healthcheck:
@@ -69,6 +71,20 @@ services:
     healthcheck:
       test: ["CMD", "healthcheck-schedule"]
       start_period: 10s
+
+  # Cloudflare Tunnel connector: the only way in from the internet. It dials out to
+  # Cloudflare, so no inbound port is needed. The token comes from the Zero Trust
+  # dashboard (Networks → Tunnels); point the hostname's ingress at http://web:8080.
+  cloudflared:
+    image: cloudflare/cloudflared:2026.10.7
+    command: ["tunnel", "--no-autoupdate", "run"]
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:?set CLOUDFLARE_TUNNEL_TOKEN in .env}
+    depends_on:
+      web:
+        condition: service_healthy
+    restart: unless-stopped
+    networks: [backend]
 
   db:
     image: mariadb:11.4
