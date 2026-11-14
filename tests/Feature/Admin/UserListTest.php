@@ -67,10 +67,13 @@ it('forbids the list to non-admins and hides the nav link', function () {
     $this->get(route('home'))->assertDontSee(route('admin.users.index'));
 });
 
-it('shows the nav link to admins', function () {
+it('shows the admin section link to admins, with Users in its menu', function () {
     $this->actingAs(User::factory()->admin()->create())
         ->get(route('home'))
-        ->assertSee(route('admin.users.index'));
+        ->assertSee(route('admin.home'))
+        ->assertDontSee(route('admin.users.index'));
+
+    $this->get(route('admin.home'))->assertSee(route('admin.users.index'));
 });
 
 it('sends guests to the login page', function () {

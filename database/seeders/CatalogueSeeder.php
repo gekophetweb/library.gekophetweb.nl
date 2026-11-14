@@ -35,7 +35,7 @@ class CatalogueSeeder extends Seeder
             }
         }
 
-        foreach (['ja' => 'Japanese', 'en' => 'English', 'nl' => 'Dutch', 'de' => 'German', 'fr' => 'French', 'ko' => 'Korean', 'zh' => 'Chinese'] as $code => $name) {
+        foreach (['ja' => 'Japanese', 'en' => 'English', 'nl' => 'Dutch', 'ko' => 'Korean'] as $code => $name) {
             Language::query()->firstOrCreate(['code' => $code], ['name' => $name]);
         }
 

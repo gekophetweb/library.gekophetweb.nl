@@ -1,4 +1,4 @@
-<x-layout title="Sign-in methods">
+<x-admin-layout title="Sign-in methods">
     @php
         $secondary = 'rounded-md border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800';
         $primary = 'rounded-md bg-stone-900 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300';
@@ -29,11 +29,7 @@
                         @endif
                         <span class="text-xs text-stone-500">{{ $provider->identities_count }} linked</span>
                     </div>
-                    <div class="flex flex-wrap items-center gap-2 text-sm">
-                        <span class="text-stone-500">Callback URL:</span>
-                        <code class="break-all rounded bg-stone-100 px-1.5 py-0.5 text-xs dark:bg-stone-800" id="callback-{{ $provider->id }}">{{ route('sso.callback', $provider) }}</code>
-                        <button type="button" class="text-xs underline" onclick="navigator.clipboard.writeText(document.getElementById('callback-{{ $provider->id }}').textContent)">Copy</button>
-                    </div>
+                    <x-copy-field :value="route('sso.callback', $provider)" label="Callback URL (register this at the provider):" class="max-w-2xl" />
                     <div class="flex flex-wrap gap-2">
                         <a href="{{ route('admin.sso.edit', $provider) }}" class="{{ $secondary }}">Edit</a>
                         <a href="{{ route('admin.sso.test', $provider) }}" class="{{ $secondary }}">Test login</a>
@@ -68,4 +64,4 @@
             <button class="{{ $primary }}">Save</button>
         </form>
     </section>
-</x-layout>
+</x-admin-layout>

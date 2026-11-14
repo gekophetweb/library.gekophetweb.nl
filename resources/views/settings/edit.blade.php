@@ -78,7 +78,7 @@
             <div class="mb-4 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm dark:border-amber-800 dark:bg-amber-950">
                 <p class="mb-1 font-medium">Your new token (shown once):</p>
                 <code class="block break-all font-mono" id="new-token">{{ session('token') }}</code>
-                <button type="button" class="mt-2 underline" onclick="navigator.clipboard.writeText(document.getElementById('new-token').textContent)">Copy</button>
+                <x-copy-button :value="session('token')" class="mt-2" />
             </div>
         @endif
 
@@ -117,7 +117,7 @@
             <div class="mb-4 rounded-md border border-emerald-300 bg-emerald-50 p-3 text-sm dark:border-emerald-800 dark:bg-emerald-950">
                 <p class="mb-1 font-medium">Your new link:</p>
                 <code class="block break-all font-mono" id="new-share">{{ session('share_url') }}</code>
-                <button type="button" class="mt-2 underline" onclick="navigator.clipboard.writeText(document.getElementById('new-share').textContent)">Copy</button>
+                <x-copy-button :value="session('share_url')" class="mt-2" />
             </div>
         @endif
 
@@ -177,7 +177,7 @@
                             <code class="block break-all font-mono text-xs text-stone-500" id="share-{{ $share->id }}">{{ $share->url() }}</code>
                         </div>
                         <div class="flex gap-2">
-                            <button type="button" class="{{ $secondary }}" onclick="navigator.clipboard.writeText(document.getElementById('share-{{ $share->id }}').textContent)">Copy</button>
+                            <x-copy-button :value="$share->url()" />
                             <form method="POST" action="{{ route('settings.shares.destroy', $share) }}">
                                 @csrf
                                 @method('DELETE')
@@ -222,5 +222,29 @@
                 @endforeach
             </div>
         @endif
+    </section>
+
+    <section class="mt-10 max-w-2xl" id="delete-account">
+        <h2 class="mb-1 text-lg font-semibold text-red-700 dark:text-red-400">Delete account</h2>
+        <div class="rounded-lg border border-red-200 bg-white p-4 dark:border-red-900 dark:bg-stone-900">
+            <p class="mb-2 text-sm">This permanently deletes your account and <strong>cannot be undone</strong>:</p>
+            <ul class="mb-3 list-disc space-y-0.5 pl-5 text-sm text-stone-600 dark:text-stone-400">
+                <li>your whole collection and wishlist, series and scan batches;</li>
+                <li>your shared links, phone app tokens, API keys and linked sign-in methods.</li>
+            </ul>
+            <p class="mb-4 text-sm text-stone-600 dark:text-stone-400">Suggestions and comments you wrote stay for others to read, shown as <em>[deleted user]</em>. Your votes are removed.</p>
+
+            <form method="POST" action="{{ route('settings.account.destroy') }}" class="space-y-3"
+                  onsubmit="return confirm('Delete your account and your whole collection? This cannot be undone.')">
+                @csrf
+                @method('DELETE')
+                <div>
+                    <label for="confirm_email" class="mb-1 block text-sm font-medium">Type your e-mail address (<span class="font-mono">{{ $user->email }}</span>) to confirm</label>
+                    <input id="confirm_email" name="confirm_email" type="email" required autocomplete="off" class="{{ $input }}">
+                    @error('confirm_email', 'deleteAccount') <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+                </div>
+                <button class="rounded-md bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700">Delete my account</button>
+            </form>
+        </div>
     </section>
 </x-layout>

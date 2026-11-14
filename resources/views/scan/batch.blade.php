@@ -20,6 +20,8 @@
     </p>
 
     @if ($batch->isDraft())
+        <x-camera-scanner mode="batch" target="barcodes" />
+
         <form method="POST" action="{{ route('scan.batches.items.store', $batch) }}" class="mb-2 flex max-w-md gap-2">
             @csrf
             <label for="barcode" class="sr-only">Barcode</label>
@@ -27,6 +29,31 @@
             <button class="rounded-md border border-stone-300 px-4 py-2 text-sm dark:border-stone-700">Add</button>
         </form>
         @error('barcode') <p class="mb-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+
+        {{-- Bulk entry: a list typed or pasted from elsewhere, one ISBN / barcode per line. --}}
+        <details class="mb-4 max-w-md" @if (old('barcodes') !== null || $errors->has('barcodes')) open @endif>
+            <summary class="cursor-pointer text-sm font-medium underline underline-offset-2">Paste a list instead</summary>
+            <form method="POST" action="{{ route('scan.batches.items.bulk', $batch) }}" class="mt-3 space-y-2">
+                @csrf
+                <label for="barcodes" class="block text-sm text-stone-600 dark:text-stone-400">One ISBN or barcode per line. Empty lines are ignored.</label>
+                <textarea id="barcodes" name="barcodes" rows="8" required autocomplete="off" spellcheck="false"
+                          placeholder="9780140449136&#10;978-0-14-044913-6&#10;4988601234567"
+                          class="{{ $input }} font-mono">{{ old('barcodes') }}</textarea>
+                @error('barcodes') <p class="text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+                @if ($skipped = session('bulk_skipped'))
+                    <div class="rounded-md bg-amber-50 px-3 py-2 text-sm text-amber-900 dark:bg-amber-950 dark:text-amber-200" data-bulk-skipped>
+                        <p class="font-medium">{{ count($skipped) }} {{ Str::plural('line', count($skipped)) }} not added (still in the box above):</p>
+                        <ul class="mt-1 list-disc pl-5">
+                            @foreach ($skipped as $line)
+                                <li><span class="font-mono">{{ $line['line'] }}</span> {{ $line['reason'] }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <button class="rounded-md border border-stone-300 px-4 py-2 text-sm dark:border-stone-700">Add all to the list</button>
+            </form>
+        </details>
+
         <p class="mb-6 text-sm text-stone-500">Items on this list are not in your {{ $toWishlist ? 'wishlist' : 'collection' }} yet. Commit the list when you are done.</p>
     @elseif ($running)
         <p class="mb-6 rounded-md bg-sky-50 px-4 py-3 text-sm text-sky-800 dark:bg-sky-950 dark:text-sky-200">Adding {{ $items->count() }} items in the background…</p>
