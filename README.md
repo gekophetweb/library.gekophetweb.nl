@@ -101,6 +101,42 @@ docker compose exec web php artisan test --compact
 docker compose down
 ```
 
+### Automatic updates
+
+[`scripts/update.sh`](scripts/update.sh) keeps the production stack in step with
+`origin/main`, and is meant for cron. Each run it:
+
+1. stops at once if another update is still running, the checkout is not on `main`, or
+   tracked files have local edits;
+2. pulls the registry images (`mariadb`, `cloudflared`) and recreates only what changed;
+3. when `origin/main` has new commits: dumps the database to `backups/` (newest 14
+   kept), fast-forwards the checkout, rebuilds the app image and recreates the
+   containers, waiting until they are healthy. Migrations run when `web` starts.
+
+If the new `docker-compose.yml` needs an `.env` setting you haven't added yet, the
+script puts the checkout back on the old commit and exits with an error, leaving the
+running containers alone. `--force` rebuilds even without new commits, to pick up
+security fixes in the PHP/nginx/Node base images.
+
+Install it with `crontab -e`, as a user in the `docker` group that owns the checkout
+(adjust the path):
+
+```cron
+*/15 * * * * /opt/library.gekophetweb.nl/scripts/update.sh >> /var/log/library-update.log 2>&1
+30 4 * * 0   /opt/library.gekophetweb.nl/scripts/update.sh --force >> /var/log/library-update.log 2>&1
+```
+
+The log file must be writable by that user. A failed run exits non-zero and prints
+`ERROR:` with the previous commit and backup file, so you can roll back by hand:
+
+```bash
+git reset --hard <previous-commit> && docker compose up -d --build
+```
+
+```bash
+gunzip -c backups/<file>.sql.gz | docker compose exec -T db sh -c 'mariadb -uroot -p"$MARIADB_ROOT_PASSWORD" "$MARIADB_DATABASE"'
+```
+
 ### Development stack with live changes
 
 `docker-compose.dev.yml` runs the app on your checkout, so edits show up without a
