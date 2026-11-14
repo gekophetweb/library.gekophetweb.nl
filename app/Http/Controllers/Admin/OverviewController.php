@@ -6,6 +6,7 @@ use App\Enums\SuggestionStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Language;
+use App\Models\ScanBatch;
 use App\Models\SsoProvider;
 use App\Models\Suggestion;
 use App\Models\User;
@@ -26,6 +27,8 @@ class OverviewController extends Controller
             'subCategories' => Category::query()->whereNotNull('parent_id')->count(),
             'topCategories' => Category::query()->whereNull('parent_id')->count(),
             'newSuggestions' => Suggestion::query()->where('status', SuggestionStatus::New)->count(),
+            'batches' => ScanBatch::query()->count(),
+            'draftBatches' => ScanBatch::query()->where('status', ScanBatch::DRAFT)->count(),
         ]);
     }
 }

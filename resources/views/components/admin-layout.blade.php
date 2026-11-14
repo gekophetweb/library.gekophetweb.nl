@@ -9,6 +9,7 @@
         ['admin.sso.index', 'admin.sso.*', 'Sign-in', null],
         ['admin.languages.index', 'admin.languages.*', 'Languages', null],
         ['admin.categories.index', 'admin.categories.*', 'Categories', null],
+        ['admin.scan-batches.index', 'admin.scan-batches.*', 'Scan batches', null],
         ['admin.suggestions.index', 'admin.suggestions.*', 'Suggestions', $newSuggestions ?: null],
     ];
 @endphp
