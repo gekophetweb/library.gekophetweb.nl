@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\OwnershipStatus;
+use App\Http\Controllers\Admin\ScanBatchController as AdminScanBatchController;
 use App\Jobs\ProcessScanBatch;
 use App\Models\CollectionObject;
 use App\Models\ScanBatch;
@@ -19,6 +20,24 @@ use Illuminate\View\View;
  */
 class ScanBatchController extends Controller
 {
+    /** The user's own batches, newest first: drafts to continue and finished ones to check. */
+    public function index(Request $request): View
+    {
+        return view('scan.batches', [
+            'batches' => ScanBatch::query()
+                ->where('user_id', $request->user()->id)
+                ->with(['category', 'subCategory', 'language'])
+                ->withCount([
+                    'items',
+                    'items as added_count' => fn ($query) => $query->whereIn('status', ['added', 'promoted']),
+                    'items as failed_count' => fn ($query) => $query->where('status', 'failed'),
+                ])
+                ->latest()->latest('id')
+                ->paginate(25),
+            'statuses' => AdminScanBatchController::STATUSES,
+        ]);
+    }
+
     public function show(Request $request, ScanBatch $batch): View
     {
         $this->authorizeBatch($request, $batch);

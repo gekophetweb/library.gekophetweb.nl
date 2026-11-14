@@ -45,6 +45,15 @@
                 <button class="{{ $secondary }}">Look up the {{ $counts['failed'] }} failed {{ Str::plural('code', $counts['failed']) }} again</button>
             </form>
         @endif
+        @php($redoable = collect(App\Models\ScanBatch::REDOABLE)->sum(fn ($status) => $counts[$status] ?? 0))
+        @if ($batch->status === App\Models\ScanBatch::DONE && $redoable > 0)
+            <form method="POST" action="{{ route('admin.scan-batches.redo', $batch) }}"
+                  onsubmit="return confirm('Look up the {{ $redoable }} {{ Str::plural('code', $redoable) }} that were not added again, with {{ e($batch->user->name) }}’s keys?')">
+                @csrf
+                <button class="{{ $secondary }}" data-redo="{{ $redoable }}"
+                        title="Looks up every failed and not-found code again; added codes are left alone">Redo batch: {{ $redoable }} {{ Str::plural('code', $redoable) }} not added</button>
+            </form>
+        @endif
         <form method="POST" action="{{ route('admin.scan-batches.destroy', $batch) }}" onsubmit="return confirm('Remove this scan batch?')">
             @csrf
             @method('DELETE')

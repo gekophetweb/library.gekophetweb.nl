@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\ProcessScanBatch;
 use App\Models\Category;
 use App\Models\CollectionObject;
 use App\Models\Language;
@@ -7,6 +8,7 @@ use App\Models\ScanBatch;
 use App\Models\User;
 use Database\Seeders\CatalogueSeeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Queue;
 
 beforeEach(function () {
     $this->seed(CatalogueSeeder::class);
@@ -111,4 +113,48 @@ it('shows scan batches in the admin menu and overview', function () {
         ->assertSee(route('admin.scan-batches.index'))
         ->assertSee('1 batch')
         ->assertSee('1 not committed');
+});
+
+it('redoes a finished batch: codes not added are looked up again, the rest left alone', function () {
+    Queue::fake();
+    $owner = User::factory()->create();
+    $batch = adminTestBatch($owner, ScanBatch::DONE, $this->ja, $this->manga, ['111', '222', '333', '444', '555']);
+    $object = CollectionObject::factory()->for($owner)->create(['barcode' => '111']);
+    $items = $batch->items()->get();
+    $items[0]->update(['status' => 'added', 'object_id' => $object->id]);
+    $items[1]->update(['status' => 'not_found', 'message' => 'Not found.']);
+    $items[2]->update(['status' => 'failed', 'message' => 'No answer from Rakuten.']);
+    $items[3]->update(['status' => 'invalid']);
+    $items[4]->update(['status' => 'already_owned']);
+
+    $this->actingAs($this->admin)->get(route('admin.scan-batches.show', $batch))
+        ->assertSee('data-redo="2"', false)
+        ->assertSee('Redo batch: 2 codes not added');
+
+    $this->post(route('admin.scan-batches.redo', $batch))
+        ->assertRedirect(route('admin.scan-batches.show', $batch))
+        ->assertSessionHas('status', 'Redoing 2 codes…');
+
+    expect($batch->refresh()->status)->toBe(ScanBatch::QUEUED)
+        ->and($batch->finished_at)->toBeNull()
+        ->and($batch->items()->pluck('status', 'barcode')->all())->toBe([
+            '111' => 'added', '222' => 'pending', '333' => 'pending', '444' => 'invalid', '555' => 'already_owned',
+        ])
+        ->and($batch->items()->where('barcode', '222')->value('message'))->toBeNull();
+    Queue::assertPushed(ProcessScanBatch::class, fn (ProcessScanBatch $job) => $job->batch->is($batch));
+});
+
+it('only redoes finished batches, and only for admins', function () {
+    Queue::fake();
+    $owner = User::factory()->create();
+    $running = adminTestBatch($owner, ScanBatch::PROCESSING, $this->ja, codes: ['111']);
+    $done = adminTestBatch($owner, ScanBatch::DONE, $this->ja, codes: ['222']);
+    $done->items()->update(['status' => 'not_found']);
+
+    $this->actingAs($owner)->post(route('admin.scan-batches.redo', $done))->assertForbidden();
+    $this->actingAs($this->admin)->post(route('admin.scan-batches.redo', $running))->assertStatus(409);
+
+    $done->items()->update(['status' => 'already_owned']);
+    $this->post(route('admin.scan-batches.redo', $done))->assertSessionHas('status', 'Every code in this batch was already added; nothing to redo.');
+    Queue::assertNothingPushed();
 });
