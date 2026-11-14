@@ -29,7 +29,8 @@ class SettingsController extends Controller
     {
         return view('settings.api-keys.index', [
             'apiKeyProviders' => ApiKeyProvider::cases(),
-            'savedApiKeys' => $request->user()->apiKeys()->pluck('updated_at', 'provider'),
+            'missingApiKeys' => $request->user()->missingApiKeys(),
+            'storedApiKeys' => $request->user()->apiKeys()->pluck('provider')->map(fn (ApiKeyProvider $provider) => $provider->value)->all(),
         ]);
     }
 
@@ -41,6 +42,8 @@ class SettingsController extends Controller
         return view('settings.api-keys.show', [
             'provider' => $provider,
             'saved' => $request->user()->apiKey($provider) !== null,
+            'stored' => $request->user()->apiKeys()->where('provider', $provider->value)->exists(),
+            'serverIp' => config('catalogue.providers.rakuten.server_ip'),
         ]);
     }
 
@@ -96,9 +99,16 @@ class SettingsController extends Controller
     public function updateApiKey(Request $request, string $provider): RedirectResponse
     {
         $provider = ApiKeyProvider::tryFrom($provider) ?? abort(404);
-        $validated = $request->validate(['key' => ['required', 'string', 'max:500']]);
+        // Both credentials together when the provider needs two: saved ones are never shown again.
+        $validated = $request->validate([
+            'key' => ['required', 'string', 'max:500'],
+            'secret' => [$provider->needsSecret() ? 'required' : 'prohibited', 'nullable', 'string', 'max:500'],
+        ], [], ['key' => strtolower($provider->keyLabel()), 'secret' => strtolower((string) $provider->secretLabel())]);
 
-        $request->user()->apiKeys()->updateOrCreate(['provider' => $provider], ['key' => trim($validated['key'])]);
+        $request->user()->apiKeys()->updateOrCreate(['provider' => $provider], [
+            'key' => trim($validated['key']),
+            'secret' => $provider->needsSecret() ? trim($validated['secret']) : null,
+        ]);
 
         return redirect()->route('settings.api-keys')->with('status', "{$provider->label()} key saved.");
     }

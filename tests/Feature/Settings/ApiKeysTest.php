@@ -8,16 +8,19 @@ use Illuminate\Support\Facades\DB;
 it('stores a provider key encrypted and never shows it back', function () {
     $user = User::factory()->create();
 
-    $this->actingAs($user)->put(route('settings.api-keys.update', 'rakuten'), ['key' => 'app-id-123'])
+    $this->actingAs($user)->put(route('settings.api-keys.update', 'rakuten'), ['key' => 'app-id-123', 'secret' => ' pk_access-456 '])
         ->assertRedirect(route('settings.api-keys'));
 
     expect($user->apiKey(ApiKeyProvider::Rakuten))->toBe('app-id-123')
-        ->and(DB::table('user_api_keys')->value('key'))->not->toContain('app-id-123');
+        ->and($user->apiKeySecret(ApiKeyProvider::Rakuten))->toBe('pk_access-456')
+        ->and(DB::table('user_api_keys')->value('key'))->not->toContain('app-id-123')
+        ->and(DB::table('user_api_keys')->value('secret'))->not->toContain('pk_access-456');
 
     $this->get(route('settings.api-keys'))
         ->assertSee('Rakuten')
         ->assertSee('Key saved')
-        ->assertDontSee('app-id-123');
+        ->assertDontSee('app-id-123')
+        ->assertDontSee('pk_access-456');
 });
 
 it('replaces and removes a key', function () {
@@ -45,8 +48,43 @@ it('rejects an unknown provider and an empty key', function () {
         ->put(route('settings.api-keys.update', 'myspace'), ['key' => 'x'])
         ->assertNotFound();
 
-    $this->put(route('settings.api-keys.update', 'rakuten'), ['key' => ''])->assertSessionHasErrors('key');
+    $this->put(route('settings.api-keys.update', 'rakuten'), ['key' => '', 'secret' => 'pk_x'])->assertSessionHasErrors('key');
     expect(UserApiKey::count())->toBe(0);
+});
+
+it('needs Rakuten\'s access key next to the application ID, and no second value elsewhere', function () {
+    $this->actingAs(User::factory()->create());
+
+    $this->put(route('settings.api-keys.update', 'rakuten'), ['key' => 'app-id'])->assertSessionHasErrors('secret');
+    $this->put(route('settings.api-keys.update', 'hardcover'), ['key' => 'token', 'secret' => 'x'])->assertSessionHasErrors('secret');
+    expect(UserApiKey::count())->toBe(0);
+
+    $this->get(route('settings.api-keys.show', 'rakuten'))
+        ->assertSee('name="secret"', false)
+        ->assertSee('Access key')
+        ->assertSee('pk_');
+    $this->get(route('settings.api-keys.show', 'hardcover'))->assertDontSee('name="secret"', false);
+});
+
+it('treats a Rakuten application ID without access key as missing', function () {
+    $user = User::factory()->withApiKeys()->create();
+    $user->apiKeys()->where('provider', ApiKeyProvider::Rakuten->value)->update(['secret' => null]);
+
+    expect($user->apiKey(ApiKeyProvider::Rakuten))->toBeNull()
+        ->and($user->missingApiKeys())->toBe([ApiKeyProvider::Rakuten]);
+
+    $this->actingAs($user)->get(route('settings.api-keys'))
+        ->assertSee('Access key missing')
+        ->assertSee(route('settings.api-keys.destroy', 'rakuten'), false);
+});
+
+it('shows this server\'s IP address in the Rakuten guide when it is configured', function () {
+    $this->actingAs(User::factory()->create());
+
+    $this->get(route('settings.api-keys.show', 'rakuten'))->assertDontSee('data-server-ip', false)->assertSee('Ask the person who runs this site');
+
+    config(['catalogue.providers.rakuten.server_ip' => '203.0.113.7']);
+    $this->get(route('settings.api-keys.show', 'rakuten'))->assertSee('203.0.113.7');
 });
 
 it('splits settings into separate pages, each with the settings menu', function () {

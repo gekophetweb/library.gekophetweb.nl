@@ -38,6 +38,7 @@ class UserFactory extends Factory
                 $user->apiKeys()->create([
                     'provider' => $provider,
                     'key' => $provider === ApiKeyProvider::Rakuten ? 'app-123' : "{$provider->value}-key",
+                    'secret' => $provider->needsSecret() ? 'pk_test' : null,
                 ]);
             }
         });
