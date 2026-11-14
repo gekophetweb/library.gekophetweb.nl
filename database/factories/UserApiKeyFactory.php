@@ -21,6 +21,7 @@ class UserApiKeyFactory extends Factory
             'user_id' => User::factory(),
             'provider' => ApiKeyProvider::Rakuten,
             'key' => fake()->sha1(),
+            'secret' => 'pk_'.fake()->sha1(), // only read for providers that need one (Rakuten)
         ];
     }
 }

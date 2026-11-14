@@ -67,25 +67,46 @@ class User extends Authenticatable
         return $this->hasMany(UserApiKey::class);
     }
 
-    /** This user's own key for $provider, or null when none is set. */
+    /**
+     * This user's own key for $provider, or null when none is set — or when the provider
+     * also needs a secret (Rakuten's access key) and that is missing, so callers skip it.
+     */
     public function apiKey(ApiKeyProvider $provider): ?string
     {
-        return $this->apiKeys()->where('provider', $provider->value)->first()?->key;
+        $saved = $this->apiKeys()->where('provider', $provider->value)->first();
+
+        return $saved !== null && self::isComplete($saved) ? $saved->key : null;
+    }
+
+    /** The second credential for $provider (Rakuten's access key), or null. */
+    public function apiKeySecret(ApiKeyProvider $provider): ?string
+    {
+        return $provider->needsSecret()
+            ? $this->apiKeys()->where('provider', $provider->value)->first()?->secret
+            : null;
     }
 
     /**
-     * Providers this user has not saved a key for yet. Scanning needs all of them.
+     * Providers this user has no complete key for yet. Scanning needs all of them.
      *
      * @return list<ApiKeyProvider>
      */
     public function missingApiKeys(): array
     {
-        $saved = $this->apiKeys()->pluck('provider')->map(fn (ApiKeyProvider $provider) => $provider->value)->all();
+        $complete = $this->apiKeys()->get()
+            ->filter(fn (UserApiKey $saved) => self::isComplete($saved))
+            ->map(fn (UserApiKey $saved) => $saved->provider->value)
+            ->all();
 
         return array_values(array_filter(
             ApiKeyProvider::cases(),
-            fn (ApiKeyProvider $provider) => ! in_array($provider->value, $saved, true),
+            fn (ApiKeyProvider $provider) => ! in_array($provider->value, $complete, true),
         ));
+    }
+
+    private static function isComplete(UserApiKey $saved): bool
+    {
+        return ! $saved->provider->needsSecret() || filled($saved->secret);
     }
 
     /** @return HasMany<Suggestion, $this> */

@@ -181,6 +181,11 @@ Each user links **their own API keys** for these providers through **user settin
   (`settings.api-keys.show`, view `settings/api-keys/guides/{provider}.blade.php`)
   explaining step by step how to get a key, with the form to save it. A new provider
   needs a guide view. Lookups still skip a provider whose key was removed later.
+- **Rakuten needs two credentials** since its 2026 move to `openapi.rakuten.co.jp`: the
+  application ID (`key`) and an access key (`secret`, `ApiKeyProvider::needsSecret()`),
+  both sent as query parameters. A row without the secret counts as missing
+  (`User::apiKey()` returns null). Rakuten only answers calls from IP addresses the user
+  allowed for their app; `RAKUTEN_ALLOWED_IP` shows this server's address in the guide.
 - **Settings are split into short pages** sharing `<x-settings-layout>` (its menu):
   Profile (`settings.edit`, name and e-mail), API keys, Phone app tokens, Shared links,
   Sign-in methods, Delete account. Each form redirects back to its own page.

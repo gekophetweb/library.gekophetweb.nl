@@ -12,7 +12,7 @@ before relying on the field mapping in production:
 
 ```sh
 curl "https://www.googleapis.com/books/v1/volumes?q=isbn:9780593820247&key=$GOOGLE_BOOKS_KEY"
-curl "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&formatVersion=2&isbn=9784592135746&applicationId=$RAKUTEN_APP_ID"
+curl "https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&formatVersion=2&isbn=9784592135746&applicationId=$RAKUTEN_APP_ID&accessKey=$RAKUTEN_ACCESS_KEY"
 ```
 
 ## Catalogue search (plan search-catalogue-not-owned)

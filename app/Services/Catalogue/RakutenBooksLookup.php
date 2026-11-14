@@ -74,10 +74,11 @@ class RakutenBooksLookup implements CatalogueLookup, CatalogueSearch
             $response = $this->logger->send(
                 provider: $this->name(),
                 operation: $operation,
-                query: http_build_query($query), // the application ID stays out of the log
+                query: http_build_query($query), // the application ID and access key stay out of the log
                 request: fn () => $this->http->timeout($timeout)->acceptJson()
                     ->get(config('catalogue.providers.rakuten.endpoint'), $query + [
                         'applicationId' => $context->user->apiKey(ApiKeyProvider::Rakuten),
+                        'accessKey' => $context->user->apiKeySecret(ApiKeyProvider::Rakuten),
                     ]),
                 language: $context->language,
                 category: $context->category->kind->value,
@@ -91,7 +92,8 @@ class RakutenBooksLookup implements CatalogueLookup, CatalogueSearch
             throw CatalogueUnavailable::from($this->name(), $response->status());
         }
 
-        return $response->successful() ? array_values((array) $response->json('Items')) : [];
+        // formatVersion 2 has answered with "Items"; the openapi host may use "items".
+        return $response->successful() ? array_values((array) ($response->json('Items') ?? $response->json('items'))) : [];
     }
 
     /** @param  array<string, mixed>  $item */
