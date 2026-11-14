@@ -21,10 +21,37 @@ enum ApiKeyProvider: string
     public function hint(): string
     {
         return match ($this) {
-            self::Rakuten => 'Your Rakuten Web Service application ID. Needed for Japanese book lookups.',
+            self::Rakuten => 'Your Rakuten app’s application ID and access key. Needed for Japanese book lookups.',
             self::GoogleBooks => 'Your Google Cloud API key with the Books API enabled. Used for book lookups and series of translated manga.',
             self::Hardcover => 'Your Hardcover API token. Used for series of translated manga.',
         };
+    }
+
+    /** What the main credential is called at the provider. */
+    public function keyLabel(): string
+    {
+        return match ($this) {
+            self::Rakuten => 'Application ID',
+            self::GoogleBooks => 'API key',
+            self::Hardcover => 'API token',
+        };
+    }
+
+    /**
+     * The second credential the provider needs next to the key, or null for none. Rakuten
+     * wants an access key with every call since its 2026 API move.
+     */
+    public function secretLabel(): ?string
+    {
+        return match ($this) {
+            self::Rakuten => 'Access key',
+            default => null,
+        };
+    }
+
+    public function needsSecret(): bool
+    {
+        return $this->secretLabel() !== null;
     }
 
     /** Where the user signs up for a key. */

@@ -12,7 +12,8 @@
 
     <ul class="divide-y divide-stone-200 rounded-lg border border-stone-200 bg-white dark:divide-stone-800 dark:border-stone-800 dark:bg-stone-900">
         @foreach ($apiKeyProviders as $provider)
-            @php($saved = $savedApiKeys->has($provider->value))
+            @php($saved = ! in_array($provider, $missingApiKeys, true))
+            @php($stored = in_array($provider->value, $storedApiKeys, true))
             <li class="space-y-2 px-4 py-3" data-provider="{{ $provider->value }}">
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="font-medium">{{ $provider->label() }}</span>

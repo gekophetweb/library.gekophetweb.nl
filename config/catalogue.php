@@ -15,7 +15,11 @@ return [
 
     'providers' => [
         'rakuten' => [
-            'endpoint' => 'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404',
+            // Rakuten moved its API to openapi.rakuten.co.jp in 2026; the old app.rakuten.co.jp host is retired.
+            'endpoint' => 'https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404',
+            // This server's public IP address, shown in the key guide: Rakuten only answers
+            // calls from the IP addresses a user allows for their app.
+            'server_ip' => env('RAKUTEN_ALLOWED_IP'),
         ],
         'google_books' => [
             'endpoint' => 'https://www.googleapis.com/books/v1/volumes',

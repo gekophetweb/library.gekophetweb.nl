@@ -47,7 +47,7 @@ function fakeCatalogueApis(bool $googleQuotaExceeded = false, bool $ndlDown = fa
                 : ['numFound' => 0, 'docs' => []]);
         }
 
-        if (str_contains($request->url(), 'app.rakuten.co.jp')) {
+        if (str_contains($request->url(), 'openapi.rakuten.co.jp')) {
             return Http::response(($query['isbn'] ?? '') === '9784592135746'
                 ? catalogueFixture('rakuten-isbn-9784592135746.json')
                 : ['count' => 0, 'Items' => []]);
@@ -79,7 +79,7 @@ function bookContext(string $language): CatalogueContext
 }
 
 it('looks a Japanese book up at Rakuten with the user\'s key', function () {
-    UserApiKey::factory()->for($this->user)->create(['provider' => ApiKeyProvider::Rakuten, 'key' => 'app-123']);
+    UserApiKey::factory()->for($this->user)->create(['provider' => ApiKeyProvider::Rakuten, 'key' => 'app-123', 'secret' => 'pk_access']);
     fakeCatalogueApis();
 
     $outcome = app(CatalogueLookupManager::class)->lookup('978-4-592-13574-6', bookContext('ja'));
@@ -92,7 +92,8 @@ it('looks a Japanese book up at Rakuten with the user\'s key', function () {
         ->and($outcome->result->releaseDate)->toBe('1990-12')
         ->and($outcome->result->coverUrl)->toContain('large.jpg');
 
-    Http::assertSent(fn (Request $request) => str_contains($request->url(), 'applicationId=app-123'));
+    Http::assertSent(fn (Request $request) => str_starts_with($request->url(), 'https://openapi.rakuten.co.jp/')
+        && $request['applicationId'] === 'app-123' && $request['accessKey'] === 'pk_access');
 });
 
 it('skips Rakuten without a key, says so, and still finds a Japanese book at NDL', function () {
@@ -174,14 +175,14 @@ it('falls through when Google Books is over its quota', function () {
 });
 
 it('logs every provider call without the key', function () {
-    UserApiKey::factory()->for($this->user)->create(['provider' => ApiKeyProvider::Rakuten, 'key' => 'secret-app-id']);
+    UserApiKey::factory()->for($this->user)->create(['provider' => ApiKeyProvider::Rakuten, 'key' => 'secret-app-id', 'secret' => 'pk_secret-access']);
     fakeCatalogueApis();
 
     app(CatalogueLookupManager::class)->lookup('9784592135746', bookContext('ja'));
 
     $logs = ApiCallLog::query()->orderBy('id')->get();
     expect($logs->pluck('provider')->all())->toBe(['rakuten', 'ndl', 'google_books'])
-        ->and($logs->pluck('query')->join(' '))->not->toContain('secret-app-id')
+        ->and($logs->pluck('query')->join(' '))->not->toContain('secret-app-id')->not->toContain('pk_secret-access')
         ->and($logs->first()->user_id)->toBe($this->user->id);
 });
 

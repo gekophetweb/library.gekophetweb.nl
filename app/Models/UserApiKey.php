@@ -10,9 +10,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/** A user's own key for an external provider, encrypted at rest (§5.1). */
-#[Fillable(['provider', 'key'])]
-#[Hidden(['key'])]
+/**
+ * A user's own key for an external provider, encrypted at rest (§5.1). `secret` holds the
+ * second credential a provider may need (Rakuten's access key); see ApiKeyProvider::needsSecret().
+ */
+#[Fillable(['provider', 'key', 'secret'])]
+#[Hidden(['key', 'secret'])]
 class UserApiKey extends Model
 {
     /** @use HasFactory<UserApiKeyFactory> */
@@ -20,7 +23,7 @@ class UserApiKey extends Model
 
     protected function casts(): array
     {
-        return ['provider' => ApiKeyProvider::class, 'key' => 'encrypted'];
+        return ['provider' => ApiKeyProvider::class, 'key' => 'encrypted', 'secret' => 'encrypted'];
     }
 
     /** @return BelongsTo<User, $this> */
