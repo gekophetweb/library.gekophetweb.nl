@@ -27,7 +27,12 @@
                            value="{{ $bag->any() ? old('name') : $language->name }}" class="{{ $input }} max-w-56">
                     <button class="{{ $secondary }}">Save</button>
                 </form>
-                <span class="text-sm text-stone-500">{{ $uses ? 'Used by '.$uses : 'Not used' }}</span>
+                <span class="text-sm text-stone-500">
+                    {{ $uses ? 'Used by '.$uses : 'Not used' }}
+                    @if ($language->scan_batches_count)
+                        · <a href="{{ route('admin.scan-batches.index', ['language' => $language->id]) }}" class="underline">see scan batches</a>
+                    @endif
+                </span>
                 <form method="POST" action="{{ route('admin.languages.destroy', $language) }}"
                       onsubmit="return confirm('Remove {{ e($language->name) }}?')">
                     @csrf

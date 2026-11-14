@@ -4,6 +4,7 @@
         [route('admin.sso.index'), 'Sign-in', $providers.' SSO '.Str::plural('provider', $providers).' enabled', 'E-mail login codes '.($emailCodes ? 'on' : 'off')],
         [route('admin.languages.index'), 'Languages', $languages.' '.Str::plural('language', $languages), 'Offered when scanning and editing items'],
         [route('admin.categories.index'), 'Categories', $topCategories.' main · '.$subCategories.' sub-categories', 'Sub-categories can be added and renamed'],
+        [route('admin.scan-batches.index'), 'Scan batches', $batches.' '.Str::plural('batch', $batches), $draftBatches.' not committed'],
         [route('admin.suggestions.index'), 'Suggestions', $newSuggestions.' new', 'Ideas and bug reports from users'],
     ];
 @endphp
