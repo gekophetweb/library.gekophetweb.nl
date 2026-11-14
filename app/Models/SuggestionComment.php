@@ -21,10 +21,10 @@ class SuggestionComment extends Model
         return $this->belongsTo(Suggestion::class);
     }
 
-    /** @return BelongsTo<User, $this> */
+    /** The author; "[deleted user]" (never mailed) once the account is gone. @return BelongsTo<User, $this> */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault(User::deletedPlaceholder());
     }
 
     /**
@@ -34,6 +34,8 @@ class SuggestionComment extends Model
     public function authorLabelFor(User $viewer): string
     {
         return match (true) {
+            // Before the "Sender" check: a deleted sender and a deleted commenter both have no id.
+            $this->user_id === null => User::DELETED_NAME,
             $viewer->is_admin => $this->user->name.($this->user->is_admin ? ' (admin)' : ''),
             $this->user_id === $viewer->id => 'You',
             $this->user->is_admin => 'Admin',

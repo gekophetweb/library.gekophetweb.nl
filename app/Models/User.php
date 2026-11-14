@@ -23,6 +23,20 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
 
+    /** Shown where a deleted account's suggestions and comments remain. */
+    public const string DELETED_NAME = '[deleted user]';
+
+    /**
+     * Attributes of the stand-in for a deleted author (`withDefault` on author relations):
+     * not an admin, and never mailed.
+     *
+     * @return array<string, mixed>
+     */
+    public static function deletedPlaceholder(): array
+    {
+        return ['name' => self::DELETED_NAME, 'email' => null, 'is_admin' => false, 'suggestion_emails' => false];
+    }
+
     /**
      * @return array<string, string>
      */

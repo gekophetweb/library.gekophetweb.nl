@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\OverviewController;
 use App\Http\Controllers\Admin\SsoProviderController;
 use App\Http\Controllers\Admin\SuggestionController as AdminSuggestionController;
 use App\Http\Controllers\Admin\UserController;
@@ -74,6 +77,7 @@ Route::middleware('auth')->group(function () {
     Route::post('scan/single/add', [ScanController::class, 'add'])->name('scan.single.add');
     Route::get('scan/batches/{batch}', [ScanBatchController::class, 'show'])->name('scan.batches.show');
     Route::post('scan/batches/{batch}/items', [ScanBatchController::class, 'storeItem'])->name('scan.batches.items.store');
+    Route::post('scan/batches/{batch}/items/bulk', [ScanBatchController::class, 'storeItems'])->name('scan.batches.items.bulk');
     Route::delete('scan/batches/{batch}/items/{item}', [ScanBatchController::class, 'destroyItem'])->name('scan.batches.items.destroy');
     Route::post('scan/batches/{batch}/commit', [ScanBatchController::class, 'commit'])->name('scan.batches.commit');
 
@@ -90,6 +94,7 @@ Route::middleware('auth')->group(function () {
     Route::post('settings/tokens', [SettingsController::class, 'storeToken'])->name('settings.tokens.store');
     Route::delete('settings/tokens/{token}', [SettingsController::class, 'destroyToken'])->whereNumber('token')->name('settings.tokens.destroy');
     Route::delete('settings/identities/{identity}', [SettingsController::class, 'destroyIdentity'])->name('settings.identities.destroy');
+    Route::delete('settings/account', [SettingsController::class, 'destroyAccount'])->middleware('throttle:10,1')->name('settings.account.destroy');
     Route::post('settings/shares', [LibraryShareController::class, 'store'])->name('settings.shares.store');
     Route::delete('settings/shares/{share}', [LibraryShareController::class, 'destroy'])->name('settings.shares.destroy');
 
@@ -103,6 +108,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('suggestions/{suggestion}/vote', [SuggestionVoteController::class, 'destroy'])->middleware('throttle:60,1')->name('suggestions.unvote');
 
     Route::middleware('can:admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/', OverviewController::class)->name('home');
+
+        Route::get('languages', [LanguageController::class, 'index'])->name('languages.index');
+        Route::post('languages', [LanguageController::class, 'store'])->name('languages.store');
+        Route::patch('languages/{language}', [LanguageController::class, 'update'])->name('languages.update');
+        Route::delete('languages/{language}', [LanguageController::class, 'destroy'])->name('languages.destroy');
+
+        Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+        Route::post('categories/{parent}/children', [CategoryController::class, 'store'])->name('categories.store');
+        Route::patch('categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+        Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
         Route::get('users', [UserController::class, 'index'])->name('users.index');
         Route::patch('users/{user}/role', [UserController::class, 'updateRole'])->name('users.role');
         Route::get('suggestions', [AdminSuggestionController::class, 'index'])->name('suggestions.index');

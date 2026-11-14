@@ -25,6 +25,44 @@ it('lists providers with their callback URL', function () {
         ->assertSee(route('sso.callback', $provider));
 });
 
+it('offers a copy button for each callback URL', function () {
+    $provider = SsoProvider::factory()->create();
+
+    $this->actingAs(User::factory()->admin()->create())->get(route('admin.sso.index'))
+        ->assertOk()
+        ->assertSee('data-copy="'.route('sso.callback', $provider).'"', false);
+});
+
+it('shows a setup guide for every provider type on the add form', function () {
+    $response = $this->actingAs(User::factory()->admin()->create())->get(route('admin.sso.create'))->assertOk();
+
+    foreach (SsoDriver::cases() as $driver) {
+        $response->assertSee('data-sso-guide="'.$driver->value.'"', false);
+    }
+
+    $response->assertSee('The callback URL appears here once you')
+        ->assertSee('data-sso-driver-select', false);
+});
+
+it('shows the callback URL with a copy button next to the guide when editing', function () {
+    $provider = SsoProvider::factory()->create();
+
+    $this->actingAs(User::factory()->admin()->create())->get(route('admin.sso.edit', $provider))
+        ->assertOk()
+        ->assertSee('data-copy="'.route('sso.callback', $provider).'"', false)
+        ->assertDontSee('The callback URL appears here once you');
+});
+
+it('warns on the form when APP_URL is not a public https address', function () {
+    $admin = User::factory()->admin()->create();
+
+    config(['app.url' => 'http://localhost:8000']);
+    $this->actingAs($admin)->get(route('admin.sso.create'))->assertSee('APP_URL is http://localhost:8000');
+
+    config(['app.url' => 'https://library.example.test']);
+    $this->get(route('admin.sso.create'))->assertDontSee('APP_URL is');
+});
+
 it('adds a provider and stores its secret encrypted', function () {
     $this->actingAs(User::factory()->admin()->create())->post(route('admin.sso.store'), [
         'driver' => 'oidc',
@@ -34,7 +72,7 @@ it('adds a provider and stores its secret encrypted', function () {
         'issuer' => 'https://auth.example.com/application/o/library/',
         'enabled' => '1',
         'allow_registration' => '0',
-    ])->assertRedirect(route('admin.sso.index'));
+    ])->assertRedirect(route('admin.sso.edit', SsoProvider::sole()));
 
     $provider = SsoProvider::sole();
     expect($provider->driver)->toBe(SsoDriver::Oidc)

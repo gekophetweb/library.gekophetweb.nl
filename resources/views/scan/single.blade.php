@@ -10,6 +10,8 @@
         · <span data-ownership="{{ $setup->ownership->value }}" class="font-medium">{{ $setup->ownership === App\Enums\OwnershipStatus::Owned ? 'Adding to your collection' : 'Adding to your wishlist' }}</span>
     </p>
 
+    <x-camera-scanner mode="single" target="barcode" />
+
     <form method="POST" action="{{ route('scan.single.lookup') }}" class="mb-8 flex max-w-md gap-2">
         @csrf
         <label for="barcode" class="sr-only">Barcode</label>

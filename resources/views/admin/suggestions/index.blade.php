@@ -1,4 +1,4 @@
-<x-layout title="Suggestions">
+<x-admin-layout title="Suggestions">
     @php
         $input = 'block w-full rounded-md border border-stone-300 px-3 py-2 text-sm dark:border-stone-700 dark:bg-stone-950';
         $secondary = 'rounded-md border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800';
@@ -62,4 +62,4 @@
     </ul>
 
     <div class="mt-4">{{ $suggestions->links() }}</div>
-</x-layout>
+</x-admin-layout>

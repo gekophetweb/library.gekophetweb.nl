@@ -68,7 +68,9 @@ it('shows admins a nav link with the count of new suggestions', function () {
 
     $this->actingAs(User::factory()->admin()->create())
         ->get(route('home'))
-        ->assertSee(route('admin.suggestions.index'))
+        // The header has one Admin link carrying the count; Suggestions is in the admin menu.
+        ->assertSee('href="'.route('admin.home').'" data-admin-link', false)
+        ->assertDontSee(route('admin.suggestions.index'))
         ->assertSee('data-new-suggestions="2"', false);
 });
 
