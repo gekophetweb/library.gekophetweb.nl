@@ -133,6 +133,10 @@ These selections scope the subsequent external lookup.
 4. Committing the list adds all items to the account. **This commit runs
    asynchronously** — dispatch it to a **queued job** (per item or per batch), do
    not block the request. Report progress/results back to the user.
+5. Users see their own batches at **Your scan batches** (`scan.batches.index`) and can
+   retry failed lookups. Admins see every batch and can **redo** a finished one
+   (`ScanBatch::redo()`): failed and not-found codes go back to pending and the job runs
+   again with the owner's keys; added, already-owned and invalid codes are left alone.
 
 ### 4.3 External API call logging
 

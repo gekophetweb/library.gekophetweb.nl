@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::get('scan/single', [ScanController::class, 'single'])->name('scan.single');
     Route::post('scan/single/lookup', [ScanController::class, 'lookup'])->middleware('throttle:60,1')->name('scan.single.lookup');
     Route::post('scan/single/add', [ScanController::class, 'add'])->name('scan.single.add');
+    Route::get('scan/batches', [ScanBatchController::class, 'index'])->name('scan.batches.index');
     Route::get('scan/batches/{batch}', [ScanBatchController::class, 'show'])->name('scan.batches.show');
     Route::post('scan/batches/{batch}/items', [ScanBatchController::class, 'storeItem'])->name('scan.batches.items.store');
     Route::post('scan/batches/{batch}/items/bulk', [ScanBatchController::class, 'storeItems'])->name('scan.batches.items.bulk');
@@ -131,6 +132,7 @@ Route::middleware('auth')->group(function () {
         Route::get('scan-batches', [AdminScanBatchController::class, 'index'])->name('scan-batches.index');
         Route::get('scan-batches/{batch}', [AdminScanBatchController::class, 'show'])->name('scan-batches.show');
         Route::post('scan-batches/{batch}/retry', [AdminScanBatchController::class, 'retry'])->name('scan-batches.retry');
+        Route::post('scan-batches/{batch}/redo', [AdminScanBatchController::class, 'redo'])->name('scan-batches.redo');
         Route::delete('scan-batches/{batch}', [AdminScanBatchController::class, 'destroy'])->name('scan-batches.destroy');
 
         Route::get('users', [UserController::class, 'index'])->name('users.index');
