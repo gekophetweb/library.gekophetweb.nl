@@ -32,7 +32,12 @@
                                        value="{{ $bag->any() ? old('sort') : $child->sort }}" class="{{ $input }} w-20">
                                 <button class="{{ $secondary }}">Save</button>
                             </form>
-                            <span class="text-sm text-stone-500">{{ $uses ? 'Used by '.$uses : 'Not used' }}</span>
+                            <span class="text-sm text-stone-500">
+                                {{ $uses ? 'Used by '.$uses : 'Not used' }}
+                                @if ($child->sub_category_scan_batches_count)
+                                    · <a href="{{ route('admin.scan-batches.index', ['category' => $child->id]) }}" class="underline">see scan batches</a>
+                                @endif
+                            </span>
                             <form method="POST" action="{{ route('admin.categories.destroy', $child) }}"
                                   onsubmit="return confirm('Remove {{ e($child->name) }} from {{ e($parent->name) }}?')">
                                 @csrf

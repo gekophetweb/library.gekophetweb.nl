@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\OverviewController;
+use App\Http\Controllers\Admin\ScanBatchController as AdminScanBatchController;
 use App\Http\Controllers\Admin\SsoProviderController;
 use App\Http\Controllers\Admin\SuggestionController as AdminSuggestionController;
 use App\Http\Controllers\Admin\UserController;
@@ -119,6 +120,9 @@ Route::middleware('auth')->group(function () {
         Route::post('categories/{parent}/children', [CategoryController::class, 'store'])->name('categories.store');
         Route::patch('categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
         Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
+        Route::get('scan-batches', [AdminScanBatchController::class, 'index'])->name('scan-batches.index');
+        Route::delete('scan-batches/{batch}', [AdminScanBatchController::class, 'destroy'])->name('scan-batches.destroy');
 
         Route::get('users', [UserController::class, 'index'])->name('users.index');
         Route::patch('users/{user}/role', [UserController::class, 'updateRole'])->name('users.role');

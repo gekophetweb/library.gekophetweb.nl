@@ -62,6 +62,12 @@ class ScanBatch extends Model
         return $this->status === self::DRAFT;
     }
 
+    /** Committed and still being worked through by the queued job. */
+    public function isRunning(): bool
+    {
+        return in_array($this->status, [self::QUEUED, self::PROCESSING], true);
+    }
+
     public function setup(): ScanSetup
     {
         return new ScanSetup($this->category, $this->subCategory, $this->language, $this->ownership ?? OwnershipStatus::Owned);
