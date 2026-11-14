@@ -81,6 +81,17 @@ class ScanBatchController extends Controller
             ->with('status', $count ? "Looking up {$count} ".str('item')->plural($count).' again…' : 'Nothing to try again.');
     }
 
+    /** Looks every code that was not added (failed or not found) up again, with the owner's keys. */
+    public function redo(ScanBatch $batch): RedirectResponse
+    {
+        abort_unless($batch->status === ScanBatch::DONE, 409, 'This batch is not finished yet.');
+
+        $count = $batch->redo();
+
+        return redirect()->route('admin.scan-batches.show', $batch)
+            ->with('status', $count ? "Redoing {$count} ".str('code')->plural($count).'…' : 'Every code in this batch was already added; nothing to redo.');
+    }
+
     public function destroy(Request $request, ScanBatch $batch): RedirectResponse
     {
         if ($batch->isRunning()) {

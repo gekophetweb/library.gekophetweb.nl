@@ -81,7 +81,26 @@ class ScanBatch extends Model
      */
     public function retryFailed(): int
     {
-        $count = $this->items()->where('status', 'failed')->update(['status' => 'pending', 'message' => null]);
+        return $this->requeue(['failed']);
+    }
+
+    /** Outcomes an admin's redo looks up again: everything that did not reach the collection for lack of an answer. */
+    public const array REDOABLE = ['failed', 'not_found'];
+
+    /**
+     * An admin's redo of a finished batch: looks every code that was not added up again, for
+     * example after a provider or key was fixed. Added and already-owned codes are left alone,
+     * and so are invalid barcodes. Uses the batch owner's keys, like the first run.
+     */
+    public function redo(): int
+    {
+        return $this->requeue(self::REDOABLE);
+    }
+
+    /** @param  list<string>  $statuses */
+    private function requeue(array $statuses): int
+    {
+        $count = $this->items()->whereIn('status', $statuses)->whereNull('object_id')->update(['status' => 'pending', 'message' => null]);
 
         if ($count > 0) {
             $this->update(['status' => self::QUEUED, 'finished_at' => null]);

@@ -12,7 +12,7 @@
         <meta http-equiv="refresh" content="3">
     @endif
 
-    <a href="{{ route('home') }}" class="text-sm text-stone-500 underline">Library</a>
+    <a href="{{ route('scan.batches.index') }}" class="text-sm text-stone-500 underline">Your scan batches</a>
     <h1 class="mb-1 mt-1 text-2xl font-semibold">Batch scan</h1>
     <p class="mb-6 text-sm text-stone-500">
         {{ collect([$batch->category->name, $batch->subCategory?->name, $batch->language->name])->filter()->join(' · ') }}

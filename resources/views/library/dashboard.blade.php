@@ -1,7 +1,12 @@
 <x-layout title="Library">
     <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
         <h1 class="text-2xl font-semibold">Your library</h1>
-        <x-scanner-dialog :categories="$scanCategories" :languages="$languages" />
+        <div class="flex flex-wrap items-center gap-3">
+            @if ($hasScanBatches)
+                <a href="{{ route('scan.batches.index') }}" class="text-sm text-stone-600 underline hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100">Your scan batches</a>
+            @endif
+            <x-scanner-dialog :categories="$scanCategories" :languages="$languages" />
+        </div>
     </div>
 
     <ul class="grid gap-4 sm:grid-cols-3">
