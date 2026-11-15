@@ -3,7 +3,354 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
-@theme {
+/*
+ * Redesign (plan redesign-themes): two themes on <html data-theme="light|dark">, set by
+ * the layout from the user's appearance. `dark:` classes follow that attribute instead of
+ * the operating system, so the sun/moon button and Settings › Appearance decide.
+ */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/*
+ * Theme tokens. `@theme inline` makes utilities read the variables where they are used,
+ * so a nested [data-theme] (the previews on Settings › Appearance) re-themes its part.
+ * Classes: bg-paper bg-surface bg-surface-2 text-ink text-muted border-line
+ * border-line-strong bg-accent text-accent-ink bg-accent-soft, and owned / wanted / info
+ * with their -soft pairs. font-display (the user's heading font) and font-mono.
+ *
+ * The stone ramp, used across the older pages, is re-tinted per theme: warm paper tones
+ * in light, midnight blues in dark, so every page matches without a rewrite.
+ */
+@theme inline {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: var(--head);
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --color-paper: var(--bg);
+    --color-surface: var(--surface);
+    --color-surface-2: var(--surface-2);
+    --color-ink: var(--ink);
+    --color-muted: var(--muted);
+    --color-line: var(--line);
+    --color-line-strong: var(--line-strong);
+    --color-accent: var(--accent);
+    --color-accent-ink: var(--accent-ink);
+    --color-accent-soft: var(--accent-soft);
+    --color-owned: var(--owned);
+    --color-owned-soft: var(--owned-soft);
+    --color-wanted: var(--wanted);
+    --color-wanted-soft: var(--wanted-soft);
+    --color-info: var(--info);
+    --color-info-soft: var(--info-soft);
+
+    --color-stone-50: var(--stone-50);
+    --color-stone-100: var(--stone-100);
+    --color-stone-200: var(--stone-200);
+    --color-stone-300: var(--stone-300);
+    --color-stone-400: var(--stone-400);
+    --color-stone-500: var(--stone-500);
+    --color-stone-600: var(--stone-600);
+    --color-stone-700: var(--stone-700);
+    --color-stone-800: var(--stone-800);
+    --color-stone-900: var(--stone-900);
+    --color-stone-950: var(--stone-950);
+
+    --shadow-card: var(--shadow);
+}
+
+:root,
+[data-theme='light'] {
+    color-scheme: light;
+    --bg: #f3eee4;
+    --bg-line: rgba(52, 72, 112, 0.085);
+    --grid: rgba(52, 72, 112, 0.12);
+    --dot: rgba(52, 72, 112, 0.26);
+    --surface: #fffdf8;
+    --surface-2: #f7f1e6;
+    --ink: #1d2230;
+    --muted: #5d5a52;
+    --line: #ddd3c2;
+    --line-strong: #bcae95;
+    --accent: #c4412b;
+    --accent-ink: #ffffff;
+    --owned: #1f6f5c;
+    --owned-soft: #d8ede5;
+    --wanted: #875800;
+    --wanted-soft: #f7e6c1;
+    --info: #1f5f8b;
+    --info-soft: #dcebf5;
+    --shadow: 0 1px 0 rgba(29, 34, 48, 0.05), 0 10px 28px -14px rgba(29, 34, 48, 0.22);
+    --logo-filter: brightness(0) opacity(0.85);
+
+    --stone-50: #f3eee4;
+    --stone-100: #efe7d9;
+    --stone-200: #ddd3c2;
+    --stone-300: #bcae95;
+    --stone-400: #8f8576;
+    --stone-500: #67625a;
+    --stone-600: #5d5a52;
+    --stone-700: #3d3a34;
+    --stone-800: #2a2d38;
+    --stone-900: #1d2230;
+    --stone-950: #12151e;
+}
+
+[data-theme='dark'] {
+    color-scheme: dark;
+    --bg: #111622;
+    --bg-line: rgba(150, 175, 225, 0.055);
+    --grid: rgba(150, 175, 225, 0.08);
+    --dot: rgba(150, 175, 225, 0.2);
+    --surface: #192030;
+    --surface-2: #1f283a;
+    --ink: #eef0f4;
+    --muted: #a3abbb;
+    --line: #2a3447;
+    --line-strong: #3c4960;
+    --accent: #ff7a5c;
+    --accent-ink: #1c0c07;
+    --owned: #5fd0ae;
+    --owned-soft: #163a33;
+    --wanted: #f2c066;
+    --wanted-soft: #3a2e16;
+    --info: #7cc0f0;
+    --info-soft: #192f45;
+    --shadow: 0 1px 0 rgba(0, 0, 0, 0.25), 0 14px 34px -16px rgba(0, 0, 0, 0.7);
+    --logo-filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+
+    --stone-50: #f5f6f9;
+    --stone-100: #eef0f4;
+    --stone-200: #d5d9e2;
+    --stone-300: #b8bfcc;
+    --stone-400: #a3abbb;
+    --stone-500: #98a1b3;
+    --stone-600: #7d879b;
+    --stone-700: #3c4960;
+    --stone-800: #2a3447;
+    --stone-900: #192030;
+    --stone-950: #111622;
+}
+
+/* Accent presets (App\Support\Appearance\AccentColour): a light and a dark shade each. */
+[data-accent='teal'] { --accent: #0f6e78; }
+[data-accent='indigo'] { --accent: #3f4fb8; }
+[data-accent='plum'] { --accent: #8a3a7a; }
+[data-accent='mustard'] { --accent: #7d5c00; }
+[data-accent='forest'] { --accent: #2f6b2f; }
+[data-theme='dark'][data-accent='teal'] { --accent: #4fd1d9; }
+[data-theme='dark'][data-accent='indigo'] { --accent: #9aa6ff; }
+[data-theme='dark'][data-accent='plum'] { --accent: #e590d4; }
+[data-theme='dark'][data-accent='mustard'] { --accent: #f2c94c; }
+[data-theme='dark'][data-accent='forest'] { --accent: #8ed38e; }
+[data-theme='dark'][data-accent]:not([data-accent='stamp']) { --accent-ink: #111622; }
+
+:root,
+[data-theme],
+[data-accent] {
+    --accent-soft: color-mix(in srgb, var(--accent) 16%, var(--surface));
+    --margin: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+/* Heading fonts (App\Support\Appearance\HeadingFont). */
+:root,
+[data-font='bricolage'] { --head: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif; }
+[data-font='fraunces'] { --head: 'Fraunces', ui-serif, Georgia, serif; }
+[data-font='instrument'] { --head: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif; }
+
+/* Compact density: everything is sized in rem, so a smaller root tightens the whole page. */
+html[data-density='compact'] { font-size: 93.75%; }
+
+/*
+ * Backgrounds (App\Support\Appearance\Background). The ruled card has a margin rule
+ * 48px from the left (16px on phones), drawn in the accent colour.
+ */
+.paper {
+    --margin-x: 16px;
+    background-color: var(--bg);
+    color: var(--ink);
+}
+
+@media (min-width: 640px) {
+    .paper { --margin-x: 48px; }
+}
+
+.paper,
+[data-bg='ruled'] .paper,
+.paper.paper[data-bg='ruled'] {
+    background-image:
+        linear-gradient(90deg, transparent 0 calc(var(--margin-x) - 1px), var(--margin) calc(var(--margin-x) - 1px) calc(var(--margin-x) + 1px), transparent calc(var(--margin-x) + 1px)),
+        repeating-linear-gradient(180deg, transparent 0 31px, var(--bg-line) 31px 32px);
+    background-size: auto;
+}
+
+[data-bg='plain'] .paper,
+.paper.paper[data-bg='plain'] {
+    background-image: none;
+}
+
+[data-bg='dots'] .paper,
+.paper.paper[data-bg='dots'] {
+    background-image: radial-gradient(circle, var(--dot) 1.2px, transparent 1.7px);
+    background-size: 22px 22px;
+}
+
+[data-bg='grid'] .paper,
+.paper.paper[data-bg='grid'] {
+    background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* The photo sits under a veil of the theme's paper colour so text stays readable. */
+[data-bg='photo'] .paper,
+.paper.paper[data-bg='photo'] {
+    background-image:
+        linear-gradient(color-mix(in srgb, var(--bg) var(--veil, 85%), transparent), color-mix(in srgb, var(--bg) var(--veil, 85%), transparent)),
+        var(--photo, none);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Small previews on Settings › Appearance use the same patterns at a smaller scale. */
+.paper.swatch { --margin-x: 14px; background-size: auto; }
+.paper.swatch[data-bg='dots'] { background-size: 14px 14px; }
+.paper.swatch[data-bg='grid'] { background-size: 14px 14px; }
+.paper.swatch[data-bg='photo'] { background-attachment: scroll; }
+
+.logo { filter: var(--logo-filter); }
+
+@layer base {
+    body { font-family: var(--font-sans); }
+
+    h1, h2, h3, .font-display { font-family: var(--head); }
+
+    h1 { letter-spacing: -0.02em; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    ::selection { background: var(--accent-soft); }
+}
+
+@layer components {
+    .btn {
+        display: inline-flex;
+        min-height: 2.75rem;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border-radius: 10px;
+        padding: 0 1.1rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+    }
+
+    .btn-primary {
+        background: var(--accent);
+        color: var(--accent-ink);
+        box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover { background: color-mix(in srgb, var(--accent) 86%, var(--ink)); }
+
+    .btn-secondary {
+        border: 1px solid var(--line-strong);
+        background: var(--surface);
+        color: var(--ink);
+        font-weight: 500;
+    }
+
+    .btn-secondary:hover { background: var(--surface-2); }
+
+    .btn-ghost {
+        color: var(--ink);
+        font-weight: 500;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    .card {
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        box-shadow: var(--shadow);
+    }
+
+    .field {
+        display: block;
+        width: 100%;
+        min-height: 2.75rem;
+        border-radius: 10px;
+        border: 1px solid var(--line-strong);
+        background: var(--surface-2);
+        padding: 0 0.85rem;
+        color: var(--ink);
+        font-size: 0.9375rem;
+    }
+
+    .label-mono {
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    .chip {
+        display: inline-flex;
+        min-height: 2.6rem;
+        align-items: center;
+        gap: 0.5rem;
+        border-radius: 999px;
+        border: 1px solid var(--line-strong);
+        background: var(--surface);
+        padding: 0 1rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--ink);
+        cursor: pointer;
+    }
+
+    /* Radio chips and tiles: the input stays in the DOM (keyboard + form submit). */
+    .chip:has(input:checked) {
+        border-color: var(--ink);
+        background: var(--ink);
+        color: var(--bg);
+    }
+
+    .tile {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        border-radius: 14px;
+        border: 2px solid var(--line);
+        background: var(--surface-2);
+        padding: 0.5rem;
+        cursor: pointer;
+    }
+
+    .tile:has(input:checked) { border-color: var(--accent); }
+
+    .chip:has(input:focus-visible),
+    .tile:has(input:focus-visible) {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+    }
+
+    .pill {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 0.15rem 0.6rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .pill-owned { background: var(--owned-soft); color: var(--owned); }
+    .pill-wanted { background: var(--wanted-soft); color: var(--wanted); }
+    .pill-info { background: var(--info-soft); color: var(--info); }
+    .pill-accent { background: var(--accent-soft); color: var(--accent); }
 }

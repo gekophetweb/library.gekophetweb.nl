@@ -14,28 +14,8 @@
     ];
 @endphp
 <x-layout :title="$title ? $title.' · Admin' : 'Admin'" wide>
-    <div class="grid gap-6 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-10">
-        <nav aria-label="Admin" class="-mx-4 overflow-x-auto px-4 md:mx-0 md:overflow-visible md:px-0">
-            <p class="mb-2 hidden text-xs font-semibold uppercase tracking-wide text-stone-500 md:block">Admin</p>
-            <ul class="flex gap-1 md:flex-col">
-                @foreach ($items as [$route, $pattern, $label, $badge])
-                    @php($active = request()->routeIs($pattern))
-                    <li>
-                        <a href="{{ route($route) }}" @if ($active) aria-current="page" @endif
-                           @class([
-                               'flex items-center justify-between gap-2 whitespace-nowrap rounded-md px-3 py-1.5 text-sm',
-                               'bg-stone-900 font-medium text-white dark:bg-stone-100 dark:text-stone-900' => $active,
-                               'text-stone-700 hover:bg-stone-100 dark:text-stone-300 dark:hover:bg-stone-800' => ! $active,
-                           ])>
-                            {{ $label }}
-                            @if ($badge)
-                                <span class="rounded-full bg-sky-100 px-1.5 text-xs text-sky-800 dark:bg-sky-950 dark:text-sky-200">{{ $badge }}<span class="sr-only"> new</span></span>
-                            @endif
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </nav>
+    <div class="grid gap-6 md:grid-cols-[13rem_minmax(0,1fr)] md:gap-12">
+        <x-section-menu label="Admin" :items="$items" />
 
         <div class="min-w-0">
             {{ $slot }}

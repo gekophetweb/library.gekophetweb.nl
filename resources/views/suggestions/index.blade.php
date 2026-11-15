@@ -1,6 +1,6 @@
 <x-layout title="Suggest something">
     @php
-        $primary = 'rounded-md bg-stone-900 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300';
+        $primary = 'rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-ink shadow-card hover:opacity-90';
     @endphp
 
     <x-suggestion-tabs current="mine" />
