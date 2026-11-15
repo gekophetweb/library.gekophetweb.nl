@@ -4,6 +4,12 @@ use App\Enums\ApiKeyProvider;
 use App\Models\User;
 use App\Models\UserApiKey;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+
+beforeEach(function () {
+    // Every key is tried at its provider before saving (ApiKeyCheckTest): accept them all here.
+    Http::fake(fn () => Http::response(file_get_contents(base_path('tests/Fixtures/api-keys/hardcover-me.json'))));
+});
 
 it('stores a provider key encrypted and never shows it back', function () {
     $user = User::factory()->create();

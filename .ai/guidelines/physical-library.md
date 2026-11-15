@@ -189,6 +189,11 @@ Each user links **their own API keys** for these providers through **user settin
 - Store keys per user, **encrypted at rest** (Laravel encrypted casts).
 - Lookups use the **authenticated user's** keys, never a shared global key.
 - Handle the "no key configured for this provider" case gracefully in the UI.
+- **A key is tried before it is saved** (`App\Services\ApiKeyChecker`, one logged call,
+  operation `key-check`, the key kept out of the log): a key the provider refuses
+  (400/401/403, or a GraphQL token error) is not saved and the provider's reason is
+  shown; when the provider gives no usable answer (down, quota used up) the key is saved
+  with a "could not be checked" notice. A new provider needs a check there too.
 - **Scanning needs every key**: starting a scan (`scan.start`, middleware `api-keys`)
   sends a user with a missing key to Settings → API keys (`settings.api-keys`), and the
   scanner dialog says which keys are missing. Each provider has its own guide page

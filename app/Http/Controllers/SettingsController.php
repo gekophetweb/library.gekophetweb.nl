@@ -10,6 +10,7 @@ use App\Models\Series;
 use App\Models\SsoProvider;
 use App\Models\User;
 use App\Models\UserIdentity;
+use App\Services\ApiKeyChecker;
 use App\Support\Appearance\AppearancePhotos;
 use App\Support\Auth\LoginSettings;
 use Illuminate\Http\RedirectResponse;
@@ -17,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class SettingsController extends Controller
@@ -97,7 +99,12 @@ class SettingsController extends Controller
         return redirect()->route('settings.edit')->with('status', 'E-mail settings saved.');
     }
 
-    public function updateApiKey(Request $request, string $provider): RedirectResponse
+    /**
+     * Tries the key at the provider first: a key it refuses is not saved (the saved one, if
+     * any, stays). When the provider gives no usable answer the key is saved anyway, and the
+     * user is told it could not be checked.
+     */
+    public function updateApiKey(Request $request, string $provider, ApiKeyChecker $checker): RedirectResponse
     {
         $provider = ApiKeyProvider::tryFrom($provider) ?? abort(404);
         // Both credentials together when the provider needs two: saved ones are never shown again.
@@ -106,12 +113,19 @@ class SettingsController extends Controller
             'secret' => [$provider->needsSecret() ? 'required' : 'prohibited', 'nullable', 'string', 'max:500'],
         ], [], ['key' => strtolower($provider->keyLabel()), 'secret' => strtolower((string) $provider->secretLabel())]);
 
-        $request->user()->apiKeys()->updateOrCreate(['provider' => $provider], [
-            'key' => trim($validated['key']),
-            'secret' => $provider->needsSecret() ? trim($validated['secret']) : null,
-        ]);
+        $key = trim($validated['key']);
+        $secret = $provider->needsSecret() ? trim($validated['secret']) : null;
+        $check = $checker->check($provider, $key, $secret);
 
-        return redirect()->route('settings.api-keys')->with('status', "{$provider->label()} key saved.");
+        if ($check->refused) {
+            throw ValidationException::withMessages(['key' => "{$provider->label()} did not accept this key: {$check->message}"]);
+        }
+
+        $request->user()->apiKeys()->updateOrCreate(['provider' => $provider], ['key' => $key, 'secret' => $secret]);
+
+        return redirect()->route('settings.api-keys')->with('status', $check->accepted
+            ? "{$provider->label()} key checked and saved."
+            : "{$provider->label()} key saved, but it could not be checked: {$check->message} Try a lookup later to see whether it works.");
     }
 
     public function destroyApiKey(Request $request, string $provider): RedirectResponse
