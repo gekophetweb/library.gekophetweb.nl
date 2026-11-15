@@ -71,7 +71,7 @@
             <p class="font-medium">Done: {{ $added }} of {{ $items->count() }} added.</p>
             @if ($notFound || $failed)
                 <p class="mt-1">
-                    @if ($notFound) {{ $notFound }} not found in the catalogues (add those by hand).@endif
+                    @if ($notFound) <span class="font-medium text-red-600 dark:text-red-400" data-not-found>{{ $notFound }} not found</span> in the catalogues (add those by hand below).@endif
                     @if ($failed) {{ $failed }} could not be looked up because no catalogue answered.@endif
                 </p>
             @endif
@@ -93,6 +93,27 @@
                         <a href="{{ route('objects.show', $item->object) }}" class="font-medium underline">{{ $item->object->name }}</a>
                     @endif
                     @if ($item->message) <p class="text-sm text-stone-500">{{ $item->message }}</p> @endif
+                    @if ($batch->status === ScanBatch::DONE && $item->status === 'not_found')
+                        {{-- Only a code no catalogue knew can be added by hand. --}}
+                        @php($bag = $errors->getBag("item{$item->id}"))
+                        <details class="mt-2" data-add-by-hand="{{ $item->id }}" @if ($bag->any()) open @endif>
+                            <summary class="cursor-pointer text-sm font-medium underline underline-offset-2">Add by hand</summary>
+                            <form method="POST" action="{{ route('scan.batches.items.add', [$batch, $item]) }}" class="mt-2 max-w-md space-y-2">
+                                @csrf
+                                <div>
+                                    <label for="name-{{ $item->id }}" class="mb-1 block text-sm font-medium">Title (original)</label>
+                                    <input id="name-{{ $item->id }}" name="name" required maxlength="255" value="{{ $bag->any() ? old('name') : '' }}" class="{{ $input }}">
+                                    @if ($bag->has('name')) <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $bag->first('name') }}</p> @endif
+                                </div>
+                                <div>
+                                    <label for="name_romanized-{{ $item->id }}" class="mb-1 block text-sm font-medium">Title (romanized)</label>
+                                    <input id="name_romanized-{{ $item->id }}" name="name_romanized" required maxlength="255" value="{{ $bag->any() ? old('name_romanized') : '' }}" class="{{ $input }}">
+                                    @if ($bag->has('name_romanized')) <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $bag->first('name_romanized') }}</p> @endif
+                                </div>
+                                <button class="{{ $primary }}">{{ $toWishlist ? 'Add to wishlist' : 'Add to collection' }}</button>
+                            </form>
+                        </details>
+                    @endif
                 </div>
                 @if ($batch->isDraft())
                     <form method="POST" action="{{ route('scan.batches.items.destroy', [$batch, $item]) }}">
@@ -101,7 +122,11 @@
                         <button class="text-sm underline">Remove</button>
                     </form>
                 @else
-                    <span class="text-sm text-stone-500" data-status="{{ $item->status }}">{{ $labels[$item->status] ?? $item->status }}</span>
+                    <span @class([
+                        'text-sm',
+                        'font-medium text-red-600 dark:text-red-400' => $item->status === 'not_found',
+                        'text-stone-500' => $item->status !== 'not_found',
+                    ]) data-status="{{ $item->status }}">{{ $labels[$item->status] ?? $item->status }}</span>
                 @endif
             </li>
         @empty

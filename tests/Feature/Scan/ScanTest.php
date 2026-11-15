@@ -278,6 +278,45 @@ it('adds the found items when the batch job runs and reports the rest', function
     $this->get(route('scan.batches.show', $batch))->assertSee('ベルセルク 1')->assertSee('Not found');
 });
 
+it('shows not found codes in red with an add-by-hand form, and only those', function () {
+    startScan('batch');
+    $batch = ScanBatch::sole();
+    foreach (['9784592135746', '9784088725093'] as $barcode) {
+        $this->post(route('scan.batches.items.store', $batch), ['barcode' => $barcode]);
+    }
+    $this->post(route('scan.batches.commit', $batch));
+    $found = $batch->items()->where('barcode', '9784592135746')->sole();
+    $missing = $batch->items()->where('barcode', '9784088725093')->sole();
+
+    $this->get(route('scan.batches.show', $batch))
+        ->assertSee('data-not-found', false)
+        ->assertSee('font-medium text-red-600 dark:text-red-400" data-status="not_found"', false)
+        ->assertSee('data-add-by-hand="'.$missing->id.'"', false)
+        ->assertDontSee('data-add-by-hand="'.$found->id.'"', false);
+
+    // The required fields are checked, per code.
+    $this->post(route('scan.batches.items.add', [$batch, $missing]), ['name' => ''])
+        ->assertSessionHasErrorsIn('item'.$missing->id, ['name', 'name_romanized']);
+
+    $this->post(route('scan.batches.items.add', [$batch, $missing]), ['name' => 'ONE PIECE 1', 'name_romanized' => 'One Piece 1'])
+        ->assertRedirect(route('scan.batches.show', $batch))
+        ->assertSessionHas('status', 'Added ONE PIECE 1 to your collection.');
+
+    $object = CollectionObject::query()->where('barcode', '9784088725093')->sole();
+    expect($object->user_id)->toBe($this->user->id)
+        ->and($object->name_romanized)->toBe('One Piece 1')
+        ->and($object->sub_category_id)->toBe($this->manga->id)
+        ->and($missing->refresh()->status)->toBe('added')
+        ->and($missing->object_id)->toBe($object->id);
+
+    // Anything but a not-found code is refused: found, added by hand already, or someone else's.
+    $this->post(route('scan.batches.items.add', [$batch, $found]), ['name' => 'X', 'name_romanized' => 'X'])->assertStatus(409);
+    $this->post(route('scan.batches.items.add', [$batch, $missing]), ['name' => 'X', 'name_romanized' => 'X'])->assertStatus(409);
+    $this->actingAs(User::factory()->create())
+        ->post(route('scan.batches.items.add', [$batch, $missing]), ['name' => 'X', 'name_romanized' => 'X'])->assertNotFound();
+    expect(CollectionObject::query()->count())->toBe(2);
+});
+
 it('links every API call of a batch job to its code and keeps the raw answer', function () {
     startScan('batch');
     $batch = ScanBatch::sole();
