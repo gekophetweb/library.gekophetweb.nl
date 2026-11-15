@@ -62,7 +62,7 @@
             <div class="flex gap-2">
                 <form method="POST" action="{{ route('objects.series-suggestion.accept', $object) }}">
                     @csrf
-                    <button class="rounded-md bg-stone-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300">Add to this series</button>
+                    <button class="rounded-md bg-accent px-3 py-1.5 text-sm font-semibold text-accent-ink shadow-card hover:opacity-90">Add to this series</button>
                 </form>
                 <form method="POST" action="{{ route('objects.series-suggestion.dismiss', $object) }}">
                     @csrf
@@ -180,7 +180,7 @@
                 @error('release_date') <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
             </div>
 
-            <button class="rounded-md bg-stone-900 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300">Save</button>
+            <button class="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-ink shadow-card hover:opacity-90">Save</button>
         </form>
     </details>
     @endif

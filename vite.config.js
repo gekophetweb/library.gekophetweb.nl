@@ -12,7 +12,18 @@ export default defineConfig({
             refresh: true,
             fonts: [
                 bunny('Instrument Sans', {
-                    weights: [400, 500, 600],
+                    weights: [400, 500, 600, 700],
+                }),
+                // Headings (plan redesign-themes): Bricolage by default, Fraunces as a choice
+                // in Settings › Appearance; JetBrains Mono for codes and small labels.
+                bunny('Bricolage Grotesque', {
+                    weights: [500, 700, 800],
+                }),
+                bunny('Fraunces', {
+                    weights: [600, 800],
+                }),
+                bunny('JetBrains Mono', {
+                    weights: [400, 500],
                 }),
             ],
         }),

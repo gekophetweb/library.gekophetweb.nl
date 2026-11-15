@@ -1,6 +1,6 @@
 @php
     $input = 'block w-full rounded-md border border-stone-300 px-3 py-2 text-sm dark:border-stone-700 dark:bg-stone-950';
-    $primary = 'rounded-md bg-stone-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300';
+    $primary = 'rounded-md bg-accent px-3 py-1.5 text-sm font-semibold text-accent-ink shadow-card hover:opacity-90';
 @endphp
 <x-layout title="Find books">
     <h1 class="mb-1 text-2xl font-semibold">Find books you don’t own yet</h1>

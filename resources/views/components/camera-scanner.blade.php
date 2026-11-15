@@ -40,7 +40,7 @@
             <div class="flex justify-end gap-3 p-4">
                 <button type="button" data-camera-close class="px-4 py-2 text-sm underline">Cancel</button>
                 <button type="button" data-camera-submit disabled
-                        class="rounded-md bg-stone-900 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700 disabled:opacity-40 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300">Add to list</button>
+                        class="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-ink shadow-card hover:opacity-90 disabled:opacity-40">Add to list</button>
             </div>
         @else
             <div class="p-4"></div>

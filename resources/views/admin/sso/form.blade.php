@@ -61,7 +61,7 @@
         </label>
 
         <div class="flex gap-3">
-            <button class="rounded-md bg-stone-900 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300">Save</button>
+            <button class="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-ink shadow-card hover:opacity-90">Save</button>
             <a href="{{ route('admin.sso.index') }}" class="px-4 py-2 text-sm underline">{{ $editing ? 'Back to overview' : 'Cancel' }}</a>
         </div>
     </form>

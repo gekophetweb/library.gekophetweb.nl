@@ -10,6 +10,7 @@ use App\Models\Series;
 use App\Models\SsoProvider;
 use App\Models\User;
 use App\Models\UserIdentity;
+use App\Support\Appearance\AppearancePhotos;
 use App\Support\Auth\LoginSettings;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -192,6 +193,9 @@ class SettingsController extends Controller
             // Foreign keys cascade to the user's own data and set suggestion authors to null.
             $user->delete();
         });
+
+        // Files are outside the database: remove the background photos too.
+        app(AppearancePhotos::class)->deleteAll($user);
 
         return redirect()->route('login')->with('status', 'Your account has been deleted.');
     }
