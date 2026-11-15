@@ -134,7 +134,9 @@ These selections scope the subsequent external lookup.
    asynchronously** — dispatch it to a **queued job** (per item or per batch), do
    not block the request. Report progress/results back to the user.
 5. Users see their own batches at **Your scan batches** (`scan.batches.index`) and can
-   retry failed lookups. Admins see every batch and can **redo** a finished one
+   retry failed lookups. A code that came back **not found** is shown in red and can be
+   added by hand (`scan.batches.items.add`, title + romanized title); no other outcome
+   offers that. Admins see every batch and can **redo** a finished one
    (`ScanBatch::redo()`): failed and not-found codes go back to pending and the job runs
    again with the owner's keys; added, already-owned and invalid codes are left alone.
    Admins can also tick single codes to redo (`ScanBatch::redoItems()`, any code not in

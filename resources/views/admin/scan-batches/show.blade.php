@@ -6,8 +6,8 @@
     ];
     $tone = fn (string $status) => match ($status) {
         'added', 'promoted' => 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200',
-        'failed' => 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-200',
-        'not_found', 'invalid' => 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200',
+        'failed', 'not_found' => 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-200',
+        'invalid' => 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200',
         default => 'bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300',
     };
     $secondary = 'rounded-md border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800';
