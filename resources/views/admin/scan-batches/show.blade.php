@@ -61,24 +61,55 @@
         </form>
     </div>
 
+    {{-- Tick codes to look them up again; only codes that did not reach the collection can be ticked. --}}
+    @php($canPick = $batch->status === App\Models\ScanBatch::DONE && $items->contains->isRedoable())
+    <form id="redo-items" method="POST" action="{{ route('admin.scan-batches.items.redo', $batch) }}"
+          onsubmit="return confirm('Look up the ticked codes again, with {{ e($batch->user->name) }}’s keys?')">
+        @csrf
+    </form>
+    @if ($canPick)
+        <div class="mb-2 flex items-center gap-3">
+            <button form="redo-items" class="{{ $secondary }}" data-redo-items>Redo ticked codes</button>
+            @error('items') <p class="text-sm text-red-700 dark:text-red-400">{{ $message }}</p> @enderror
+        </div>
+    @endif
+
     <div class="overflow-x-auto rounded-lg border border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900">
         <table class="w-full text-left text-sm">
             <thead class="border-b border-stone-200 text-xs uppercase tracking-wide text-stone-500 dark:border-stone-800">
                 <tr>
+                    @if ($canPick) <th class="w-0 px-4 py-3 font-medium"><span class="sr-only">Redo</span></th> @endif
                     <th class="px-4 py-3 font-medium">Code</th>
                     <th class="px-4 py-3 font-medium">Outcome</th>
                     <th class="px-4 py-3 font-medium">Details</th>
+                    <th class="px-4 py-3 font-medium">API data</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-stone-200 dark:divide-stone-800">
                 @forelse ($items as $item)
                     <tr data-item-status="{{ $item->status }}">
+                        @if ($canPick)
+                            <td class="px-4 py-2">
+                                @if ($item->isRedoable())
+                                    <input type="checkbox" form="redo-items" name="items[]" value="{{ $item->id }}"
+                                           aria-label="Redo {{ $item->barcode }}" data-redo-item="{{ $item->id }}"
+                                           class="rounded border-stone-300 dark:border-stone-700">
+                                @endif
+                            </td>
+                        @endif
                         <td class="whitespace-nowrap px-4 py-2 font-mono">{{ $item->barcode }}</td>
                         <td class="whitespace-nowrap px-4 py-2"><span class="rounded px-2 py-0.5 text-xs {{ $tone($item->status) }}">{{ $labels[$item->status] ?? $item->status }}</span></td>
                         <td class="px-4 py-2 text-stone-600 dark:text-stone-400">{{ $item->object?->name ?? $item->message }}</td>
+                        <td class="whitespace-nowrap px-4 py-2">
+                            @if ($item->api_calls_count > 0)
+                                <a href="{{ route('admin.scan-batches.items.show', [$batch, $item]) }}" class="underline">{{ $item->api_calls_count }} {{ Str::plural('call', $item->api_calls_count) }}</a>
+                            @else
+                                <span class="text-stone-400">—</span>
+                            @endif
+                        </td>
                     </tr>
                 @empty
-                    <tr><td colspan="3" class="px-4 py-6 text-center text-stone-500">Nothing was scanned in this batch.</td></tr>
+                    <tr><td colspan="{{ $canPick ? 5 : 4 }}" class="px-4 py-6 text-center text-stone-500">Nothing was scanned in this batch.</td></tr>
                 @endforelse
             </tbody>
         </table>

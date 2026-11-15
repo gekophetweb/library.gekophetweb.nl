@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Language;
 use App\Models\ScanBatch;
+use App\Models\ScanBatchItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -61,7 +62,7 @@ class ScanBatchController extends Controller
     public function show(ScanBatch $batch): View
     {
         $batch->load(['user', 'category', 'subCategory', 'language']);
-        $items = $batch->items()->with('object:id,name')->get();
+        $items = $batch->items()->with('object:id,name')->withCount('apiCalls')->get();
 
         return view('admin.scan-batches.show', [
             'batch' => $batch,
@@ -90,6 +91,34 @@ class ScanBatchController extends Controller
 
         return redirect()->route('admin.scan-batches.show', $batch)
             ->with('status', $count ? "Redoing {$count} ".str('code')->plural($count).'…' : 'Every code in this batch was already added; nothing to redo.');
+    }
+
+    /** Looks the codes the admin ticked up again; codes already in the collection are skipped. */
+    public function redoItems(Request $request, ScanBatch $batch): RedirectResponse
+    {
+        abort_unless($batch->status === ScanBatch::DONE, 409, 'This batch is not finished yet.');
+
+        $ids = $request->validate([
+            'items' => ['required', 'array'],
+            'items.*' => ['integer'],
+        ], ['items.required' => 'Tick the codes to redo first.'])['items'];
+
+        $count = $batch->redoItems(array_map('intval', $ids));
+
+        return redirect()->route('admin.scan-batches.show', $batch)
+            ->with('status', $count ? "Redoing {$count} ".str('code')->plural($count).'…' : 'Those codes are already in the collection; nothing to redo.');
+    }
+
+    /** The raw answers of every external API call made for one scanned code. */
+    public function showItem(ScanBatch $batch, ScanBatchItem $item): View
+    {
+        $batch->load('user');
+
+        return view('admin.scan-batches.item', [
+            'batch' => $batch,
+            'item' => $item->load('object:id,name'),
+            'calls' => $item->apiCalls()->get(),
+        ]);
     }
 
     public function destroy(Request $request, ScanBatch $batch): RedirectResponse
