@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\CategoryKind;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,9 +34,20 @@ class ScanBatchItem extends Model
         return $this->hasMany(ApiCallLog::class)->latest()->latest('id');
     }
 
-    /** An admin can redo a code that was handled but did not reach the collection. */
+    /**
+     * A handled code can be redone when it did not reach the collection (looked up again),
+     * or when it was found as a book without a series (series detection runs again).
+     */
     public function isRedoable(): bool
     {
-        return $this->object_id === null && $this->status !== 'pending';
+        return $this->status !== 'pending' && ($this->object_id === null || $this->lacksSeries());
+    }
+
+    /** Found as a book that is in no series yet. */
+    public function lacksSeries(): bool
+    {
+        return $this->object !== null
+            && $this->object->serie_id === null
+            && $this->object->category->topLevel()->kind === CategoryKind::Books;
     }
 }

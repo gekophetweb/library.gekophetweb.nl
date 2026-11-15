@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\CollectionObject;
 use App\Models\Language;
 use App\Models\ScanBatch;
+use App\Models\Series;
 use App\Models\User;
 use Database\Seeders\CatalogueSeeder;
 use Illuminate\Support\Facades\DB;
@@ -164,7 +165,8 @@ it('redoes only the ticked codes that did not reach the collection', function ()
     Queue::fake();
     $owner = User::factory()->create();
     $batch = adminTestBatch($owner, ScanBatch::DONE, $this->ja, $this->manga, ['111', '222', '333', '444']);
-    $object = CollectionObject::factory()->for($owner)->create(['barcode' => '111']);
+    // Found and in a series: nothing to redo (a book without a series would get its series again).
+    $object = CollectionObject::factory()->for($owner)->create(['barcode' => '111', 'serie_id' => Series::factory()->for($owner)]);
     $items = $batch->items()->get();
     $items[0]->update(['status' => 'added', 'object_id' => $object->id]);
     $items[1]->update(['status' => 'not_found']);
