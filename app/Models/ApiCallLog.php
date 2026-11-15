@@ -25,6 +25,7 @@ class ApiCallLog extends Model
 
     protected $fillable = [
         'user_id',
+        'scan_batch_item_id',
         'provider',
         'operation',
         'query',
@@ -34,6 +35,7 @@ class ApiCallLog extends Model
         'status_code',
         'duration_ms',
         'error',
+        'response_body',
     ];
 
     protected function casts(): array
@@ -48,5 +50,21 @@ class ApiCallLog extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /** @return BelongsTo<ScanBatchItem, $this> */
+    public function scanBatchItem(): BelongsTo
+    {
+        return $this->belongsTo(ScanBatchItem::class);
+    }
+
+    /** The raw response body, pretty-printed when it is JSON. */
+    public function prettyBody(): ?string
+    {
+        $json = json_decode((string) $this->response_body, true);
+
+        return is_array($json)
+            ? json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
+            : $this->response_body;
     }
 }

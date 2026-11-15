@@ -133,6 +133,8 @@ Route::middleware('auth')->group(function () {
         Route::get('scan-batches/{batch}', [AdminScanBatchController::class, 'show'])->name('scan-batches.show');
         Route::post('scan-batches/{batch}/retry', [AdminScanBatchController::class, 'retry'])->name('scan-batches.retry');
         Route::post('scan-batches/{batch}/redo', [AdminScanBatchController::class, 'redo'])->name('scan-batches.redo');
+        Route::post('scan-batches/{batch}/items/redo', [AdminScanBatchController::class, 'redoItems'])->name('scan-batches.items.redo');
+        Route::get('scan-batches/{batch}/items/{item}', [AdminScanBatchController::class, 'showItem'])->scopeBindings()->name('scan-batches.items.show');
         Route::delete('scan-batches/{batch}', [AdminScanBatchController::class, 'destroy'])->name('scan-batches.destroy');
 
         Route::get('users', [UserController::class, 'index'])->name('users.index');

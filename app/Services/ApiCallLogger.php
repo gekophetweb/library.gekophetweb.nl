@@ -6,6 +6,7 @@ use App\Models\ApiCallLog;
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Context;
 use Throwable;
 
 /**
@@ -14,6 +15,12 @@ use Throwable;
  */
 class ApiCallLogger
 {
+    /** Hidden context key: the scan batch item a queued lookup is made for. */
+    public const string SCAN_BATCH_ITEM = 'api_call_log.scan_batch_item_id';
+
+    /** Longest response body kept (characters); a catalogue answer fits easily. */
+    public const int MAX_BODY = 200_000;
+
     public function __construct(private readonly Auth $auth) {}
 
     /**
@@ -35,7 +42,7 @@ class ApiCallLogger
         try {
             $response = $request();
         } catch (Throwable $e) {
-            $this->write($provider, $operation, $query, $language, $category, $started, ApiCallLog::OUTCOME_ERROR, null, $e->getMessage());
+            $this->write($provider, $operation, $query, $language, $category, $started, ApiCallLog::OUTCOME_ERROR, null, $e->getMessage(), null);
 
             throw $e;
         }
@@ -49,6 +56,7 @@ class ApiCallLogger
         $this->write(
             $provider, $operation, $query, $language, $category, $started, $outcome, $response->status(),
             $outcome === ApiCallLog::OUTCOME_FAILED ? mb_substr($response->body(), 0, 1000) : null,
+            mb_substr($response->body(), 0, self::MAX_BODY),
         );
 
         return $response;
@@ -64,9 +72,11 @@ class ApiCallLogger
         string $outcome,
         ?int $status,
         ?string $error,
+        ?string $body,
     ): void {
         ApiCallLog::query()->create([
             'user_id' => $this->auth->guard()->id(),
+            'scan_batch_item_id' => Context::getHidden(self::SCAN_BATCH_ITEM),
             'provider' => $provider,
             'operation' => $operation,
             'query' => $query,
@@ -76,6 +86,7 @@ class ApiCallLogger
             'status_code' => $status,
             'duration_ms' => (int) round((hrtime(true) - $started) / 1_000_000),
             'error' => $error,
+            'response_body' => $body,
         ]);
     }
 }
