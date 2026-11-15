@@ -34,8 +34,9 @@ FROM serversideup/php:8.4-fpm-nginx AS runtime
 
 # Extra extensions on top of the image defaults (pdo_mysql, redis, zip, opcache, ...).
 # intl: locale-aware sorting/formatting of Japanese and other non-Latin titles.
+# gd: resizing the background photos users upload in Settings › Appearance.
 USER root
-RUN install-php-extensions intl bcmath
+RUN install-php-extensions intl bcmath gd
 USER www-data
 
 ENV PHP_OPCACHE_ENABLE=1 \

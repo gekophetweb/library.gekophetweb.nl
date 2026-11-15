@@ -1,6 +1,6 @@
 # Plan — Redesign: logo, light/dark themes and user styles
 
-Status: **designed 2026-11-15**, not built yet.
+Status: **built 2026-11-15** on `feature/redesign-themes` (see §6).
 
 Design canvas (private, owner only): <https://claude.ai/artifact/X8CqpMNFrdmYdLeZ4Q5dzt>
 Boards: Brand & themes, Log in, Library (desktop + phone), Category, Series, Item,
@@ -81,3 +81,22 @@ the owner's defaults, never the visitor's settings or photo.
 4. `users.appearance` migration, Settings › Appearance page, photo upload + route.
 5. Feature tests: saving each option, invalid values rejected, share pages ignore the
    visitor's appearance, photo route needs a signature.
+
+## 6. As built (2026-11-15)
+
+- **Tokens** in `resources/css/app.css`: `[data-theme]` blocks, `@theme inline` (classes
+  `bg-surface text-muted border-line bg-accent …`), `dark:` follows `data-theme`. The
+  stone ramp is re-tinted per theme, so pages not redrawn by hand still match. Components:
+  `.btn(-primary/-secondary/-ghost) .card .field .chip .tile .pill(-owned/-wanted/…)`.
+- **Redrawn**: layout + top bar (logo, search pill, sun/moon), log in / code / name, library
+  dashboard, settings and admin menus (`<x-section-menu>`), Profile, Appearance. Other pages
+  use the re-tinted palette and accent primary buttons.
+- **Appearance** is `App\Support\Appearance\Appearance` (enums for every option, cast
+  `AsAppearance`; the standard look is stored as null). Photos: `AppearancePhotos`, private
+  `local` disk, re-encoded to WebP by GD (now in the Dockerfile), served by
+  `appearance.photo` (signed + owner only). Account deletion removes them.
+- **Theme toggle**: `PUT settings/appearance/theme`; guests keep their pick in localStorage.
+- **MCP server** (`laravel/mcp`, `routes/ai.php`): `POST /api/mcp/appearance`, Sanctum token
+  from Settings › Phone app. Tools `get-appearance`, `update-appearance`,
+  `set-background-photo` (base64, never a URL), `reset-appearance`.
+- Tests: `tests/Feature/Settings/AppearanceTest.php`, `tests/Feature/Mcp/AppearanceMcpTest.php`.

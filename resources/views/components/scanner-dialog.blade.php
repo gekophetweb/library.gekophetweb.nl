@@ -1,12 +1,12 @@
 @props(['categories', 'languages'])
-@php($input = 'block w-full rounded-md border border-stone-300 px-3 py-2 text-sm dark:border-stone-700 dark:bg-stone-950')
-<button type="button" onclick="document.getElementById('scanner-dialog').showModal()"
-        class="rounded-md bg-stone-900 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300">
+@php($input = 'field text-sm')
+<button type="button" onclick="document.getElementById('scanner-dialog').showModal()" class="btn btn-primary min-h-12 rounded-xl px-5 text-[15px]">
+    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2M8 8v8M11 8v8M14 8v8M17 8v8"/></svg>
     Scan items
 </button>
 
 <dialog id="scanner-dialog" @if ($errors->hasAny(['category_id', 'sub_category_id', 'language_id', 'mode', 'ownership'])) open @endif
-        class="w-full max-w-md rounded-xl border border-stone-200 bg-white p-6 text-stone-900 backdrop:bg-stone-950/50 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-100">
+        class="m-auto w-full max-w-md rounded-[18px] border border-line bg-surface p-6 text-ink shadow-card backdrop:bg-stone-950/60">
     @php($missingKeys = auth()->user()->missingApiKeys())
     @if ($missingKeys !== [])
         <h2 class="mb-4 text-lg font-semibold">Add your API keys first</h2>
@@ -19,7 +19,7 @@
         <p class="mb-4 text-sm text-stone-600 dark:text-stone-400">They are free; Settings explains step by step how to get each one.</p>
         <div class="flex justify-end gap-3">
             <button type="button" onclick="this.closest('dialog').close()" class="px-4 py-2 text-sm underline">Cancel</button>
-            <a href="{{ route('settings.api-keys') }}" class="rounded-md bg-stone-900 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300">Go to API keys</a>
+            <a href="{{ route('settings.api-keys') }}" class="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-ink shadow-card hover:opacity-90">Go to API keys</a>
         </div>
     @else
     <h2 class="mb-4 text-lg font-semibold">What are you scanning?</h2>
@@ -80,7 +80,7 @@
 
         <div class="flex justify-end gap-3">
             <button type="button" onclick="this.closest('dialog').close()" class="px-4 py-2 text-sm underline">Cancel</button>
-            <button class="rounded-md bg-stone-900 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-300">Start scanning</button>
+            <button class="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-ink shadow-card hover:opacity-90">Start scanning</button>
         </div>
     </form>
     @endif

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ApiKeyProvider;
+use App\Support\Appearance\AsAppearance;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -14,7 +15,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 /**
  * There are no passwords: users log in through an SSO provider or an e-mail login code.
- * `is_admin` is deliberately not fillable — it is only ever set explicitly.
+ * `is_admin` is deliberately not fillable — it is only ever set explicitly, and so is
+ * `appearance` (Settings › Appearance and the appearance MCP server, both validated).
  */
 #[Fillable(['name', 'email', 'suggestion_emails'])]
 #[Hidden(['password', 'remember_token'])]
@@ -46,6 +48,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'is_admin' => 'boolean',
             'suggestion_emails' => 'boolean',
+            'appearance' => AsAppearance::class,
         ];
     }
 
