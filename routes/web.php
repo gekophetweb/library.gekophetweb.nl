@@ -148,6 +148,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('users', [UserController::class, 'index'])->name('users.index');
         Route::patch('users/{user}/role', [UserController::class, 'updateRole'])->name('users.role');
+        Route::delete('users/{user}/library', [UserController::class, 'clearLibrary'])->name('users.library.destroy');
         Route::get('suggestions', [AdminSuggestionController::class, 'index'])->name('suggestions.index');
         Route::patch('suggestions/{suggestion}', [AdminSuggestionController::class, 'update'])->name('suggestions.update');
 

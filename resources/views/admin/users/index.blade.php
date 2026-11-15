@@ -10,6 +10,8 @@
         </nav>
     </div>
 
+    @error('library') <p class="mb-4 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm dark:border-amber-800 dark:bg-amber-950" data-clear-library-error>{{ $message }}</p> @enderror
+
     <div class="overflow-x-auto rounded-lg border border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900">
         <table class="w-full text-left text-sm">
             <thead class="border-b border-stone-200 text-xs uppercase tracking-wide text-stone-500 dark:border-stone-800">
@@ -37,17 +39,29 @@
                         <td class="px-4 py-3 text-stone-600 dark:text-stone-400">{{ $user->email }}</td>
                         <td class="px-4 py-3 text-right tabular-nums" data-total="{{ $user->objects_count }}">{{ number_format($user->objects_count) }}</td>
                         <td class="px-4 py-3 text-stone-600 dark:text-stone-400">{{ $user->created_at?->toFormattedDateString() }}</td>
-                        <td class="px-4 py-3 text-right">
-                            @unless ($you)
-                                <form method="POST" action="{{ route('admin.users.role', $user) }}" data-role-form>
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="is_admin" value="{{ $user->is_admin ? 0 : 1 }}">
-                                    <button class="rounded-md border border-stone-300 px-3 py-1 text-xs hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800">
-                                        {{ $user->is_admin ? 'Remove admin' : 'Make admin' }}
-                                    </button>
-                                </form>
-                            @endunless
+                        <td class="px-4 py-3">
+                            <div class="flex flex-wrap items-center justify-end gap-2">
+                                @if ($user->library_objects_count + $user->scan_batches_count > 0)
+                                    {{-- Empties the library: scan batches, collection, wishlist and series. The account stays. --}}
+                                    @php($what = number_format($user->library_objects_count).' '.Str::plural('item', $user->library_objects_count).' (collection and wishlist) and '.number_format($user->scan_batches_count).' '.Str::plural('scan batch', $user->scan_batches_count))
+                                    <form method="POST" action="{{ route('admin.users.library.destroy', $user) }}"
+                                          onsubmit="return confirm(@js("Remove all {$what} of {$user->name}, and their series? This cannot be undone. The account itself stays."))">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-secondary text-xs" data-clear-library="{{ $user->id }}" title="Remove {{ $what }}">Empty library</button>
+                                    </form>
+                                @endif
+                                @unless ($you)
+                                    <form method="POST" action="{{ route('admin.users.role', $user) }}" data-role-form>
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="is_admin" value="{{ $user->is_admin ? 0 : 1 }}">
+                                        <button class="rounded-md border border-stone-300 px-3 py-1 text-xs hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800">
+                                            {{ $user->is_admin ? 'Remove admin' : 'Make admin' }}
+                                        </button>
+                                    </form>
+                                @endunless
+                            </div>
                         </td>
                     </tr>
                 @empty
