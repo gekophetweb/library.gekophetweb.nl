@@ -64,6 +64,12 @@ class User extends Authenticatable
         return $this->hasMany(Series::class);
     }
 
+    /** @return HasMany<ScanBatch, $this> */
+    public function scanBatches(): HasMany
+    {
+        return $this->hasMany(ScanBatch::class);
+    }
+
     /** @return HasMany<UserApiKey, $this> */
     public function apiKeys(): HasMany
     {

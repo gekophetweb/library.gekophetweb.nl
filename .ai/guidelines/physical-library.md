@@ -146,6 +146,11 @@ These selections scope the subsequent external lookup.
    (`scan.single.redo`); the raw API answers stay admin-only. A redone code that was
    found as a book without a series gets its series detected again
    (`DetectObjectSeries`, calls logged against the code).
+6. On Admin → Users an admin can **empty a user's library** (`admin.users.library.destroy`,
+   `App\Actions\Admin\ClearUserLibrary`): every scan batch with its codes, every object
+   (collection and wishlist) and the user's series, plus share links to one of those
+   series. The account, keys, settings and other share links stay. Refused while one
+   of the user's batches is still queued or processing.
 
 ### 4.3 External API call logging
 
