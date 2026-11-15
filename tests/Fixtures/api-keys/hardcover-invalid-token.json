@@ -1,0 +1,11 @@
+{
+  "errors": [
+    {
+      "message": "Could not verify JWT: JWSError JWSInvalidSignature",
+      "extensions": {
+        "path": "$",
+        "code": "invalid-jwt"
+      }
+    }
+  ]
+}
