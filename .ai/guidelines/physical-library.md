@@ -141,7 +141,11 @@ These selections scope the subsequent external lookup.
    again with the owner's keys; added, already-owned and invalid codes are left alone.
    Admins can also tick single codes to redo (`ScanBatch::redoItems()`, any code not in
    the collection, invalid ones included) and open each code's raw API answers
-   (`admin.scan-batches.items.show`).
+   (`admin.scan-batches.items.show`). Owners can redo their own codes one at a time
+   (`scan.batches.items.redo`, same rules), and the last code of a single scan
+   (`scan.single.redo`); the raw API answers stay admin-only. A redone code that was
+   found as a book without a series gets its series detected again
+   (`DetectObjectSeries`, calls logged against the code).
 
 ### 4.3 External API call logging
 

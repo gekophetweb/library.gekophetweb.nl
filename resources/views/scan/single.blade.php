@@ -22,7 +22,16 @@
 
     @if ($pending)
         <section class="max-w-xl rounded-lg border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900">
-            <p class="mb-3 font-mono text-sm text-stone-500">{{ $pending['barcode'] }}</p>
+            <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
+                <p class="font-mono text-sm text-stone-500">{{ $pending['barcode'] }}</p>
+                @unless ($existing)
+                    {{-- A catalogue that did not answer, or an incomplete answer: ask again. --}}
+                    <form method="POST" action="{{ route('scan.single.redo') }}">
+                        @csrf
+                        <button class="btn btn-secondary" data-redo-lookup>Look up again</button>
+                    </form>
+                @endunless
+            </div>
 
             @if ($existing && ($pending['can_promote'] ?? false))
                 <p class="mb-3">This is on your wishlist: <a href="{{ route('objects.show', $existing) }}" class="font-medium underline">{{ $existing->name }}</a>.</p>

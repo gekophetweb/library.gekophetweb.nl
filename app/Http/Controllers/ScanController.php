@@ -83,6 +83,24 @@ class ScanController extends Controller
         $barcode = trim((string) $request->validate(['barcode' => ['required', 'string', 'max:64']])['barcode']);
         $barcode = Isbn::tryFrom($barcode)?->value ?? preg_replace('/\s+/', '', $barcode);
 
+        return $this->lookUpBarcode($request, $setup, $barcode, $catalogue, $series);
+    }
+
+    /**
+     * Looks the code scanned last up again, for example after a catalogue did not answer
+     * or the result came back incomplete; the series is detected again too. The code
+     * lives in the user's own session, so only they can redo it.
+     */
+    public function redo(Request $request, CatalogueLookupManager $catalogue, DetectSeries $series): RedirectResponse
+    {
+        $setup = $this->setup($request) ?? abort(409, 'Choose what to scan first.');
+        $barcode = $request->session()->get('scan.pending.barcode') ?? abort(409, 'Scan something first.');
+
+        return $this->lookUpBarcode($request, $setup, $barcode, $catalogue, $series);
+    }
+
+    private function lookUpBarcode(Request $request, ScanSetup $setup, string $barcode, CatalogueLookupManager $catalogue, DetectSeries $series): RedirectResponse
+    {
         $existing = CollectionObject::query()->ownedBy($request->user())->where('barcode', $barcode)->first();
 
         if ($existing !== null) {

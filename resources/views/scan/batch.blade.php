@@ -122,6 +122,14 @@
                         <button class="text-sm underline">Remove</button>
                     </form>
                 @else
+                    @if ($batch->status === ScanBatch::DONE && $item->isRedoable())
+                        {{-- Not in the collection yet, or a book without a series: look it up again. --}}
+                        <form method="POST" action="{{ route('scan.batches.items.redo', [$batch, $item]) }}" class="ml-auto">
+                            @csrf
+                            <button class="btn btn-secondary" data-redo-code="{{ $item->id }}"
+                                    title="{{ $item->object_id ? 'Look for its series again' : 'Ask the catalogues again' }}">{{ $item->object_id ? 'Find series again' : 'Look up again' }}</button>
+                        </form>
+                    @endif
                     <span @class([
                         'text-sm',
                         'font-medium text-red-600 dark:text-red-400' => $item->status === 'not_found',
