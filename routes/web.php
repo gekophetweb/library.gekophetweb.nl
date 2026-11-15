@@ -81,6 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::post('scan/batches/{batch}/items', [ScanBatchController::class, 'storeItem'])->name('scan.batches.items.store');
     Route::post('scan/batches/{batch}/items/bulk', [ScanBatchController::class, 'storeItems'])->name('scan.batches.items.bulk');
     Route::delete('scan/batches/{batch}/items/{item}', [ScanBatchController::class, 'destroyItem'])->name('scan.batches.items.destroy');
+    Route::post('scan/batches/{batch}/items/{item}/add', [ScanBatchController::class, 'addItem'])->scopeBindings()->name('scan.batches.items.add');
     Route::post('scan/batches/{batch}/commit', [ScanBatchController::class, 'commit'])->name('scan.batches.commit');
     Route::post('scan/batches/{batch}/retry', [ScanBatchController::class, 'retry'])->middleware('throttle:10,1')->name('scan.batches.retry');
 
@@ -133,6 +134,8 @@ Route::middleware('auth')->group(function () {
         Route::get('scan-batches/{batch}', [AdminScanBatchController::class, 'show'])->name('scan-batches.show');
         Route::post('scan-batches/{batch}/retry', [AdminScanBatchController::class, 'retry'])->name('scan-batches.retry');
         Route::post('scan-batches/{batch}/redo', [AdminScanBatchController::class, 'redo'])->name('scan-batches.redo');
+        Route::post('scan-batches/{batch}/items/redo', [AdminScanBatchController::class, 'redoItems'])->name('scan-batches.items.redo');
+        Route::get('scan-batches/{batch}/items/{item}', [AdminScanBatchController::class, 'showItem'])->scopeBindings()->name('scan-batches.items.show');
         Route::delete('scan-batches/{batch}', [AdminScanBatchController::class, 'destroy'])->name('scan-batches.destroy');
 
         Route::get('users', [UserController::class, 'index'])->name('users.index');

@@ -81,7 +81,7 @@ class ScanBatch extends Model
      */
     public function retryFailed(): int
     {
-        return $this->requeue(['failed']);
+        return $this->requeue($this->items()->where('status', 'failed'));
     }
 
     /** Outcomes an admin's redo looks up again: everything that did not reach the collection for lack of an answer. */
@@ -94,13 +94,24 @@ class ScanBatch extends Model
      */
     public function redo(): int
     {
-        return $this->requeue(self::REDOABLE);
+        return $this->requeue($this->items()->whereIn('status', self::REDOABLE));
     }
 
-    /** @param  list<string>  $statuses */
-    private function requeue(array $statuses): int
+    /**
+     * An admin's redo of the codes they picked: any of them that did not reach the
+     * collection is looked up again (added and already-owned codes are left alone).
+     *
+     * @param  list<int>  $itemIds
+     */
+    public function redoItems(array $itemIds): int
     {
-        $count = $this->items()->whereIn('status', $statuses)->whereNull('object_id')->update(['status' => 'pending', 'message' => null]);
+        return $this->requeue($this->items()->whereKey($itemIds)->where('status', '!=', 'pending'));
+    }
+
+    /** @param  HasMany<ScanBatchItem, $this>  $items */
+    private function requeue(HasMany $items): int
+    {
+        $count = $items->whereNull('object_id')->update(['status' => 'pending', 'message' => null]);
 
         if ($count > 0) {
             $this->update(['status' => self::QUEUED, 'finished_at' => null]);

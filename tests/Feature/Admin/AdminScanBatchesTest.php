@@ -1,6 +1,7 @@
 <?php
 
 use App\Jobs\ProcessScanBatch;
+use App\Models\ApiCallLog;
 use App\Models\Category;
 use App\Models\CollectionObject;
 use App\Models\Language;
@@ -157,4 +158,79 @@ it('only redoes finished batches, and only for admins', function () {
     $done->items()->update(['status' => 'already_owned']);
     $this->post(route('admin.scan-batches.redo', $done))->assertSessionHas('status', 'Every code in this batch was already added; nothing to redo.');
     Queue::assertNothingPushed();
+});
+
+it('redoes only the ticked codes that did not reach the collection', function () {
+    Queue::fake();
+    $owner = User::factory()->create();
+    $batch = adminTestBatch($owner, ScanBatch::DONE, $this->ja, $this->manga, ['111', '222', '333', '444']);
+    $object = CollectionObject::factory()->for($owner)->create(['barcode' => '111']);
+    $items = $batch->items()->get();
+    $items[0]->update(['status' => 'added', 'object_id' => $object->id]);
+    $items[1]->update(['status' => 'not_found']);
+    $items[2]->update(['status' => 'invalid', 'message' => 'Not a valid barcode for this category.']);
+    $items[3]->update(['status' => 'failed']);
+    $other = adminTestBatch($owner, ScanBatch::DONE, $this->ja, codes: ['999']);
+    $other->items()->update(['status' => 'failed']);
+
+    $this->actingAs($this->admin)->get(route('admin.scan-batches.show', $batch))
+        ->assertSee('Redo ticked codes')
+        ->assertDontSee('data-redo-item="'.$items[0]->id.'"', false)
+        ->assertSee('data-redo-item="'.$items[1]->id.'"', false)
+        ->assertSee('data-redo-item="'.$items[2]->id.'"', false);
+
+    $this->post(route('admin.scan-batches.items.redo', $batch), ['items' => [$items[0]->id, $items[2]->id, $other->items()->value('id')]])
+        ->assertRedirect(route('admin.scan-batches.show', $batch))
+        ->assertSessionHas('status', 'Redoing 1 code…');
+
+    expect($batch->refresh()->status)->toBe(ScanBatch::QUEUED)
+        ->and($batch->items()->pluck('status', 'barcode')->all())->toBe(['111' => 'added', '222' => 'not_found', '333' => 'pending', '444' => 'failed'])
+        ->and($batch->items()->where('barcode', '333')->value('message'))->toBeNull()
+        ->and($other->items()->value('status'))->toBe('failed');
+    Queue::assertPushed(ProcessScanBatch::class, 1);
+});
+
+it('asks for ticked codes, and redoes codes only on finished batches for admins', function () {
+    Queue::fake();
+    $owner = User::factory()->create();
+    $done = adminTestBatch($owner, ScanBatch::DONE, $this->ja, codes: ['111']);
+    $done->items()->update(['status' => 'failed']);
+    $running = adminTestBatch($owner, ScanBatch::PROCESSING, $this->ja, codes: ['222']);
+
+    $this->actingAs($owner)->post(route('admin.scan-batches.items.redo', $done), ['items' => [$done->items()->value('id')]])->assertForbidden();
+    $this->actingAs($this->admin)->post(route('admin.scan-batches.items.redo', $running), ['items' => [$running->items()->value('id')]])->assertStatus(409);
+    $this->post(route('admin.scan-batches.items.redo', $done), [])->assertSessionHasErrors('items');
+    Queue::assertNothingPushed();
+});
+
+it('shows the raw API answers for a scanned code', function () {
+    $owner = User::factory()->create();
+    $batch = adminTestBatch($owner, ScanBatch::DONE, $this->ja, codes: ['9784592135746', '222']);
+    [$item, $other] = $batch->items()->get()->all();
+    $item->update(['status' => 'not_found']);
+    $log = fn (array $attributes) => ApiCallLog::query()->create($attributes + [
+        'scan_batch_item_id' => $item->id, 'provider' => 'rakuten', 'operation' => 'lookup', 'query' => 'isbn=9784592135746',
+        'category' => 'books', 'language' => 'ja', 'outcome' => 'success', 'status_code' => 200, 'duration_ms' => 120,
+    ]);
+    $log(['response_body' => '{"count":0,"Items":[],"note":"<script>"}']);
+    $log(['provider' => 'ndl', 'outcome' => 'error', 'status_code' => null, 'error' => 'cURL error 28: Operation timed out']);
+
+    $this->actingAs($this->admin)->get(route('admin.scan-batches.show', $batch))
+        ->assertSee(route('admin.scan-batches.items.show', [$batch, $item]))
+        ->assertSee('2 calls')
+        ->assertDontSee(route('admin.scan-batches.items.show', [$batch, $other]));
+
+    $this->get(route('admin.scan-batches.items.show', [$batch, $item]))
+        ->assertOk()
+        ->assertSee('isbn=9784592135746')
+        ->assertSee('"count": 0')                  // pretty-printed JSON
+        ->assertSee('&lt;script&gt;', false)       // escaped
+        ->assertSee('cURL error 28: Operation timed out')
+        ->assertSee('No response body (the request did not get an answer).');
+
+    $this->get(route('admin.scan-batches.items.show', [$batch, $other]))->assertSee('No API calls are linked to this code.');
+
+    $elsewhere = adminTestBatch($owner, ScanBatch::DONE, $this->ja, codes: ['333']);
+    $this->get(route('admin.scan-batches.items.show', [$elsewhere, $item]))->assertNotFound();
+    $this->actingAs($owner)->get(route('admin.scan-batches.items.show', [$batch, $item]))->assertForbidden();
 });

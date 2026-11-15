@@ -7,9 +7,14 @@ use App\Actions\Series\DetectSeries;
 use App\Models\CollectionObject;
 use App\Models\ScanBatch;
 use App\Models\ScanBatchItem;
+use App\Models\User;
+use App\Services\ApiCallLogger;
 use App\Services\Catalogue\CatalogueLookupManager;
+use App\Support\Catalogue\CatalogueContext;
+use App\Support\Scan\ScanSetup;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Context;
 use Throwable;
 
 /**
@@ -32,44 +37,58 @@ class ProcessScanBatch implements ShouldQueue
         $setup = $this->batch->setup();
         $context = $this->batch->context();
 
-        $this->batch->items()->where('status', 'pending')->each(function (ScanBatchItem $item) use ($catalogue, $add, $series, $user, $setup, $context) {
-            $existing = CollectionObject::query()->ownedBy($user)->where('barcode', $item->barcode)->first();
-
-            if ($existing !== null) {
-                // No lookup needed: promote a wanted item on an Own batch, else report it.
-                $promoted = AddScannedObject::promoteIfAcquired($existing, $setup->ownership)->wasChanged('ownership');
-                $item->update([
-                    'status' => $promoted ? 'promoted' : ($existing->isOwned() ? 'already_owned' : 'already_wanted'),
-                    'object_id' => $existing->id,
-                ]);
-
-                return;
-            }
-
-            try {
-                $outcome = $catalogue->lookup($item->barcode, $context);
-
-                if ($outcome->invalidBarcode) {
-                    $item->update(['status' => 'invalid', 'message' => 'Not a valid barcode for this category.']);
-                } elseif ($outcome->failed()) {
-                    // No catalogue answered at all: unknown, not "not found". Retrying can help.
-                    $item->update(['status' => 'failed', 'message' => "No answer from {$outcome->unavailableNames()}. Try again later."]);
-                } elseif ($outcome->result === null) {
-                    $item->update(['status' => 'not_found', 'message' => $outcome->missingKeys
-                        ? 'Not found. Adding your '.collect($outcome->missingKeys)->map->label()->join(', ').' key may help.'
-                        : null]);
-                } else {
-                    $object = $add->handle($user, $setup, $outcome->result);
-                    $item->update(['status' => 'added', 'object_id' => $object->id]);
-                    $this->detectSeries($series, $object, $setup->language->code);
-                }
-            } catch (Throwable $e) {
-                report($e);
-                $item->update(['status' => 'failed', 'message' => 'Something went wrong; try scanning it again.']);
-            }
-        });
+        $this->batch->items()->where('status', 'pending')->each(fn (ScanBatchItem $item) => Context::scope(
+            // Every API call logged while handling this code is linked to it (raw data for admins).
+            fn () => $this->handleItem($item, $catalogue, $add, $series, $user, $setup, $context),
+            hidden: [ApiCallLogger::SCAN_BATCH_ITEM => $item->id],
+        ));
 
         $this->batch->update(['status' => ScanBatch::DONE, 'finished_at' => now()]);
+    }
+
+    private function handleItem(
+        ScanBatchItem $item,
+        CatalogueLookupManager $catalogue,
+        AddScannedObject $add,
+        DetectSeries $series,
+        User $user,
+        ScanSetup $setup,
+        CatalogueContext $context,
+    ): void {
+        $existing = CollectionObject::query()->ownedBy($user)->where('barcode', $item->barcode)->first();
+
+        if ($existing !== null) {
+            // No lookup needed: promote a wanted item on an Own batch, else report it.
+            $promoted = AddScannedObject::promoteIfAcquired($existing, $setup->ownership)->wasChanged('ownership');
+            $item->update([
+                'status' => $promoted ? 'promoted' : ($existing->isOwned() ? 'already_owned' : 'already_wanted'),
+                'object_id' => $existing->id,
+            ]);
+
+            return;
+        }
+
+        try {
+            $outcome = $catalogue->lookup($item->barcode, $context);
+
+            if ($outcome->invalidBarcode) {
+                $item->update(['status' => 'invalid', 'message' => 'Not a valid barcode for this category.']);
+            } elseif ($outcome->failed()) {
+                // No catalogue answered at all: unknown, not "not found". Retrying can help.
+                $item->update(['status' => 'failed', 'message' => "No answer from {$outcome->unavailableNames()}. Try again later."]);
+            } elseif ($outcome->result === null) {
+                $item->update(['status' => 'not_found', 'message' => $outcome->missingKeys
+                    ? 'Not found. Adding your '.collect($outcome->missingKeys)->map->label()->join(', ').' key may help.'
+                    : null]);
+            } else {
+                $object = $add->handle($user, $setup, $outcome->result);
+                $item->update(['status' => 'added', 'object_id' => $object->id]);
+                $this->detectSeries($series, $object, $setup->language->code);
+            }
+        } catch (Throwable $e) {
+            report($e);
+            $item->update(['status' => 'failed', 'message' => 'Something went wrong; try scanning it again.']);
+        }
     }
 
     /**

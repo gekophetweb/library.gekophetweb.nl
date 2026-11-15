@@ -134,9 +134,14 @@ These selections scope the subsequent external lookup.
    asynchronously** — dispatch it to a **queued job** (per item or per batch), do
    not block the request. Report progress/results back to the user.
 5. Users see their own batches at **Your scan batches** (`scan.batches.index`) and can
-   retry failed lookups. Admins see every batch and can **redo** a finished one
+   retry failed lookups. A code that came back **not found** is shown in red and can be
+   added by hand (`scan.batches.items.add`, title + romanized title); no other outcome
+   offers that. Admins see every batch and can **redo** a finished one
    (`ScanBatch::redo()`): failed and not-found codes go back to pending and the job runs
    again with the owner's keys; added, already-owned and invalid codes are left alone.
+   Admins can also tick single codes to redo (`ScanBatch::redoItems()`, any code not in
+   the collection, invalid ones included) and open each code's raw API answers
+   (`admin.scan-batches.items.show`).
 
 ### 4.3 External API call logging
 
@@ -144,6 +149,11 @@ These selections scope the subsequent external lookup.
 context (which provider, the query/scan value, the user, category/language) and the
 outcome (success/failure, timing). This log is a first-class table, not just the
 application log file, so lookups can be audited and debugged.
+
+`ApiCallLogger` also keeps the raw response body (`response_body`, up to
+`ApiCallLogger::MAX_BODY` characters) and, inside the batch job, the scanned code it was
+made for (`scan_batch_item_id`, set through hidden `Context` by `ProcessScanBatch`). Never
+put keys in the logged `query`; the body is the provider's answer only.
 
 ---
 

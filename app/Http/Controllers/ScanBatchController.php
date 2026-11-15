@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Scan\AddScannedObject;
 use App\Enums\OwnershipStatus;
 use App\Http\Controllers\Admin\ScanBatchController as AdminScanBatchController;
 use App\Jobs\ProcessScanBatch;
 use App\Models\CollectionObject;
 use App\Models\ScanBatch;
 use App\Models\ScanBatchItem;
+use App\Support\Catalogue\CatalogueResult;
 use App\Support\Isbn;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -187,6 +189,29 @@ class ScanBatchController extends Controller
 
         return redirect()->route('scan.batches.show', $batch)
             ->with('status', $count ? "Trying {$count} ".str('item')->plural($count).' again…' : 'Nothing to try again.');
+    }
+
+    /**
+     * Adds a code no catalogue knew by hand, with the required details typed by the user
+     * (like a single scan, §7). Only for codes whose lookup came back "not found".
+     */
+    public function addItem(Request $request, ScanBatch $batch, ScanBatchItem $item, AddScannedObject $add): RedirectResponse
+    {
+        $this->authorizeBatch($request, $batch);
+        abort_unless($batch->status === ScanBatch::DONE, 409, 'This batch is not finished yet.');
+        abort_unless($item->status === 'not_found' && $item->object_id === null, 409, 'Only codes that were not found can be added by hand.');
+
+        $typed = $request->validateWithBag("item{$item->id}", [
+            'name' => ['required', 'string', 'max:255'],
+            'name_romanized' => ['required', 'string', 'max:255'],
+        ]);
+
+        $object = $add->handle($request->user(), $batch->setup(), new CatalogueResult('manual', $item->barcode, $typed['name'], $typed['name_romanized']));
+        $item->update(['status' => 'added', 'object_id' => $object->id, 'message' => null]);
+
+        $where = $object->isOwned() ? 'your collection' : 'your wishlist';
+
+        return redirect()->route('scan.batches.show', $batch)->with('status', "Added {$object->name} to {$where}.");
     }
 
     private function authorizeBatch(Request $request, ScanBatch $batch): void
