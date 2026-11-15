@@ -16,7 +16,7 @@
         @csrf
         <label for="barcode" class="sr-only">Barcode</label>
         <input id="barcode" name="barcode" required autofocus inputmode="numeric" autocomplete="off" placeholder="Scan or type a barcode / ISBN" class="{{ $input }}">
-        <button class="{{ $primary }}">Look up</button>
+        <button class="{{ $primary }} shrink-0 whitespace-nowrap">Look up</button>
     </form>
     @error('barcode') <p class="-mt-6 mb-6 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
 
