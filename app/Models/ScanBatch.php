@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\OwnershipStatus;
+use App\Jobs\DetectObjectSeries;
 use App\Jobs\ProcessScanBatch;
 use App\Support\Catalogue\CatalogueContext;
 use App\Support\Scan\ScanSetup;
@@ -98,14 +99,31 @@ class ScanBatch extends Model
     }
 
     /**
-     * An admin's redo of the codes they picked: any of them that did not reach the
-     * collection is looked up again (added and already-owned codes are left alone).
+     * A redo of picked codes (an admin's ticks, or the owner's one at a time): any of them
+     * that did not reach the collection is looked up again, and any found book without a
+     * series gets its series detected again. Other found codes are left alone. Returns how many.
      *
      * @param  list<int>  $itemIds
      */
     public function redoItems(array $itemIds): int
     {
-        return $this->requeue($this->items()->whereKey($itemIds)->where('status', '!=', 'pending'));
+        return $this->redetectSeries($itemIds)
+            + $this->requeue($this->items()->whereKey($itemIds)->where('status', '!=', 'pending'));
+    }
+
+    /**
+     * Series detection again for the picked codes found as a book without a series, for
+     * example because the series APIs did not answer the first time. Queued, like the first
+     * detection; its calls are logged against the code.
+     *
+     * @param  list<int>  $itemIds
+     */
+    private function redetectSeries(array $itemIds): int
+    {
+        return $this->items()->whereKey($itemIds)->whereNotNull('object_id')->with('object.category')->get()
+            ->filter->lacksSeries()
+            ->each(fn (ScanBatchItem $item) => DetectObjectSeries::dispatch($item->object, $this->language->code, $item->id))
+            ->count();
     }
 
     /** @param  HasMany<ScanBatchItem, $this>  $items */

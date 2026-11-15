@@ -46,7 +46,7 @@ class ScanBatchController extends Controller
 
         return view('scan.batch', [
             'batch' => $batch->load(['category', 'subCategory', 'language']),
-            'items' => $batch->items()->with('object')->get(),
+            'items' => $batch->items()->with('object.category')->get(),
         ]);
     }
 
@@ -189,6 +189,26 @@ class ScanBatchController extends Controller
 
         return redirect()->route('scan.batches.show', $batch)
             ->with('status', $count ? "Trying {$count} ".str('item')->plural($count).' again…' : 'Nothing to try again.');
+    }
+
+    /**
+     * Redoes one of the user's own codes: one that did not reach the collection is looked up
+     * again (a catalogue may answer now), a book found without a series gets its series
+     * detected again. The raw API answers stay on the admin pages.
+     */
+    public function redoItem(Request $request, ScanBatch $batch, ScanBatchItem $item): RedirectResponse
+    {
+        $this->authorizeBatch($request, $batch);
+        abort_unless($batch->status === ScanBatch::DONE, 409, 'This batch is not finished yet.');
+        abort_unless($item->isRedoable(), 409, 'This code is already in your collection, in a series.');
+
+        $status = $item->object_id === null
+            ? "Looking {$item->barcode} up again…"
+            : "Looking for the series of {$item->object->name} again…";
+
+        $batch->redoItems([$item->id]);
+
+        return redirect()->route('scan.batches.show', $batch)->with('status', $status);
     }
 
     /**

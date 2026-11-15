@@ -62,7 +62,7 @@ class ScanBatchController extends Controller
     public function show(ScanBatch $batch): View
     {
         $batch->load(['user', 'category', 'subCategory', 'language']);
-        $items = $batch->items()->with('object:id,name')->withCount('apiCalls')->get();
+        $items = $batch->items()->with(['object:id,name,serie_id,category_id', 'object.category'])->withCount('apiCalls')->get();
 
         return view('admin.scan-batches.show', [
             'batch' => $batch,

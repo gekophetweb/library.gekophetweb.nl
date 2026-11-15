@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::post('scan', [ScanController::class, 'start'])->middleware('api-keys')->name('scan.start');
     Route::get('scan/single', [ScanController::class, 'single'])->name('scan.single');
     Route::post('scan/single/lookup', [ScanController::class, 'lookup'])->middleware('throttle:60,1')->name('scan.single.lookup');
+    Route::post('scan/single/redo', [ScanController::class, 'redo'])->middleware('throttle:60,1')->name('scan.single.redo');
     Route::post('scan/single/add', [ScanController::class, 'add'])->name('scan.single.add');
     Route::get('scan/batches', [ScanBatchController::class, 'index'])->name('scan.batches.index');
     Route::get('scan/batches/{batch}', [ScanBatchController::class, 'show'])->name('scan.batches.show');
@@ -84,6 +85,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('scan/batches/{batch}/items/{item}', [ScanBatchController::class, 'destroyItem'])->name('scan.batches.items.destroy');
     Route::post('scan/batches/{batch}/items/{item}/add', [ScanBatchController::class, 'addItem'])->scopeBindings()->name('scan.batches.items.add');
     Route::post('scan/batches/{batch}/commit', [ScanBatchController::class, 'commit'])->name('scan.batches.commit');
+    Route::post('scan/batches/{batch}/items/{item}/redo', [ScanBatchController::class, 'redoItem'])->scopeBindings()->middleware('throttle:30,1')->name('scan.batches.items.redo');
     Route::post('scan/batches/{batch}/retry', [ScanBatchController::class, 'retry'])->middleware('throttle:10,1')->name('scan.batches.retry');
 
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
