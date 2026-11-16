@@ -15,6 +15,7 @@ use App\Support\Library\CategoryCounts;
 use App\Support\Library\CategoryShelf;
 use App\Support\Library\SeriesShelf;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -26,8 +27,7 @@ class LibraryController extends Controller
     {
         return view('library.dashboard', [
             'categories' => CategoryCounts::for($request->user()->objects()->getQuery()),
-            'scanCategories' => Category::query()->whereNull('parent_id')->with('children')->orderBy('sort')->orderBy('id')->get(),
-            'languages' => Language::query()->orderBy('name')->get(),
+            ...$this->scanOptions(),
             'hasScanBatches' => ScanBatch::query()->where('user_id', $request->user()->id)->exists(),
             'sharedWithMe' => LibraryShare::query()->usable()->sharedWith($request->user())
                 ->with(['user', 'shareable'])->latest()->get(),
@@ -40,7 +40,21 @@ class LibraryController extends Controller
 
         return view('library.category', [
             'shelf' => CategoryShelf::build($category, $request->user()->objects()->getQuery(), $request->integer('sub') ?: null),
+            ...$this->scanOptions(),
         ]);
+    }
+
+    /**
+     * The scanner dialog's choices.
+     *
+     * @return array{scanCategories: Collection<int, Category>, languages: Collection<int, Language>}
+     */
+    private function scanOptions(): array
+    {
+        return [
+            'scanCategories' => Category::query()->whereNull('parent_id')->with('children')->orderBy('sort')->orderBy('id')->get(),
+            'languages' => Language::query()->orderBy('name')->get(),
+        ];
     }
 
     public function series(Request $request, Series $series, WishMissingVolumes $wish): View

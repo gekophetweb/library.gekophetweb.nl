@@ -48,6 +48,20 @@ it('opens the scanner dialog from the dashboard', function () {
     $this->get(route('home'))->assertSee('Scan items')->assertSee(route('scan.start'));
 });
 
+it('opens the scanner dialog from a category page with that category selected', function () {
+    $this->get(route('library.category', $this->books))
+        ->assertSee('Scan items')
+        ->assertSee(route('scan.start'))
+        ->assertSee('<option value="'.$this->books->id.'" selected>', false)
+        ->assertDontSee('<option value="'.$this->manga->id.'" selected>', false);
+});
+
+it('selects the sub-category filter in the scanner dialog', function () {
+    $this->get(route('library.category', [$this->books, 'sub' => $this->manga->id]))
+        ->assertSee('<option value="'.$this->books->id.'" selected>', false)
+        ->assertSee('<option value="'.$this->manga->id.'" selected>', false);
+});
+
 it('sends a user without every API key to settings instead of scanning', function (string $mode) {
     $this->user->apiKeys()->where('provider', ApiKeyProvider::Hardcover->value)->delete();
 
