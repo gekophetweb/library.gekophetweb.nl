@@ -20,9 +20,12 @@ function catalogueFixture(string $name): string
 /**
  * Rakuten answers the Berserk fixture, Google Books the DCC fixture, NDL and Open Library
  * their recorded Berserk 1 answers; anything else is empty. $ndlDown makes NDL time out.
+ * Each call replaces the previous fake: Http::fake() stacks, and the first one would answer.
  */
 function fakeCatalogueApis(bool $googleQuotaExceeded = false, bool $ndlDown = false, bool $openLibraryDown = false): void
 {
+    withoutSeriesFixtures(); // starts from a clean HTTP client
+
     Http::fake(function (Request $request) use ($googleQuotaExceeded, $ndlDown, $openLibraryDown) {
         parse_str((string) parse_url($request->url(), PHP_URL_QUERY), $query);
 
@@ -170,7 +173,11 @@ it('falls through when Google Books is over its quota', function () {
 
     $outcome = app(CatalogueLookupManager::class)->lookup('9784592135746', bookContext('en'));
 
-    expect($outcome->result->source)->toBe('rakuten');
+    // Next in line is keyless Open Library (config/catalogue.php); Rakuten, asked last,
+    // fills the gap it leaves.
+    expect($outcome->result->source)->toBe('openlibrary')
+        ->and($outcome->result->publisher)->toBe('白泉社');
+    Http::assertSent(fn (Request $request) => str_contains($request->url(), 'rakuten'));
     expect(ApiCallLog::query()->where('provider', 'google_books')->sole()->outcome)->toBe(ApiCallLog::OUTCOME_FAILED);
 });
 
