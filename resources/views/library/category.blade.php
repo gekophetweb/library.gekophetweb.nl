@@ -8,7 +8,12 @@
             <h1 class="mb-4 mt-1 text-2xl font-semibold">{{ $shelf->category->name }}</h1>
         </div>
         @if ($links->canEdit())
-            <x-share-button :scope="'category:'.$shelf->category->id" :label="'Share '.$shelf->category->name" />
+            <div class="flex flex-wrap items-center gap-3">
+                <x-share-button :scope="'category:'.$shelf->category->id" :label="'Share '.$shelf->category->name" />
+                {{-- Preselects this category and the sub-category filter, if one is on. --}}
+                <x-scanner-dialog :categories="$scanCategories" :languages="$languages"
+                                  :category="$shelf->category" :sub-category="$shelf->subCategory" />
+            </div>
         @endif
     </div>
 
