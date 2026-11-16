@@ -152,6 +152,28 @@ These selections scope the subsequent external lookup.
    series. The account, keys, settings and other share links stay. Refused while one
    of the user's batches is still queued or processing.
 
+### 4.2.1 Romanization on scan
+
+Japanese and Korean names are romanized when a scanned item is added
+(`App\Services\Romanization\NameRomanizer`), for the title, a new publisher and a new
+author / artist:
+- a kana reading from the catalogue (Rakuten `titleKana` / `authorKana`, NDL
+  transcriptions), or a name written in kana only → modified Hepburn with macrons
+  (`App\Support\Romanization\Hepburn`: `Miura Kentarō`); a title's volume number is added
+  back (`Beruseruku 1`);
+- a name in Hangul → Revised Romanization (`RevisedRomanization`: `hangugeo`);
+- a publisher or person in kanji / hanja only → the English label of the Wikidata item
+  with exactly that Japanese / Korean label (`WikidataLatinName`, one logged call, only for
+  a new publisher or artist);
+- anything else (a kanji title without a reading) keeps the original as before.
+
+`name_romanized_auto` (objects, publishers, artists) marks an automatic romanization;
+editing an item's romanized title by hand clears it. An admin can **redo the
+romanization** (`App\Actions\Admin\RedoRomanization`, queued `RomanizeObjects`, the barcode
+looked up again for its readings) from the item page (`admin.objects.romanize`) or for
+ticked codes on an admin batch page (`admin.scan-batches.items.romanize`). It only
+replaces placeholders: a romanization equal to the original name, or an automatic one.
+
 ### 4.3 External API call logging
 
 **Every** call to an external catalogue API must be **logged** — store request

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\OverviewController;
+use App\Http\Controllers\Admin\RomanizationController;
 use App\Http\Controllers\Admin\ScanBatchController as AdminScanBatchController;
 use App\Http\Controllers\Admin\SsoProviderController;
 use App\Http\Controllers\Admin\SuggestionController as AdminSuggestionController;
@@ -143,7 +144,9 @@ Route::middleware('auth')->group(function () {
         Route::post('scan-batches/{batch}/retry', [AdminScanBatchController::class, 'retry'])->name('scan-batches.retry');
         Route::post('scan-batches/{batch}/redo', [AdminScanBatchController::class, 'redo'])->name('scan-batches.redo');
         Route::post('scan-batches/{batch}/items/redo', [AdminScanBatchController::class, 'redoItems'])->name('scan-batches.items.redo');
+        Route::post('scan-batches/{batch}/items/romanize', [RomanizationController::class, 'batchItems'])->name('scan-batches.items.romanize');
         Route::get('scan-batches/{batch}/items/{item}', [AdminScanBatchController::class, 'showItem'])->scopeBindings()->name('scan-batches.items.show');
+        Route::post('objects/{object}/romanize', [RomanizationController::class, 'object'])->name('objects.romanize');
         Route::delete('scan-batches/{batch}', [AdminScanBatchController::class, 'destroy'])->name('scan-batches.destroy');
 
         Route::get('users', [UserController::class, 'index'])->name('users.index');

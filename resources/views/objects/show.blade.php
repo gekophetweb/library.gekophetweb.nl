@@ -73,14 +73,23 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('objects.ownership', $object) }}" class="mb-4">
-        @csrf
-        @method('PATCH')
-        <input type="hidden" name="ownership" value="{{ $object->isOwned() ? 'wishlist' : 'owned' }}">
-        <button class="rounded-md border border-stone-300 px-4 py-2 text-sm hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800">
-            {{ $object->isOwned() ? 'Move to wishlist' : 'Mark as owned' }}
-        </button>
-    </form>
+    <div class="mb-4 flex flex-wrap gap-2">
+        <form method="POST" action="{{ route('objects.ownership', $object) }}">
+            @csrf
+            @method('PATCH')
+            <input type="hidden" name="ownership" value="{{ $object->isOwned() ? 'wishlist' : 'owned' }}">
+            <button class="rounded-md border border-stone-300 px-4 py-2 text-sm hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800">
+                {{ $object->isOwned() ? 'Move to wishlist' : 'Mark as owned' }}
+            </button>
+        </form>
+        @can('admin')
+            {{-- Admins only: romanize the title, publisher and author again (hand-typed names stay). --}}
+            <form method="POST" action="{{ route('admin.objects.romanize', $object) }}">
+                @csrf
+                <button class="btn btn-secondary" data-romanize-object>Redo romanization</button>
+            </form>
+        @endcan
+    </div>
 
     <details class="max-w-2xl rounded-lg border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900" @if ($errors->any()) open @endif>
         <summary class="cursor-pointer font-medium">Edit</summary>
