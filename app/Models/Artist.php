@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasRomanizedName;
 use App\Models\Concerns\SearchesNames;
 use Database\Factories\ArtistFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -16,11 +17,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * A book author or music artist, shared across users. Shared rows are not a shared
  * library: a user only ever sees the artists reachable through their own items and series.
  */
-#[Fillable(['name', 'name_romanized', 'name_english'])]
+#[Fillable(['name', 'name_romanized', 'name_romanized_auto', 'name_english'])]
 class Artist extends Model
 {
     /** @use HasFactory<ArtistFactory> */
-    use HasFactory, SearchesNames;
+    use HasFactory, HasRomanizedName, SearchesNames;
 
     /**
      * Artists linked to one of the user's items (book author, music artist) or series.

@@ -16,6 +16,9 @@ final readonly class CatalogueResult
         public ?string $releaseDate = null, // "1990", "1990-12" or "1990-12-01"
         public ?string $coverUrl = null,
         public ?string $languageCode = null,
+        /** Kana readings (Rakuten `titleKana` / `authorKana`, NDL transcriptions), for romanizing kanji. */
+        public ?string $nameReading = null,
+        public ?string $creatorReading = null,
     ) {}
 
     /** Fills this result's gaps from a later provider's result for the same item. */
@@ -39,7 +42,7 @@ final readonly class CatalogueResult
     /** @param  array<string, string|null>  $data */
     public static function fromArray(array $data): self
     {
-        $fields = ['source', 'barcode', 'name', 'nameRomanized', 'nameEnglish', 'creator', 'publisher', 'releaseDate', 'coverUrl', 'languageCode'];
+        $fields = ['source', 'barcode', 'name', 'nameRomanized', 'nameEnglish', 'creator', 'publisher', 'releaseDate', 'coverUrl', 'languageCode', 'nameReading', 'creatorReading'];
 
         return new self(...array_intersect_key($data, array_flip($fields)));
     }

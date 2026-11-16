@@ -162,6 +162,9 @@ class NdlCatalogueSearch implements CatalogueLookup, CatalogueSearch
             publisher: Text::clean((string) $dc->publisher),
             releaseDate: Text::date((string) $item->children(self::NS_DCTERMS)->issued) ?? Text::date((string) $dc->date),
             languageCode: 'ja',
+            nameReading: Text::clean((string) $item->children(self::NS_DCNDL)->titleTranscription),
+            // `ミウラ, ケンタロウ, 1966-2021` → `ミウラ ケンタロウ`: family name first, like the name.
+            creatorReading: Text::clean(str_replace(',', ' ', (string) preg_replace('/,\s*\d{0,4}\s*-\s*\d{0,4}$/u', '', (string) $item->children(self::NS_DCNDL)->creatorTranscription))),
         );
     }
 }
