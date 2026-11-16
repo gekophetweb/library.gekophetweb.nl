@@ -61,15 +61,19 @@
         </form>
     </div>
 
-    {{-- Tick codes to look them up again; only codes that did not reach the collection can be ticked. --}}
-    @php($canPick = $batch->status === App\Models\ScanBatch::DONE && $items->contains->isRedoable())
-    <form id="redo-items" method="POST" action="{{ route('admin.scan-batches.items.redo', $batch) }}"
-          onsubmit="return confirm('Look up the ticked codes again, with {{ e($batch->user->name) }}’s keys?')">
+    {{-- Tick codes to look them up again (codes not in the collection, or books without a
+         series), or to redo the romanization of the items they added. --}}
+    @php($pickable = fn ($item) => $item->isRedoable() || $item->object_id !== null)
+    @php($canPick = $batch->status === App\Models\ScanBatch::DONE && $items->contains($pickable))
+    <form id="redo-items" method="POST" action="{{ route('admin.scan-batches.items.redo', $batch) }}">
         @csrf
     </form>
     @if ($canPick)
-        <div class="mb-2 flex items-center gap-3">
-            <button form="redo-items" class="{{ $secondary }}" data-redo-items>Redo ticked codes</button>
+        <div class="mb-2 flex flex-wrap items-center gap-3">
+            <button form="redo-items" class="{{ $secondary }}" data-redo-items
+                    onclick="return confirm(@js('Look up the ticked codes again, with '.$batch->user->name.'’s keys?'))">Redo ticked codes</button>
+            <button form="redo-items" formaction="{{ route('admin.scan-batches.items.romanize', $batch) }}" class="btn btn-secondary" data-romanize-items
+                    onclick="return confirm(@js('Redo the romanized title, publisher and author of the items the ticked codes added? Names typed by hand are kept.'))">Redo romanization</button>
             @error('items') <p class="text-sm text-red-700 dark:text-red-400">{{ $message }}</p> @enderror
         </div>
     @endif
@@ -90,9 +94,11 @@
                     <tr data-item-status="{{ $item->status }}">
                         @if ($canPick)
                             <td class="px-4 py-2">
-                                @if ($item->isRedoable())
+                                @if ($pickable($item))
                                     <input type="checkbox" form="redo-items" name="items[]" value="{{ $item->id }}"
-                                           aria-label="Redo {{ $item->barcode }}" data-redo-item="{{ $item->id }}"
+                                           aria-label="Redo {{ $item->barcode }}"
+                                           @if ($item->isRedoable()) data-redo-item="{{ $item->id }}" @endif
+                                           @if ($item->object_id) data-romanize-item="{{ $item->id }}" @endif
                                            class="rounded border-stone-300 dark:border-stone-700">
                                 @endif
                             </td>

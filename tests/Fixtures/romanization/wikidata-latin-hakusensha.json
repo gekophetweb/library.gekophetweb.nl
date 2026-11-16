@@ -1,0 +1,18 @@
+{
+  "head": {
+    "vars": [
+      "latin"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "latin": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Hakusensha"
+        }
+      }
+    ]
+  }
+}

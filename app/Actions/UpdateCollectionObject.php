@@ -17,6 +17,8 @@ class UpdateCollectionObject
             $object->update([
                 'name' => $data['name'],
                 'name_romanized' => $data['name_romanized'],
+                // A romanization changed by hand is the user's own: a redo never replaces it.
+                'name_romanized_auto' => $data['name_romanized'] === $object->name_romanized && $object->name_romanized_auto,
                 'name_english' => $data['name_english'] ?? null,
                 'sub_category_id' => $data['sub_category_id'] ?? null,
                 'publisher_id' => $data['publisher_id'] ?? null,

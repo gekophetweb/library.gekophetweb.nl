@@ -8,7 +8,9 @@ use App\Models\Artist;
 use App\Models\CollectionObject;
 use App\Models\Publisher;
 use App\Models\User;
+use App\Services\Romanization\NameRomanizer;
 use App\Support\Catalogue\CatalogueResult;
+use App\Support\Romanization\Hepburn;
 use App\Support\Scan\ScanSetup;
 use App\Support\Series\TitleVolumeParser;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +23,7 @@ use Illuminate\Support\Facades\DB;
  */
 class AddScannedObject
 {
-    public function __construct(private readonly TitleVolumeParser $titles) {}
+    public function __construct(private readonly TitleVolumeParser $titles, private readonly NameRomanizer $romanizer) {}
 
     public function handle(User $user, ScanSetup $setup, CatalogueResult $result): CollectionObject
     {
@@ -31,24 +33,29 @@ class AddScannedObject
             return self::promoteIfAcquired($existing, $setup->ownership);
         }
 
-        return DB::transaction(function () use ($user, $setup, $result) {
+        // Before the transaction: a new publisher or artist may need a Wikidata call.
+        $language = $setup->language->code;
+        $publisher = $result->publisher ? $this->publisher($result->publisher, $language) : null;
+        $artist = $result->creator ? $this->artist($result->creator, $result->creatorReading, $language) : null;
+        // Required (§7). Japanese and Korean titles are romanized from the catalogue's kana
+        // reading or their kana / Hangul; otherwise the original title stands in until edited.
+        $romanized = $result->nameRomanized === null ? $this->romanizer->title($result->name, $result->nameReading) : null;
+
+        return DB::transaction(function () use ($user, $setup, $result, $publisher, $artist, $romanized) {
             $object = new CollectionObject([
                 'category_id' => $setup->category->id,
                 'sub_category_id' => $setup->subCategory?->id,
                 'barcode' => $result->barcode,
                 'ownership' => $setup->ownership,
                 'name' => $result->name,
-                // Required (§7). The catalogues rarely give a romanization; the original
-                // title stands in until the user edits it.
-                'name_romanized' => $result->nameRomanized ?? $result->name,
+                'name_romanized' => $result->nameRomanized ?? $romanized ?? $result->name,
+                'name_romanized_auto' => $romanized !== null,
                 'name_english' => $result->nameEnglish,
-                'publisher_id' => $result->publisher ? $this->publisher($result->publisher)->id : null,
+                'publisher_id' => $publisher?->id,
                 'release_date' => self::normalizeDate($result->releaseDate),
             ]);
             $object->user()->associate($user)->save();
             $object->languages()->attach($setup->language);
-
-            $artist = $result->creator ? $this->artist($result->creator) : null;
 
             match ($setup->category->kind) {
                 CategoryKind::Books => $object->bookDetail()->create([
@@ -77,14 +84,40 @@ class AddScannedObject
         return $existing;
     }
 
-    private function publisher(string $name): Publisher
+    /** Publishers are shared: a new one is romanized once (its kana / Hangul, or Wikidata). */
+    private function publisher(string $name, string $language): Publisher
     {
-        return Publisher::query()->firstOrCreate(['name' => $name], ['name_romanized' => $name]);
+        $existing = Publisher::query()->where('name', $name)->first();
+
+        if ($existing !== null) {
+            return $existing;
+        }
+
+        $romanized = $this->romanizer->publisher($name, $language);
+
+        return Publisher::query()->create(['name' => $name, 'name_romanized' => $romanized ?? $name, 'name_romanized_auto' => $romanized !== null]);
     }
 
-    private function artist(string $name): Artist
+    /**
+     * Artists are shared: a new one is romanized from the catalogue's reading (or Wikidata);
+     * an existing one still without a romanization gets one when this scan brings a reading.
+     */
+    private function artist(string $name, ?string $reading, string $language): Artist
     {
-        return Artist::query()->firstOrCreate(['name' => $name], ['name_romanized' => $name]);
+        $existing = Artist::query()->where('name', $name)->first();
+
+        if ($existing !== null) {
+            // Only from a reading: no Wikidata call for an artist seen before.
+            if ($reading !== null && Hepburn::fromKana($reading) !== null && $existing->hasPlaceholderRomanization()) {
+                $existing->update(['name_romanized' => $this->romanizer->person($name, $reading, $language), 'name_romanized_auto' => true]);
+            }
+
+            return $existing;
+        }
+
+        $romanized = $this->romanizer->person($name, $reading, $language);
+
+        return Artist::query()->create(['name' => $name, 'name_romanized' => $romanized ?? $name, 'name_romanized_auto' => $romanized !== null]);
     }
 
     /** "1990" / "1990-12" / "1990-12-05" → a date on the first of the unknown parts. */

@@ -112,6 +112,8 @@ class RakutenBooksLookup implements CatalogueLookup, CatalogueSearch
             releaseDate: self::date($item['salesDate'] ?? null),
             coverUrl: Text::clean($item['largeImageUrl'] ?? null) ?? Text::clean($item['mediumImageUrl'] ?? null),
             languageCode: 'ja',
+            nameReading: Text::clean($item['titleKana'] ?? null),
+            creatorReading: Text::clean($item['authorKana'] ?? null),
         );
     }
 

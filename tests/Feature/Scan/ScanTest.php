@@ -116,7 +116,7 @@ it('looks a single scan up and adds it to the collection', function () {
     expect($object->user_id)->toBe($this->user->id)
         ->and($object->barcode)->toBe('9784592135746')
         ->and($object->name)->toBe('ベルセルク 1')
-        ->and($object->name_romanized)->toBe('ベルセルク 1')
+        ->and($object->name_romanized)->toBe('Beruseruku 1') // from Rakuten's titleKana (RomanizeOnScanTest)
         ->and($object->category_id)->toBe($this->books->id)
         ->and($object->sub_category_id)->toBe($this->manga->id)
         ->and($object->languages->pluck('code')->all())->toBe(['ja'])

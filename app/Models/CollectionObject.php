@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\OwnershipStatus;
 use App\Enums\SearchScope;
+use App\Models\Concerns\HasRomanizedName;
 use App\Models\Concerns\SearchesNames;
 use App\Support\Isbn;
 use Database\Factories\CollectionObjectFactory;
@@ -23,13 +24,13 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 #[Table('objects')]
 #[Fillable([
-    'category_id', 'sub_category_id', 'barcode', 'ownership', 'name', 'name_romanized', 'name_english',
+    'category_id', 'sub_category_id', 'barcode', 'ownership', 'name', 'name_romanized', 'name_romanized_auto', 'name_english',
     'publisher_id', 'release_date', 'serie_id', 'series_suggestion',
 ])]
 class CollectionObject extends Model
 {
     /** @use HasFactory<CollectionObjectFactory> */
-    use HasFactory, SearchesNames;
+    use HasFactory, HasRomanizedName, SearchesNames;
 
     protected function casts(): array
     {
