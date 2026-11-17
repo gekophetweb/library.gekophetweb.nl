@@ -8,14 +8,15 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Scanning starts only once the user has saved a key for every provider (§5.1), so a
- * scan never runs with half its lookups skipped. Sends them to settings otherwise.
+ * Scanning starts only once the user has saved every key it needs (§5.1), so a scan
+ * never runs with most of its lookups skipped. Optional keys (Rakuten) don't count:
+ * lookups skip that provider instead. Sends them to settings otherwise.
  */
 class EnsureApiKeysAreSet
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $missing = $request->user()->missingApiKeys();
+        $missing = $request->user()->missingScanKeys();
 
         if ($missing === []) {
             return $next($request);

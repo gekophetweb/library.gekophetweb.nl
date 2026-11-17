@@ -5,7 +5,7 @@
     @endphp
 
     <h1 class="mb-1 text-2xl font-semibold">API keys</h1>
-    <p class="mb-6 text-sm text-stone-600 dark:text-stone-400">Lookups use your own keys, and you need all three before you can scan. Each is free and takes a few minutes to get: every provider has a step-by-step guide. A saved key is never shown again; enter a new one to replace it.</p>
+    <p class="mb-6 text-sm text-stone-600 dark:text-stone-400">Lookups use your own keys. You need Google Books and Hardcover before you can scan; Rakuten is optional, and without it Japanese lookups skip Rakuten. Each is free and takes a few minutes to get: every provider has a step-by-step guide. A saved key is never shown again; enter a new one to replace it.</p>
 
     @error('api_keys') <p class="mb-4 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm dark:border-amber-800 dark:bg-amber-950" data-api-keys-missing>{{ $message }}</p> @enderror
     @error('key') <p class="mb-4 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror

@@ -8,7 +8,7 @@
 
 <dialog id="scanner-dialog" @if ($errors->hasAny(['category_id', 'sub_category_id', 'language_id', 'mode', 'ownership'])) open @endif
         class="m-auto w-full max-w-md rounded-[18px] border border-line bg-surface p-6 text-ink shadow-card backdrop:bg-stone-950/60">
-    @php($missingKeys = auth()->user()->missingApiKeys())
+    @php($missingKeys = auth()->user()->missingScanKeys())
     @if ($missingKeys !== [])
         <h2 class="mb-4 text-lg font-semibold">Add your API keys first</h2>
         <p class="mb-2 text-sm">Scanning looks items up with your own keys. You still need:</p>

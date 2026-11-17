@@ -96,7 +96,21 @@ class User extends Authenticatable
     }
 
     /**
-     * Providers this user has no complete key for yet. Scanning needs all of them.
+     * Providers this user has no complete key for yet that scanning waits for; optional
+     * ones (Rakuten) are skipped during lookups instead.
+     *
+     * @return list<ApiKeyProvider>
+     */
+    public function missingScanKeys(): array
+    {
+        return array_values(array_filter(
+            $this->missingApiKeys(),
+            fn (ApiKeyProvider $provider) => $provider->requiredToScan(),
+        ));
+    }
+
+    /**
+     * Providers this user has no complete key for yet, optional ones included.
      *
      * @return list<ApiKeyProvider>
      */
