@@ -20,6 +20,9 @@ class DetectObjectSeries implements ShouldQueue
 
     public int $tries = 2;
 
+    /** An NDL call may wait for a slot in the app-wide budget (NdlRateLimiter). */
+    public int $timeout = 300;
+
     public function __construct(public CollectionObject $object, public string $language, public ?int $scanBatchItemId = null) {}
 
     public function handle(DetectSeries $detect): void

@@ -214,6 +214,12 @@ Google Books and Hardcover use the user's stored keys (§5.1) and are skipped wh
 user has none. See
 [`series-detection-from-isbn.md`](../plans/series-detection-from-isbn.md).
 
+**NDL Search is rate limited app-wide** to `series.providers.ndl.per_minute` calls a minute
+(`NDL_CALLS_PER_MINUTE`, default 2; 0 = no limit, the test default). Every NDL call goes
+through `NdlRateLimiter::acquire()`: inside a queued job an over-budget call waits for a
+slot (so the NDL-calling jobs have long `$timeout`s and the database queue's `retry_after`
+is above them); on a page it is skipped, like NDL not answering.
+
 ### 5.1 Per-user API keys
 
 Each user links **their own API keys** for these providers through **user settings**.

@@ -8,11 +8,13 @@ use App\Models\Series;
 use App\Models\User;
 use App\Services\Auth\SocialiteSsoDriverFactory;
 use App\Services\Auth\SsoDriverFactory;
+use App\Services\NdlRateLimiter;
 use App\Support\Library\LibraryLinks;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(SsoDriverFactory::class, SocialiteSsoDriverFactory::class);
+        $this->app->singleton(NdlRateLimiter::class);
     }
 
     public function boot(): void
@@ -35,6 +38,12 @@ class AppServiceProvider extends ServiceProvider
         // Views link to owner or share routes through this; it is stateless (it reads
         // the share off the current request), so one instance serves every request.
         View::share('links', new LibraryLinks);
+
+        // NDL calls over the budget wait inside a queued job and are skipped elsewhere.
+        Queue::before(fn () => $this->app->make(NdlRateLimiter::class)->waitWhenLimited());
+        Queue::after(fn () => $this->app->make(NdlRateLimiter::class)->waitWhenLimited(false));
+        Queue::failing(fn () => $this->app->make(NdlRateLimiter::class)->waitWhenLimited(false));
+        Queue::exceptionOccurred(fn () => $this->app->make(NdlRateLimiter::class)->waitWhenLimited(false));
 
         // Searching the external catalogues costs provider calls; searching your own
         // library does not.
