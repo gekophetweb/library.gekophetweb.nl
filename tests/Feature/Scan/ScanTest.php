@@ -79,13 +79,34 @@ it('sends a user without every API key to settings instead of scanning', functio
 })->with(['single', 'batch']);
 
 it('shows the missing keys in the scanner dialog instead of the form', function () {
-    $this->user->apiKeys()->whereIn('provider', [ApiKeyProvider::Rakuten->value, ApiKeyProvider::GoogleBooks->value])->delete();
+    $this->user->apiKeys()->whereIn('provider', [ApiKeyProvider::GoogleBooks->value, ApiKeyProvider::Hardcover->value])->delete();
 
     $this->get(route('home'))
         ->assertSee('Add your API keys first')
-        ->assertSeeInOrder(['Rakuten Books', 'Google Books'])
+        ->assertSeeInOrder(['Google Books', 'Hardcover'])
         ->assertSee(route('settings.api-keys'), false)
         ->assertDontSee(route('scan.start'));
+});
+
+it('scans without a Rakuten key and skips Rakuten in the lookup', function () {
+    $this->user->apiKeys()->where('provider', ApiKeyProvider::Rakuten->value)->delete();
+
+    $this->get(route('home'))->assertDontSee('Add your API keys first')->assertSee(route('scan.start'));
+    $this->get(route('settings.api-keys'))->assertSee('Optional');
+
+    startScan('single')->assertRedirect(route('scan.single'));
+    $this->post(route('scan.single.lookup'), ['barcode' => '9784592135746'])->assertRedirect(route('scan.single'));
+    $this->get(route('scan.single'))->assertSee('Rakuten Books')->assertSee(route('settings.api-keys'));
+
+    Http::assertNotSent(fn (Request $request) => str_contains($request->url(), 'rakuten'));
+});
+
+it('treats a Rakuten key without its access key as optional too', function () {
+    $this->user->apiKeys()->where('provider', ApiKeyProvider::Rakuten->value)->update(['secret' => null]);
+
+    startScan('batch')->assertRedirect();
+    expect(ScanBatch::count())->toBe(1)
+        ->and($this->user->missingScanKeys())->toBe([]);
 });
 
 it('explains how to get every key on its own guide page', function () {

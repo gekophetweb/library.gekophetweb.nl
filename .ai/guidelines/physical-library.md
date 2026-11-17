@@ -225,9 +225,11 @@ Each user links **their own API keys** for these providers through **user settin
   (400/401/403, or a GraphQL token error) is not saved and the provider's reason is
   shown; when the provider gives no usable answer (down, quota used up) the key is saved
   with a "could not be checked" notice. A new provider needs a check there too.
-- **Scanning needs every key**: starting a scan (`scan.start`, middleware `api-keys`)
-  sends a user with a missing key to Settings → API keys (`settings.api-keys`), and the
-  scanner dialog says which keys are missing. Each provider has its own guide page
+- **Scanning needs every required key**: starting a scan (`scan.start`, middleware
+  `api-keys`) sends a user with a missing required key (`User::missingScanKeys()`) to
+  Settings → API keys (`settings.api-keys`), and the scanner dialog says which keys are
+  missing. Rakuten is optional (`ApiKeyProvider::requiredToScan()`): without a complete
+  Rakuten key, scanning still starts and lookups skip Rakuten. Each provider has its own guide page
   (`settings.api-keys.show`, view `settings/api-keys/guides/{provider}.blade.php`)
   explaining step by step how to get a key, with the form to save it. A new provider
   needs a guide view. Lookups still skip a provider whose key was removed later.
