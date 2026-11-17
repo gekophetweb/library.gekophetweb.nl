@@ -221,6 +221,24 @@ html[data-density='compact'] { font-size: 93.75%; }
 
 .logo { filter: var(--logo-filter); }
 
+/*
+ * A photo behind the page (the login screen), darkened so the card and the light logo
+ * stand out in both themes. Beats every [data-bg] pattern above.
+ */
+body.paper.paper.has-backdrop {
+    --logo-filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+    background-image: linear-gradient(rgba(20, 14, 8, 0.55), rgba(20, 14, 8, 0.65)), var(--backdrop);
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+}
+
+@media (min-width: 640px) {
+    body.paper.paper.has-backdrop { background-attachment: fixed; }
+}
+
+.has-backdrop .label-mono { color: rgba(255, 255, 255, 0.85); }
+
 @layer base {
     body { font-family: var(--font-sans); }
 

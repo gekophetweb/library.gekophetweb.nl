@@ -231,3 +231,12 @@ it('prunes login codes older than a day', function () {
 
     expect(LoginCode::count())->toBe(0);
 });
+
+it('shows the bookshelf photo behind the login card for guests only', function () {
+    $this->get(route('login'))->assertOk()
+        ->assertSee('has-backdrop', false)
+        ->assertSee(asset('images/login-background.jpg'), false);
+
+    $this->actingAs(User::factory()->create(['name' => 'Ann']))->get(route('home'))
+        ->assertDontSee('login-background.jpg', false);
+});

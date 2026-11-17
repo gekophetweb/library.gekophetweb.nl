@@ -1,4 +1,4 @@
-@props(['title' => null, 'share' => null, 'wide' => false])
+@props(['title' => null, 'share' => null, 'wide' => false, 'backdrop' => null])
 @php
     // Share links always get the standard look: never the visitor's settings or photo,
     // and not the owner's either (plan redesign-themes §3).
@@ -28,7 +28,7 @@
     @fonts
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="paper min-h-screen antialiased">
+<body @class(['paper min-h-screen antialiased', 'has-backdrop' => $backdrop]) @if ($backdrop) style="--backdrop: url('{{ $backdrop }}')" @endif>
     @php
         $navLink = 'rounded-md py-2 text-muted hover:text-ink';
     @endphp
