@@ -41,6 +41,9 @@ return [
     'providers' => [
         'ndl' => [
             'endpoint' => env('SERIES_NDL_ENDPOINT', 'https://ndlsearch.ndl.go.jp/api/opensearch'),
+            // NDL Search calls a minute for the whole app (catalogue and series); 0 = no
+            // limit. Queued jobs wait for a free slot, page requests skip NDL (NdlRateLimiter).
+            'per_minute' => (int) env('NDL_CALLS_PER_MINUTE', 2),
             // NDL returns at most 200 records per page.
             'page_size' => 200,
             'max_pages' => 5,

@@ -4,6 +4,7 @@ namespace App\Services\Series;
 
 use App\Contracts\SeriesLookup;
 use App\Services\ApiCallLogger;
+use App\Services\NdlRateLimiter;
 use App\Support\Isbn;
 use App\Support\Series\Confidence;
 use App\Support\Series\CreatorName;
@@ -44,6 +45,7 @@ class NdlSeriesLookup implements SeriesLookup
         private readonly Http $http,
         private readonly ApiCallLogger $logger,
         private readonly TitleVolumeParser $titleParser,
+        private readonly NdlRateLimiter $limiter,
     ) {}
 
     public function name(): string
@@ -172,6 +174,11 @@ class NdlSeriesLookup implements SeriesLookup
      */
     private function search(array $query, string $operation, ?string $language = 'ja'): ?array
     {
+        // Over the app-wide NDL budget on a page: treated like a failed call (not cached).
+        if (! $this->limiter->acquire()) {
+            return null;
+        }
+
         try {
             $response = $this->logger->send(
                 provider: $this->name(),

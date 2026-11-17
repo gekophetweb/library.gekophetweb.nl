@@ -30,6 +30,8 @@
         <env name="DB_URL" value=""/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
+        <!-- No NDL budget by default; NdlRateLimitTest sets its own. -->
+        <env name="NDL_CALLS_PER_MINUTE" value="0"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
