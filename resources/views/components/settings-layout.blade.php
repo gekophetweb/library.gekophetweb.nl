@@ -2,7 +2,7 @@
 {{-- The settings section: one short page per topic, with its own menu (a side column on
      wide screens, a scrollable row of tabs on phones), like the admin section. --}}
 @php
-    $missingKeys = count(auth()->user()->missingApiKeys());
+    $missingKeys = count(auth()->user()->missingScanKeys());
     $items = [
         ['settings.edit', 'settings.edit', 'Profile', null],
         ['settings.appearance', 'settings.appearance', 'Appearance', null],

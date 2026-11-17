@@ -1,5 +1,7 @@
 @props(['title'])
-<x-layout :title="$title">
+{{-- Guests (log in, enter code) get the bookshelf photo behind the card, once it is in place. --}}
+@php($backdrop = auth()->guest() && is_file(public_path('images/login-background.jpg')) ? asset('images/login-background.jpg') : null)
+<x-layout :title="$title" :backdrop="$backdrop">
     <div class="flex flex-col items-center gap-3">
         @guest
             <div class="flex self-stretch justify-end">

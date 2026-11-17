@@ -108,7 +108,7 @@ it('splits settings into separate pages, each with the settings menu', function 
     $this->get(route('settings.edit'))->assertDontSee('Delete my account')->assertDontSee('Create token');
 });
 
-it('counts the missing keys in the settings menu', function () {
+it('counts the missing keys needed to scan in the settings menu, not the optional Rakuten one', function () {
     $this->actingAs(User::factory()->create())->get(route('settings.edit'))
-        ->assertSee('data-missing-key-count>3', false);
+        ->assertSee('data-missing-key-count>2', false);
 });

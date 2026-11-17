@@ -21,7 +21,7 @@ enum ApiKeyProvider: string
     public function hint(): string
     {
         return match ($this) {
-            self::Rakuten => 'Your Rakuten app’s application ID and access key. Needed for Japanese book lookups.',
+            self::Rakuten => 'Your Rakuten app’s application ID and access key. Optional: used for Japanese book lookups.',
             self::GoogleBooks => 'Your Google Cloud API key with the Books API enabled. Used for book lookups and series of translated manga.',
             self::Hardcover => 'Your Hardcover API token. Used for series of translated manga.',
         };
@@ -52,6 +52,15 @@ enum ApiKeyProvider: string
     public function needsSecret(): bool
     {
         return $this->secretLabel() !== null;
+    }
+
+    /**
+     * Whether scanning waits for this key. Rakuten is optional: without it, lookups skip
+     * Rakuten and use the other providers.
+     */
+    public function requiredToScan(): bool
+    {
+        return $this !== self::Rakuten;
     }
 
     /** Where the user signs up for a key. */
