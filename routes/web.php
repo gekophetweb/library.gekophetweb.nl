@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [LibraryController::class, 'dashboard'])->name('home');
     Route::get('library/categories/{category}', [LibraryController::class, 'category'])->name('library.category');
     Route::get('library/series/{series}', [LibraryController::class, 'series'])->name('library.series');
+    Route::patch('library/series/{series}', [LibraryController::class, 'updateSeries'])->name('library.series.update');
     Route::post('library/series/{series}/sync', [LibraryController::class, 'syncSeries'])->middleware('throttle:10,1')->name('library.series.sync');
     Route::post('library/series/{series}/wishlist', [LibraryController::class, 'wishMissing'])->name('library.series.wish-missing');
     Route::post('library/series/{series}/volumes/{volume}/wishlist', [LibraryController::class, 'wishMissing'])->scopeBindings()->name('library.series.volumes.wish');
