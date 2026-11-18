@@ -107,8 +107,10 @@ Artist, Object, and Series so the same accessor/formatting logic is reusable.
 
 A series' `name_english` is the owner's own name for it, editable on the series page.
 When set it is the series' title everywhere (`Series::$display_name`, lists sorted with
-`orderByDisplayName()`), with the original name underneath on the series page. Lookups,
-syncing and scan matching keep using `name`.
+`orderByDisplayName()`), with the original name underneath on the series page. Lookups
+and syncing keep using `name`. A series name typed at scan time also matches the English
+name (`LinkSeries::byName`), but a detected series never does: an English edition
+called "Berserk" is a different series from the owner's ベルセルク named "Berserk".
 
 ---
 

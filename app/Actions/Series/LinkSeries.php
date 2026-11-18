@@ -61,7 +61,9 @@ class LinkSeries
             return $series;
         }
 
-        $series = $this->findByName($object, $reference->name);
+        // Not on the owner's English name: a detected series of that name (an English
+        // edition) is a different series.
+        $series = $this->findByName($object, $reference->name, includeEnglish: false);
 
         if ($series === null) {
             return $this->create($object, $reference);
@@ -75,12 +77,16 @@ class LinkSeries
         return $series;
     }
 
-    private function findByName(CollectionObject $object, string $name): ?Series
+    private function findByName(CollectionObject $object, string $name, bool $includeEnglish = true): ?Series
     {
         $key = Text::key($name);
 
         return Series::query()->ownedBy($object->user)->get()
-            ->first(fn (Series $series) => in_array($key, [Text::key($series->name), Text::key($series->name_romanized), Text::key($series->name_english)], true));
+            ->first(fn (Series $series) => in_array($key, array_filter([
+                Text::key($series->name),
+                Text::key($series->name_romanized),
+                $includeEnglish ? Text::key($series->name_english) : null,
+            ], fn (?string $candidate) => $candidate !== null), true));
     }
 
     private function create(CollectionObject $object, SeriesReference $reference): Series

@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\Series\LinkSeries;
 use App\Models\Artist;
 use App\Models\BookDetail;
 use App\Models\Category;
@@ -7,7 +8,9 @@ use App\Models\CollectionObject;
 use App\Models\LibraryShare;
 use App\Models\Series;
 use App\Models\User;
+use App\Support\Series\SeriesReference;
 use Database\Seeders\CatalogueSeeder;
+use Illuminate\Support\Facades\Queue;
 
 beforeEach(function () {
     $this->seed(CatalogueSeeder::class);
@@ -126,5 +129,34 @@ describe('elsewhere', function () {
     it('finds a series by its English name in library search', function () {
         $this->get(route('search.index', ['q' => 'berser', 'scope' => 'all']))
             ->assertSee('<span class="font-medium">Berserk</span>', false);
+    });
+});
+
+it('labels a series share link with the English name', function () {
+    $this->series->update(['name_english' => 'Berserk']);
+    $share = LibraryShare::factory()->for($this->user)->create();
+    $share->shareable()->associate($this->series)->save();
+
+    expect($share->fresh()->scopeLabel())->toBe('Series: Berserk');
+});
+
+describe('matching', function () {
+    beforeEach(function () {
+        Queue::fake();
+        $this->series->update(['name_english' => 'Berserk', 'external_source' => 'ndl', 'external_id' => 'ベルセルク|三浦建太郎|白泉社']);
+        $this->object = CollectionObject::factory()->for($this->user)->create(['category_id' => Category::query()->where('slug', 'books')->sole()->id]);
+    });
+
+    it('does not put a detected series into the owned one through its English name', function () {
+        $linked = app(LinkSeries::class)->toReference($this->object, new SeriesReference('hardcover', '123', 'Berserk'), null);
+
+        expect($linked->id)->not->toBe($this->series->id)
+            ->and($this->series->fresh()->external_source)->toBe('ndl');
+    });
+
+    it('still matches a typed series name against the English name', function () {
+        $linked = app(LinkSeries::class)->byName($this->object, 'berserk', null);
+
+        expect($linked->id)->toBe($this->series->id);
     });
 });
