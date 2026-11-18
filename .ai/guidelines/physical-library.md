@@ -105,6 +105,13 @@ Seed the initial hierarchy:
 Keep `name` / `name_romanized` / `name_english` naming consistent across Publisher,
 Artist, Object, and Series so the same accessor/formatting logic is reusable.
 
+A series' `name_english` is the owner's own name for it, editable on the series page.
+When set it is the series' title everywhere (`Series::$display_name`, lists sorted with
+`orderByDisplayName()`), with the original name underneath on the series page. Lookups
+and syncing keep using `name`. A series name typed at scan time also matches the English
+name (`LinkSeries::byName`), but a detected series never does: an English edition
+called "Berserk" is a different series from the owner's ベルセルク named "Berserk".
+
 ---
 
 ## 4. Scanning workflow
@@ -213,6 +220,12 @@ NDL, Open Library and Wikidata need **no API key** and are not per-user keys; Ra
 Google Books and Hardcover use the user's stored keys (§5.1) and are skipped when the
 user has none. See
 [`series-detection-from-isbn.md`](../plans/series-detection-from-isbn.md).
+
+**NDL Search is rate limited app-wide** to `series.providers.ndl.per_minute` calls a minute
+(`NDL_CALLS_PER_MINUTE`, default 2; 0 = no limit, the test default). Every NDL call goes
+through `NdlRateLimiter::acquire()`: inside a queued job an over-budget call waits for a
+slot (so the NDL-calling jobs have long `$timeout`s and the database queue's `retry_after`
+is above them); on a page it is skipped, like NDL not answering.
 
 ### 5.1 Per-user API keys
 

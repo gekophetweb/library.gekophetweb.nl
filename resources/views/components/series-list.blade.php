@@ -4,7 +4,7 @@
         <li>
             <a href="{{ $links->series($entry) }}" class="flex flex-wrap items-baseline justify-between gap-2 px-4 py-3 hover:bg-stone-50 dark:hover:bg-stone-800">
                 <span>
-                    <span class="font-medium">{{ $entry->name }}</span>
+                    <span class="font-medium">{{ $entry->display_name }}</span>
                     @if ($entry->artist) <span class="text-sm text-stone-500">· {{ $entry->artist->name }}</span> @endif
                 </span>
                 <span class="text-sm text-stone-500">

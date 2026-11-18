@@ -28,6 +28,9 @@ class ProcessScanBatch implements ShouldQueue
 
     public int $tries = 3;
 
+    /** Long: every NDL call waits for a slot in the app-wide budget (NdlRateLimiter). */
+    public int $timeout = 3600;
+
     public function __construct(public ScanBatch $batch) {}
 
     public function handle(CatalogueLookupManager $catalogue, AddScannedObject $add, DetectSeries $series): void

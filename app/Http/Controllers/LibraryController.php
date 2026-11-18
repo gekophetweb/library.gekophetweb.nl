@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Series\WishMissingVolumes;
+use App\Http\Requests\UpdateSeriesRequest;
 use App\Jobs\SyncSeriesVolumes;
 use App\Models\Artist;
 use App\Models\Category;
@@ -93,6 +94,16 @@ class LibraryController extends Controller
         return redirect()->route('library.series', $series)->with('status', 'Fetching the volume list. Reload in a moment to see it.');
     }
 
+    /** Save the owner's English name for a series; blank clears it. */
+    public function updateSeries(UpdateSeriesRequest $request, Series $series): RedirectResponse
+    {
+        abort_unless($series->user_id === $request->user()->id, 404);
+
+        $series->update(['name_english' => $request->validated('name_english')]);
+
+        return redirect()->route('library.series', $series)->with('status', 'Series name saved.');
+    }
+
     /** An author's or artist's page: the user's own series and items by them. */
     public function artist(Request $request, Artist $artist): View
     {
@@ -106,7 +117,7 @@ class LibraryController extends Controller
             'artist' => $artist,
             'series' => Series::query()->ownedBy($user)->where('artist_id', $artist->id)
                 ->withCount(['objects' => fn ($query) => $query->owned()])
-                ->orderBy('name')->get(),
+                ->orderByDisplayName()->get(),
             'objects' => $user->objects()->getQuery()
                 ->where(fn (Builder $query) => $query
                     ->whereHas('bookDetail', $byArtist)

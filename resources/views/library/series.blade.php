@@ -1,10 +1,13 @@
-<x-layout :title="$shelf->series->name" :share="$share ?? null">
+<x-layout :title="$shelf->series->display_name" :share="$share ?? null">
     <div class="flex flex-wrap items-start justify-between gap-3">
         <div>
             @if ($links->hasHome())
                 <a href="{{ $links->home() }}" class="text-sm text-stone-500 underline">Library</a>
             @endif
-            <h1 class="mt-1 text-2xl font-semibold">{{ $shelf->series->name }}</h1>
+            <h1 class="mt-1 text-2xl font-semibold">{{ $shelf->series->display_name }}</h1>
+            @if (filled($shelf->series->name_english))
+                <p class="text-stone-500" data-original-name>{{ $shelf->series->name }}</p>
+            @endif
             @if ($shelf->series->name_romanized && $shelf->series->name_romanized !== $shelf->series->name)
                 <p class="text-stone-500">{{ $shelf->series->name_romanized }}</p>
             @endif
@@ -21,6 +24,21 @@
             </div>
         @endif
     </div>
+    @if ($links->canEdit())
+        <details class="mt-2 max-w-md" @if ($errors->has('name_english')) open @endif>
+            <summary class="cursor-pointer text-sm text-stone-500 underline">English name</summary>
+            <form method="POST" action="{{ route('library.series.update', $shelf->series) }}" class="mt-2 flex flex-wrap items-start gap-2">
+                @csrf
+                @method('PATCH')
+                <div class="min-w-0 flex-1">
+                    <label for="name_english" class="sr-only">English name</label>
+                    <input id="name_english" name="name_english" maxlength="255" value="{{ old('name_english', $shelf->series->name_english) }}" placeholder="Shown instead of {{ $shelf->series->name }}" class="block w-full rounded-md border border-stone-300 px-3 py-1.5 text-sm dark:border-stone-700 dark:bg-stone-950">
+                    @error('name_english') <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+                </div>
+                <button class="rounded-md border border-stone-300 px-3 py-1.5 text-sm hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800">Save</button>
+            </form>
+        </details>
+    @endif
     @if ($links->canEdit() && $shelf->series->isSyncable())
         <p class="mt-1 text-xs text-stone-500" data-synced>
             Volume list from {{ \App\Models\Series::sourceLabel($shelf->series->external_source) }}

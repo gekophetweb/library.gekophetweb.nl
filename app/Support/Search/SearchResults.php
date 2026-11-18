@@ -48,7 +48,7 @@ final readonly class SearchResults
             ? Series::query()->ownedBy($user)->whereNameLike($term)
                 ->with('artist')
                 ->withCount(['objects' => fn ($query) => $query->owned()])
-                ->orderBy('name')->limit(self::SECTION_LIMIT)->get()
+                ->orderByDisplayName()->limit(self::SECTION_LIMIT)->get()
             : collect();
 
         $artists = $scope->includesCreators()

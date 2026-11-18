@@ -25,6 +25,9 @@ class SyncSeriesVolumes implements ShouldBeUnique, ShouldQueue
 
     public int $uniqueFor = 600;
 
+    /** Up to max_pages NDL calls, each waiting for a slot in the app-wide budget. */
+    public int $timeout = 600;
+
     public function __construct(public Series $series) {}
 
     public function uniqueId(): string

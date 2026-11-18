@@ -124,7 +124,7 @@ class LibraryShare extends Model
     {
         return match (true) {
             $this->scopedCategory() !== null => 'Category: '.$this->scopedCategory()->name,
-            $this->scopedSeries() !== null => 'Series: '.$this->scopedSeries()->name,
+            $this->scopedSeries() !== null => 'Series: '.$this->scopedSeries()->display_name,
             default => 'Whole library',
         };
     }

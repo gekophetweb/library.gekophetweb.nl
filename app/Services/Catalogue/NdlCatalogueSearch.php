@@ -7,6 +7,7 @@ use App\Contracts\CatalogueSearch;
 use App\Enums\ApiKeyProvider;
 use App\Enums\CategoryKind;
 use App\Services\ApiCallLogger;
+use App\Services\NdlRateLimiter;
 use App\Support\Catalogue\CatalogueContext;
 use App\Support\Catalogue\CatalogueResult;
 use App\Support\Catalogue\CatalogueUnavailable;
@@ -32,7 +33,11 @@ class NdlCatalogueSearch implements CatalogueLookup, CatalogueSearch
 
     private const string NS_XSI = 'http://www.w3.org/2001/XMLSchema-instance';
 
-    public function __construct(private readonly Http $http, private readonly ApiCallLogger $logger) {}
+    public function __construct(
+        private readonly Http $http,
+        private readonly ApiCallLogger $logger,
+        private readonly NdlRateLimiter $limiter,
+    ) {}
 
     public function name(): string
     {
@@ -88,6 +93,11 @@ class NdlCatalogueSearch implements CatalogueLookup, CatalogueSearch
      */
     private function query(array $query, CatalogueContext $context, string $operation = 'search', ?int $timeout = null, bool $strict = false): array
     {
+        // Over the app-wide NDL budget on a page: treated like NDL not answering.
+        if (! $this->limiter->acquire()) {
+            return $strict ? throw CatalogueUnavailable::from($this->name()) : [];
+        }
+
         try {
             $response = $this->logger->send(
                 provider: $this->name(),

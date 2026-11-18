@@ -37,7 +37,7 @@ class CollectionObjectController extends Controller
                 'languages' => Language::query()->orderBy('name')->get(),
                 'genres' => $object->category->genres()->orderBy('name')->get(),
                 'publishers' => Publisher::query()->orderBy('name')->get(),
-                'series' => Series::query()->ownedBy($request->user())->orderBy('name')->get(),
+                'series' => Series::query()->ownedBy($request->user())->orderByDisplayName()->get(),
                 'artists' => $kind === CategoryKind::Games ? collect() : Artist::query()->orderBy('name')->get(),
                 'platforms' => $kind === CategoryKind::Games ? Platform::query()->orderBy('name')->get() : collect(),
             ],

@@ -29,7 +29,7 @@
                 @if ($shareSeries->isNotEmpty())
                     <optgroup label="Series">
                         @foreach ($shareSeries as $series)
-                            <option value="series:{{ $series->id }}" @selected(old('scope') === 'series:'.$series->id)>{{ $series->name }}</option>
+                            <option value="series:{{ $series->id }}" @selected(old('scope') === 'series:'.$series->id)>{{ $series->display_name }}</option>
                         @endforeach
                     </optgroup>
                 @endif
