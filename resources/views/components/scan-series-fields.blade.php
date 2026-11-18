@@ -1,6 +1,13 @@
 @props(['suggestion' => null])
 @php
     $input = 'block w-full rounded-md border border-stone-300 px-3 py-2 text-sm dark:border-stone-700 dark:bg-stone-950';
+    // The owner's own English name for this series, when they already have it.
+    $english = $suggestion && filled($suggestion['reference']['externalId'] ?? null)
+        ? \App\Models\Series::query()->ownedBy(auth()->user())
+            ->where('external_source', $suggestion['reference']['source'])
+            ->where('external_id', $suggestion['reference']['externalId'])
+            ->value('name_english')
+        : null;
 @endphp
 {{-- Series + volume, pre-filled from the series lookup and editable. Empty the series to add the book on its own. --}}
 <fieldset class="mb-4 grid gap-3 sm:grid-cols-[1fr_8rem]">
@@ -8,6 +15,9 @@
         Series
         @if ($suggestion)
             <span class="font-normal text-stone-500" data-series-source="{{ $suggestion['source'] }}">· from {{ \App\Models\Series::sourceLabel($suggestion['source']) }}</span>
+            @if (filled($english))
+                <span class="font-normal text-stone-500" data-series-english>· your name: {{ $english }}</span>
+            @endif
         @endif
     </legend>
     <div>
