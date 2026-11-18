@@ -69,7 +69,21 @@ describe('single scan', function () {
         $this->get(route('scan.single'))
             ->assertSee('value="ベルセルク"', false)
             ->assertSee('id="series_volume" name="series_volume" maxlength="20" value="1"', false)
-            ->assertSee('data-series-source="ndl"', false);
+            ->assertSee('data-series-source="ndl"', false)
+            ->assertDontSee('data-series-english', false);
+    });
+
+    it('shows the owner\'s English name next to a detected series they already have', function () {
+        Series::factory()->for($this->user)->create([
+            'name' => 'ベルセルク', 'name_english' => 'Berserk',
+            'external_source' => 'ndl', 'external_id' => 'ベルセルク|三浦建太郎|白泉社',
+        ]);
+        scanOne(BERSERK_1);
+
+        $this->get(route('scan.single'))
+            ->assertSee('value="ベルセルク"', false)
+            ->assertSee('data-series-english', false)
+            ->assertSee('your name: Berserk');
     });
 
     it('links the detected series with its source and fetches every volume', function () {

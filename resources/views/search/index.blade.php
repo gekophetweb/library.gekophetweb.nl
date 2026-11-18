@@ -30,7 +30,7 @@
                                 </span>
                                 <span class="text-sm text-stone-500">
                                     {{ collect([
-                                        $object->serie ? $object->serie->name.($object->bookDetail?->volume ? ' · vol. '.$object->bookDetail->volume : '') : null,
+                                        $object->serie ? $object->serie->display_name.($object->bookDetail?->volume ? ' · vol. '.$object->bookDetail->volume : '') : null,
                                         $object->bookDetail?->artist?->name ?? $object->musicDetail?->artist?->name,
                                         $object->gameDetail?->platform?->name,
                                         $object->category->name,

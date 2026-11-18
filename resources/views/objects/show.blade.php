@@ -12,7 +12,7 @@
     @endphp
     @if ($back)
         <a href="{{ $back }}" class="text-sm text-stone-500 underline">
-            {{ $object->serie?->name ?? $object->category->name }}
+            {{ $object->serie?->display_name ?? $object->category->name }}
         </a>
     @endif
     <h1 class="mt-1 text-2xl font-semibold">{{ $object->name }}</h1>
@@ -28,7 +28,7 @@
         </dd>
         @foreach (array_filter([
             'Category' => collect([$object->category->name, $object->subCategory?->name])->filter()->join(' › '),
-            'Series' => $object->serie ? $object->serie->name.($object->bookDetail?->volume ? ' · vol. '.$object->bookDetail->volume : '') : null,
+            'Series' => $object->serie ? $object->serie->display_name.($object->bookDetail?->volume ? ' · vol. '.$object->bookDetail->volume : '') : null,
             $kind === CategoryKind::Music ? 'Artist' : 'Author' => $artist?->name,
             'Platform' => $object->gameDetail?->platform?->name,
             'Languages' => $object->languages->pluck('name')->join(', '),
@@ -168,7 +168,7 @@
                     <select id="{{ $field }}" name="{{ $field }}" class="{{ $input }}">
                         <option value="">—</option>
                         @foreach ($choices as $choice)
-                            <option value="{{ $choice->id }}" @selected((int) old($field, $current) === $choice->id)>{{ $choice->name }}</option>
+                            <option value="{{ $choice->id }}" @selected((int) old($field, $current) === $choice->id)>{{ $choice->display_name ?? $choice->name }}</option>
                         @endforeach
                     </select>
                     @error($field) <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror

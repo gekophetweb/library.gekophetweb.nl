@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Concerns\SearchesNames;
 use App\Support\Series\SeriesReference;
 use Database\Factories\SeriesFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
@@ -36,6 +37,32 @@ class Series extends Model
     protected function ownedBy(Builder $query, User $user): void
     {
         $query->where($this->qualifyColumn('user_id'), $user->id);
+    }
+
+    /**
+     * Alphabetical by the title the owner sees: their English name when set, else the
+     * original name.
+     *
+     * @param  Builder<self>  $query
+     */
+    #[Scope]
+    protected function orderByDisplayName(Builder $query): void
+    {
+        $grammar = $query->getQuery()->getGrammar();
+
+        $query->orderByRaw('coalesce('.$grammar->wrap($this->qualifyColumn('name_english')).', '.$grammar->wrap($this->qualifyColumn('name')).')')
+            ->orderBy($this->qualifyColumn('id'));
+    }
+
+    /**
+     * The series' main title: the owner's English name when set, else the original name.
+     * Lookups and matching keep using `name`.
+     *
+     * @return Attribute<string, never>
+     */
+    protected function displayName(): Attribute
+    {
+        return Attribute::get(fn (): string => filled($this->name_english) ? $this->name_english : $this->name);
     }
 
     /** @return BelongsTo<User, $this> */

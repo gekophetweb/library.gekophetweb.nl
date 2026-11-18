@@ -60,7 +60,7 @@ class SettingsController extends Controller
         return view('settings.shares', [
             'shares' => LibraryShare::query()->whereBelongsTo($request->user())->with('shareable')->latest()->get(),
             'shareCategories' => Category::query()->whereNull('parent_id')->orderBy('sort')->orderBy('id')->get(),
-            'shareSeries' => Series::query()->ownedBy($request->user())->orderBy('name')->get(),
+            'shareSeries' => Series::query()->ownedBy($request->user())->orderByDisplayName()->get(),
         ]);
     }
 
