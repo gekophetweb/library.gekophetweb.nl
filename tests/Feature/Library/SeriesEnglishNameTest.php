@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Artist;
+use App\Models\BookDetail;
+use App\Models\Category;
+use App\Models\CollectionObject;
 use App\Models\LibraryShare;
 use App\Models\Series;
 use App\Models\User;
@@ -86,4 +90,41 @@ it('sorts series by display name', function () {
 
     expect(Series::query()->orderByDisplayName()->pluck('id')->all())
         ->toBe([$akira->id, $this->series->id, $kana->id]);
+});
+
+describe('elsewhere', function () {
+    beforeEach(function () {
+        $this->books = Category::query()->where('slug', 'books')->sole();
+        $this->artist = Artist::factory()->create(['name' => '三浦建太郎']);
+        $this->series->update(['name_english' => 'Berserk', 'artist_id' => $this->artist->id]);
+        $this->object = CollectionObject::factory()->for($this->user)->create([
+            'category_id' => $this->books->id, 'serie_id' => $this->series->id, 'name' => 'Volume one',
+        ]);
+        BookDetail::query()->create(['object_id' => $this->object->id, 'artist_id' => $this->artist->id, 'volume' => '1', 'volume_sort' => 1]);
+        $this->actingAs($this->user);
+    });
+
+    it('shows the English name on the category shelf, artist page and settings share picker', function () {
+        $this->get(route('library.category', $this->books))
+            ->assertSee('<span class="font-medium">Berserk</span>', false)
+            ->assertDontSee('>ベルセルク<', false);
+
+        $this->get(route('library.artist', $this->artist))
+            ->assertSee('<span class="font-medium">Berserk</span>', false);
+
+        $this->get(route('settings.shares'))
+            ->assertSee('>Berserk</option>', false);
+    });
+
+    it('shows the English name on an item page and in its series select', function () {
+        $this->get(route('objects.show', $this->object))
+            ->assertSee('Berserk · vol. 1')
+            ->assertSee('>Berserk</option>', false)
+            ->assertDontSee('ベルセルク');
+    });
+
+    it('finds a series by its English name in library search', function () {
+        $this->get(route('search.index', ['q' => 'berser', 'scope' => 'all']))
+            ->assertSee('<span class="font-medium">Berserk</span>', false);
+    });
 });

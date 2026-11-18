@@ -117,7 +117,7 @@ class LibraryController extends Controller
             'artist' => $artist,
             'series' => Series::query()->ownedBy($user)->where('artist_id', $artist->id)
                 ->withCount(['objects' => fn ($query) => $query->owned()])
-                ->orderBy('name')->get(),
+                ->orderByDisplayName()->get(),
             'objects' => $user->objects()->getQuery()
                 ->where(fn (Builder $query) => $query
                     ->whereHas('bookDetail', $byArtist)
