@@ -22,4 +22,17 @@
             </li>
         @endforeach
     </ul>
+
+    {{-- Redo the automatic romanization of every Japanese / Korean item that still has a
+         placeholder title, publisher or author. Hand-typed names stay. --}}
+    <section class="mt-8 rounded-lg border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900">
+        <h2 class="font-semibold">Romanization</h2>
+        <p class="mt-1 text-sm">{{ $unromanized }} Japanese or Korean {{ Str::plural('item', $unromanized) }} with a missing or automatic romanized title, publisher or author.</p>
+        <p class="mt-1 text-sm text-stone-500">Looks each barcode up again with its owner’s keys. Names typed by hand are kept.</p>
+        <form method="POST" action="{{ route('admin.romanize') }}" class="mt-3">
+            @csrf
+            <button class="btn btn-secondary" data-romanize-all @disabled($unromanized === 0)
+                    onclick="return confirm(@js('Redo the romanization of '.$unromanized.' '.Str::plural('item', $unromanized).'?'))">Redo romanization</button>
+        </form>
+    </section>
 </x-admin-layout>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\SuggestionStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\CollectionObject;
 use App\Models\Language;
 use App\Models\ScanBatch;
 use App\Models\SsoProvider;
@@ -29,6 +30,7 @@ class OverviewController extends Controller
             'newSuggestions' => Suggestion::query()->where('status', SuggestionStatus::New)->count(),
             'batches' => ScanBatch::query()->count(),
             'draftBatches' => ScanBatch::query()->where('status', ScanBatch::DRAFT)->count(),
+            'unromanized' => CollectionObject::query()->needingRomanization()->count(),
         ]);
     }
 }
