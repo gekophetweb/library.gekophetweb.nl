@@ -79,6 +79,7 @@
     --wanted-soft: #f7e6c1;
     --info: #1f5f8b;
     --info-soft: #dcebf5;
+    --danger: #b3261e;
     --shadow: 0 1px 0 rgba(29, 34, 48, 0.05), 0 10px 28px -14px rgba(29, 34, 48, 0.22);
     --logo-filter: brightness(0) opacity(0.85);
 
@@ -115,6 +116,7 @@
     --wanted-soft: #3a2e16;
     --info: #7cc0f0;
     --info-soft: #192f45;
+    --danger: #ff8a80;
     --shadow: 0 1px 0 rgba(0, 0, 0, 0.25), 0 14px 34px -16px rgba(0, 0, 0, 0.7);
     --logo-filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
 
@@ -239,16 +241,88 @@ body.paper.paper.has-backdrop {
 
 .has-backdrop .label-mono { color: rgba(255, 255, 255, 0.85); }
 
+/*
+ * Page-to-page cross-fade (cross-document view transitions). Browsers without support,
+ * and users who prefer reduced motion, keep the normal instant navigation. The header
+ * gets its own name so it stays put while the page under it fades.
+ */
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
+
+    ::view-transition-group(root) { animation-duration: 0.2s; }
+}
+
+body > header { view-transition-name: site-header; }
+
 @layer base {
+    /* Checkboxes, radios, ranges and progress bars pick up the theme's accent. */
+    html { accent-color: var(--accent); }
+
     body { font-family: var(--font-sans); }
 
     h1, h2, h3, .font-display { font-family: var(--head); }
 
     h1 { letter-spacing: -0.02em; }
 
+    /* Even line lengths for short headings, no one-word last lines in running text. */
+    h1, h2, h3, h4, caption, figcaption { text-wrap: balance; }
+
+    p, li, dd, blockquote { text-wrap: pretty; }
+
     :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     ::selection { background: var(--accent-soft); }
+
+    ::placeholder { color: var(--muted); opacity: 1; }
+
+    /*
+     * Dialogs fade (and, without reduced motion, grow) in and out. The backdrop colour
+     * comes from each dialog's backdrop: utility, so only its opacity is animated here.
+     */
+    dialog {
+        opacity: 0;
+        transition-property: opacity, scale, display, overlay;
+        transition-duration: 0.2s;
+        transition-timing-function: ease-out;
+        transition-behavior: allow-discrete;
+    }
+
+    dialog[open] {
+        opacity: 1;
+
+        @starting-style { opacity: 0; }
+    }
+
+    dialog::backdrop {
+        opacity: 0;
+        transition-property: opacity, display, overlay;
+        transition-duration: 0.2s;
+        transition-timing-function: ease-out;
+        transition-behavior: allow-discrete;
+    }
+
+    dialog[open]::backdrop {
+        opacity: 1;
+
+        @starting-style { opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        dialog { scale: 0.96; }
+
+        dialog[open] {
+            scale: 1;
+
+            @starting-style { scale: 0.96; }
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        dialog,
+        dialog::backdrop { transition-duration: 0.1s; }
+    }
 }
 
 @layer components {
@@ -259,11 +333,26 @@ body.paper.paper.has-backdrop {
         justify-content: center;
         gap: 0.5rem;
         border-radius: 10px;
+        /* Transparent until a variant sets it, so Forced Colors mode still draws an edge. */
+        border: 1px solid transparent;
         padding: 0 1.1rem;
         font-size: 0.875rem;
         font-weight: 600;
         cursor: pointer;
-        transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+        touch-action: manipulation;
+        transition: background-color 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s, scale 0.15s ease-out;
+    }
+
+    /* Hover, press and focus each look different, so any combination shows all of them. */
+    @media (prefers-reduced-motion: no-preference) {
+        .btn:active:not(:disabled),
+        .chip:active { scale: 0.97; }
+    }
+
+    .btn:disabled,
+    .btn[aria-disabled='true'] {
+        cursor: not-allowed;
+        opacity: 0.55;
     }
 
     .btn-primary {
@@ -272,7 +361,7 @@ body.paper.paper.has-backdrop {
         box-shadow: var(--shadow);
     }
 
-    .btn-primary:hover { background: color-mix(in srgb, var(--accent) 86%, var(--ink)); }
+    .btn-primary:hover:not(:disabled) { background: color-mix(in srgb, var(--accent) 86%, var(--ink)); }
 
     .btn-secondary {
         border: 1px solid var(--line-strong);
@@ -281,14 +370,20 @@ body.paper.paper.has-backdrop {
         font-weight: 500;
     }
 
-    .btn-secondary:hover { background: var(--surface-2); }
+    .btn-secondary:hover:not(:disabled) {
+        border-color: var(--ink);
+        background: var(--surface-2);
+    }
 
     .btn-ghost {
         color: var(--ink);
         font-weight: 500;
         text-decoration: underline;
+        text-decoration-thickness: 1px;
         text-underline-offset: 3px;
     }
+
+    .btn-ghost:hover { text-decoration-thickness: 2px; }
 
     .card {
         border-radius: 18px;
@@ -307,6 +402,24 @@ body.paper.paper.has-backdrop {
         padding: 0 0.85rem;
         color: var(--ink);
         font-size: 0.9375rem;
+        transition: border-color 0.15s, background-color 0.15s;
+    }
+
+    .field:hover { border-color: var(--muted); }
+
+    .field:focus { border-color: var(--accent); background: var(--surface); }
+
+    textarea.field {
+        padding-block: 0.6rem;
+        field-sizing: content;
+        min-block-size: 5lh;
+    }
+
+    /* Errors only after the user has finished with the field (or tried to submit). */
+    .field:user-invalid,
+    .field[aria-invalid='true'] {
+        border-color: var(--danger);
+        background: color-mix(in srgb, var(--danger) 8%, var(--surface-2));
     }
 
     .label-mono {
@@ -330,6 +443,12 @@ body.paper.paper.has-backdrop {
         font-weight: 500;
         color: var(--ink);
         cursor: pointer;
+        transition: background-color 0.15s, border-color 0.15s, color 0.15s, scale 0.15s ease-out;
+    }
+
+    .chip:hover:not(:has(input:checked)) {
+        border-color: var(--ink);
+        background: var(--surface-2);
     }
 
     /* Radio chips and tiles: the input stays in the DOM (keyboard + form submit). */
@@ -348,7 +467,10 @@ body.paper.paper.has-backdrop {
         background: var(--surface-2);
         padding: 0.5rem;
         cursor: pointer;
+        transition: border-color 0.15s;
     }
+
+    .tile:hover:not(:has(input:checked)) { border-color: var(--line-strong); }
 
     .tile:has(input:checked) { border-color: var(--accent); }
 

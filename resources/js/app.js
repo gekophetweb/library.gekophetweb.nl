@@ -202,3 +202,32 @@ if (appearanceForm) {
 
     photoFields.hidden = picked('background') !== 'photo';
 }
+
+// Keep aria-invalid in step with the CSS :user-invalid state of .field inputs, so screen
+// readers hear an error exactly when it is shown. An aria-invalid="true" this script did
+// not set (a server-side error) is left alone until the user changes the field.
+const flaggedFields = new WeakSet();
+
+function syncFieldValidity(field) {
+    if (!field.matches?.('.field') || !field.willValidate) {
+        return;
+    }
+
+    if (field.matches(':user-invalid')) {
+        field.setAttribute('aria-invalid', 'true');
+        flaggedFields.add(field);
+    } else if (flaggedFields.has(field)) {
+        field.setAttribute('aria-invalid', 'false');
+        flaggedFields.delete(field);
+    }
+}
+
+document.addEventListener('blur', (event) => syncFieldValidity(event.target), true);
+document.addEventListener('change', (event) => syncFieldValidity(event.target), true);
+document.addEventListener('invalid', (event) => syncFieldValidity(event.target), true);
+document.addEventListener('input', (event) => {
+    if (event.target.getAttribute?.('aria-invalid') === 'true') {
+        flaggedFields.add(event.target);
+        syncFieldValidity(event.target);
+    }
+});
