@@ -62,6 +62,26 @@ class CollectionObject extends Model
         $query->where($this->qualifyColumn('ownership'), OwnershipStatus::Wishlist->value);
     }
 
+    /**
+     * Japanese and Korean items whose title, publisher or author / artist still has a
+     * placeholder romanization: the ones RedoRomanization may still improve.
+     *
+     * @param  Builder<self>  $query
+     */
+    #[Scope]
+    protected function needingRomanization(Builder $query): void
+    {
+        $placeholder = fn (Builder $query) => $query->wherePlaceholderRomanization();
+
+        $query
+            ->whereHas('languages', fn (Builder $languages) => $languages->whereIn('code', ['ja', 'ko']))
+            ->where(fn (Builder $query) => $query
+                ->wherePlaceholderRomanization()
+                ->orWhereHas('publisher', $placeholder)
+                ->orWhereHas('bookDetail.artist', $placeholder)
+                ->orWhereHas('musicDetail.artist', $placeholder));
+    }
+
     public function isOwned(): bool
     {
         return $this->ownership === OwnershipStatus::Owned;
