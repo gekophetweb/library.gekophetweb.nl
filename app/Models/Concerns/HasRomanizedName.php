@@ -2,6 +2,9 @@
 
 namespace App\Models\Concerns;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
+
 /**
  * For models with name / name_romanized and the `name_romanized_auto` flag: whether the
  * romanized name may be replaced by an automatic one.
@@ -23,5 +26,22 @@ trait HasRomanizedName
             || $this->name_romanized === ''
             || $this->name_romanized === $this->name
             || $this->name_romanized_auto;
+    }
+
+    /**
+     * The query form of hasPlaceholderRomanization().
+     *
+     * @param  Builder<static>  $query
+     */
+    #[Scope]
+    protected function wherePlaceholderRomanization(Builder $query): void
+    {
+        $column = $this->qualifyColumn('name_romanized');
+
+        $query->where(fn (Builder $query) => $query
+            ->whereNull($column)
+            ->orWhere($column, '')
+            ->orWhereColumn($column, $this->qualifyColumn('name'))
+            ->orWhere($this->qualifyColumn('name_romanized_auto'), true));
     }
 }

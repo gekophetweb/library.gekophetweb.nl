@@ -196,11 +196,39 @@ describe('admin redo', function () {
         $this->post(route('admin.scan-batches.items.romanize', $batch), [])->assertSessionHasErrors('items');
     });
 
+    it('redoes the romanization of every item still needing it from the admin overview', function () {
+        $item = placeholderBerserk($this->user);
+        $done = placeholderBerserk(User::factory()->create(), ['name_romanized' => 'Berserk Vol. 1'], ['name' => '三浦', 'name_romanized' => 'Miura'], ['name' => '白泉', 'name_romanized' => 'Hakusen']);
+        $english = CollectionObject::factory()->for($this->user)->create(['category_id' => $this->books->id, 'name' => 'Dune', 'name_romanized' => 'Dune']);
+        $english->languages()->attach(Language::query()->where('code', 'en')->sole());
+
+        $this->actingAs($this->admin)->get(route('admin.home'))
+            ->assertSee('data-romanize-all', false)
+            ->assertSee('1 Japanese or Korean item');
+
+        $this->post(route('admin.romanize'))
+            ->assertRedirect(route('admin.home'))
+            ->assertSessionHas('status', 'Romanizing 1 item again…');
+
+        expect($item->refresh()->name_romanized)->toBe('Beruseruku 1')
+            ->and($done->refresh()->name_romanized)->toBe('Berserk Vol. 1');
+        Http::assertNotSent(fn (Request $request) => str_contains($request->url(), 'Dune'));
+    });
+
+    it('redoes the romanization of every item still needing it from the command line', function () {
+        $item = placeholderBerserk($this->user);
+
+        $this->artisan('romanize:items')->expectsOutput('Queued 1 item.')->assertSuccessful();
+
+        expect($item->refresh()->name_romanized)->toBe('Beruseruku 1');
+    });
+
     it('is for admins only', function () {
         $item = placeholderBerserk($this->user);
 
         $this->get(route('objects.show', $item))->assertOk()->assertDontSee('data-romanize-object', false);
         $this->post(route('admin.objects.romanize', $item))->assertForbidden();
+        $this->post(route('admin.romanize'))->assertForbidden();
         expect($item->refresh()->name_romanized)->toBe('ベルセルク 1');
     });
 });

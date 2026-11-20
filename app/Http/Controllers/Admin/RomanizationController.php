@@ -36,6 +36,16 @@ class RomanizationController extends Controller
             : 'None of those codes reached the collection; nothing to romanize.');
     }
 
+    /** Every Japanese or Korean item that still has a placeholder name, from the overview. */
+    public function all(): RedirectResponse
+    {
+        $count = RomanizeObjects::dispatchAllNeeded();
+
+        return redirect()->route('admin.home')->with('status', $count
+            ? "Romanizing {$count} ".str('item')->plural($count).' again…'
+            : 'No items need romanizing.');
+    }
+
     public function object(CollectionObject $object): RedirectResponse
     {
         RomanizeObjects::dispatch([$object->id]);

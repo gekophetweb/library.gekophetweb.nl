@@ -18,6 +18,20 @@ class RomanizeObjects implements ShouldQueue
     /** @param  list<int>  $objectIds */
     public function __construct(public array $objectIds) {}
 
+    /**
+     * Queues every item still needing a romanization, in jobs of 50.
+     *
+     * @return int how many items were queued
+     */
+    public static function dispatchAllNeeded(): int
+    {
+        $ids = CollectionObject::query()->needingRomanization()->orderBy('id')->pluck('id');
+
+        $ids->chunk(50)->each(fn ($chunk) => self::dispatch($chunk->values()->all()));
+
+        return $ids->count();
+    }
+
     public function handle(RedoRomanization $redo): void
     {
         CollectionObject::query()->whereKey($this->objectIds)->each(function (CollectionObject $object) use ($redo) {
