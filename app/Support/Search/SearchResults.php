@@ -48,6 +48,7 @@ final readonly class SearchResults
             ? Series::query()->ownedBy($user)->whereNameLike($term)
                 ->with('artist')
                 ->withCount(['objects' => fn ($query) => $query->owned()])
+                ->withBookTitle()
                 ->orderByDisplayName()->limit(self::SECTION_LIMIT)->get()
             : collect();
 

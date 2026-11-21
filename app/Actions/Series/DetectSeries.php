@@ -4,11 +4,17 @@ namespace App\Actions\Series;
 
 use App\Enums\CategoryKind;
 use App\Models\CollectionObject;
+use App\Models\Series;
+use App\Models\SeriesVolume;
 use App\Models\User;
 use App\Services\Series\SeriesLookupManager;
 use App\Support\Isbn;
+use App\Support\Series\Confidence;
 use App\Support\Series\SeriesMatch;
+use App\Support\Series\SeriesReference;
 use App\Support\Series\SeriesResolution;
+use App\Support\Series\Text;
+use App\Support\Series\TitleVolumeParser;
 use App\Support\Series\VolumeNumber;
 
 /**
@@ -18,7 +24,14 @@ use App\Support\Series\VolumeNumber;
  */
 class DetectSeries
 {
-    public function __construct(private readonly SeriesLookupManager $series, private readonly LinkSeries $link) {}
+    /** Source of a match found in the owner's own library rather than a catalogue. */
+    public const string SOURCE_LIBRARY = 'library';
+
+    public function __construct(
+        private readonly SeriesLookupManager $series,
+        private readonly LinkSeries $link,
+        private readonly TitleVolumeParser $titleParser,
+    ) {}
 
     public function handle(CollectionObject $object, string $language): SeriesResolution
     {
@@ -57,7 +70,67 @@ class DetectSeries
 
         $isbn = Isbn::tryFrom($barcode);
 
-        return $isbn === null ? new SeriesResolution : $this->series->resolve($isbn, $language, $title, $user);
+        if ($isbn === null) {
+            return new SeriesResolution;
+        }
+
+        if ($user !== null && ($own = $this->fromLibrary($isbn, $title, $user)) !== null) {
+            return new SeriesResolution([$own]);
+        }
+
+        return $this->series->resolve($isbn, $language, $title, $user);
+    }
+
+    /**
+     * The owner's own library answers first: a series whose volume list carries this
+     * ISBN, else the one series holding their other volumes of the same title (`マギ 3`
+     * joins the series of `マギ 1` and `マギ 10`). Catalogues often miss single volumes
+     * of a series they know, or name it differently (Hardcover's English title).
+     */
+    private function fromLibrary(Isbn $isbn, ?string $title, User $user): ?SeriesMatch
+    {
+        $listed = SeriesVolume::query()
+            ->whereHas('series', fn ($query) => $query->ownedBy($user))
+            ->with('series')
+            ->orderBy('edition')
+            ->get()
+            ->first(fn (SeriesVolume $volume) => collect($volume->isbns ?? [])
+                ->contains(fn (string $known) => Isbn::tryFrom($known)?->equals($isbn) ?? false));
+
+        if ($listed !== null) {
+            return $this->libraryMatch($listed->series, VolumeNumber::parse($listed->volume_number));
+        }
+
+        $parsed = $this->titleParser->parse($title);
+
+        if ($parsed === null) {
+            return null;
+        }
+
+        $key = Text::key($parsed->title);
+        $seriesIds = CollectionObject::query()->ownedBy($user)
+            ->whereNotNull('serie_id')
+            ->get(['id', 'name', 'serie_id'])
+            ->filter(fn (CollectionObject $other) => Text::key($this->titleParser->parse($other->name)?->title) === $key)
+            ->pluck('serie_id')
+            ->unique();
+
+        // Volumes of one title spread over several series: not ours to choose.
+        if ($seriesIds->count() !== 1) {
+            return null;
+        }
+
+        return $this->libraryMatch(Series::query()->findOrFail($seriesIds->first()), $parsed->volume);
+    }
+
+    private function libraryMatch(Series $series, ?VolumeNumber $volume): SeriesMatch
+    {
+        return new SeriesMatch(
+            series: $series->reference() ?? new SeriesReference('manual', '', $series->name),
+            volume: $volume,
+            confidence: Confidence::High,
+            source: self::SOURCE_LIBRARY,
+        );
     }
 
     /** @return array{reference: array<string, string|null>, volume: ?string, source: string, confidence: string} */
