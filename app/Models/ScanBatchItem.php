@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['barcode', 'status', 'object_id', 'message'])]
 class ScanBatchItem extends Model
 {
+    /** A single scan whose lookup is still running in the user's request: no job or redo touches it. */
+    public const string LOOKING_UP = 'looking_up';
+
     /** @return BelongsTo<ScanBatch, $this> */
     public function batch(): BelongsTo
     {
@@ -40,7 +43,7 @@ class ScanBatchItem extends Model
      */
     public function isRedoable(): bool
     {
-        return $this->status !== 'pending' && ($this->object_id === null || $this->lacksSeries());
+        return ! in_array($this->status, ['pending', self::LOOKING_UP], true) && ($this->object_id === null || $this->lacksSeries());
     }
 
     /** Found as a book that is in no series yet. */

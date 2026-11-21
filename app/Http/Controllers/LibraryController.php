@@ -30,7 +30,7 @@ class LibraryController extends Controller
         return view('library.dashboard', [
             'categories' => CategoryCounts::for($request->user()->objects()->getQuery()),
             ...$this->scanOptions(),
-            'hasScanBatches' => ScanBatch::query()->where('user_id', $request->user()->id)->exists(),
+            'hasScanBatches' => ScanBatch::query()->where('user_id', $request->user()->id)->where('mode', ScanBatch::MODE_BATCH)->exists(),
             'sharedWithMe' => LibraryShare::query()->usable()->sharedWith($request->user())
                 ->with(['user', 'shareable'])->latest()->get(),
         ]);

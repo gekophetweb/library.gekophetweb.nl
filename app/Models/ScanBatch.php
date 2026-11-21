@@ -12,10 +12,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/** A batch scan. Its items are a working list until the batch is committed. */
-#[Fillable(['category_id', 'sub_category_id', 'language_id', 'ownership', 'status', 'committed_at', 'finished_at'])]
+/**
+ * A batch scan (its items are a working list until the batch is committed), or the
+ * automatic record of a user's single scans with one scan setup (mode `single`).
+ */
+#[Fillable(['category_id', 'sub_category_id', 'language_id', 'ownership', 'mode', 'status', 'committed_at', 'finished_at'])]
 class ScanBatch extends Model
 {
+    public const string MODE_BATCH = 'batch';
+
+    public const string MODE_SINGLE = 'single';
+
+    /** @var array<string, mixed> */
+    protected $attributes = ['mode' => self::MODE_BATCH];
+
     public const string DRAFT = 'draft';
 
     public const string QUEUED = 'queued';
@@ -59,6 +69,12 @@ class ScanBatch extends Model
         return $this->hasMany(ScanBatchItem::class)->orderBy('id');
     }
 
+    /** The automatic record of single scans, not a batch the user made. */
+    public function isSingle(): bool
+    {
+        return $this->mode === self::MODE_SINGLE;
+    }
+
     public function isDraft(): bool
     {
         return $this->status === self::DRAFT;
@@ -85,8 +101,8 @@ class ScanBatch extends Model
         return $this->requeue($this->items()->where('status', 'failed'));
     }
 
-    /** Outcomes an admin's redo looks up again: everything that did not reach the collection for lack of an answer. */
-    public const array REDOABLE = ['failed', 'not_found'];
+    /** Outcomes an admin's redo looks up again: everything that did not reach the collection (for lack of an answer, or a single scan the user didn't add). */
+    public const array REDOABLE = ['failed', 'not_found', 'not_added'];
 
     /**
      * An admin's redo of a finished batch: looks every code that was not added up again, for
@@ -108,7 +124,7 @@ class ScanBatch extends Model
     public function redoItems(array $itemIds): int
     {
         return $this->redetectSeries($itemIds)
-            + $this->requeue($this->items()->whereKey($itemIds)->where('status', '!=', 'pending'));
+            + $this->requeue($this->items()->whereKey($itemIds)->whereNotIn('status', ['pending', ScanBatchItem::LOOKING_UP]));
     }
 
     /**

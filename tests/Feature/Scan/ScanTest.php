@@ -365,10 +365,12 @@ it('links every API call of a batch job to its code and keeps the raw answer', f
         ->and($rakuten->response_body)->not->toContain('applicationId')
         ->and(ApiCallLog::query()->whereNull('scan_batch_item_id')->count())->toBe(0);
 
-    // A single scan outside a batch job is logged too, but not linked to a code.
+    // A single scan is recorded in a single-scan batch, its calls linked to its code too.
     startScan('single');
     $this->post(route('scan.single.lookup'), ['barcode' => '9784088725093']);
-    expect(ApiCallLog::query()->whereNull('scan_batch_item_id')->exists())->toBeTrue();
+    $single = ScanBatch::query()->where('mode', ScanBatch::MODE_SINGLE)->sole()->items()->sole();
+    expect($single->apiCalls()->exists())->toBeTrue()
+        ->and(ApiCallLog::query()->whereNull('scan_batch_item_id')->count())->toBe(0);
 });
 
 it('keeps batches private to their owner', function () {

@@ -3,7 +3,7 @@
     $input = 'block w-full rounded-md border border-stone-300 px-3 py-2 text-sm dark:border-stone-700 dark:bg-stone-950';
     $primary = 'rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-ink shadow-card hover:opacity-90';
     $running = in_array($batch->status, [ScanBatch::QUEUED, ScanBatch::PROCESSING], true);
-    $labels = ['pending' => 'Waiting', 'added' => 'Added', 'promoted' => 'Moved from wishlist', 'already_owned' => 'Already in collection', 'already_wanted' => 'Already on wishlist', 'not_found' => 'Not found', 'invalid' => 'Invalid barcode', 'failed' => 'Failed'];
+    $labels = ['pending' => 'Waiting', 'added' => 'Added', 'promoted' => 'Moved from wishlist', 'already_owned' => 'Already in collection', 'already_wanted' => 'Already on wishlist', 'not_found' => 'Not found', 'invalid' => 'Invalid barcode', 'failed' => 'Failed', 'not_added' => 'Not added', 'looking_up' => 'Looking up'];
     $toWishlist = $batch->ownership === App\Enums\OwnershipStatus::Wishlist;
 @endphp
 <x-layout title="Batch scan">

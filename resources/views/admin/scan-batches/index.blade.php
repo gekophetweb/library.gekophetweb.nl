@@ -1,7 +1,8 @@
 @php
     $secondary = 'rounded-md border border-stone-300 px-3 py-1 text-xs hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-stone-700 dark:hover:bg-stone-800';
     $active = fn (?string $value) => ($filters['status'] ?? null) === $value;
-    $keep = array_filter(['language' => $filters['language'] ?? null, 'category' => $filters['category'] ?? null]);
+    $keep = array_filter(['language' => $filters['language'] ?? null, 'category' => $filters['category'] ?? null, 'mode' => $filters['mode'] ?? null]);
+    $kinds = ['' => 'Batches and single scans', 'batch' => 'Batches', 'single' => 'Single scans'];
 @endphp
 <x-admin-layout title="Scan batches">
     <div class="mb-2 flex flex-wrap items-center justify-between gap-3">
@@ -19,11 +20,21 @@
         a batch keeps its language and sub-category in use. Removing a batch never removes items it already added.
     </p>
 
+    {{-- Single scans are recorded per user and scan setup, as a "single" batch. --}}
+    <nav class="mb-4 flex flex-wrap gap-3 text-sm" aria-label="Batches or single scans" data-mode-filter>
+        @foreach ($kinds as $value => $label)
+            @php($current = ($filters['mode'] ?? '') === $value)
+            <a href="{{ route('admin.scan-batches.index', array_filter(['status' => $filters['status'] ?? null, 'mode' => $value ?: null] + $keep)) }}"
+               @class(['underline-offset-2', 'font-semibold' => $current, 'underline' => ! $current])
+               @if ($current) aria-current="true" @endif>{{ $label }}</a>
+        @endforeach
+    </nav>
+
     @if ($language || $category)
         <p class="mb-4 flex flex-wrap items-center gap-2 text-sm" data-filter>
             Showing batches for
             <span class="rounded bg-stone-100 px-2 py-0.5 font-medium dark:bg-stone-800">{{ $language?->name ?? $category?->name }}</span>
-            <a href="{{ route('admin.scan-batches.index', array_filter(['status' => $filters['status'] ?? null])) }}" class="underline">Show all</a>
+            <a href="{{ route('admin.scan-batches.index', array_filter(['status' => $filters['status'] ?? null, 'mode' => $filters['mode'] ?? null])) }}" class="underline">Show all</a>
         </p>
     @endif
 
@@ -52,6 +63,9 @@
                         <td class="px-4 py-3">
                             {{ collect([$batch->category->name, $batch->subCategory?->name, $batch->language->name])->filter()->join(' · ') }}
                             <span class="block text-xs text-stone-500">{{ $batch->ownership?->value === 'wishlist' ? 'To wishlist' : 'To collection' }}</span>
+                            @if ($batch->isSingle())
+                                <span class="mt-1 inline-block rounded bg-sky-100 px-2 py-0.5 text-xs text-sky-800 dark:bg-sky-950 dark:text-sky-200" data-single>Single scans</span>
+                            @endif
                         </td>
                         <td class="px-4 py-3 text-right tabular-nums">
                             @if ($batch->isDraft())
