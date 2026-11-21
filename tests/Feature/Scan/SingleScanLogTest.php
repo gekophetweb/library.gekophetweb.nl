@@ -146,3 +146,45 @@ it('lets an admin redo a single scan the user did not add, which adds it', funct
         ->and($item->object_id)->toBe($object->id)
         ->and($object->user_id)->toBe($this->user->id);
 });
+
+/** A finished batch scan of the user's own, for comparing with single-scan batches. */
+function regularBatch(User $user): ScanBatch
+{
+    $batch = new ScanBatch(['category_id' => test()->books->id, 'language_id' => test()->ja->id, 'ownership' => 'owned', 'status' => ScanBatch::DONE]);
+    $batch->forceFill(['user_id' => $user->id])->save();
+
+    return $batch;
+}
+
+it('marks single batches on the admin list and filters on them', function () {
+    $regular = regularBatch($this->user);
+    startSingleScan($this->ja);
+    $this->post(route('scan.single.lookup'), ['barcode' => '9784592135746']);
+    $single = ScanBatch::query()->where('mode', ScanBatch::MODE_SINGLE)->sole();
+
+    $this->actingAs(User::factory()->admin()->create());
+
+    $all = $this->get(route('admin.scan-batches.index'))->assertOk();
+    expect(substr_count($all->getContent(), 'data-single'))->toBe(1);
+
+    $this->get(route('admin.scan-batches.index', ['mode' => 'single']))
+        ->assertSee('data-batch="'.$single->id.'"', false)
+        ->assertDontSee('data-batch="'.$regular->id.'"', false);
+    $this->get(route('admin.scan-batches.index', ['mode' => 'batch']))
+        ->assertSee('data-batch="'.$regular->id.'"', false)
+        ->assertDontSee('data-batch="'.$single->id.'"', false);
+    $this->get(route('admin.scan-batches.index', ['mode' => 'other']))->assertSessionHasErrors('mode');
+});
+
+it('keeps single batches out of the user\'s own batch list', function () {
+    startSingleScan($this->ja);
+    $this->post(route('scan.single.lookup'), ['barcode' => '9784592135746']);
+    $single = ScanBatch::sole();
+
+    $this->get(route('home'))->assertOk()->assertDontSee(route('scan.batches.index'));
+    $this->get(route('scan.batches.index'))->assertDontSee('data-batch="'.$single->id.'"', false);
+
+    $regular = regularBatch($this->user);
+    $this->get(route('home'))->assertSee(route('scan.batches.index'));
+    $this->get(route('scan.batches.index'))->assertSee('data-batch="'.$regular->id.'"', false);
+});
