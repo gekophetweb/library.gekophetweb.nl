@@ -12,10 +12,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/** A batch scan. Its items are a working list until the batch is committed. */
-#[Fillable(['category_id', 'sub_category_id', 'language_id', 'ownership', 'status', 'committed_at', 'finished_at'])]
+/**
+ * A batch scan (its items are a working list until the batch is committed), or the
+ * automatic record of a user's single scans with one scan setup (mode `single`).
+ */
+#[Fillable(['category_id', 'sub_category_id', 'language_id', 'ownership', 'mode', 'status', 'committed_at', 'finished_at'])]
 class ScanBatch extends Model
 {
+    public const string MODE_BATCH = 'batch';
+
+    public const string MODE_SINGLE = 'single';
+
+    /** @var array<string, mixed> */
+    protected $attributes = ['mode' => self::MODE_BATCH];
+
     public const string DRAFT = 'draft';
 
     public const string QUEUED = 'queued';
@@ -57,6 +67,12 @@ class ScanBatch extends Model
     public function items(): HasMany
     {
         return $this->hasMany(ScanBatchItem::class)->orderBy('id');
+    }
+
+    /** The automatic record of single scans, not a batch the user made. */
+    public function isSingle(): bool
+    {
+        return $this->mode === self::MODE_SINGLE;
     }
 
     public function isDraft(): bool

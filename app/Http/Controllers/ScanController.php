@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Scan\AddScannedObject;
+use App\Actions\Scan\RecordSingleScan;
 use App\Actions\Series\DetectSeries;
 use App\Actions\Series\LinkSeries;
 use App\Enums\CategoryKind;
@@ -12,6 +13,7 @@ use App\Models\Category;
 use App\Models\CollectionObject;
 use App\Models\Language;
 use App\Models\ScanBatch;
+use App\Services\ApiCallLogger;
 use App\Services\Catalogue\CatalogueLookupManager;
 use App\Support\Catalogue\CatalogueContext;
 use App\Support\Catalogue\CatalogueResult;
@@ -23,7 +25,9 @@ use App\Support\Series\VolumeNumber;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Context;
 use Illuminate\View\View;
+use Throwable;
 
 /**
  * Single-item scanning (guidelines §4.1): look the barcode up, say whether it is already
@@ -32,6 +36,8 @@ use Illuminate\View\View;
  */
 class ScanController extends Controller
 {
+    public function __construct(private readonly RecordSingleScan $record) {}
+
     public function start(StartScanRequest $request): RedirectResponse
     {
         $setup = $request->setup();
@@ -101,27 +107,46 @@ class ScanController extends Controller
 
     private function lookUpBarcode(Request $request, ScanSetup $setup, string $barcode, CatalogueLookupManager $catalogue, DetectSeries $series): RedirectResponse
     {
+        // Every lookup is recorded as a code in the user's single-scan batch (admins see it).
+        $item = $this->record->start($request->user(), $setup, $barcode);
         $existing = CollectionObject::query()->ownedBy($request->user())->where('barcode', $barcode)->first();
 
         if ($existing !== null) {
             // Already owned, or already wanted in Wishlist mode: nothing to add. A wanted
             // item in Own mode can be promoted from the page.
+            $this->record->existing($item, $existing);
             $request->session()->put('scan.pending', [
                 'barcode' => $barcode,
                 'existing_id' => $existing->id,
                 'can_promote' => ! $existing->isOwned() && $setup->ownership === OwnershipStatus::Owned,
+                'scan_item_id' => $item->id,
             ]);
 
             return redirect()->route('scan.single');
         }
 
-        $outcome = $catalogue->lookup($barcode, new CatalogueContext($request->user(), $setup->category, $setup->language->code));
+        try {
+            // Every API call made for this code is linked to its row (raw data for admins).
+            [$outcome, $match] = Context::scope(function () use ($request, $setup, $barcode, $catalogue, $series) {
+                $outcome = $catalogue->lookup($barcode, new CatalogueContext($request->user(), $setup->category, $setup->language->code));
 
-        // Books: which series and volume is this? Shown pre-filled and editable (plan
-        // series-detection-from-isbn §5 step 13), whatever the confidence.
-        $match = ! $outcome->invalidBarcode && $setup->category->topLevel()->kind === CategoryKind::Books
-            ? $series->resolve($outcome->result?->barcode ?? $barcode, $setup->language->code, $outcome->result?->name, $request->user())->best()
-            : null;
+                // Books: which series and volume is this? Shown pre-filled and editable (plan
+                // series-detection-from-isbn §5 step 13), whatever the confidence.
+                $match = ! $outcome->invalidBarcode && $setup->category->topLevel()->kind === CategoryKind::Books
+                    ? $series->resolve($outcome->result?->barcode ?? $barcode, $setup->language->code, $outcome->result?->name, $request->user())->best()
+                    : null;
+
+                return [$outcome, $match];
+            }, hidden: [ApiCallLogger::SCAN_BATCH_ITEM => $item->id]);
+        } catch (Throwable $e) {
+            report($e);
+            $this->record->failed($item);
+            $request->session()->put('scan.pending', ['barcode' => $barcode, 'unavailable' => 'the catalogues', 'scan_item_id' => $item->id]);
+
+            return redirect()->route('scan.single');
+        }
+
+        $this->record->outcome($item, $outcome);
 
         $request->session()->put('scan.pending', [
             'barcode' => $outcome->result?->barcode ?? $barcode,
@@ -131,6 +156,7 @@ class ScanController extends Controller
             'invalid' => $outcome->invalidBarcode,
             'unavailable' => $outcome->failed() ? $outcome->unavailableNames() : null,
             'series' => $match ? DetectSeries::suggestion($match) : null,
+            'scan_item_id' => $item->id,
         ]);
 
         return redirect()->route('scan.single');
@@ -147,6 +173,7 @@ class ScanController extends Controller
                 CollectionObject::query()->ownedBy($request->user())->findOrFail($pending['existing_id']),
                 $setup->ownership,
             );
+            $this->record->added($pending['scan_item_id'] ?? null, $object, 'promoted');
             $request->session()->forget('scan.pending');
 
             return redirect()->route('objects.show', $object)->with('status', 'Moved from your wishlist to your collection.');
@@ -173,6 +200,7 @@ class ScanController extends Controller
         }
 
         $object = $add->handle($request->user(), $setup, $result);
+        $this->record->added($pending['scan_item_id'] ?? null, $object);
         $request->session()->forget('scan.pending');
 
         $this->linkSeries($object, $pending['series'] ?? null, $seriesInput, $link);
