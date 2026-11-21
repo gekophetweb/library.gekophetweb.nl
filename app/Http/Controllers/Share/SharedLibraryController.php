@@ -47,7 +47,7 @@ class SharedLibraryController extends Controller
         abort_unless($share->exposes($category), 404);
 
         return view('library.category', [
-            'shelf' => CategoryShelf::build($category, $share->objectsQuery(), $request->integer('sub') ?: null),
+            'shelf' => CategoryShelf::build($category, $share->objectsQuery(), $request->integer('sub') ?: null, $request->integer('language') ?: null),
             'share' => $share,
         ]);
     }

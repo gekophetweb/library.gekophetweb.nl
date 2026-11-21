@@ -17,13 +17,31 @@
         @endif
     </div>
 
+    @php($on = 'border-stone-900 bg-stone-900 text-white dark:border-stone-100 dark:bg-stone-100 dark:text-stone-900')
+    @php($off = 'border-stone-300 dark:border-stone-700')
+    {{-- Each filter keeps the other one when it changes. --}}
+    @php($withSub = array_filter(['sub' => $shelf->subCategory?->id]))
+    @php($withLanguage = array_filter(['language' => $shelf->language?->id]))
+
     @if ($shelf->subCategories->isNotEmpty())
-        <nav class="mb-6 flex flex-wrap gap-2" aria-label="Sub-categories">
-            <a href="{{ $links->category($shelf->category) }}" @class([$chip, 'border-stone-900 bg-stone-900 text-white dark:border-stone-100 dark:bg-stone-100 dark:text-stone-900' => ! $shelf->subCategory, 'border-stone-300 dark:border-stone-700' => $shelf->subCategory])>All</a>
+        <nav class="mb-3 flex flex-wrap gap-2" aria-label="Sub-categories">
+            <a href="{{ $links->category($shelf->category, $withLanguage) }}" @class([$chip, $on => ! $shelf->subCategory, $off => $shelf->subCategory])>All</a>
             @foreach ($shelf->subCategories as $sub)
-                <a href="{{ $links->category($shelf->category, ['sub' => $sub->id]) }}" @class([$chip, 'border-stone-900 bg-stone-900 text-white dark:border-stone-100 dark:bg-stone-100 dark:text-stone-900' => $shelf->subCategory?->is($sub), 'border-stone-300 dark:border-stone-700' => ! $shelf->subCategory?->is($sub)])>{{ $sub->name }}</a>
+                <a href="{{ $links->category($shelf->category, ['sub' => $sub->id] + $withLanguage) }}" @class([$chip, $on => $shelf->subCategory?->is($sub), $off => ! $shelf->subCategory?->is($sub)])>{{ $sub->name }}</a>
             @endforeach
         </nav>
+    @endif
+
+    {{-- Only when the shelf holds more than one language: one chip per language on it. --}}
+    @if ($shelf->languages->count() > 1)
+        <nav class="mb-6 flex flex-wrap gap-2" aria-label="Languages" data-language-filter>
+            <a href="{{ $links->category($shelf->category, $withSub) }}" @class([$chip, $on => ! $shelf->language, $off => $shelf->language])>All languages</a>
+            @foreach ($shelf->languages as $language)
+                <a href="{{ $links->category($shelf->category, $withSub + ['language' => $language->id]) }}" @class([$chip, $on => $shelf->language?->is($language), $off => ! $shelf->language?->is($language)])>{{ $language->name }}</a>
+            @endforeach
+        </nav>
+    @elseif ($shelf->subCategories->isNotEmpty())
+        <div class="mb-3"></div>
     @endif
 
     @if ($shelf->series->isEmpty() && $shelf->standalone->isEmpty() && $shelf->wishlist->isEmpty())

@@ -62,6 +62,42 @@ it('filters a category page by sub-category', function () {
         ->assertDontSee('A Manga');
 });
 
+it('filters a category page by language, keeping the sub-category', function () {
+    $ja = Language::query()->where('code', 'ja')->sole();
+    $en = Language::query()->where('code', 'en')->sole();
+    $novels = Category::query()->where('slug', 'novels')->sole();
+    item(['name' => 'A Japanese Manga'])->languages()->attach($ja);
+    item(['name' => 'An English Manga'])->languages()->attach($en);
+    item(['name' => 'A Japanese Novel', 'sub_category_id' => $novels->id])->languages()->attach($ja);
+    $berserk = Series::factory()->for($this->user)->create(['name' => 'ベルセルク']);
+    item(['serie_id' => $berserk->id])->languages()->attach($ja);
+
+    $this->actingAs($this->user)->get(route('library.category', $this->books))
+        ->assertSee('data-language-filter', false)
+        ->assertSee(route('library.category', [$this->books, 'language' => $en->id]));
+
+    $this->get(route('library.category', [$this->books, 'language' => $en->id]))
+        ->assertSee('An English Manga')
+        ->assertDontSee('A Japanese Manga')
+        ->assertDontSee('ベルセルク');
+
+    $this->get(route('library.category', [$this->books, 'sub' => $this->manga->id, 'language' => $ja->id]))
+        ->assertSee('A Japanese Manga')
+        ->assertSee('ベルセルク')
+        ->assertDontSee('An English Manga')
+        ->assertDontSee('A Japanese Novel')
+        // Switching sub-category keeps the language, and the other way round.
+        ->assertSee(route('library.category', [$this->books, 'sub' => $novels->id, 'language' => $ja->id]))
+        ->assertSee(route('library.category', [$this->books, 'sub' => $this->manga->id, 'language' => $en->id]));
+});
+
+it('leaves out the language filter when a category holds one language', function () {
+    item(['name' => 'A Japanese Manga'])->languages()->attach(Language::query()->where('code', 'ja')->sole());
+
+    $this->actingAs($this->user)->get(route('library.category', $this->books))
+        ->assertDontSee('data-language-filter', false);
+});
+
 it('shows a series with owned and missing volumes', function () {
     $series = Series::factory()->for($this->user)->create(['name' => 'ベルセルク']);
     SeriesVolume::factory()->for($series)->create(['volume_number' => '1', 'volume_sort' => 1, 'isbns' => ['9784592135746']]);

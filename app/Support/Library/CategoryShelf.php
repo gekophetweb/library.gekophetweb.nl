@@ -5,6 +5,7 @@ namespace App\Support\Library;
 use App\Enums\OwnershipStatus;
 use App\Models\Category;
 use App\Models\CollectionObject;
+use App\Models\Language;
 use App\Models\Series;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -20,6 +21,7 @@ final readonly class CategoryShelf
      * @param  Collection<int, CollectionObject>  $standalone  owned, not in a series
      * @param  Collection<int, CollectionObject>  $wishlist  every wanted item, series or not
      * @param  Collection<int, Category>  $subCategories
+     * @param  Collection<int, Language>  $languages  the languages of the shelf's items, for the filter
      */
     public function __construct(
         public Category $category,
@@ -28,10 +30,12 @@ final readonly class CategoryShelf
         public Collection $standalone,
         public Collection $wishlist,
         public Collection $subCategories,
+        public ?Language $language = null,
+        public Collection $languages = new Collection,
     ) {}
 
     /** @param  Builder<CollectionObject>  $objects  already scoped to what the viewer may see */
-    public static function build(Category $category, Builder $objects, ?int $subCategoryId = null): self
+    public static function build(Category $category, Builder $objects, ?int $subCategoryId = null, ?int $languageId = null): self
     {
         $subCategory = $subCategoryId ? $category->children()->whereKey($subCategoryId)->first() : null;
         $with = ['subCategory', 'bookDetail.artist', 'musicDetail.artist', 'gameDetail.platform'];
@@ -39,6 +43,14 @@ final readonly class CategoryShelf
         $inShelf = (clone $objects)
             ->where('objects.category_id', $category->id)
             ->when($subCategory, fn (Builder $query) => $query->where('objects.sub_category_id', $subCategory->id));
+
+        // The languages on this shelf, before filtering on one, so the filter only offers those.
+        $languages = Language::query()
+            ->whereHas('objects', fn (Builder $query) => $query->whereIn('objects.id', (clone $inShelf)->select('objects.id')))
+            ->orderBy('name')
+            ->get();
+        $language = $languageId ? $languages->firstWhere('id', $languageId) : null;
+        $inShelf->when($language, fn (Builder $query) => $query->whereHas('languages', fn (Builder $query) => $query->whereKey($language->id)));
 
         $counts = (clone $inShelf)->whereNotNull('serie_id')
             ->selectRaw('serie_id, ownership, count(*) as aggregate')->groupBy('serie_id', 'ownership')
@@ -58,6 +70,6 @@ final readonly class CategoryShelf
         $standalone = (clone $inShelf)->owned()->whereNull('serie_id')->with($with)->orderBy('name')->get();
         $wishlist = (clone $inShelf)->wishlisted()->with([...$with, 'serie'])->orderBy('name')->get();
 
-        return new self($category, $subCategory, $series, $standalone, $wishlist, $category->children);
+        return new self($category, $subCategory, $series, $standalone, $wishlist, $category->children, $language, $languages);
     }
 }
