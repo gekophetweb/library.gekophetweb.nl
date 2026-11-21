@@ -5,6 +5,7 @@
             <a href="{{ $links->series($entry) }}" class="flex flex-wrap items-baseline justify-between gap-2 px-4 py-3 hover:bg-stone-50 dark:hover:bg-stone-800">
                 <span>
                     <span class="font-medium">{{ $entry->display_name }}</span>
+                    @if ($entry->original_name) <span class="text-stone-600 dark:text-stone-300" data-original-name>{{ $entry->original_name }}</span> @endif
                     @if ($entry->artist) <span class="text-sm text-stone-500">· {{ $entry->artist->name }}</span> @endif
                 </span>
                 <span class="text-sm text-stone-500">

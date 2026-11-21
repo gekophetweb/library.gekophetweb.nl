@@ -62,7 +62,7 @@ final readonly class CategoryShelf
             ?->first(fn ($row) => $row->ownership === $status->value)
             ?->aggregate ?? 0);
 
-        $series = Series::query()->whereKey($counts->keys())->with('artist')->orderByDisplayName()->get()
+        $series = Series::query()->whereKey($counts->keys())->with('artist')->withBookTitle()->orderByDisplayName()->get()
             ->each(fn (Series $series) => $series
                 ->setAttribute('items_count', $count($series->id, OwnershipStatus::Owned))
                 ->setAttribute('wanted_count', $count($series->id, OwnershipStatus::Wishlist)));
