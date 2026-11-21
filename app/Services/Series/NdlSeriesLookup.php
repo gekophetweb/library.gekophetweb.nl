@@ -60,6 +60,12 @@ class NdlSeriesLookup implements SeriesLookup
         $records = collect($channel['records'] ?? [])
             ->filter(fn (array $record) => $record['is_book'] && $record['title'] !== null);
 
+        // NDL also answers with records that only resemble the ISBN, such as one record for
+        // a whole set (鋼の錬金術師 "2002-2010", volume "1", the ISBN of volume 1 only):
+        // the records that carry this ISBN come first.
+        [$exact, $other] = $records->partition(fn (array $record) => collect($record['isbns'])->contains(fn (Isbn $known) => $known->equals($isbn)));
+        $records = $exact->concat($other);
+
         $record = $records->first(fn (array $record) => VolumeNumber::parse($record['volume']) !== null)
             ?? $records->first();
 
@@ -124,7 +130,7 @@ class NdlSeriesLookup implements SeriesLookup
         return collect($records)
             ->filter(fn (array $record) => $record['is_book']
                 && Text::key($record['title']) === $titleKey
-                && ($publisherKey === '' || Text::key($record['publisher']) === $publisherKey))
+                && $this->samePublisher($publisherKey, Text::key($record['publisher'])))
             ->map(fn (array $record) => $record + ['volume_number' => VolumeNumber::parse($record['volume'])])
             ->filter(fn (array $record) => $record['volume_number'] !== null)
             // A special edition (`dcndl:edition` set) is its own entry; records of the
@@ -147,6 +153,15 @@ class NdlSeriesLookup implements SeriesLookup
             ->sort(fn (SeriesVolumeData $a, SeriesVolumeData $b) => $a->volume->compare($b->volume)
                 ?: [$a->isSpecialEdition(), $a->edition] <=> [$b->isSpecialEdition(), $b->edition])
             ->values();
+    }
+
+    /**
+     * One name inside the other also counts: a publisher renamed by a merger keeps its
+     * series (エニックス → スクウェア・エニックス from 鋼の錬金術師 volume 5 on).
+     */
+    private function samePublisher(string $series, string $record): bool
+    {
+        return $series === '' || ($record !== '' && (str_contains($record, $series) || str_contains($series, $record)));
     }
 
     /** @param  array<string, mixed>  $record */
