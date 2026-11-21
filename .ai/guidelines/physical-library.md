@@ -124,6 +124,12 @@ number; it then is not counted and not wished by "Add all missing". Every volume
 lists its ISBNs, the one of your copy first. A volume note in brackets after the number
 (NDL's `5(番外編)`) is dropped by `VolumeNumber::parse`, so that volume is kept.
 
+NDL quirks: an ISBN search can also return a record for the whole set (one volume
+number, one ISBN, issued `2002-2010`), so resolve prefers the records that carry the
+scanned ISBN. A series' publisher also matches a name that contains it or that it
+contains (エニックス → スクウェア・エニックス). After a sync, an item whose barcode the
+source lists under a volume takes that volume's number (`SyncSeriesVolumes`).
+
 ---
 
 ## 4. Scanning workflow
