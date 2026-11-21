@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\Scan\RecordSingleScan;
 use App\Models\ApiCallLog;
 use App\Models\Category;
 use App\Models\CollectionObject;
@@ -7,8 +8,11 @@ use App\Models\Language;
 use App\Models\ScanBatch;
 use App\Models\ScanBatchItem;
 use App\Models\User;
+use App\Support\Scan\ScanSetup;
 use Database\Seeders\CatalogueSeeder;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 /*
@@ -187,4 +191,38 @@ it('keeps single batches out of the user\'s own batch list', function () {
     $regular = regularBatch($this->user);
     $this->get(route('home'))->assertSee(route('scan.batches.index'));
     $this->get(route('scan.batches.index'))->assertSee('data-batch="'.$regular->id.'"', false);
+});
+
+it('leaves a code the user is still looking up alone when an admin redoes the batch', function () {
+    startSingleScan($this->ja);
+    $this->post(route('scan.single.lookup'), ['barcode' => '9784088725093']); // not found: redoable
+    $batch = ScanBatch::sole();
+
+    // A second scan whose lookup is still running in the user's request.
+    $inFlight = app(RecordSingleScan::class)->start($this->user, new ScanSetup($this->books, $this->manga, $this->ja), '9784592135746');
+
+    $this->actingAs(User::factory()->admin()->create())->post(route('admin.scan-batches.redo', $batch));
+
+    expect(CollectionObject::count())->toBe(0)
+        ->and($inFlight->refresh()->object_id)->toBeNull()
+        ->and($inFlight->status)->toBe('looking_up');
+});
+
+it('records a code scanned twice at once in one row', function () {
+    startSingleScan($this->ja);
+    $batch = app(RecordSingleScan::class)->batchFor($this->user, new ScanSetup($this->books, $this->manga, $this->ja));
+
+    // The other request (a double tap) commits the same code right after this request
+    // looked for it, and before this request inserts it.
+    $inserted = false;
+    DB::listen(function (QueryExecuted $query) use ($batch, &$inserted) {
+        if (! $inserted && str_starts_with($query->sql, 'select') && str_contains($query->sql, '"scan_batch_items"')) {
+            $inserted = true;
+            DB::table('scan_batch_items')->where('barcode', '9784592135746')->exists() || DB::table('scan_batch_items')->insert(['scan_batch_id' => $batch->id, 'barcode' => '9784592135746', 'status' => 'looking_up', 'created_at' => now(), 'updated_at' => now()]);
+        }
+    });
+
+    $this->post(route('scan.single.lookup'), ['barcode' => '9784592135746'])->assertRedirect(route('scan.single'));
+
+    expect(ScanBatchItem::sole()->status)->toBe('not_added');
 });

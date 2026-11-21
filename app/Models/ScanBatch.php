@@ -124,7 +124,7 @@ class ScanBatch extends Model
     public function redoItems(array $itemIds): int
     {
         return $this->redetectSeries($itemIds)
-            + $this->requeue($this->items()->whereKey($itemIds)->where('status', '!=', 'pending'));
+            + $this->requeue($this->items()->whereKey($itemIds)->whereNotIn('status', ['pending', ScanBatchItem::LOOKING_UP]));
     }
 
     /**

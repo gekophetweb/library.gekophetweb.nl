@@ -48,11 +48,16 @@ class RecordSingleScan
         return $batch;
     }
 
-    /** The code's row in the batch, created or reset for a new lookup. */
+    /**
+     * The code's row in the batch, created or reset for a new lookup. It is `looking_up`
+     * while the user's request runs, not `pending`, so a batch job started by an admin's
+     * redo never adds it behind the user's back. createOrFirst: a code scanned twice at
+     * once (a double tap) lands on one row instead of a duplicate-key error.
+     */
     public function start(User $user, ScanSetup $setup, string $barcode): ScanBatchItem
     {
-        $item = $this->batchFor($user, $setup)->items()->firstOrNew(['barcode' => $barcode]);
-        $item->fill(['status' => 'pending', 'message' => null, 'object_id' => null])->save();
+        $item = $this->batchFor($user, $setup)->items()->createOrFirst(['barcode' => $barcode], ['status' => ScanBatchItem::LOOKING_UP]);
+        $item->update(['status' => ScanBatchItem::LOOKING_UP, 'message' => null, 'object_id' => null]);
 
         return $item;
     }
