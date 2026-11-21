@@ -25,11 +25,7 @@ class RomanizationController extends Controller
 
         $objectIds = $batch->items()->whereKey(array_map('intval', $ids))->whereNotNull('object_id')->pluck('object_id')->unique()->values()->all();
 
-        if ($objectIds !== []) {
-            RomanizeObjects::dispatch($objectIds);
-        }
-
-        $count = count($objectIds);
+        $count = RomanizeObjects::dispatchEach($objectIds);
 
         return redirect()->route('admin.scan-batches.show', $batch)->with('status', $count
             ? "Romanizing {$count} ".str('item')->plural($count).' again…'
