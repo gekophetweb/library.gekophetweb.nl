@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\CollectionObject;
 use App\Models\Series;
 use App\Models\SeriesVolume;
 use App\Services\Series\SeriesLookupManager;
@@ -69,5 +70,33 @@ class SyncSeriesVolumes implements ShouldBeUnique, ShouldQueue
         });
 
         $this->series->forceFill(['synced_at' => now()])->save();
+        $this->correctItemVolumes();
+    }
+
+    /**
+     * An item whose barcode the source lists under a volume takes that volume's number:
+     * a wrong number from the scan (NDL's whole-set record says "1") is put right.
+     */
+    private function correctItemVolumes(): void
+    {
+        $byIsbn = [];
+
+        // Special editions first, so a regular edition wins an ISBN listed under both.
+        foreach ($this->series->volumes()->get()->sortByDesc(fn (SeriesVolume $volume) => $volume->isSpecialEdition()) as $volume) {
+            foreach ($volume->isbns ?? [] as $isbn) {
+                $byIsbn[(string) $isbn] = $volume;
+            }
+        }
+
+        $this->series->objects()->whereNotNull('barcode')->with('bookDetail')->get()
+            ->each(function (CollectionObject $object) use ($byIsbn) {
+                $volume = $byIsbn[$object->barcode] ?? null;
+
+                if ($volume === null || (float) $object->bookDetail?->volume_sort === (float) $volume->volume_sort) {
+                    return;
+                }
+
+                $object->bookDetail()->updateOrCreate([], ['volume' => $volume->volume_number, 'volume_sort' => $volume->volume_sort]);
+            });
     }
 }
