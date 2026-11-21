@@ -40,7 +40,7 @@ class LibraryController extends Controller
         abort_unless($category->isTopLevel(), 404);
 
         return view('library.category', [
-            'shelf' => CategoryShelf::build($category, $request->user()->objects()->getQuery(), $request->integer('sub') ?: null),
+            'shelf' => CategoryShelf::build($category, $request->user()->objects()->getQuery(), $request->integer('sub') ?: null, $request->integer('language') ?: null),
             ...$this->scanOptions(),
         ]);
     }
