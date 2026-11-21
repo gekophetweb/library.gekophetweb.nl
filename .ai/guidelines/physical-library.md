@@ -112,6 +112,11 @@ and syncing keep using `name`. A series name typed at scan time also matches the
 name (`LinkSeries::byName`), but a detected series never does: an English edition
 called "Berserk" is a different series from the owner's ベルセルク named "Berserk".
 
+A book's series can be picked by hand on its item page (`objects.series`): one of the
+owner's series, or a typed name (`LinkSeries::byName`, so a name they already use joins
+that series), plus the volume. This also fixes a wrongly detected series; choosing
+nothing takes the book out of its series, and the series itself stays.
+
 ---
 
 ## 4. Scanning workflow
