@@ -38,6 +38,16 @@ return [
         'resolve_ttl' => (int) env('SERIES_RESOLVE_CACHE_TTL', 60 * 60 * 24 * 30),
     ],
 
+    /*
+    | Publishers that are one company for series purposes: a series keeps its
+    | volumes when NDL lists later ones under the group's new name (よつばと!:
+    | メディアワークス → アスキー・メディアワークス → KADOKAWA). A name that contains
+    | another (エニックス → スクウェア・エニックス) needs no entry.
+    */
+    'publisher_groups' => [
+        ['KADOKAWA', '角川書店', '角川グループパブリッシング', '角川グループホールディングス', 'アスキー・メディアワークス', 'メディアワークス', 'アスキー', 'エンターブレイン', '富士見書房', 'メディアファクトリー', '中経出版', '角川学芸出版'],
+    ],
+
     'providers' => [
         'ndl' => [
             'endpoint' => env('SERIES_NDL_ENDPOINT', 'https://ndlsearch.ndl.go.jp/api/opensearch'),

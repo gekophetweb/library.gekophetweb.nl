@@ -15,7 +15,11 @@
 @endphp
 <x-layout :title="$title ? $title.' · Admin' : 'Admin'" wide>
     <div class="grid gap-6 md:grid-cols-[13rem_minmax(0,1fr)] md:gap-12">
-        <x-section-menu label="Admin" :items="$items" />
+        <div>
+            <x-section-menu label="Admin" :items="$items" />
+            {{-- The git tag the running code was built from (config app.version). --}}
+            <p class="mt-3 ml-3 text-xs text-stone-500" data-app-version>Version {{ config('app.version') ?? 'unknown' }}</p>
+        </div>
 
         <div class="min-w-0">
             {{ $slot }}

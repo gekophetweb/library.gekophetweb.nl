@@ -141,7 +141,12 @@ else
     log "Forced rebuild of ${old_rev:0:7}."
 fi
 
-log "Building the app image."
+# The tag (or tag-plus-commits) the image is built from, shown in the admin section.
+# The fetch above brings the tags of origin/main along.
+APP_VERSION="$(git describe --tags --always)"
+export APP_VERSION
+
+log "Building the app image ($APP_VERSION)."
 compose build --pull --quiet
 
 log "Recreating containers."
@@ -149,4 +154,4 @@ compose up -d --wait --remove-orphans ||
     fail "containers did not become healthy; check 'docker compose ps' and 'docker compose logs web'. Previous version: ${old_rev:0:7}${backup_file:+, backup: $backup_file}."
 
 docker image prune --force >/dev/null
-log "Done: now on $(git rev-parse --short HEAD)."
+log "Done: now on $APP_VERSION ($(git rev-parse --short HEAD))."

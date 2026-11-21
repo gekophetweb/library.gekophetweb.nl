@@ -39,6 +39,10 @@ USER root
 RUN install-php-extensions intl bcmath gd
 USER www-data
 
+# The git tag this image was built from (scripts/update.sh passes it in), shown in admin.
+ARG APP_VERSION=""
+ENV APP_VERSION=${APP_VERSION}
+
 ENV PHP_OPCACHE_ENABLE=1 \
     SSL_MODE=off
 

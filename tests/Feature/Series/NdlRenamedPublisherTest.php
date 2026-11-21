@@ -64,6 +64,25 @@ it('keeps the volumes published after the publisher was renamed', function () {
         ->and($volumes[0]->isbns)->toHaveCount(1);
 });
 
+it('keeps the volumes published under another name of the same publisher group', function () {
+    $yotsuba = fn (string $volume, string $isbn, string $publisher) => str_replace(
+        ['鋼の錬金術師', '荒川, 弘'], ['よつばと!', 'あずま, きよひこ'], fmaRecord($volume, $isbn, $publisher),
+    );
+
+    Http::fake(['ndlsearch.ndl.go.jp/*' => Http::response(fmaRss(
+        $yotsuba('7', '484024053', 'メディアワークス'),
+        $yotsuba('12', '978-4-04-891352-2', 'アスキー・メディアワークス'),
+        $yotsuba('13', '978-4-04-865594-1', 'KADOKAWA'),
+        $yotsuba('16', '978-4-04-916194-6', 'KADOKAWA'),
+        $yotsuba('17', '9999999999', '白泉社'),
+    ))]);
+
+    $series = Series::factory()->make(['external_source' => 'ndl', 'external_id' => 'よつばと!|あずまきよひこ|アスキー・メディアワークス'])->reference();
+    $volumes = app(NdlSeriesLookup::class)->volumes($series);
+
+    expect($volumes->map(fn (SeriesVolumeData $v) => (string) $v->volume)->all())->toBe(['7', '12', '13', '16']);
+});
+
 it('puts right an item volume that the scan got wrong when the series syncs', function () {
     $this->seed(CatalogueSeeder::class);
     $user = User::factory()->create();

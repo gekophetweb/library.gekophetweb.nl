@@ -13,6 +13,10 @@ x-app: &app
   build:
     context: .
     target: runtime
+    args:
+      # The git tag shown in the admin section; scripts/update.sh sets it. By hand:
+      # APP_VERSION=$(git describe --tags --always) docker compose up -d --build
+      APP_VERSION: ${APP_VERSION:-}
   image: library-gekophetweb/app:latest
   env_file: .env
   environment:
