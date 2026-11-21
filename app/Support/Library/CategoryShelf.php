@@ -68,7 +68,7 @@ final readonly class CategoryShelf
                 ->setAttribute('wanted_count', $count($series->id, OwnershipStatus::Wishlist)));
 
         $standalone = (clone $inShelf)->owned()->whereNull('serie_id')->with($with)->orderBy('name')->get();
-        $wishlist = (clone $inShelf)->wishlisted()->with([...$with, 'serie'])->orderBy('name')->get();
+        $wishlist = ObjectOrder::bySeriesVolume((clone $inShelf)->wishlisted()->with([...$with, 'serie'])->get());
 
         return new self($category, $subCategory, $series, $standalone, $wishlist, $category->children, $language, $languages);
     }

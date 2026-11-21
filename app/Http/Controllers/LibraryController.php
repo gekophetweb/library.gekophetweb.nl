@@ -14,6 +14,7 @@ use App\Models\Series;
 use App\Models\SeriesVolume;
 use App\Support\Library\CategoryCounts;
 use App\Support\Library\CategoryShelf;
+use App\Support\Library\ObjectOrder;
 use App\Support\Library\SeriesShelf;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -118,13 +119,13 @@ class LibraryController extends Controller
             'series' => Series::query()->ownedBy($user)->where('artist_id', $artist->id)
                 ->withCount(['objects' => fn ($query) => $query->owned()])
                 ->orderByDisplayName()->get(),
-            'objects' => $user->objects()->getQuery()
+            'objects' => ObjectOrder::bySeriesVolume($user->objects()->getQuery()
                 ->where(fn (Builder $query) => $query
                     ->whereHas('bookDetail', $byArtist)
                     ->orWhereHas('musicDetail', $byArtist)
                     ->orWhereHas('serie', $byArtist))
-                ->with(['subCategory', 'bookDetail.artist', 'musicDetail.artist', 'gameDetail.platform'])
-                ->orderBy('name')->get(),
+                ->with(['subCategory', 'bookDetail.artist', 'musicDetail.artist', 'gameDetail.platform', 'serie'])
+                ->get()),
         ]);
     }
 }

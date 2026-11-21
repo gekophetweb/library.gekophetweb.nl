@@ -98,6 +98,38 @@ it('leaves out the language filter when a category holds one language', function
         ->assertDontSee('data-language-filter', false);
 });
 
+/** A book in a series with its volume number; the name sorts differently on purpose. */
+function volume(Series $series, string $name, string $volume, array $attributes = [], ?Artist $artist = null): CollectionObject
+{
+    $object = item($attributes + ['serie_id' => $series->id, 'name' => $name]);
+    $object->bookDetail()->create(['volume' => $volume, 'volume_sort' => (float) $volume, 'artist_id' => $artist?->id]);
+
+    return $object;
+}
+
+it('lists an artist\'s books from a series in volume order, among the others by name', function () {
+    $artist = Artist::factory()->create(['name' => '荒川 弘']);
+    $series = Series::factory()->for($this->user)->create(['name' => 'Fullmetal Alchemist', 'artist_id' => $artist->id]);
+    volume($series, 'Fullmetal Alchemist 10', '10', artist: $artist);
+    volume($series, 'Fullmetal Alchemist', '2', artist: $artist);
+    volume($series, 'Fullmetal Alchemist 1', '1', artist: $artist);
+    item(['name' => 'Arslan Senki'])->bookDetail()->create(['artist_id' => $artist->id]);
+    item(['name' => 'Silver Spoon'])->bookDetail()->create(['artist_id' => $artist->id]);
+
+    $this->actingAs($this->user)->get(route('library.artist', $artist))
+        ->assertSeeInOrder(['Arslan Senki', 'Fullmetal Alchemist 1', 'Fullmetal Alchemist<', 'Fullmetal Alchemist 10', 'Silver Spoon'], false);
+});
+
+it('lists a category\'s wishlist with series books in volume order', function () {
+    $series = Series::factory()->for($this->user)->create(['name' => 'Berserk']);
+    volume($series, 'Berserk 10', '10', ['ownership' => 'wishlist']);
+    volume($series, 'Berserk 2', '2', ['ownership' => 'wishlist']);
+    item(['name' => 'Akira', 'ownership' => 'wishlist']);
+
+    $this->actingAs($this->user)->get(route('library.category', $this->books))
+        ->assertSeeInOrder(['Akira', 'Berserk 2', 'Berserk 10']);
+});
+
 it('shows a series with owned and missing volumes', function () {
     $series = Series::factory()->for($this->user)->create(['name' => 'ベルセルク']);
     SeriesVolume::factory()->for($series)->create(['volume_number' => '1', 'volume_sort' => 1, 'isbns' => ['9784592135746']]);
