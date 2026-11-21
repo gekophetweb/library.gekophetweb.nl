@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Language;
 use App\Models\ScanBatch;
 use App\Models\ScanBatchItem;
+use App\Support\Isbn;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -109,6 +110,30 @@ class ScanBatchController extends Controller
 
         return redirect()->route('admin.scan-batches.show', $batch)
             ->with('status', $count ? "Redoing {$count} ".str('code')->plural($count).'…' : 'Those codes are already in the collection; nothing to redo.');
+    }
+
+    /** Corrects a mis-scanned code that did not reach the collection, and looks it up again. */
+    public function updateItemBarcode(Request $request, ScanBatch $batch, ScanBatchItem $item): RedirectResponse
+    {
+        abort_unless($batch->status === ScanBatch::DONE, 409, 'This batch is not finished yet.');
+        abort_unless($item->object_id === null, 409, 'This code is already in the collection.');
+
+        $raw = trim((string) $request->validateWithBag("barcode-{$item->id}", ['barcode' => ['required', 'string', 'max:64']])['barcode']);
+        $barcode = Isbn::tryFrom($raw)?->value ?? (string) preg_replace('/\s+/', '', $raw);
+
+        if ($barcode === $item->barcode) {
+            throw ValidationException::withMessages(['barcode' => 'That is the code it already has.'])->errorBag("barcode-{$item->id}");
+        }
+
+        if ($batch->items()->where('barcode', $barcode)->exists()) {
+            throw ValidationException::withMessages(['barcode' => "{$barcode} is already in this batch."])->errorBag("barcode-{$item->id}");
+        }
+
+        $old = $item->barcode;
+        $batch->rescanItem($item, $barcode);
+
+        return redirect()->route('admin.scan-batches.show', $batch)
+            ->with('status', "Changed {$old} to {$barcode}; looking it up again…");
     }
 
     /** The raw answers of every external API call made for one scanned code. */
