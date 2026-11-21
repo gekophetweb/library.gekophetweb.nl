@@ -60,8 +60,12 @@ class SeriesLookupManager
         return new SeriesResolution($matches);
     }
 
-    /** @return Collection<int, SeriesVolumeData> */
-    public function volumes(SeriesReference $series, ?User $user = null): Collection
+    /**
+     * @param  bool  $fresh  skip the cached list (the owner pressed "Fetch volumes"); a
+     *                       non-empty answer still replaces the cached one
+     * @return Collection<int, SeriesVolumeData>
+     */
+    public function volumes(SeriesReference $series, ?User $user = null, bool $fresh = false): Collection
     {
         $provider = collect($this->allProviders($user))->first(fn (SeriesLookup $p) => $p->supports($series));
 
@@ -69,11 +73,19 @@ class SeriesLookupManager
             return collect();
         }
 
-        return $this->rememberUnlessEmpty(
-            'series:volumes:'.sha1($series->key()),
-            config('series.cache.volumes_ttl'),
-            fn () => $provider->volumes($series),
-        );
+        $key = 'series:volumes:'.sha1($series->key());
+
+        if ($fresh) {
+            $volumes = $provider->volumes($series);
+
+            if ($volumes->isNotEmpty()) {
+                $this->cache->put($key, $volumes, config('series.cache.volumes_ttl'));
+            }
+
+            return $volumes;
+        }
+
+        return $this->rememberUnlessEmpty($key, config('series.cache.volumes_ttl'), fn () => $provider->volumes($series));
     }
 
     /**

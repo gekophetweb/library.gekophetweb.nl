@@ -24,7 +24,8 @@ class SyncSeries extends Command
             ->whereNotNull('external_id')
             ->where(fn (Builder $query) => $query->whereNull('synced_at')->orWhere('synced_at', '<=', $due))
             ->each(function (Series $series) use (&$count) {
-                SyncSeriesVolumes::dispatch($series);
+                // Fresh: the cache lives as long as the gap between syncs and would hide new volumes.
+                SyncSeriesVolumes::dispatch($series, fresh: true);
                 $count++;
             });
 
