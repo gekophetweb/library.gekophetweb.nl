@@ -117,6 +117,13 @@ owner's series, or a typed name (`LinkSeries::byName`, so a name they already us
 that series), plus the volume. This also fixes a wrongly detected series; choosing
 nothing takes the book out of its series, and the series itself stays.
 
+A series page counts each volume **number** once (`SeriesShelf`). A special edition (a
+新装版, 特装版) is still listed with its own ISBNs, but it is `other_edition` rather than
+missing when the regular edition is listed or you own or want another edition of that
+number; it then is not counted and not wished by "Add all missing". Every volume card
+lists its ISBNs, the one of your copy first. A volume note in brackets after the number
+(NDL's `5(番外編)`) is dropped by `VolumeNumber::parse`, so that volume is kept.
+
 ---
 
 ## 4. Scanning workflow

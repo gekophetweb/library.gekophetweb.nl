@@ -51,12 +51,12 @@
         <p class="mb-4 mt-2 text-sm text-stone-600 dark:text-stone-400">
             {{-- The owner's wording stays as it was; viewers get a neutral variant. --}}
             @if ($links->isShared())
-                {{ $shelf->ownedCount }} of {{ $shelf->volumes->count() }} volumes owned
+                {{ $shelf->ownedCount }} of {{ $shelf->volumeCount }} volumes owned
                 @if ($wanted)
                     · {{ $wanted }} on the wishlist
                 @endif
             @else
-                You own {{ $shelf->ownedCount }} of {{ $shelf->volumes->count() }} volumes
+                You own {{ $shelf->ownedCount }} of {{ $shelf->volumeCount }} volumes
                 @if ($wanted)
                     · {{ $wanted }} on your wishlist
                 @endif
@@ -77,7 +77,8 @@
                     @class(['rounded-lg border px-3 py-2 text-sm',
                         'border-emerald-300 bg-emerald-50 dark:border-emerald-800 dark:bg-emerald-950' => $entry['state'] === 'owned',
                         'border-amber-300 bg-amber-50 dark:border-amber-800 dark:bg-amber-950' => $entry['state'] === 'wanted',
-                        'border-dashed border-stone-300 text-stone-500 dark:border-stone-700' => $entry['state'] === 'missing'])>
+                        'border-dashed border-stone-300 text-stone-500 dark:border-stone-700' => $entry['state'] === 'missing',
+                        'border-stone-200 text-stone-400 dark:border-stone-800 dark:text-stone-500' => $entry['state'] === 'other_edition'])>
                     @if ($entry['object'])
                         <a href="{{ $links->object($entry['object']) }}" class="font-medium underline-offset-2 hover:underline">Vol. {{ $volume->volume_number }}</a>
                     @else
@@ -86,7 +87,15 @@
                     @if ($volume->isSpecialEdition())
                         <span class="block text-xs">{{ $volume->edition }}</span>
                     @endif
-                    <span class="block text-xs">{{ ['owned' => 'Owned', 'wanted' => 'Wanted', 'missing' => 'Missing'][$entry['state']] }}</span>
+                    <span class="block text-xs">{{ ['owned' => 'Owned', 'wanted' => 'Wanted', 'missing' => 'Missing', 'other_edition' => 'Other edition'][$entry['state']] }}</span>
+                    @if (filled($volume->isbns))
+                        {{-- The ISBN of the item you have first, so it is easy to compare with the book. --}}
+                        <ul class="mt-1 space-y-0.5 font-mono text-[0.7rem] leading-tight text-stone-500 dark:text-stone-400" data-volume-isbns>
+                            @foreach (collect($volume->isbns)->sortBy(fn ($isbn) => $isbn !== $entry['object']?->barcode) as $isbn)
+                                <li @class(['font-semibold text-stone-700 dark:text-stone-200' => $isbn === $entry['object']?->barcode])>{{ $isbn }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
                     @if ($entry['state'] === 'missing' && $links->canEdit() && ($canWish ?? false))
                         <form method="POST" action="{{ route('library.series.volumes.wish', [$shelf->series, $volume]) }}" class="mt-1" data-wish-volume>
                             @csrf
