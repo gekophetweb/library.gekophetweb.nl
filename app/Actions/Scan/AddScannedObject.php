@@ -107,9 +107,11 @@ class AddScannedObject
         $existing = Artist::query()->where('name', $name)->first();
 
         if ($existing !== null) {
-            // Only from a reading: no Wikidata call for an artist seen before.
-            if ($reading !== null && Hepburn::fromKana($reading) !== null && $existing->hasPlaceholderRomanization()) {
-                $existing->update(['name_romanized' => $this->romanizer->person($name, $reading, $language), 'name_romanized_auto' => true]);
+            // Only from a reading: no Wikidata call for an artist seen before. A Latin name
+            // ("One") romanizes to null and keeps its name as it is.
+            if ($reading !== null && Hepburn::fromKana($reading) !== null && $existing->hasPlaceholderRomanization()
+                && ($romanized = $this->romanizer->person($name, $reading, $language)) !== null) {
+                $existing->update(['name_romanized' => $romanized, 'name_romanized_auto' => true]);
             }
 
             return $existing;
