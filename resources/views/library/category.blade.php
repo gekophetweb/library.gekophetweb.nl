@@ -56,6 +56,7 @@
                     <li>
                         <a href="{{ $links->series($series) }}" class="flex flex-wrap items-baseline justify-between gap-2 px-4 py-3 hover:bg-stone-50 dark:hover:bg-stone-800">
                             <span><span class="font-medium">{{ $series->display_name }}</span>
+                                @if ($series->original_name) <span class="text-stone-600 dark:text-stone-300" data-original-name>{{ $series->original_name }}</span> @endif
                                 @if ($series->artist) <span class="text-sm text-stone-500">· {{ $series->artist->name }}</span> @endif</span>
                             <span class="text-sm text-stone-500">
                                 {{ $series->items_count }} owned

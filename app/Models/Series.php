@@ -4,11 +4,13 @@ namespace App\Models;
 
 use App\Models\Concerns\SearchesNames;
 use App\Support\Series\SeriesReference;
+use App\Support\Series\Text;
+use App\Support\Series\TitleVolumeParser;
 use Database\Factories\SeriesFactory;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -65,6 +67,58 @@ class Series extends Model
         return Attribute::get(fn (): string => filled($this->name_english) ? $this->name_english : $this->name);
     }
 
+    /**
+     * Adds `book_title`, the name of one of the series' books, so `original_name` needs
+     * no query per series in a list.
+     *
+     * @param  Builder<self>  $query
+     */
+    #[Scope]
+    protected function withBookTitle(Builder $query): void
+    {
+        if ($query->getQuery()->columns === null) {
+            $query->select($query->qualifyColumn('*'));
+        }
+
+        $query->addSelect(['book_title' => CollectionObject::query()->select('name')
+            ->whereColumn('serie_id', $this->qualifyColumn('id'))
+            ->orderBy('id')
+            ->limit(1)]);
+    }
+
+    /**
+     * The title in its own script (マギ, 원피스) next to a Latin display name ("Magi: The
+     * Labyrinth of Magic"): the series' own name, else the title of its books, which keep
+     * the original-language name when the series came from an English source. Null when
+     * the display name already is in that script, or nothing is.
+     *
+     * @return Attribute<?string, never>
+     */
+    protected function originalName(): Attribute
+    {
+        return Attribute::get(function (): ?string {
+            if (! Text::isLatin($this->display_name)) {
+                return null;
+            }
+
+            if (! Text::isLatin($this->name)) {
+                return $this->name;
+            }
+
+            $bookTitle = array_key_exists('book_title', $this->attributes)
+                ? $this->attributes['book_title']
+                : $this->objects()->orderBy('id')->value('name');
+
+            if ($bookTitle === null) {
+                return null;
+            }
+
+            $title = app(TitleVolumeParser::class)->parse($bookTitle)?->title ?? Text::clean($bookTitle);
+
+            return $title !== null && ! Text::isLatin($title) ? $title : null;
+        });
+    }
+
     /** @return BelongsTo<User, $this> */
     public function user(): BelongsTo
     {
@@ -109,6 +163,7 @@ class Series extends Model
             'google_books' => 'Google Books',
             'hardcover' => 'Hardcover',
             'title' => 'the title',
+            'library' => 'your other volumes',
         ][$source] ?? $source;
     }
 

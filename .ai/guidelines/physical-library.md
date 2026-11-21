@@ -112,6 +112,15 @@ and syncing keep using `name`. A series name typed at scan time also matches the
 name (`LinkSeries::byName`), but a detected series never does: an English edition
 called "Berserk" is a different series from the owner's ベルセルク named "Berserk".
 
+Series lists show the title in its own script next to a Latin display name
+(`Series::$original_name`: the series' `name`, else its books' title, as マギ next to
+Hardcover's "Magi: The Labyrinth of Magic"; load lists `withBookTitle()`).
+
+Series detection asks the owner's own library before any catalogue
+(`DetectSeries::fromLibrary`): a series whose volume list carries the ISBN, else the one
+series holding their other volumes of the same title (`マギ 3` joins the series of
+`マギ 1`). Catalogues miss single volumes of series they know.
+
 A book's series can be picked by hand on its item page (`objects.series`): one of the
 owner's series, or a typed name (`LinkSeries::byName`, so a name they already use joins
 that series), plus the volume. This also fixes a wrongly detected series; choosing
