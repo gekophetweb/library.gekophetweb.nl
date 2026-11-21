@@ -157,11 +157,27 @@ class NdlSeriesLookup implements SeriesLookup
 
     /**
      * One name inside the other also counts: a publisher renamed by a merger keeps its
-     * series (エニックス → スクウェア・エニックス from 鋼の錬金術師 volume 5 on).
+     * series (エニックス → スクウェア・エニックス from 鋼の錬金術師 volume 5 on). So do
+     * two names of one group in config series.publisher_groups (アスキー・メディアワークス
+     * → KADOKAWA from よつばと! volume 13 on).
      */
     private function samePublisher(string $series, string $record): bool
     {
-        return $series === '' || ($record !== '' && (str_contains($record, $series) || str_contains($series, $record)));
+        if ($series === '') {
+            return true;
+        }
+
+        if ($record === '') {
+            return false;
+        }
+
+        if (str_contains($record, $series) || str_contains($series, $record)) {
+            return true;
+        }
+
+        return collect(config('series.publisher_groups', []))
+            ->contains(fn (array $group) => collect($group)->map(fn (string $name) => Text::key($name))
+                ->intersect([$series, $record])->count() === 2);
     }
 
     /** @param  array<string, mixed>  $record */

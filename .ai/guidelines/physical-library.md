@@ -127,7 +127,8 @@ lists its ISBNs, the one of your copy first. A volume note in brackets after the
 NDL quirks: an ISBN search can also return a record for the whole set (one volume
 number, one ISBN, issued `2002-2010`), so resolve prefers the records that carry the
 scanned ISBN. A series' publisher also matches a name that contains it or that it
-contains (エニックス → スクウェア・エニックス). After a sync, an item whose barcode the
+contains (エニックス → スクウェア・エニックス), and another name of its group in
+`config/series.php` `publisher_groups` (アスキー・メディアワークス → KADOKAWA). After a sync, an item whose barcode the
 source lists under a volume takes that volume's number (`SyncSeriesVolumes`).
 
 ---
