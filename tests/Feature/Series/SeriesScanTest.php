@@ -10,9 +10,12 @@ use App\Models\ScanBatch;
 use App\Models\Series;
 use App\Models\SeriesVolume;
 use App\Models\User;
+use App\Support\Series\SeriesVolumeData;
+use App\Support\Series\VolumeNumber;
 use Database\Seeders\CatalogueSeeder;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Laravel\Sanctum\Sanctum;
@@ -215,6 +218,21 @@ describe('sync', function () {
             ->and($volume1->isbns)->toContain('9784592999999')
             ->and($volume1->isbns)->toContain(BERSERK_1)
             ->and($series->volumes()->where('volume_sort', 99)->exists())->toBeTrue();
+    });
+
+    it('asks the source again on "Fetch volumes" instead of using a cached list', function () {
+        $series = Series::factory()->for($this->user)->create(['external_source' => 'ndl', 'external_id' => 'ベルセルク|三浦建太郎|白泉社']);
+        $stale = collect([new SeriesVolumeData(VolumeNumber::fromNumeric(1))]);
+        Cache::put('series:volumes:'.sha1($series->reference()->key()), $stale, 3600);
+
+        SyncSeriesVolumes::dispatchSync($series);
+        expect($series->volumes()->count())->toBe(1);
+
+        $this->post(route('library.series.sync', $series));
+        expect($series->volumes()->count())->toBe(46);
+
+        // The fresh answer replaced the cached list.
+        expect(Cache::get('series:volumes:'.sha1($series->reference()->key())))->toHaveCount(46);
     });
 
     it('changes nothing when the source returns no volumes', function () {

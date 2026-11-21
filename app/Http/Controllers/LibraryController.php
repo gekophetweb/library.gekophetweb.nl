@@ -90,7 +90,8 @@ class LibraryController extends Controller
         abort_unless($series->user_id === $request->user()->id, 404);
         abort_unless($series->isSyncable(), 409, 'This series is not linked to a catalogue.');
 
-        SyncSeriesVolumes::dispatch($series);
+        // Fresh: the cached list may be from before a fix to how it is read.
+        SyncSeriesVolumes::dispatch($series, fresh: true);
 
         return redirect()->route('library.series', $series)->with('status', 'Fetching the volume list. Reload in a moment to see it.');
     }
