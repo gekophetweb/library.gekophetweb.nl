@@ -73,6 +73,43 @@
         </div>
     @endif
 
+    @if ($kind === CategoryKind::Books)
+        {{-- Pick the series by hand: when none was detected, or the detected one is wrong. --}}
+        @php
+            $seriesErrors = $errors->hasAny(['serie_id', 'series_name', 'series_volume']);
+        @endphp
+        <details class="mb-6 max-w-2xl rounded-lg border border-stone-200 bg-white p-4 text-sm dark:border-stone-800 dark:bg-stone-900" data-series-picker @if ($seriesErrors) open @endif>
+            <summary class="cursor-pointer font-medium">{{ $object->serie ? 'Change series' : 'Choose a series' }}</summary>
+
+            <form method="POST" action="{{ route('objects.series', $object) }}" class="mt-4 space-y-3">
+                @csrf
+                @method('PUT')
+                <div>
+                    <label for="series_pick" class="{{ $label }}">One of your series</label>
+                    <select id="series_pick" name="serie_id" class="{{ $input }}">
+                        <option value="">Not part of a series</option>
+                        @foreach ($options['series'] as $choice)
+                            <option value="{{ $choice->id }}" @selected((int) old('serie_id', $object->serie_id) === $choice->id)>{{ $choice->display_name }}</option>
+                        @endforeach
+                    </select>
+                    @error('serie_id') <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label for="series_new" class="{{ $label }}">Or a new series</label>
+                    <input id="series_new" name="series_name" maxlength="255" value="{{ old('series_name') }}" placeholder="Series name" class="{{ $input }}">
+                    <p class="mt-1 text-xs text-stone-500">A name you already use joins that series instead of making a second one.</p>
+                    @error('series_name') <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label for="series_volume_pick" class="{{ $label }}">Volume</label>
+                    <input id="series_volume_pick" name="series_volume" maxlength="20" value="{{ old('series_volume', $object->bookDetail?->volume) }}" placeholder="e.g. 3 or 3.5" class="{{ $input }} w-32">
+                    @error('series_volume') <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+                </div>
+                <button class="rounded-md bg-accent px-3 py-1.5 text-sm font-semibold text-accent-ink shadow-card hover:opacity-90">Save series</button>
+            </form>
+        </details>
+    @endif
+
     <div class="mb-4 flex flex-wrap gap-2">
         <form method="POST" action="{{ route('objects.ownership', $object) }}">
             @csrf

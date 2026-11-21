@@ -33,6 +33,7 @@ class ScanBatchController extends Controller
             'status' => ['nullable', Rule::in(array_keys(self::STATUSES))],
             'language' => ['nullable', 'integer'],
             'category' => ['nullable', 'integer'],
+            'mode' => ['nullable', Rule::in([ScanBatch::MODE_BATCH, ScanBatch::MODE_SINGLE])],
         ]);
 
         $batches = ScanBatch::query()
@@ -45,6 +46,7 @@ class ScanBatchController extends Controller
             ->when($filters['status'] ?? null, fn ($query, $status) => $query->where('status', $status))
             ->when($filters['language'] ?? null, fn ($query, $id) => $query->where('language_id', $id))
             ->when($filters['category'] ?? null, fn ($query, $id) => $query->where(fn ($query) => $query->where('category_id', $id)->orWhere('sub_category_id', $id)))
+            ->when($filters['mode'] ?? null, fn ($query, $mode) => $query->where('mode', $mode))
             ->latest()->latest('id')
             ->paginate(25)
             ->withQueryString();

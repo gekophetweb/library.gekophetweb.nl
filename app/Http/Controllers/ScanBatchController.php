@@ -28,6 +28,8 @@ class ScanBatchController extends Controller
         return view('scan.batches', [
             'batches' => ScanBatch::query()
                 ->where('user_id', $request->user()->id)
+                // Single-scan records are for admins; this list holds the user's own batches.
+                ->where('mode', ScanBatch::MODE_BATCH)
                 ->with(['category', 'subCategory', 'language'])
                 ->withCount([
                     'items',
