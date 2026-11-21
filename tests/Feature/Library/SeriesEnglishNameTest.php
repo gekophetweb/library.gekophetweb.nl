@@ -107,13 +107,12 @@ describe('elsewhere', function () {
         $this->actingAs($this->user);
     });
 
-    it('shows the English name on the category shelf, artist page and settings share picker', function () {
+    it('shows the English name, with the original next to it, on the category shelf and artist page, and in the settings share picker', function () {
         $this->get(route('library.category', $this->books))
-            ->assertSee('<span class="font-medium">Berserk</span>', false)
-            ->assertDontSee('>ベルセルク<', false);
+            ->assertSeeInOrder(['<span class="font-medium">Berserk</span>', 'data-original-name>ベルセルク<'], false);
 
         $this->get(route('library.artist', $this->artist))
-            ->assertSee('<span class="font-medium">Berserk</span>', false);
+            ->assertSeeInOrder(['<span class="font-medium">Berserk</span>', 'data-original-name>ベルセルク<'], false);
 
         $this->get(route('settings.shares'))
             ->assertSee('>Berserk</option>', false);

@@ -128,6 +128,16 @@ class ScanBatch extends Model
     }
 
     /**
+     * An admin's fix of a mis-scanned code (a misread digit): the item takes $barcode and
+     * is looked up again. Only for a code that did not reach the collection.
+     */
+    public function rescanItem(ScanBatchItem $item, string $barcode): void
+    {
+        $item->update(['barcode' => $barcode]);
+        $this->requeue($this->items()->whereKey($item->id));
+    }
+
+    /**
      * Series detection again for the picked codes found as a book without a series, for
      * example because the series APIs did not answer the first time. Queued, like the first
      * detection; its calls are logged against the code.

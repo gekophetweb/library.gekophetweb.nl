@@ -103,7 +103,25 @@
                                 @endif
                             </td>
                         @endif
-                        <td class="whitespace-nowrap px-4 py-2 font-mono">{{ $item->barcode }}</td>
+                        <td class="whitespace-nowrap px-4 py-2">
+                            <span class="font-mono">{{ $item->barcode }}</span>
+                            {{-- A misread digit: correct the code and look it up again. --}}
+                            @if ($batch->status === App\Models\ScanBatch::DONE && $item->object_id === null)
+                                @php($bag = $errors->getBag('barcode-'.$item->id))
+                                <details class="mt-1" data-barcode-edit="{{ $item->id }}" @if ($bag->any()) open @endif>
+                                    <summary class="cursor-pointer text-xs text-stone-500 underline">Change code</summary>
+                                    <form method="POST" action="{{ route('admin.scan-batches.items.barcode', [$batch, $item]) }}" class="mt-1 flex items-center gap-2">
+                                        @csrf
+                                        @method('PUT')
+                                        <label class="sr-only" for="barcode-{{ $item->id }}">New code for {{ $item->barcode }}</label>
+                                        <input id="barcode-{{ $item->id }}" name="barcode" value="{{ $bag->any() ? old('barcode') : $item->barcode }}" required maxlength="64"
+                                               class="w-40 rounded-md border-stone-300 px-2 py-1 font-mono text-sm dark:border-stone-700 dark:bg-stone-950">
+                                        <button class="{{ $secondary }}">Save and look up</button>
+                                    </form>
+                                    @if ($bag->has('barcode')) <p class="mt-1 text-xs text-red-700 dark:text-red-400">{{ $bag->first('barcode') }}</p> @endif
+                                </details>
+                            @endif
+                        </td>
                         <td class="whitespace-nowrap px-4 py-2"><span class="rounded px-2 py-0.5 text-xs {{ $tone($item->status) }}">{{ $labels[$item->status] ?? $item->status }}</span></td>
                         <td class="px-4 py-2 text-stone-600 dark:text-stone-400">{{ $item->object?->name ?? $item->message }}</td>
                         <td class="whitespace-nowrap px-4 py-2">

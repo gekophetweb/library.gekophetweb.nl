@@ -192,6 +192,53 @@ it('redoes only the ticked codes that did not reach the collection', function ()
     Queue::assertPushed(ProcessScanBatch::class, 1);
 });
 
+it('lets an admin correct a mis-scanned code and look it up again', function () {
+    Queue::fake();
+    $owner = User::factory()->create();
+    $batch = adminTestBatch($owner, ScanBatch::DONE, $this->ja, $this->manga, ['8784840240536', '111']);
+    $object = CollectionObject::factory()->for($owner)->create(['barcode' => '111']);
+    [$wrong, $added] = $batch->items()->orderBy('id')->get()->all();
+    $wrong->update(['status' => 'invalid', 'message' => 'Not a valid barcode for this category.']);
+    $added->update(['status' => 'added', 'object_id' => $object->id]);
+
+    $this->actingAs($this->admin)->get(route('admin.scan-batches.show', $batch))
+        ->assertSee('data-barcode-edit="'.$wrong->id.'"', false)
+        ->assertDontSee('data-barcode-edit="'.$added->id.'"', false);
+
+    $this->put(route('admin.scan-batches.items.barcode', [$batch, $wrong]), ['barcode' => ' 978-4-8402-4053-6 '])
+        ->assertRedirect(route('admin.scan-batches.show', $batch))
+        ->assertSessionHas('status', 'Changed 8784840240536 to 9784840240536; looking it up again…');
+
+    expect($wrong->refresh()->only('barcode', 'status', 'message'))->toBe(['barcode' => '9784840240536', 'status' => 'pending', 'message' => null])
+        ->and($batch->refresh()->status)->toBe(ScanBatch::QUEUED);
+    Queue::assertPushed(ProcessScanBatch::class, 1);
+});
+
+it('refuses a code change that is a duplicate, unchanged, on an added code, or not by an admin', function () {
+    Queue::fake();
+    $owner = User::factory()->create();
+    $batch = adminTestBatch($owner, ScanBatch::DONE, $this->ja, codes: ['111', '222', '333']);
+    $object = CollectionObject::factory()->for($owner)->create(['barcode' => '333']);
+    [$one, , $three] = $batch->items()->orderBy('id')->get()->all();
+    $batch->items()->update(['status' => 'not_found']);
+    $three->update(['status' => 'added', 'object_id' => $object->id]);
+
+    $this->actingAs($owner)->put(route('admin.scan-batches.items.barcode', [$batch, $one]), ['barcode' => '999'])->assertForbidden();
+
+    $this->actingAs($this->admin);
+    $this->put(route('admin.scan-batches.items.barcode', [$batch, $one]), ['barcode' => '222'])
+        ->assertSessionHasErrorsIn("barcode-{$one->id}", ['barcode' => '222 is already in this batch.']);
+    $this->put(route('admin.scan-batches.items.barcode', [$batch, $one]), ['barcode' => '111'])
+        ->assertSessionHasErrorsIn("barcode-{$one->id}", 'barcode');
+    $this->put(route('admin.scan-batches.items.barcode', [$batch, $three]), ['barcode' => '444'])->assertStatus(409);
+
+    $other = adminTestBatch($owner, ScanBatch::DONE, $this->ja, codes: ['555']);
+    $this->put(route('admin.scan-batches.items.barcode', [$other, $one]), ['barcode' => '666'])->assertNotFound();
+
+    expect($batch->items()->orderBy('id')->pluck('barcode')->all())->toBe(['111', '222', '333']);
+    Queue::assertNothingPushed();
+});
+
 it('asks for ticked codes, and redoes codes only on finished batches for admins', function () {
     Queue::fake();
     $owner = User::factory()->create();
@@ -220,7 +267,7 @@ it('shows the raw API answers for a scanned code', function () {
     $this->actingAs($this->admin)->get(route('admin.scan-batches.show', $batch))
         ->assertSee(route('admin.scan-batches.items.show', [$batch, $item]))
         ->assertSee('2 calls')
-        ->assertDontSee(route('admin.scan-batches.items.show', [$batch, $other]));
+        ->assertDontSee('href="'.route('admin.scan-batches.items.show', [$batch, $other]).'"', false);
 
     $this->get(route('admin.scan-batches.items.show', [$batch, $item]))
         ->assertOk()
