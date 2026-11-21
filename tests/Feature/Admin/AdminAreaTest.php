@@ -43,6 +43,16 @@ it('puts one Admin link in the header and the full menu in the admin section', f
     }
 });
 
+it('shows the version the running code was built from', function () {
+    $this->actingAs($this->admin);
+
+    config(['app.version' => '1.2.2']);
+    $this->get(route('admin.users.index'))->assertOk()->assertSeeInOrder(['data-app-version', 'Version 1.2.2'], false);
+
+    config(['app.version' => null]);
+    $this->get(route('admin.home'))->assertOk()->assertSee('Version unknown');
+});
+
 it('shows each area with its numbers on the overview', function () {
     $this->actingAs($this->admin)->get(route('admin.home'))
         ->assertOk()

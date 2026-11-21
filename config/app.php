@@ -16,6 +16,14 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
+    | The git tag the running code was built from (`git describe --tags`), shown in
+    | the admin section. scripts/update.sh passes it to the image build; null when
+    | the image was built without it.
+    */
+
+    'version' => env('APP_VERSION') ?: null,
+
+    /*
     |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
