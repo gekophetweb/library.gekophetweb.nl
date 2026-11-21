@@ -102,7 +102,7 @@ class CatalogueController extends Controller
             return response()->json(['message' => 'This series is not linked to a catalogue.'], 422);
         }
 
-        SyncSeriesVolumes::dispatch($series);
+        SyncSeriesVolumes::dispatch($series, fresh: true);
 
         return response()->json(['data' => ['status' => 'queued']], 202);
     }

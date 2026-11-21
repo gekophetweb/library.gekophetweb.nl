@@ -29,7 +29,8 @@ class SyncSeriesVolumes implements ShouldBeUnique, ShouldQueue
     /** Up to max_pages NDL calls, each waiting for a slot in the app-wide budget. */
     public int $timeout = 600;
 
-    public function __construct(public Series $series) {}
+    /** @param  bool  $fresh  ask the source again instead of using the cached list ("Fetch volumes") */
+    public function __construct(public Series $series, public bool $fresh = false) {}
 
     public function uniqueId(): string
     {
@@ -44,7 +45,7 @@ class SyncSeriesVolumes implements ShouldBeUnique, ShouldQueue
             return;
         }
 
-        $volumes = $lookup->volumes($reference, $this->series->user);
+        $volumes = $lookup->volumes($reference, $this->series->user, $this->fresh);
 
         if ($volumes->isEmpty()) {
             return;
