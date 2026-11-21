@@ -103,7 +103,7 @@ describe('single scan', function () {
             ->and($series->volumes()->where('edition', '!=', '')->count())->toBe(3);
 
         $this->get(route('library.series', $series))
-            ->assertSee('You own 1 of 46 volumes')
+            ->assertSee('You own 1 of 43 volumes')
             ->assertSee('data-volume="1" data-state="owned"', false)
             ->assertSee('Fetch volumes')
             ->assertSee('Volume list from NDL');

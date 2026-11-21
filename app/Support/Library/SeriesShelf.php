@@ -12,7 +12,10 @@ use Illuminate\Support\Collection;
  * A series page: every known volume marked owned, wanted (on the wishlist) or missing,
  * plus items that match no known volume. An item matches a volume by one of its ISBNs,
  * else (regular edition only) by its volume number. Owned items are matched first, so a
- * volume that is both owned and wishlisted shows as owned.
+ * volume that is both owned and wishlisted shows as owned. An edition you lack is
+ * OTHER_EDITION (shown, but neither missing nor counted) when you own or want another
+ * edition of that number, or when it is a special edition (a 新装版) and the regular
+ * edition is listed: a volume number is missing once, not once per edition.
  */
 final readonly class SeriesShelf
 {
@@ -21,6 +24,8 @@ final readonly class SeriesShelf
     public const string WANTED = 'wanted';
 
     public const string MISSING = 'missing';
+
+    public const string OTHER_EDITION = 'other_edition';
 
     /**
      * @param  Collection<int, array{volume: SeriesVolume, state: string, object: ?CollectionObject}>  $volumes
@@ -33,6 +38,7 @@ final readonly class SeriesShelf
         public int $ownedCount,
         public int $itemCount,
         public int $wantedCount = 0,
+        public int $volumeCount = 0,
     ) {}
 
     /** @param  Builder<CollectionObject>  $objects  already scoped to what the viewer may see */
@@ -77,6 +83,17 @@ final readonly class SeriesShelf
             ? ['volume' => $entry['volume'], 'state' => self::WANTED, 'object' => $object]
             : $entry);
 
+        // A missing edition is not missing when the user owns or wants another edition of
+        // that number, or (for a special edition) when the regular edition is listed too:
+        // then only the regular one is.
+        $number = fn (array $entry) => (string) (float) $entry['volume']->volume_sort;
+        $covered = $volumes->where('state', '!==', self::MISSING)->mapWithKeys(fn (array $entry) => [$number($entry) => true]);
+        $regular = $volumes->reject(fn (array $entry) => $entry['volume']->isSpecialEdition())->mapWithKeys(fn (array $entry) => [$number($entry) => true]);
+        $volumes = $volumes->map(fn (array $entry) => $entry['state'] === self::MISSING
+            && ($covered->has($number($entry)) || ($entry['volume']->isSpecialEdition() && $regular->has($number($entry))))
+            ? ['volume' => $entry['volume'], 'state' => self::OTHER_EDITION, 'object' => null]
+            : $entry);
+
         return new self(
             series: $series,
             volumes: $volumes,
@@ -84,6 +101,7 @@ final readonly class SeriesShelf
             ownedCount: $volumes->where('state', self::OWNED)->count(),
             itemCount: $owned->count(),
             wantedCount: $wanted->count(),
+            volumeCount: $volumes->where('state', '!==', self::OTHER_EDITION)->count(),
         );
     }
 }

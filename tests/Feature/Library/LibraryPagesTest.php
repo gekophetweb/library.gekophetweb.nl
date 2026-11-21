@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\Series\WishMissingVolumes;
 use App\Enums\CategoryKind;
 use App\Models\Artist;
 use App\Models\BookDetail;
@@ -143,6 +144,37 @@ it('shows a series with owned and missing volumes', function () {
         ->assertSee('data-volume="1" data-state="owned"', false)
         ->assertSee('data-volume="2" data-state="missing"', false)
         ->assertSee('特装版');
+});
+
+it('does not count another edition of a volume you have as missing', function () {
+    $series = Series::factory()->for($this->user)->create(['name' => '花田少年史']);
+    SeriesVolume::factory()->for($series)->create(['volume_number' => '1', 'volume_sort' => 1, 'isbns' => ['9784063461701', '9784063725193']]);
+    SeriesVolume::factory()->for($series)->create(['volume_number' => '1', 'volume_sort' => 1, 'edition' => '新装版', 'isbns' => ['9784063885194']]);
+    SeriesVolume::factory()->for($series)->create(['volume_number' => '2', 'volume_sort' => 2, 'isbns' => ['9784063725209']]);
+    SeriesVolume::factory()->for($series)->create(['volume_number' => '2', 'volume_sort' => 2, 'edition' => '新装版', 'isbns' => ['9784063885200']]);
+    item(['serie_id' => $series->id, 'barcode' => '9784063725193', 'name' => '花田少年史 1']);
+
+    $this->actingAs($this->user)->get(route('library.series', $series))
+        ->assertSee('You own 1 of 2 volumes')
+        ->assertSee('data-volume="1" data-state="other_edition"', false)
+        ->assertSee('data-volume="2" data-state="missing"', false)
+        ->assertSee('data-volume="2" data-state="other_edition"', false)
+        ->assertSee('Other edition')
+        // The owned item's ISBN is listed first; every known ISBN is shown.
+        ->assertSeeInOrder(['9784063725193', '9784063461701'])
+        ->assertSee('9784063885200');
+
+    expect(app(WishMissingVolumes::class)->handle($series)->pluck('barcode')->all())
+        ->toBe(['9784063725209']);
+});
+
+it('counts a special edition as missing when it is the only edition of its number', function () {
+    $series = Series::factory()->for($this->user)->create();
+    SeriesVolume::factory()->for($series)->create(['volume_number' => '1', 'volume_sort' => 1, 'edition' => '特装版']);
+
+    $this->actingAs($this->user)->get(route('library.series', $series))
+        ->assertSee('You own 0 of 1 volumes')
+        ->assertSee('data-volume="1" data-state="missing"', false);
 });
 
 it('counts an item as owning a volume by its volume number when the barcode is unknown', function () {
