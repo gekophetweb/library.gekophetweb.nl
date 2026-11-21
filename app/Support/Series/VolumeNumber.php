@@ -11,7 +11,8 @@ use Stringable;
  * sort between 3 and 4.
  *
  * parse() only accepts strings that are *just* a volume token (`1`, `４２`, `第12巻`,
- * `Vol. 12`, `#3`, `(12)`, `［2］`). Strings with other text around the number, such as
+ * `Vol. 12`, `#3`, `(12)`, `［2］`), optionally followed by a note in brackets that is
+ * dropped (`5(番外編)`, as NDL writes a side-story volume). Other text around the number, such as
  * `EPISODE:1` or `黄金時代篇 1`, are rejected: they are not plain volumes of the series.
  */
 final readonly class VolumeNumber implements Stringable
@@ -21,7 +22,9 @@ final readonly class VolumeNumber implements Stringable
           | (?:vol(?:ume)?\.?|no\.?|book|\#)\s*(?<prefixed>\d+(?:\.\d+)?)   # Vol. 12, #3
           | [(\[]\s*(?<bracketed>\d+(?:\.\d+)?)\s*[)\]]     # (12), [2]
           | (?<plain>\d+(?:\.\d+)?)\s*巻?                   # 12, 12巻
-        )$/xiu';
+        )
+        (?:\s*[(\[〈《【](?!\s*[\d.]+\s*[)\]〉》】])[^()\[\]〈〉《》【】]+[)\]〉》】])?    # a note after it: 5(番外編), 12 [完]; never a second number
+        $/xiu';
 
     private function __construct(private string $value) {}
 

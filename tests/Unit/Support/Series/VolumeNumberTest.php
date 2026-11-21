@@ -17,6 +17,10 @@ it('parses volume tokens', function (string $input, string $expected) {
     ['［２］', '2'],
     ['3.5', '3.5'],
     ['007', '7'],
+    ['5(番外編)', '5'],
+    ['5（番外編）', '5'],
+    ['第3巻 [完]', '3'],
+    ['12〈完結〉', '12'],
 ]);
 
 it('rejects strings that are not just a volume', function (?string $input) {
@@ -26,6 +30,10 @@ it('rejects strings that are not just a volume', function (?string $input) {
     '黄金時代篇 1 覇王の卵',
     'L-1',
     '新装版',
+    '(番外編)',
+    '番外編 5',
+    '5(番外編) 2',
+    '1(2)',
     '',
     null,
 ]);

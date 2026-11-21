@@ -91,6 +91,25 @@ it('lists all 43 Berserk volumes, contiguous and without noise', function () {
         ->toBe(array_map('strval', range(1, 43)));
 });
 
+it('keeps a volume with a note after its number, such as 5(番外編)', function () {
+    withoutSeriesFixtures();
+    // As NDL lists the side-story volume of 花田少年史 (log of a production lookup).
+    $item = fn (string $volume, string $isbn) => "<item><category>図書</category><dc:title>花田少年史</dc:title><dc:creator>一色, まこと</dc:creator><dcndl:volume>{$volume}</dcndl:volume><dc:publisher>講談社</dc:publisher><dc:identifier xsi:type=\"dcndl:ISBN\">{$isbn}</dc:identifier></item>";
+    $rss = fn (string ...$items) => '<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcndl="http://ndl.go.jp/dcndl/terms/" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"><channel>'
+        .'<openSearch:totalResults>'.count($items).'</openSearch:totalResults>'.implode('', $items).'</channel></rss>';
+    Http::fake(['ndlsearch.ndl.go.jp/*' => Http::sequence()
+        ->push($rss($item('5(番外編)', '4-06-372523-5')))
+        ->push($rss($item('4', '4-06-372522-7'), $item('5(番外編)', '4-06-372523-5')))]);
+
+    $match = ndl()->resolve(Isbn::fromString('9784063725230'), 'ja');
+    $volumes = ndl()->volumes($match->series);
+
+    expect((string) $match->volume)->toBe('5')
+        ->and($volumes->map(fn (SeriesVolumeData $v) => (string) $v->volume)->all())->toBe(['4', '5'])
+        ->and($volumes[1]->hasIsbn(Isbn::fromString('9784063725230')))->toBeTrue()
+        ->and($volumes[1]->isSpecialEdition())->toBeFalse();
+});
+
 it('keeps special editions as separate entries, right after the regular edition', function () {
     $series = ndl()->resolve(Isbn::fromString('9784592135746'), 'ja')->series;
     $volumes = ndl()->volumes($series);

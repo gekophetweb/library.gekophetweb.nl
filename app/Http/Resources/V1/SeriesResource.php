@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * A series; with `shelf` set (the detail endpoint) it also lists every known volume as
- * owned, wanted or missing. `items_count` counts owned items only.
+ * owned, wanted, missing or other_edition (another edition of that number is owned or wanted). `items_count` counts owned items only.
  *
  * @mixin Series
  */
@@ -43,6 +43,8 @@ class SeriesResource extends JsonResource
             'wanted_count' => $this->whenCounted('wanted'),
             $this->mergeWhen($this->shelf !== null, fn () => [
                 'owned_count' => $this->shelf->ownedCount,
+                // Known volumes, leaving out editions of a number the user already has in another one.
+                'volume_count' => $this->shelf->volumeCount,
                 'items_count' => $this->shelf->itemCount,
                 'wanted_count' => $this->shelf->wantedCount,
                 'volumes' => $this->shelf->volumes->map(fn (array $entry) => [
