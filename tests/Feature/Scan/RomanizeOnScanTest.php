@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Queue;
 
 const KOREAN_ISBN = '9791163027003';
 
+/** One-Punch Man 3: the author's pen name "One" is Latin, yet Rakuten gives a kana reading. */
+const LATIN_AUTHOR_ISBN = '9784088707242';
+
 beforeEach(function () {
     $this->seed(CatalogueSeeder::class);
     $this->user = User::factory()->withApiKeys()->create();
@@ -41,6 +44,13 @@ beforeEach(function () {
             return str_contains($query['query'] ?? '', '"白泉社"@ja')
                 ? Http::response(file_get_contents(base_path('tests/Fixtures/romanization/wikidata-latin-hakusensha.json')))
                 : Http::response(['head' => ['vars' => ['latin']], 'results' => ['bindings' => []]]);
+        }
+
+        if (str_contains($url, 'rakuten') && ($query['isbn'] ?? '') === LATIN_AUTHOR_ISBN) {
+            return Http::response(['count' => 1, 'Items' => [[
+                'title' => 'ワンパンマン 3', 'titleKana' => 'ワンパンマン', 'author' => 'One', 'authorKana' => 'ワン',
+                'publisherName' => '集英社', 'isbn' => LATIN_AUTHOR_ISBN, 'salesDate' => '2013年04月',
+            ]]]);
         }
 
         if (str_contains($url, 'rakuten')) {
@@ -123,6 +133,20 @@ describe('on scan', function () {
             ->and($object->bookDetail->artist->name_romanized)->toBe('Kentaro Miura')
             ->and(Publisher::count())->toBe(1);
         Http::assertNotSent(fn (Request $request) => str_contains($request->url(), 'wikidata'));
+    });
+
+    it('adds an item whose existing author has a Latin name, even when the catalogue gives a kana reading', function () {
+        // As created by an earlier scan: a Latin name is its own romanization (a placeholder).
+        $artist = Artist::query()->create(['name' => 'One', 'name_romanized' => 'One', 'name_romanized_auto' => false]);
+
+        romanizeScan($this->ja, 'batch');
+        $batch = ScanBatch::sole();
+        $this->post(route('scan.batches.items.store', $batch), ['barcode' => LATIN_AUTHOR_ISBN]);
+        $this->post(route('scan.batches.commit', $batch));
+
+        expect($batch->items()->sole()->status)->toBe('added')
+            ->and(CollectionObject::sole()->bookDetail->artist_id)->toBe($artist->id)
+            ->and($artist->refresh()->name_romanized)->toBe('One');
     });
 
     it('marks a romanization edited by hand as the user\'s own', function () {
