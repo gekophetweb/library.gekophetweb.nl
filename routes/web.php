@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::get('objects/{object}', [CollectionObjectController::class, 'show'])->name('objects.show');
     Route::put('objects/{object}', [CollectionObjectController::class, 'update'])->name('objects.update');
     Route::patch('objects/{object}/ownership', [CollectionObjectController::class, 'updateOwnership'])->name('objects.ownership');
+    Route::put('objects/{object}/series', [CollectionObjectController::class, 'updateSeries'])->name('objects.series');
     Route::post('objects/{object}/series-suggestion', [CollectionObjectController::class, 'acceptSeriesSuggestion'])->name('objects.series-suggestion.accept');
     Route::delete('objects/{object}/series-suggestion', [CollectionObjectController::class, 'dismissSeriesSuggestion'])->name('objects.series-suggestion.dismiss');
 

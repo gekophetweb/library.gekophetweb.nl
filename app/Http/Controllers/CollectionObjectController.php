@@ -8,6 +8,7 @@ use App\Actions\UpdateCollectionObject;
 use App\Enums\CategoryKind;
 use App\Enums\OwnershipStatus;
 use App\Http\Requests\UpdateCollectionObjectRequest;
+use App\Http\Requests\UpdateObjectSeriesRequest;
 use App\Models\Artist;
 use App\Models\CollectionObject;
 use App\Models\Language;
@@ -15,6 +16,7 @@ use App\Models\Platform;
 use App\Models\Publisher;
 use App\Models\Series;
 use App\Support\Series\SeriesReference;
+use App\Support\Series\VolumeNumber;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -71,6 +73,32 @@ class CollectionObjectController extends Controller
         $series = $link->toReference($object, SeriesReference::fromArray($suggestion['reference']), DetectSeries::suggestedVolume($suggestion));
 
         return redirect()->route('objects.show', $object)->with('status', "Added to the series {$series->name}.");
+    }
+
+    /**
+     * Put a book in a series by hand, or move it to another one: a new name wins over the
+     * picked series, and both empty takes the book out of its series.
+     */
+    public function updateSeries(UpdateObjectSeriesRequest $request, CollectionObject $object, LinkSeries $link): RedirectResponse
+    {
+        abort_unless($object->category->kind === CategoryKind::Books, 404);
+
+        $name = trim((string) $request->validated('series_name'));
+        $volume = VolumeNumber::parse($request->validated('series_volume'));
+
+        $series = match (true) {
+            $name !== '' => $link->byName($object, $name, $volume),
+            filled($request->validated('serie_id')) => $link->toSeries($object, Series::query()->findOrFail($request->validated('serie_id')), $volume),
+            default => null,
+        };
+
+        if ($series === null) {
+            $link->unlink($object);
+
+            return redirect()->route('objects.show', $object)->with('status', 'Taken out of its series.');
+        }
+
+        return redirect()->route('objects.show', $object)->with('status', "Added to the series {$series->display_name}.");
     }
 
     public function dismissSeriesSuggestion(Request $request, CollectionObject $object): RedirectResponse

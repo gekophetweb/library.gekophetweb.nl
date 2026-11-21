@@ -33,6 +33,20 @@ class LinkSeries
         return $this->apply($object, $series, $volume);
     }
 
+    /** One of the owner's own series, picked by hand. */
+    public function toSeries(CollectionObject $object, Series $series, ?VolumeNumber $volume): Series
+    {
+        abort_unless($series->user_id === $object->user_id, 404);
+
+        return $this->apply($object, $series, $volume);
+    }
+
+    /** Takes the item out of its series; the series itself and its volume list stay. */
+    public function unlink(CollectionObject $object): void
+    {
+        $object->update(['serie_id' => null]);
+    }
+
     private function apply(CollectionObject $object, Series $series, ?VolumeNumber $volume): Series
     {
         DB::transaction(function () use ($object, $series, $volume) {
