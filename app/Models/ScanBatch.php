@@ -101,8 +101,8 @@ class ScanBatch extends Model
         return $this->requeue($this->items()->where('status', 'failed'));
     }
 
-    /** Outcomes an admin's redo looks up again: everything that did not reach the collection for lack of an answer. */
-    public const array REDOABLE = ['failed', 'not_found'];
+    /** Outcomes an admin's redo looks up again: everything that did not reach the collection (for lack of an answer, or a single scan the user didn't add). */
+    public const array REDOABLE = ['failed', 'not_found', 'not_added'];
 
     /**
      * An admin's redo of a finished batch: looks every code that was not added up again, for

@@ -2,7 +2,7 @@
     $labels = [
         'pending' => 'Waiting', 'added' => 'Added', 'promoted' => 'Moved from wishlist',
         'already_owned' => 'Already in collection', 'already_wanted' => 'Already on wishlist',
-        'not_found' => 'Not found', 'invalid' => 'Invalid barcode', 'failed' => 'Lookup failed',
+        'not_found' => 'Not found', 'invalid' => 'Invalid barcode', 'failed' => 'Lookup failed', 'not_added' => 'Not added',
     ];
     $tone = fn (string $status) => match ($status) {
         'added', 'promoted' => 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200',

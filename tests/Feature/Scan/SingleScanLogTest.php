@@ -129,3 +129,20 @@ it('still adds a scan looked up before scans were recorded', function () {
 
     expect(CollectionObject::count())->toBe(1)->and(ScanBatchItem::count())->toBe(0);
 });
+
+it('lets an admin redo a single scan the user did not add, which adds it', function () {
+    startSingleScan($this->ja);
+    $this->post(route('scan.single.lookup'), ['barcode' => '9784592135746']);
+    $batch = ScanBatch::sole();
+    $item = ScanBatchItem::sole();
+
+    $admin = User::factory()->admin()->create();
+    $this->actingAs($admin)->get(route('admin.scan-batches.show', $batch))->assertSee('Not added');
+
+    $this->post(route('admin.scan-batches.redo', $batch))->assertRedirect(route('admin.scan-batches.show', $batch));
+
+    $object = CollectionObject::query()->where('barcode', '9784592135746')->sole();
+    expect($item->refresh()->status)->toBe('added')
+        ->and($item->object_id)->toBe($object->id)
+        ->and($object->user_id)->toBe($this->user->id);
+});
