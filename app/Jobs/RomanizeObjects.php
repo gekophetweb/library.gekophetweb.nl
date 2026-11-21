@@ -19,17 +19,32 @@ class RomanizeObjects implements ShouldQueue
     public function __construct(public array $objectIds) {}
 
     /**
-     * Queues every item still needing a romanization, in jobs of 50.
+     * Queues one job per item: each item's barcode is looked up again, which can take half a
+     * minute, and the production worker stops a job after 120 seconds.
+     *
+     * @param  iterable<int>  $objectIds
+     * @return int how many items were queued
+     */
+    public static function dispatchEach(iterable $objectIds): int
+    {
+        $count = 0;
+
+        foreach ($objectIds as $id) {
+            self::dispatch([(int) $id]);
+            $count++;
+        }
+
+        return $count;
+    }
+
+    /**
+     * Queues every item still needing a romanization.
      *
      * @return int how many items were queued
      */
     public static function dispatchAllNeeded(): int
     {
-        $ids = CollectionObject::query()->needingRomanization()->orderBy('id')->pluck('id');
-
-        $ids->chunk(50)->each(fn ($chunk) => self::dispatch($chunk->values()->all()));
-
-        return $ids->count();
+        return self::dispatchEach(CollectionObject::query()->needingRomanization()->orderBy('id')->pluck('id'));
     }
 
     public function handle(RedoRomanization $redo): void

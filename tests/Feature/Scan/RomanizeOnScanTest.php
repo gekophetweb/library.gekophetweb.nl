@@ -1,6 +1,7 @@
 <?php
 
 use App\Actions\UpdateCollectionObject;
+use App\Jobs\RomanizeObjects;
 use App\Models\ApiCallLog;
 use App\Models\Artist;
 use App\Models\Category;
@@ -12,6 +13,7 @@ use App\Models\User;
 use Database\Seeders\CatalogueSeeder;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Queue;
 
 /*
  * Japanese and Korean titles, publishers and authors are romanized when an item is
@@ -221,6 +223,18 @@ describe('admin redo', function () {
         $this->artisan('romanize:items')->expectsOutput('Queued 1 item.')->assertSuccessful();
 
         expect($item->refresh()->name_romanized)->toBe('Beruseruku 1');
+    });
+
+    it('queues one job per item, so a slow lookup never runs into the worker timeout', function () {
+        Queue::fake();
+        $first = placeholderBerserk($this->user);
+        $second = placeholderBerserk(User::factory()->create());
+
+        $this->artisan('romanize:items')->expectsOutput('Queued 2 items.');
+
+        Queue::assertPushed(RomanizeObjects::class, 2);
+        Queue::assertPushed(RomanizeObjects::class, fn (RomanizeObjects $job) => $job->objectIds === [$first->id]);
+        Queue::assertPushed(RomanizeObjects::class, fn (RomanizeObjects $job) => $job->objectIds === [$second->id]);
     });
 
     it('is for admins only', function () {
