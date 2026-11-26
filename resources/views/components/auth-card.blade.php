@@ -8,7 +8,7 @@
                 {{-- Guests have no account to save to: the choice stays in this browser. --}}
                 <x-theme-toggle-button type="button" data-theme-toggle />
             </div>
-            <img src="{{ asset('images/gekophetweb-logo.png') }}" alt="Gek op het Web" width="160" height="109" class="logo h-auto w-[132px] sm:w-[160px]">
+            <x-logo :size="80" class="size-16 sm:size-20" />
             <p class="label-mono -mt-1 mb-4 text-xs tracking-[0.22em]">Library · books, music &amp; games</p>
         @endguest
 
