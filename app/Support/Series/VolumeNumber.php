@@ -12,7 +12,8 @@ use Stringable;
  *
  * parse() only accepts strings that are *just* a volume token (`1`, `４２`, `第12巻`,
  * `Vol. 12`, `#3`, `(12)`, `［2］`), optionally followed by a note in brackets that is
- * dropped (`5(番外編)`, as NDL writes a side-story volume). Other text around the number, such as
+ * dropped (`5(番外編)`, as NDL writes a side-story volume; `4 (うるΨ(サイ)お正月)`, a subtitle
+ * with a reading in brackets). Other text around the number, such as
  * `EPISODE:1` or `黄金時代篇 1`, are rejected: they are not plain volumes of the series.
  */
 final readonly class VolumeNumber implements Stringable
@@ -23,7 +24,11 @@ final readonly class VolumeNumber implements Stringable
           | [(\[]\s*(?<bracketed>\d+(?:\.\d+)?)\s*[)\]]     # (12), [2]
           | (?<plain>\d+(?:\.\d+)?)\s*巻?                   # 12, 12巻
         )
-        (?:\s*[(\[〈《【](?!\s*[\d.]+\s*[)\]〉》】])[^()\[\]〈〉《》【】]+[)\]〉》】])?    # a note after it: 5(番外編), 12 [完]; never a second number
+        (?:\s*[(\[〈《【](?!\s*[\d.]+\s*[)\]〉》】])                    # a note after it: 5(番外編), 12 [完]; never a second number
+            (?:[^()\[\]〈〉《》【】]                                    # ... holding text and
+              | [(\[〈《【](?!\s*[\d.]+\s*[)\]〉》】])[^()\[\]〈〉《》【】]+[)\]〉》】]   # one level of brackets: 4 (うるΨ(サイ)お正月)
+            )+
+        [)\]〉》】])?
         $/xiu';
 
     private function __construct(private string $value) {}

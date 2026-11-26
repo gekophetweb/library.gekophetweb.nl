@@ -1,0 +1,1461 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:dcndl="http://ndl.go.jp/dcndl/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" version="2.0">
+  <channel>
+    <title>斉木楠雄のΨ難 麻生周一 - 国立国会図書館サーチ OpenSearch</title>
+    <link>https://ios-v2-prod-eks-alb.ndlsearch.ndl.go.jp/api/opensearch?title=%E6%96%89%E6%9C%A8%E6%A5%A0%E9%9B%84%E3%81%AE%CE%A8%E9%9B%A3&amp;creator=%E9%BA%BB%E7%94%9F%E5%91%A8%E4%B8%80&amp;cnt=200&amp;idx=1</link>
+    <description>Search results for title=斉木楠雄のΨ難 creator=麻生周一 cnt=200 idx=1</description>
+    <language>ja</language>
+    <openSearch:totalResults>43</openSearch:totalResults>
+    <openSearch:startIndex>1</openSearch:startIndex>
+    <openSearch:itemsPerPage>200</openSearch:itemsPerPage>
+    <item>
+      <title>斉木楠雄のΨ難 豪華版 : ブルーレイ&amp;DVDセット</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028810683</link>
+      <description><![CDATA[<p>ソニー・ピクチャーズエンタテインメント,2018,<p><ul><li>タイトル：斉木楠雄のΨ難 豪華版 : ブルーレイ&DVDセット</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 原作,福田雄一 脚本・監督,山﨑賢人 [ほか出演]</li></ul>]]></description>
+      <author>麻生周一 原作,福田雄一 脚本・監督,山﨑賢人 [ほか出演]</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028810683</guid>
+      <pubDate>Wed, 12 Sep 2018 01:59:55 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難 豪華版 : ブルーレイ&amp;DVDセット</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:publisher>ソニー・ピクチャーズエンタテインメント</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2018</dc:date>
+      <dcterms:issued>[2018.5]</dcterms:issued>
+      <dcndl:price>5800円</dcndl:price>
+      <dc:extent>ビデオディスク 3枚 (97分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">BJSL-81245</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028810683</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23103251</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">YL331</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028810683"/>
+      <dc:description> 2018</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難 : 映画ノベライズみらい文庫版</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028517355</link>
+      <description><![CDATA[<p>集英社,2017,978-4-08-321398-4<p><ul><li>タイトル：斉木楠雄のΨ難 : 映画ノベライズみらい文庫版</li><li>タイトル（読み）：サイキ クスオ ノ サイナン : エイガ ノベライズ ミライ ブンコバン</li><li>責任表示：麻生周一 原作,福田雄一 脚本,宮本深礼 小説</li><li>シリーズ名：集英社みらい文庫 ; あ-13-1</li><li>シリーズ名（読み）：シュウエイシャ ミライ ブンコ ; ア-13-1</li><li>NDC(10)：913.6</li></ul>]]></description>
+      <author>麻生, 周一,福田, 雄一, 1968-,宮本, 深礼,麻生周一 原作,福田雄一 脚本,宮本深礼 小説</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028517355</guid>
+      <pubDate>Mon, 23 May 2022 21:42:44 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難 : 映画ノベライズみらい文庫版</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン : エイガ ノベライズ ミライ ブンコバン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dc:creator>福田, 雄一, 1968-</dc:creator>
+      <dc:creator>宮本, 深礼</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>フクダ, ユウイチ, 1968-</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>ミヤモト, ミレイ</dcndl:creatorTranscription>
+      <dcndl:seriesTitle>集英社みらい文庫 ; あ-13-1</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>シュウエイシャ ミライ ブンコ ; ア-13-1</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2017</dc:date>
+      <dcterms:issued>2017.10</dcterms:issued>
+      <dcndl:price>700円</dcndl:price>
+      <dc:extent>234p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-321398-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028517355</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22953711</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">33666501</dc:identifier>
+      <dcndl:genre>児童図書</dcndl:genre>
+      <dcndl:genreTranscription>ジドウ トショ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y7</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">913.6</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.library.city.sapporo.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1008001204033"/>
+      <rdfs:seeAlso rdf:resource="https://www.lib.city.saitama.jp/bookdetail?num=2733090&amp;ctg=1"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.ishikawa.lg.jp/wo/opc_srh/srh_detail/1000001079146/"/>
+      <rdfs:seeAlso rdf:resource="https://www.tosyokan.pref.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1006000239822"/>
+      <rdfs:seeAlso rdf:resource="https://opac.libnet.pref.okayama.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1009812157003"/>
+      <rdfs:seeAlso rdf:resource="https://opac.miraionlibrary.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000002603267"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028517355"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B13484888"/>
+      <rdfs:seeAlso rdf:resource="https://ts-opac.baika.ac.jp/opac/volume/609207"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784083213984"/>
+      <dc:description> 2017</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ (サイ) 難 : 映画ノベライズみらい文庫版</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000136-I1971430859774315428</link>
+      <description><![CDATA[<p>集英社,2017,9784083213984<p><ul><li>タイトル：斉木楠雄のΨ (サイ) 難 : 映画ノベライズみらい文庫版</li><li>タイトル（読み）：サイキ クスオ ノ サイナン : エイガ ノベライズ ミライ ブンコバン</li><li>責任表示：麻生周一原作 ; 福田雄一脚本 ; 宮本深礼小説</li><li>NDC(10)：913.6</li></ul>]]></description>
+      <author>麻生, 周一,福田, 雄一,宮本, 深礼,麻生周一原作 ; 福田雄一脚本 ; 宮本深礼小説</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000136-I1971430859774315428</guid>
+      <pubDate>Fri, 25 Sep 2026 11:13:32 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ (サイ) 難 : 映画ノベライズみらい文庫版</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン : エイガ ノベライズ ミライ ブンコバン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dc:creator>福田, 雄一</dc:creator>
+      <dc:creator>宮本, 深礼</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>フクダ, ユウイチ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>ミヤモト, ミレイ</dcndl:creatorTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2017</dc:date>
+      <dcterms:issued>2017.10</dcterms:issued>
+      <dc:identifier xsi:type="dcndl:ISBN">9784083213984</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">9784083213984</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NIIBibID">BB24785962</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">Y7</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">913.6</dc:subject>
+      <dc:description>映画「斉木楠雄のΨ難」(2017年10月公開)をもとに、「映画ノベライズ斉木楠雄のΨ難」(集英社刊)を底本としたもの</dc:description>
+      <rdfs:seeAlso rdf:resource="https://cir.nii.ac.jp/crid/1971430859774315428"/>
+      <dc:description> 2017</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難 : 映画ノベライズ</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028517360</link>
+      <description><![CDATA[<p>集英社,2017,978-4-08-703433-2<p><ul><li>タイトル：斉木楠雄のΨ難 : 映画ノベライズ</li><li>タイトル（読み）：サイキ クスオ ノ サイナン : エイガ ノベライズ</li><li>責任表示：麻生周一 原作,福田雄一 脚本,宮本深礼 小説</li><li>シリーズ名：JUMP j BOOKS</li><li>NDC(10)：913.6</li></ul>]]></description>
+      <author>麻生, 周一,福田, 雄一, 1968-,宮本, 深礼,麻生周一 原作,福田雄一 脚本,宮本深礼 小説</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028517360</guid>
+      <pubDate>Mon, 16 Oct 2017 19:30:35 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難 : 映画ノベライズ</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン : エイガ ノベライズ</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dc:creator>福田, 雄一, 1968-</dc:creator>
+      <dc:creator>宮本, 深礼</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>フクダ, ユウイチ, 1968-</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>ミヤモト, ミレイ</dcndl:creatorTranscription>
+      <dcndl:seriesTitle>JUMP j BOOKS</dcndl:seriesTitle>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2017</dc:date>
+      <dcterms:issued>2017.10</dcterms:issued>
+      <dcndl:price>650円</dcndl:price>
+      <dc:extent>208p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-703433-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028517360</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22954629</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">33666511</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">KH874</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">913.6</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000014382388"/>
+      <rdfs:seeAlso rdf:resource="https://opac.miraionlibrary.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000002603886"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028517360"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B13485507"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784087034332"/>
+      <dc:description> 2017</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難 : EXTRA STORY OF PSYCHICS</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I024391787</link>
+      <description><![CDATA[<p>集英社,2013,978-4-08-703289-5<p><ul><li>タイトル：斉木楠雄のΨ難 : EXTRA STORY OF PSYCHICS</li><li>タイトル（読み）：サイキ クスオ ノ サイナン : エクストラ ストーリー オブ サイキックス</li><li>責任表示：麻生周一, ひなたしょう 著</li><li>シリーズ名：JUMP j BOOKS</li><li>NDC(9)：913.6</li></ul>]]></description>
+      <author>麻生, 周一,ひなた, しょう,麻生周一, ひなたしょう 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I024391787</guid>
+      <pubDate>Mon, 17 Jun 2013 21:44:25 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難 : EXTRA STORY OF PSYCHICS</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン : エクストラ ストーリー オブ サイキックス</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dc:creator>ひなた, しょう</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>ヒナタ, ショウ</dcndl:creatorTranscription>
+      <dcndl:seriesTitle>JUMP j BOOKS</dcndl:seriesTitle>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2013</dc:date>
+      <dcterms:issued>2013.5</dcterms:issued>
+      <dcndl:price>650円</dcndl:price>
+      <dc:extent>210p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-703289-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">024391787</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22240458</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">32917422</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">KH837</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">913.6</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.lib.city.saitama.jp/bookdetail?num=334965&amp;ctg=1"/>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000012728200"/>
+      <rdfs:seeAlso rdf:resource="http://www.lib.wakayama-c.ed.jp/winj/opac/switch-detail-iccap.do?bibid=1102539697"/>
+      <rdfs:seeAlso rdf:resource="https://opac.libnet.pref.okayama.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1009811670038"/>
+      <rdfs:seeAlso rdf:resource="http://www.library.city.hiroshima.jp/winj/opac/switch-detail-iccap.do?bibid=1103507358"/>
+      <rdfs:seeAlso rdf:resource="https://opac.miraionlibrary.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000002152223"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I024391787"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B12890478"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784087032895"/>
+      <dc:description> 2013</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難 : EXTRA STORY OF PSYCHICS</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I025527177</link>
+      <description><![CDATA[<p>2,集英社,2014,978-4-08-703321-2<p><ul><li>タイトル：斉木楠雄のΨ難 : EXTRA STORY OF PSYCHICS</li><li>タイトル（読み）：サイキ クスオ ノ サイナン : エクストラ ストーリー オブ サイキックス</li><li>責任表示：麻生周一, ひなたしょう 著</li><li>シリーズ名：JUMP j BOOKS</li><li>NDC(9)：913.6</li></ul>]]></description>
+      <author>麻生, 周一,ひなた, しょう,麻生周一, ひなたしょう 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I025527177</guid>
+      <pubDate>Thu, 17 Jul 2014 02:10:38 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難 : EXTRA STORY OF PSYCHICS</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン : エクストラ ストーリー オブ サイキックス</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dc:creator>ひなた, しょう</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>ヒナタ, ショウ</dcndl:creatorTranscription>
+      <dcndl:volume>2</dcndl:volume>
+      <dcndl:seriesTitle>JUMP j BOOKS</dcndl:seriesTitle>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2014</dc:date>
+      <dcterms:issued>2014.7</dcterms:issued>
+      <dcndl:price>650円</dcndl:price>
+      <dc:extent>221p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-703321-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">025527177</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22430635</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">33116921</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">KH837</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">913.6</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.lib.city.saitama.jp/bookdetail?num=453003&amp;ctg=1"/>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000013019677"/>
+      <rdfs:seeAlso rdf:resource="https://opac.libnet.pref.okayama.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1009811805713"/>
+      <rdfs:seeAlso rdf:resource="http://www.library.city.hiroshima.jp/winj/opac/switch-detail-iccap.do?bibid=1103629531"/>
+      <rdfs:seeAlso rdf:resource="https://opac.miraionlibrary.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000002275254"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I025527177"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B13050136"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784087033212"/>
+      <dc:description> 2014</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ(サイ)難超能力エクサΨ(サイ)ズ : オフィシャルゲームブック</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I025037467</link>
+      <description><![CDATA[<p>集英社,2013,978-4-08-880090-5<p><ul><li>タイトル：斉木楠雄のΨ(サイ)難超能力エクサΨ(サイ)ズ : オフィシャルゲームブック</li><li>タイトル（読み）：サイキ クスオ ノ サイナン チョウノウリョク エクササイズ : オフィシャル ゲーム ブック</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプ・コミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：798</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I025037467</guid>
+      <pubDate>Mon, 20 Jan 2014 20:21:15 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ(サイ)難超能力エクサΨ(サイ)ズ : オフィシャルゲームブック</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン チョウノウリョク エクササイズ : オフィシャル ゲーム ブック</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:seriesTitle>ジャンプ・コミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2013</dc:date>
+      <dcterms:issued>2013.12</dcterms:issued>
+      <dcndl:price>476円</dcndl:price>
+      <dc:extent>145p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880090-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">025037467</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22344258</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07313743</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">Y78</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">798</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I025037467"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16525270"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088800905"/>
+      <dc:description> 2013</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ (サイ) 難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I023911288</link>
+      <description><![CDATA[<p>1,集英社,2012,978-4-08-870504-0<p><ul><li>タイトル：斉木楠雄のΨ (サイ) 難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプ・コミックス</li><li>シリーズ名（読み）：ジャンプ ・ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I023911288</guid>
+      <pubDate>Mon, 22 Nov 2021 20:44:42 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ (サイ) 難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>1</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプ・コミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ ・ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2012</dc:date>
+      <dcterms:issued>2012.9</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>177p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-870504-0</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">023911288</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22124775</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527378"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I023911288"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16518865"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088705040"/>
+      <dc:description> 2012</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I025735402</link>
+      <description><![CDATA[<p>10 (マッドΨエンティスト現る!),集英社,2014,978-4-08-880175-9<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプ・コミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I025735402</guid>
+      <pubDate>Mon, 6 Dec 2021 20:10:43 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>10 (マッドΨエンティスト現る!)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプ・コミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2014</dc:date>
+      <dcterms:issued>2014.9</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>182p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880175-9</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">025735402</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22462384</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07330693</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527413"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I025735402"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16528154"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088801759"/>
+      <dc:description> 2014</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ(サイ)難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I025936532</link>
+      <description><![CDATA[<p>11 (夏休み前のΨ難),集英社,2014,978-4-08-880224-4<p><ul><li>タイトル：斉木楠雄のΨ(サイ)難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I025936532</guid>
+      <pubDate>Mon, 6 Dec 2021 21:34:57 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ(サイ)難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>11 (夏休み前のΨ難)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2014</dc:date>
+      <dcterms:issued>2014.12</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>182p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880224-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">025936532</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22502925</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07336005</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527419"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I025936532"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16528891"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088802244"/>
+      <dc:description> 2014</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I026065575</link>
+      <description><![CDATA[<p>12 (体験Ψエンスフィクション),集英社,2015,978-4-08-880304-3<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I026065575</guid>
+      <pubDate>Mon, 13 Dec 2021 22:46:29 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>12 (体験Ψエンスフィクション)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2015</dc:date>
+      <dcterms:issued>2015.2</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>190p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880304-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">026065575</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22546339</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07339576</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527421"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I026065575"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16529354"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088803043"/>
+      <dc:description> 2015</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000136-I1971712334777751809</link>
+      <description><![CDATA[<p>1,集英社,2012,9784088705040<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一著</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000136-I1971712334777751809</guid>
+      <pubDate>Fri, 25 Sep 2026 11:13:32 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>1</dcndl:volume>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2012</dc:date>
+      <dcterms:issued>2012.9-</dcterms:issued>
+      <dc:identifier xsi:type="dcndl:ISBN">9784088705040</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">9784088705040</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NIIBibID">BB26738249</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://cir.nii.ac.jp/crid/1971712334777751809"/>
+      <dc:description> 2012</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I026340474</link>
+      <description><![CDATA[<p>13 (スイーツバイキングのΨ難),集英社,2015,978-4-08-880355-5<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I026340474</guid>
+      <pubDate>Mon, 13 Dec 2021 22:12:56 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>13 (スイーツバイキングのΨ難)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2015</dc:date>
+      <dcterms:issued>2015.5</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>182p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880355-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">026340474</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22567531</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07344927</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527427"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I026340474"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16529957"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088803555"/>
+      <dc:description> 2015</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I026613666</link>
+      <description><![CDATA[<p>14 (夢のΨキックサーカス),集英社,2015,978-4-08-880426-2<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I026613666</guid>
+      <pubDate>Mon, 20 Dec 2021 20:19:34 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>14 (夢のΨキックサーカス)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2015</dc:date>
+      <dcterms:issued>2015.8</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>176p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880426-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">026613666</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22615856</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07350479</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527432"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I026613666"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16530788"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088804262"/>
+      <dc:description> 2015</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I026760426</link>
+      <description><![CDATA[<p>15 (斉木楠雄の遭難),集英社,2015,978-4-08-880462-0<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I026760426</guid>
+      <pubDate>Mon, 20 Dec 2021 20:44:42 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>15 (斉木楠雄の遭難)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2015</dc:date>
+      <dcterms:issued>2015.10</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>194p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880462-0</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">026760426</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22636820</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07353923</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527435"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I026760426"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16531288"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088804620"/>
+      <dc:description> 2015</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027000432</link>
+      <description><![CDATA[<p>16 (超能力者にはΨ心の注意を),集英社,2016,978-4-08-880582-5<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027000432</guid>
+      <pubDate>Mon, 20 Dec 2021 19:35:08 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>16 (超能力者にはΨ心の注意を)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2016</dc:date>
+      <dcterms:issued>2016.1</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>183p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880582-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027000432</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22679014</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07359442</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527440"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027000432"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16532127"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088805825"/>
+      <dc:description> 2016</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027212942</link>
+      <description><![CDATA[<p>17,集英社,2016,978-4-08-880652-5<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027212942</guid>
+      <pubDate>Tue, 18 Jan 2022 23:06:25 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>17</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2016</dc:date>
+      <dcterms:issued>2016.4</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>183p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880652-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027212942</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22716457</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07364381</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527444"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027212942"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16532868"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088806525"/>
+      <dc:description> 2016</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027447631</link>
+      <description><![CDATA[<p>18,集英社,2016,978-4-08-880728-7<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027447631</guid>
+      <pubDate>Tue, 18 Jan 2022 23:31:19 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>18</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2016</dc:date>
+      <dcterms:issued>2016.7</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>180p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880728-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027447631</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22755130</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07369656</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527452"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027447631"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16533639"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088807287"/>
+      <dc:description> 2016</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027620607</link>
+      <description><![CDATA[<p>19,集英社,2016,978-4-08-880791-1<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027620607</guid>
+      <pubDate>Tue, 18 Jan 2022 23:18:44 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>19</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2016</dc:date>
+      <dcterms:issued>2016.10</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>177p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880791-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027620607</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22803309</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07374800</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527457"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027620607"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16534343"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088807911"/>
+      <dc:description> 2016</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ (サイ) 難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I024111797</link>
+      <description><![CDATA[<p>2 (ビーチΨド夏物語),集英社,2012,978-4-08-870556-9<p><ul><li>タイトル：斉木楠雄のΨ (サイ) 難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプ・コミックス</li><li>シリーズ名（読み）：ジャンプ ・ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I024111797</guid>
+      <pubDate>Mon, 22 Nov 2021 19:53:53 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ (サイ) 難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>2 (ビーチΨド夏物語)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプ・コミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ ・ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2012</dc:date>
+      <dcterms:issued>2012.12</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>191p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-870556-9</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">024111797</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22173647</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527381"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I024111797"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16520070"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088705569"/>
+      <dc:description> 2012</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027811623</link>
+      <description><![CDATA[<p>20,集英社,2016,978-4-08-880887-1<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027811623</guid>
+      <pubDate>Mon, 17 Jan 2022 23:16:30 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>20</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2016</dc:date>
+      <dcterms:issued>2016.12</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>177p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880887-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027811623</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22836606</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07378693</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000014331202"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027811623"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16535038"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088808871"/>
+      <dc:description> 2016</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028309311</link>
+      <description><![CDATA[<p>22,集英社,2017,978-4-08-881180-2<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(10)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028309311</guid>
+      <pubDate>Mon, 17 Jan 2022 22:46:51 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>22</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2017</dc:date>
+      <dcterms:issued>2017.7</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>180p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-881180-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028309311</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22918124</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07390378</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000014333899"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028309311"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16536651"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088811802"/>
+      <dc:description> 2017</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028530333</link>
+      <description><![CDATA[<p>23,集英社,2017,978-4-08-881211-3<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(10)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028530333</guid>
+      <pubDate>Tue, 18 Jan 2022 01:44:19 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>23</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2017</dc:date>
+      <dcterms:issued>2017.10</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>198p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-881211-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028530333</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22958606</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07395485</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000014381546"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028530333"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16537016"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088812113"/>
+      <dc:description> 2017</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028730493</link>
+      <description><![CDATA[<p>24,集英社,2018,978-4-08-881315-8<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(10)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028730493</guid>
+      <pubDate>Mon, 24 Jan 2022 18:59:22 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>24</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2018</dc:date>
+      <dcterms:issued>2018.1</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>178p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-881315-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028730493</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22999080</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07400724</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000014430192"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028730493"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16538019"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088813158"/>
+      <dc:description> 2018</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028903947</link>
+      <description><![CDATA[<p>25,集英社,2018,978-4-08-881377-6<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(10)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028903947</guid>
+      <pubDate>Mon, 24 Jan 2022 20:21:59 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>25</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2018</dc:date>
+      <dcterms:issued>2018.4</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>178p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-881377-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028903947</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23041126</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07405642</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000014478156"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028903947"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16538704"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088813776"/>
+      <dc:description> 2018</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I029115670</link>
+      <description><![CDATA[<p>26,集英社,2018,978-4-08-881539-8<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプコミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(10)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I029115670</guid>
+      <pubDate>Mon, 24 Jan 2022 20:09:49 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>26</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプコミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2018</dc:date>
+      <dcterms:issued>2018.8</dcterms:issued>
+      <dcndl:price>440円</dcndl:price>
+      <dc:extent>182p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-881539-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">029115670</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23099666</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07412438</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000014539620"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I029115670"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16539566"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088815398"/>
+      <dc:description> 2018</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ (サイ) 難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I024196982</link>
+      <description><![CDATA[<p>3 (燃えろ!PK学園体育Ψ),集英社,2013,978-4-08-870621-4<p><ul><li>タイトル：斉木楠雄のΨ (サイ) 難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプ・コミックス</li><li>シリーズ名（読み）：ジャンプ ・ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I024196982</guid>
+      <pubDate>Mon, 29 Nov 2021 20:48:32 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ (サイ) 難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>3 (燃えろ!PK学園体育Ψ)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプ・コミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ ・ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2013</dc:date>
+      <dcterms:issued>2013.1</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>184p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-870621-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">024196982</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22190717</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527382"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I024196982"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16520634"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088706214"/>
+      <dc:description> 2013</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ(サイ)難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I024433274</link>
+      <description><![CDATA[<p>4 (うるΨ(サイ)お正月),集英社,2013,978-4-08-870652-8<p><ul><li>タイトル：斉木楠雄のΨ(サイ)難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプ・コミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I024433274</guid>
+      <pubDate>Mon, 29 Nov 2021 17:56:17 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ(サイ)難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>4 (うるΨ(サイ)お正月)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプ・コミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2013</dc:date>
+      <dcterms:issued>2013.5</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>191p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-870652-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">024433274</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22244905</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07300572</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527389"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I024433274"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16522855"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088706528"/>
+      <dc:description> 2013</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ(サイ)難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I024632972</link>
+      <description><![CDATA[<p>5 (Ψ(サイ)を振れ!波乱の期末テスト),集英社,2013,978-4-08-870768-6<p><ul><li>タイトル：斉木楠雄のΨ(サイ)難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプ・コミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I024632972</guid>
+      <pubDate>Mon, 29 Nov 2021 18:16:29 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ(サイ)難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>5 (Ψ(サイ)を振れ!波乱の期末テスト)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプ・コミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2013</dc:date>
+      <dcterms:issued>2013.7</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>183p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-870768-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">024632972</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22270792</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07304054</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527392"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I024632972"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16523513"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088707686"/>
+      <dc:description> 2013</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ (サイ) 難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I030575528</link>
+      <description><![CDATA[<p>6 (楠雄のΨキック大百科編),集英社,2020,978-4-08-113864-7<p><ul><li>タイトル：斉木楠雄のΨ (サイ) 難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：Shueishaジャンプremix</li><li>シリーズ名（読み）：Shueisha ジャンプ remix</li><li>NDC(10)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I030575528</guid>
+      <pubDate>Mon, 14 Feb 2022 18:05:04 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ (サイ) 難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>6 (楠雄のΨキック大百科編)</dcndl:volume>
+      <dcndl:seriesTitle>Shueishaジャンプremix</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>Shueisha ジャンプ remix</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2020</dc:date>
+      <dcterms:issued>2020.8</dcterms:issued>
+      <dcndl:price>320円</dcndl:price>
+      <dc:extent>154p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-113864-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">030575528</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23443553</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I030575528"/>
+      <dc:description> 2020</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ(サイ)難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I024790503</link>
+      <description><![CDATA[<p>6 (超能力者搭Ψ(サイ)旅客機でGO!),集英社,2013,978-4-08-870806-5<p><ul><li>タイトル：斉木楠雄のΨ(サイ)難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプ・コミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I024790503</guid>
+      <pubDate>Mon, 29 Nov 2021 19:20:12 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ(サイ)難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>6 (超能力者搭Ψ(サイ)旅客機でGO!)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプ・コミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2013</dc:date>
+      <dcterms:issued>2013.9</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>185p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-870806-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">024790503</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22298206</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07308087</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527395"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I024790503"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16524290"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088708065"/>
+      <dc:description> 2013</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ(サイ)難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I025037454</link>
+      <description><![CDATA[<p>7 (さわげ!PK学園文化Ψ),集英社,2013,978-4-08-870853-9<p><ul><li>タイトル：斉木楠雄のΨ(サイ)難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプ・コミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I025037454</guid>
+      <pubDate>Mon, 29 Nov 2021 19:45:08 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ(サイ)難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>7 (さわげ!PK学園文化Ψ)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプ・コミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2013</dc:date>
+      <dcterms:issued>2013.12</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>178p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-870853-9</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">025037454</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22335638</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07313724</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527399"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I025037454"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16525408"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088708539"/>
+      <dc:description> 2013</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I025365825</link>
+      <description><![CDATA[<p>8 (Ψ強美少女VS絶対に落ちない男),集英社,2014,978-4-08-880027-1<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプ・コミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I025365825</guid>
+      <pubDate>Mon, 6 Dec 2021 21:40:19 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>8 (Ψ強美少女VS絶対に落ちない男)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプ・コミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2014</dc:date>
+      <dcterms:issued>2014.4</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>179p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880027-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">025365825</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22396225</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07321252</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527404"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I025365825"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16526815"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088800271"/>
+      <dc:description> 2014</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I025541530</link>
+      <description><![CDATA[<p>9 (万Ψ!ツンデレおじいちゃん),集英社,2014,978-4-08-880072-1<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ サイナン</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプ・コミックス</li><li>シリーズ名（読み）：ジャンプ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I025541530</guid>
+      <pubDate>Mon, 6 Dec 2021 21:07:23 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ サイナン</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>9 (万Ψ!ツンデレおじいちゃん)</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプ・コミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2014</dc:date>
+      <dcterms:issued>2014.7</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>183p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-880072-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">025541530</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22430188</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07326963</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.oml.city.osaka.lg.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000015527410"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I025541530"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16527718"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088800721"/>
+      <dc:description> 2014</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028810780</link>
+      <description><![CDATA[<p>season 2 volume 1,ポニーキャニオン,2018,<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ Ψナン</li><li>責任表示：麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</li></ul>]]></description>
+      <author>麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028810780</guid>
+      <pubDate>Mon, 2 Jun 2025 17:57:09 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ Ψナン</dcndl:titleTranscription>
+      <dcndl:volume>season 2 volume 1</dcndl:volume>
+      <dc:publisher>ポニーキャニオン</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2018</dc:date>
+      <dcterms:issued>[2018.4]</dcterms:issued>
+      <dcndl:price>9400円</dcndl:price>
+      <dc:extent>ビデオディスク 1枚 (142分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">PCXP-50601</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028810780</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23050083</dc:identifier>
+      <dcndl:genre>アニメーション</dcndl:genre>
+      <dcndl:genreTranscription>アニメーション</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YL331</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028810780"/>
+      <dc:description> 2018</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028810781</link>
+      <description><![CDATA[<p>season 2 volume 2,ポニーキャニオン,2018,<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ Ψナン</li><li>責任表示：麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</li></ul>]]></description>
+      <author>麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028810781</guid>
+      <pubDate>Mon, 2 Jun 2025 17:57:10 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ Ψナン</dcndl:titleTranscription>
+      <dcndl:volume>season 2 volume 2</dcndl:volume>
+      <dc:publisher>ポニーキャニオン</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2018</dc:date>
+      <dcterms:issued>[2018.6]</dcterms:issued>
+      <dcndl:price>9400円</dcndl:price>
+      <dc:extent>ビデオディスク 1枚 (142分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">PCXP-50602</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028810781</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23073773</dc:identifier>
+      <dcndl:genre>アニメーション</dcndl:genre>
+      <dcndl:genreTranscription>アニメーション</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YL331</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028810781"/>
+      <dc:description> 2018</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028810782</link>
+      <description><![CDATA[<p>season 2 volume 3,ポニーキャニオン,2018,<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ Ψナン</li><li>責任表示：麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</li></ul>]]></description>
+      <author>麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028810782</guid>
+      <pubDate>Mon, 2 Jun 2025 17:57:11 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ Ψナン</dcndl:titleTranscription>
+      <dcndl:volume>season 2 volume 3</dcndl:volume>
+      <dc:publisher>ポニーキャニオン</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2018</dc:date>
+      <dcterms:issued>[2018.8]</dcterms:issued>
+      <dcndl:price>9400円</dcndl:price>
+      <dc:extent>ビデオディスク 1枚 (142分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">PCXP-50603</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028810782</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23106945</dc:identifier>
+      <dcndl:genre>アニメーション</dcndl:genre>
+      <dcndl:genreTranscription>アニメーション</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YL331</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028810782"/>
+      <dc:description> 2018</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028810783</link>
+      <description><![CDATA[<p>season 2 volume 4,ポニーキャニオン,2018,<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ Ψナン</li><li>責任表示：麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</li></ul>]]></description>
+      <author>麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028810783</guid>
+      <pubDate>Mon, 2 Jun 2025 17:57:12 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ Ψナン</dcndl:titleTranscription>
+      <dcndl:volume>season 2 volume 4</dcndl:volume>
+      <dc:publisher>ポニーキャニオン</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2018</dc:date>
+      <dcterms:issued>[2018.10]</dcterms:issued>
+      <dcndl:price>9400円</dcndl:price>
+      <dc:extent>ビデオディスク 1枚 (142分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">PCXP-50604</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028810783</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23132912</dc:identifier>
+      <dcndl:genre>アニメーション</dcndl:genre>
+      <dcndl:genreTranscription>アニメーション</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YL331</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028810783"/>
+      <dc:description> 2018</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027636626</link>
+      <description><![CDATA[<p>volume 1,ポニーキャニオン,2016,<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ Ψナン</li><li>責任表示：麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</li></ul>]]></description>
+      <author>麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027636626</guid>
+      <pubDate>Mon, 2 Jun 2025 17:52:04 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ Ψナン</dcndl:titleTranscription>
+      <dcndl:volume>volume 1</dcndl:volume>
+      <dc:publisher>ポニーキャニオン</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2016</dc:date>
+      <dcterms:issued>[2016.12]</dcterms:issued>
+      <dcndl:price>9400円</dcndl:price>
+      <dc:extent>ビデオディスク 1枚 (142分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">PCXP-50451</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027636626</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22834136</dc:identifier>
+      <dcndl:genre>アニメーション</dcndl:genre>
+      <dcndl:genreTranscription>アニメーション</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YL331</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027636626"/>
+      <dc:description> 2016</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027637293</link>
+      <description><![CDATA[<p>volume 2,ポニーキャニオン,2017,<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ Ψナン</li><li>責任表示：麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</li></ul>]]></description>
+      <author>麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027637293</guid>
+      <pubDate>Mon, 2 Jun 2025 17:52:19 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ Ψナン</dcndl:titleTranscription>
+      <dcndl:volume>volume 2</dcndl:volume>
+      <dc:publisher>ポニーキャニオン</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2017</dc:date>
+      <dcterms:issued>[2017.1]</dcterms:issued>
+      <dcndl:price>9400円</dcndl:price>
+      <dc:extent>ビデオディスク 1枚 (142分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">PCXP-50452</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027637293</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22844971</dc:identifier>
+      <dcndl:genre>アニメーション</dcndl:genre>
+      <dcndl:genreTranscription>アニメーション</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YL331</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027637293"/>
+      <dc:description> 2017</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027637296</link>
+      <description><![CDATA[<p>volume 3,ポニーキャニオン,2017,<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ Ψナン</li><li>責任表示：麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</li></ul>]]></description>
+      <author>麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027637296</guid>
+      <pubDate>Mon, 2 Jun 2025 17:52:20 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ Ψナン</dcndl:titleTranscription>
+      <dcndl:volume>volume 3</dcndl:volume>
+      <dc:publisher>ポニーキャニオン</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2017</dc:date>
+      <dcterms:issued>[2017.2]</dcterms:issued>
+      <dcndl:price>9400円</dcndl:price>
+      <dc:extent>ビデオディスク 1枚 (142分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">PCXP-50453</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027637296</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22859455</dc:identifier>
+      <dcndl:genre>アニメーション</dcndl:genre>
+      <dcndl:genreTranscription>アニメーション</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YL331</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027637296"/>
+      <dc:description> 2017</dc:description>
+    </item>
+    <item>
+      <title>斉木楠雄のΨ難</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I027637298</link>
+      <description><![CDATA[<p>volume 4,ポニーキャニオン,2017,<p><ul><li>タイトル：斉木楠雄のΨ難</li><li>タイトル（読み）：サイキ クスオ ノ Ψナン</li><li>責任表示：麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</li></ul>]]></description>
+      <author>麻生周一 原作,EGG FIRM, J.C. STAFF アニメーション制作</author>
+      <category>映像資料</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I027637298</guid>
+      <pubDate>Mon, 2 Jun 2025 17:52:21 +0900</pubDate>
+      <dc:title>斉木楠雄のΨ難</dc:title>
+      <dcndl:titleTranscription>サイキ クスオ ノ Ψナン</dcndl:titleTranscription>
+      <dcndl:volume>volume 4</dcndl:volume>
+      <dc:publisher>ポニーキャニオン</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2017</dc:date>
+      <dcterms:issued>[2017.3]</dcterms:issued>
+      <dcndl:price>9400円</dcndl:price>
+      <dc:extent>ビデオディスク 1枚 (142分)</dc:extent>
+      <dc:identifier xsi:type="dcndl:RIS502">PCXP-50454</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">027637298</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22873896</dc:identifier>
+      <dcndl:genre>アニメーション</dcndl:genre>
+      <dcndl:genreTranscription>アニメーション</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YL331</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I027637298"/>
+      <dc:description> 2017</dc:description>
+    </item>
+    <item>
+      <title>超能力者斉木楠雄のΨ (サイ) 難 : 麻生周一短編集</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I023597842</link>
+      <description><![CDATA[<p>0,集英社,2012,978-4-08-870455-5<p><ul><li>タイトル：超能力者斉木楠雄のΨ (サイ) 難 : 麻生周一短編集</li><li>タイトル（読み）：チョウノウリョクシャ サイキ クスオ ノ サイナン : アソウ シュウイチ タンペンシュウ</li><li>責任表示：麻生周一 著</li><li>シリーズ名：ジャンプ・コミックス</li><li>シリーズ名（読み）：ジャンプ ・ コミックス</li><li>NDC(9)：726.1</li></ul>]]></description>
+      <author>麻生, 周一,麻生周一 著</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I023597842</guid>
+      <pubDate>Mon, 22 Nov 2021 19:24:32 +0900</pubDate>
+      <dc:title>超能力者斉木楠雄のΨ (サイ) 難 : 麻生周一短編集</dc:title>
+      <dcndl:titleTranscription>チョウノウリョクシャ サイキ クスオ ノ サイナン : アソウ シュウイチ タンペンシュウ</dcndl:titleTranscription>
+      <dc:creator>麻生, 周一</dc:creator>
+      <dcndl:creatorTranscription>アソウ, シュウイチ</dcndl:creatorTranscription>
+      <dcndl:volume>0</dcndl:volume>
+      <dcndl:seriesTitle>ジャンプ・コミックス</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ジャンプ ・ コミックス</dcndl:seriesTitleTranscription>
+      <dc:publisher>集英社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2012</dc:date>
+      <dcterms:issued>2012.5</dcterms:issued>
+      <dcndl:price>400円</dcndl:price>
+      <dc:extent>188p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-08-870455-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">023597842</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22065709</dc:identifier>
+      <dcndl:genre>漫画</dcndl:genre>
+      <dcndl:genreTranscription>マンガ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y84</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">726.1</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I023597842"/>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16517725"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784088704555"/>
+      <dc:description> 2012</dc:description>
+    </item>
+  </channel>
+</rss>
