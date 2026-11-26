@@ -16,6 +16,9 @@
         <meta name="referrer" content="no-referrer">
     @endif
     <title>{{ $title ? $title.' · ' : '' }}{{ $share ? $share->user->name.'’s collection' : config('app.name') }}</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
     {{-- Resolve "same as device" (and a guest's choice) before the first paint: no flash. --}}
     <script>
         (function () {
