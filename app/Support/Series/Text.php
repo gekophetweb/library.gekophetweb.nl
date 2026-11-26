@@ -20,10 +20,17 @@ final class Text
         return $text === '' ? null : $text;
     }
 
-    /** Comparison key: cleaned, lower-cased, without spaces. */
+    /**
+     * Comparison key: cleaned, lower-cased, without spaces and without a kana reading in
+     * brackets inside the title. NDL writes the ruby of some volumes inline and not of
+     * others (`斉木楠雄のΨ (サイ) 難` / `斉木楠雄のΨ難`); one series either way.
+     */
     public static function key(?string $text): string
     {
-        return mb_strtolower((string) preg_replace('/\s+/u', '', (string) self::clean($text)));
+        $key = (string) preg_replace('/\s+/u', '', (string) self::clean($text));
+        $withoutReading = (string) preg_replace('/(?<=\S)\([\p{Hiragana}\p{Katakana}ー・]+\)/u', '', $key);
+
+        return mb_strtolower($withoutReading === '' ? $key : $withoutReading);
     }
 
     public static function isLatin(string $text): bool
