@@ -127,7 +127,7 @@
                 @foreach (['light', 'dark'] as $theme)
                     <figure data-theme="{{ $theme }}" data-accent="{{ $appearance->accent->value }}" data-preview class="paper overflow-hidden rounded-2xl border border-line shadow-card" data-bg="{{ $appearance->background->value }}" style="--margin-x: 22px">
                         <div class="flex items-center gap-2 border-b border-line bg-surface px-3 py-1.5">
-                            <img src="{{ asset('images/gekophetweb-logo.png') }}" alt="" width="52" height="35" class="logo h-auto w-[52px]">
+                            <x-logo :size="24" alt="" class="size-6" />
                             <span class="label-mono text-[10px]">{{ ucfirst($theme) }}</span>
                         </div>
                         <div class="space-y-3 py-4 pr-3 pl-9">

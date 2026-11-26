@@ -40,7 +40,7 @@
         {{-- A share link: no account nav, nothing to act on, even for a signed-in visitor. --}}
         <header class="border-b border-line bg-surface">
             <div class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-4 gap-y-1 py-1.5 pr-4 pl-8 sm:pl-16">
-                <img src="{{ asset('images/gekophetweb-logo.png') }}" alt="Gek op het Web" width="88" height="60" class="logo h-auto w-[72px] sm:w-[88px]">
+                <x-logo :size="36" class="size-8 sm:size-9" />
                 <p class="text-sm">
                     <span class="font-display text-base font-bold">{{ $share->user->name }}’s collection</span>
                     <span class="text-muted">· read only</span>
@@ -52,7 +52,7 @@
         <header class="border-b border-line bg-surface">
             <nav class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-5 gap-y-2 py-1.5 pr-4 pl-8 text-sm sm:pl-16">
                 <a href="{{ route('home') }}" aria-label="{{ config('app.name') }} home" class="flex items-center gap-2.5 text-ink">
-                    <img src="{{ asset('images/gekophetweb-logo.png') }}" alt="Gek op het Web" width="88" height="60" class="logo h-auto w-[72px] sm:w-[88px]">
+                    <x-logo :size="36" alt="" class="size-8 sm:size-9" />
                     <span class="label-mono text-ink">Library</span>
                 </a>
 
