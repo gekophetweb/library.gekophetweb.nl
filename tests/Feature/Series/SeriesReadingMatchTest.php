@@ -8,9 +8,12 @@ use App\Models\LibraryShare;
 use App\Models\Series;
 use App\Models\SeriesVolume;
 use App\Models\User;
+use App\Services\Series\NdlSeriesLookup;
 use App\Support\Series\SeriesReference;
+use App\Support\Series\SeriesVolumeData;
 use App\Support\Series\VolumeNumber;
 use Database\Seeders\CatalogueSeeder;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 
 /*
@@ -46,6 +49,17 @@ it('joins the series whose title carries the reading in brackets', function () {
 
     expect($joined->id)->toBe($series->id)
         ->and(Series::count())->toBe(1);
+});
+
+it('lists every volume NDL has, with or without the reading in the title or volume note', function () {
+    withoutSeriesFixtures();
+    Http::fake(['ndlsearch.ndl.go.jp/*' => Http::response(seriesFixture('ndl-volumes-saiki.xml'))]);
+
+    $volumes = app(NdlSeriesLookup::class)->volumes(ndlSaiki('斉木楠雄のΨ難'));
+
+    // NDL's search does not return volume 21.
+    expect($volumes->map(fn (SeriesVolumeData $v) => (string) $v->volume)->all())
+        ->toBe(array_map(strval(...), [...range(1, 20), ...range(22, 26)]));
 });
 
 it('merges one series into another', function () {
