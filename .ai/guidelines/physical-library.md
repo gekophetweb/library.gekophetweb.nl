@@ -133,7 +133,11 @@ number; it then is not counted and not wished by "Add all missing". Every volume
 lists its ISBNs, the one of your copy first. A volume note in brackets after the number
 (NDL's `5(番外編)`) is dropped by `VolumeNumber::parse`, so that volume is kept.
 
-NDL quirks: an ISBN search can also return a record for the whole set (one volume
+NDL quirks: some volumes carry a kana reading in brackets inside the title and others
+don't (`斉木楠雄のΨ (サイ) 難` / `斉木楠雄のΨ難`); `Text::key` drops it, so name matching
+and volume lists treat both as one series. Duplicates made before that are folded
+together with `php artisan series:merge {from} {into}` (items, share links; the kept
+series syncs again). An ISBN search can also return a record for the whole set (one volume
 number, one ISBN, issued `2002-2010`), so resolve prefers the records that carry the
 scanned ISBN. A series' publisher also matches a name that contains it or that it
 contains (エニックス → スクウェア・エニックス), and another name of its group in
