@@ -21,6 +21,11 @@ it('parses volume tokens', function (string $input, string $expected) {
     ['5（番外編）', '5'],
     ['第3巻 [完]', '3'],
     ['12〈完結〉', '12'],
+    // NDL, 斉木楠雄のΨ難: a reading in brackets inside the note.
+    ['4 (うるΨ(サイ)お正月)', '4'],
+    ['5 (Ψ(サイ)を振れ!波乱の期末テスト)', '5'],
+    ['6 (超能力者搭Ψ(サイ)旅客機でGO!)', '6'],
+    ['11 (夏休み前のΨ難)', '11'],
 ]);
 
 it('rejects strings that are not just a volume', function (?string $input) {
@@ -34,6 +39,8 @@ it('rejects strings that are not just a volume', function (?string $input) {
     '番外編 5',
     '5(番外編) 2',
     '1(2)',
+    '1 (note(2))',
+    '1 (a(b(c)))',
     '',
     null,
 ]);

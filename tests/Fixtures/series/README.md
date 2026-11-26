@@ -3,6 +3,7 @@
 | File | Origin |
 |---|---|
 | `ndl-*.xml` | **Recorded** 2026-11-09 from NDL Search OpenSearch (plan series-detection-from-isbn §2). |
+| `ndl-volumes-saiki.xml` | **Recorded** 2026-11-26 from NDL Search OpenSearch (`title=斉木楠雄のΨ難&creator=麻生周一&cnt=200&idx=1`). |
 | `openlibrary-isbn-9780593820247.json` | **Recorded** 2026-11-09 from Open Library. |
 | `wikidata-*.json` | **Recorded** 2026-11-09 from the Wikidata SPARQL endpoint. |
 | `googlebooks-*.json` | **Hand-written** 2026-11-13 from the documented `volumes`, `series/get` and `series/membership/get` response shapes (English *Berserk Deluxe*). |
