@@ -77,6 +77,12 @@ class DetectSeries
         }
 
         if ($user !== null && ($own = $this->fromLibrary($isbn, $title, $user, $languages)) !== null) {
+            // A bare title (`Claymore`) says which series but not which volume: the
+            // catalogues may still know the number, even when they name another series.
+            if ($own->volume === null && ($volume = $this->series->resolve($isbn, $language, $title, $user)->best()?->volume) !== null) {
+                $own = new SeriesMatch($own->series, $volume, $own->confidence, $own->source);
+            }
+
             return new SeriesResolution([$own]);
         }
 
@@ -108,20 +114,19 @@ class DetectSeries
             return $this->libraryMatch($listed->series, VolumeNumber::parse($listed->volume_number));
         }
 
-        $parsed = $this->titleParser->parse($title);
+        $key = $this->titleKey($title);
 
-        if ($parsed === null) {
+        if ($key === null) {
             return null;
         }
 
-        $key = Text::key($parsed->title);
         $seriesIds = CollectionObject::query()->ownedBy($user)
             ->whereNotNull('serie_id')
             ->when($languages !== [], fn ($query) => $query->where(fn ($query) => $query
                 ->whereDoesntHave('languages')
                 ->orWhereHas('languages', fn ($query) => $query->whereIn('code', $languages))))
             ->get(['id', 'name', 'serie_id'])
-            ->filter(fn (CollectionObject $other) => Text::key($this->titleParser->parse($other->name)?->title) === $key)
+            ->filter(fn (CollectionObject $other) => $this->titleKey($other->name) === $key)
             ->pluck('serie_id')
             ->unique();
 
@@ -130,7 +135,18 @@ class DetectSeries
             return null;
         }
 
-        return $this->libraryMatch(Series::query()->findOrFail($seriesIds->first()), $parsed->volume);
+        return $this->libraryMatch(Series::query()->findOrFail($seriesIds->first()), $this->titleParser->parse($title)?->volume);
+    }
+
+    /**
+     * The series title of a book name: `Claymore, Vol. 15` and a bare `Claymore` (as
+     * catalogues title many English manga volumes) both give the key of `Claymore`.
+     */
+    private function titleKey(?string $name): ?string
+    {
+        $key = Text::key($this->titleParser->parse($name)?->title ?? $name);
+
+        return $key === '' ? null : $key;
     }
 
     private function libraryMatch(Series $series, ?VolumeNumber $volume): SeriesMatch
