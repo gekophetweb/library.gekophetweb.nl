@@ -119,7 +119,11 @@ Hardcover's "Magi: The Labyrinth of Magic"; load lists `withBookTitle()`).
 Series detection asks the owner's own library before any catalogue
 (`DetectSeries::fromLibrary`): a series whose volume list carries the ISBN, else the one
 series holding their other volumes of the same title (`マギ 3` joins the series of
-`マギ 1`). Catalogues miss single volumes of series they know.
+`マギ 1`). Catalogues miss single volumes of series they know. The title match only counts
+volumes in the book's own language (or with none): an English edition never joins the
+owner's Japanese series of that title. Open Library's search answers with the *work*,
+titled in the original language for translations (`鋼の錬金術師 4` for a VIZ volume), so a
+non-Latin work title is replaced by the title of the ISBN's edition record.
 
 A book's series can be picked by hand on its item page (`objects.series`): one of the
 owner's series, or a typed name (`LinkSeries::byName`, so a name they already use joins

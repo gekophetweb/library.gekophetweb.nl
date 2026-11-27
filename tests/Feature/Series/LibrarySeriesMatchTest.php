@@ -4,6 +4,7 @@ use App\Actions\Series\DetectSeries;
 use App\Jobs\SyncSeriesVolumes;
 use App\Models\Category;
 use App\Models\CollectionObject;
+use App\Models\Language;
 use App\Models\Series;
 use App\Models\SeriesVolume;
 use App\Models\User;
@@ -86,6 +87,31 @@ it('does not choose when the title is spread over two series', function () {
     app(DetectSeries::class)->handle($volume3, 'en');
 
     expect($volume3->refresh()->serie_id)->toBeNull();
+});
+
+it('does not join a series of the same title in another language', function () {
+    // Seen in production: an English Fullmetal Alchemist 4 titled "鋼の錬金術師 4" by Open
+    // Library joined the owner's Japanese 鋼の錬金術師 series.
+    $ja = Language::query()->where('code', 'ja')->sole();
+    $en = Language::query()->where('code', 'en')->sole();
+    magiBook('マギ 1', ['serie_id' => $this->magi->id])->languages()->attach($ja);
+    $english = magiBook('マギ 3', ['barcode' => MAGI_3]);
+    $english->languages()->attach($en);
+
+    app(DetectSeries::class)->handle($english, 'en');
+
+    expect($english->refresh()->serie_id)->toBeNull();
+});
+
+it('joins the series of the same title in the same language', function () {
+    $ja = Language::query()->where('code', 'ja')->sole();
+    magiBook('マギ 1', ['serie_id' => $this->magi->id])->languages()->attach($ja);
+    $volume3 = magiBook('マギ 3', ['barcode' => MAGI_3]);
+    $volume3->languages()->attach($ja);
+
+    app(DetectSeries::class)->handle($volume3, 'ja');
+
+    expect($volume3->refresh()->serie_id)->toBe($this->magi->id);
 });
 
 it('never uses another user\'s series', function () {

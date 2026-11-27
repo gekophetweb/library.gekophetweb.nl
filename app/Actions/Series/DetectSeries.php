@@ -64,8 +64,10 @@ class DetectSeries
             }
 
             [$barcode, $title, $user] = [$objectOrBarcode->barcode, $objectOrBarcode->name, $objectOrBarcode->user];
+            $languages = $objectOrBarcode->languages->pluck('code')->all();
         } else {
             $barcode = $objectOrBarcode;
+            $languages = [$language];
         }
 
         $isbn = Isbn::tryFrom($barcode);
@@ -74,7 +76,7 @@ class DetectSeries
             return new SeriesResolution;
         }
 
-        if ($user !== null && ($own = $this->fromLibrary($isbn, $title, $user)) !== null) {
+        if ($user !== null && ($own = $this->fromLibrary($isbn, $title, $user, $languages)) !== null) {
             return new SeriesResolution([$own]);
         }
 
@@ -86,8 +88,13 @@ class DetectSeries
      * ISBN, else the one series holding their other volumes of the same title (`マギ 3`
      * joins the series of `マギ 1` and `マギ 10`). Catalogues often miss single volumes
      * of a series they know, or name it differently (Hardcover's English title).
+     *
+     * The title match only counts volumes in one of $languages (or with no language): an
+     * English edition is a different series from the owner's Japanese one of that title.
+     *
+     * @param  list<string>  $languages  language codes of the book being matched
      */
-    private function fromLibrary(Isbn $isbn, ?string $title, User $user): ?SeriesMatch
+    private function fromLibrary(Isbn $isbn, ?string $title, User $user, array $languages = []): ?SeriesMatch
     {
         $listed = SeriesVolume::query()
             ->whereHas('series', fn ($query) => $query->ownedBy($user))
@@ -110,6 +117,9 @@ class DetectSeries
         $key = Text::key($parsed->title);
         $seriesIds = CollectionObject::query()->ownedBy($user)
             ->whereNotNull('serie_id')
+            ->when($languages !== [], fn ($query) => $query->where(fn ($query) => $query
+                ->whereDoesntHave('languages')
+                ->orWhereHas('languages', fn ($query) => $query->whereIn('code', $languages))))
             ->get(['id', 'name', 'serie_id'])
             ->filter(fn (CollectionObject $other) => Text::key($this->titleParser->parse($other->name)?->title) === $key)
             ->pluck('serie_id')
