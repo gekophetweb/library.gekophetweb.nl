@@ -43,6 +43,10 @@ class OpenLibraryCatalogueSearch implements CatalogueLookup, CatalogueSearch
     /**
      * The work that lists this ISBN among its editions. Open Library describes the work,
      * so the result carries the scanned ISBN and the work's title, author and cover.
+     *
+     * A work groups every translation under the original title ("鋼の錬金術師 4" for the
+     * English VIZ edition), so a title in another script than Latin is checked against
+     * the edition record of this ISBN, whose title is that edition's own.
      */
     public function lookup(string $barcode, CatalogueContext $context): ?CatalogueResult
     {
@@ -50,11 +54,38 @@ class OpenLibraryCatalogueSearch implements CatalogueLookup, CatalogueSearch
             $title = Text::clean($doc['title'] ?? null);
 
             if ($title !== null && in_array($barcode, $doc['isbn'] ?? [], true)) {
+                if (! Text::isLatin($title)) {
+                    $title = $this->editionTitle($barcode, $context) ?? $title;
+                }
+
                 return $this->result($doc, $title, $barcode);
             }
         }
 
         return null;
+    }
+
+    /** The title of the edition record of $barcode (`/isbn/{isbn}.json`), if any. */
+    private function editionTitle(string $barcode, CatalogueContext $context): ?string
+    {
+        try {
+            $response = $this->logger->send(
+                provider: $this->name(),
+                operation: 'edition',
+                query: $barcode,
+                request: fn () => $this->http
+                    ->withUserAgent(config('series.user_agent'))
+                    ->timeout(config('catalogue.timeout'))
+                    ->acceptJson()
+                    ->get(rtrim(config('series.providers.openlibrary.endpoint'), '/')."/isbn/{$barcode}.json"),
+                language: $context->language,
+                category: $context->category->kind->value,
+            );
+        } catch (ConnectionException) {
+            return null;
+        }
+
+        return $response->successful() ? Text::clean($response->json('title')) : null;
     }
 
     public function search(string $term, CatalogueContext $context, int $limit): array

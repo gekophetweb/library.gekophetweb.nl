@@ -1,12 +1,15 @@
 <?php
 
 use App\Actions\Series\DetectSeries;
+use App\Enums\ApiKeyProvider;
 use App\Jobs\SyncSeriesVolumes;
 use App\Models\Category;
 use App\Models\CollectionObject;
+use App\Models\Language;
 use App\Models\Series;
 use App\Models\SeriesVolume;
 use App\Models\User;
+use App\Models\UserApiKey;
 use Database\Seeders\CatalogueSeeder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
@@ -29,7 +32,7 @@ beforeEach(function () {
         'name' => 'Magi: The Labyrinth of Magic', 'name_romanized' => 'Magi: The Labyrinth of Magic',
         'external_source' => 'hardcover', 'external_id' => '27974', 'synced_at' => now(),
     ]);
-    Http::fake(fn () => Http::response(['error' => 'notfound'], 404));
+    fakeSeriesApis();
     Queue::fake([SyncSeriesVolumes::class]);
 });
 
@@ -86,6 +89,61 @@ it('does not choose when the title is spread over two series', function () {
     app(DetectSeries::class)->handle($volume3, 'en');
 
     expect($volume3->refresh()->serie_id)->toBeNull();
+});
+
+it('does not join a series of the same title in another language', function () {
+    // Seen in production: an English Fullmetal Alchemist 4 titled "鋼の錬金術師 4" by Open
+    // Library joined the owner's Japanese 鋼の錬金術師 series.
+    $ja = Language::query()->where('code', 'ja')->sole();
+    $en = Language::query()->where('code', 'en')->sole();
+    magiBook('マギ 1', ['serie_id' => $this->magi->id])->languages()->attach($ja);
+    $english = magiBook('マギ 3', ['barcode' => MAGI_3]);
+    $english->languages()->attach($en);
+
+    app(DetectSeries::class)->handle($english, 'en');
+
+    expect($english->refresh()->serie_id)->toBeNull();
+});
+
+it('joins the series of the same title in the same language', function () {
+    $ja = Language::query()->where('code', 'ja')->sole();
+    magiBook('マギ 1', ['serie_id' => $this->magi->id])->languages()->attach($ja);
+    $volume3 = magiBook('マギ 3', ['barcode' => MAGI_3]);
+    $volume3->languages()->attach($ja);
+
+    app(DetectSeries::class)->handle($volume3, 'ja');
+
+    expect($volume3->refresh()->serie_id)->toBe($this->magi->id);
+});
+
+it('joins the series of the same title when the name has no volume number, taking the catalogue\'s volume', function () {
+    // Seen in production (batch 21): English Claymore 16 is titled just "Claymore", and
+    // Hardcover files it under a second Claymore series (204266, not 12594), so it got a
+    // series of its own next to the owner's volumes 1–15.
+    UserApiKey::factory()->for($this->user)->create(['provider' => ApiKeyProvider::Hardcover, 'key' => 'hc-token']);
+    $claymore = Series::factory()->for($this->user)->create([
+        'name' => 'クレイモア / Claymore', 'external_source' => 'hardcover', 'external_id' => '12594', 'synced_at' => now(),
+    ]);
+    magiBook('Claymore, Vol. 15', ['serie_id' => $claymore->id]);
+    $volume16 = magiBook('Claymore', ['barcode' => '9781421534152']);
+
+    $resolution = app(DetectSeries::class)->handle($volume16, 'en');
+
+    expect($resolution->best()->source)->toBe(DetectSeries::SOURCE_LIBRARY)
+        ->and($volume16->refresh()->serie_id)->toBe($claymore->id)
+        ->and($volume16->bookDetail->volume)->toBe('16')
+        ->and(Series::count())->toBe(2);
+});
+
+it('joins the series of a bare title without a volume when no catalogue knows one', function () {
+    $claymore = Series::factory()->for($this->user)->create(['name' => 'Claymore']);
+    magiBook('Claymore', ['serie_id' => $claymore->id]);
+    $another = magiBook('Claymore', ['barcode' => '9781421534152']);
+
+    app(DetectSeries::class)->handle($another, 'en');
+
+    expect($another->refresh()->serie_id)->toBe($claymore->id)
+        ->and($another->bookDetail?->volume)->toBeNull();
 });
 
 it('never uses another user\'s series', function () {
