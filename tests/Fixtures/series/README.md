@@ -8,6 +8,7 @@
 | `wikidata-*.json` | **Recorded** 2026-11-09 from the Wikidata SPARQL endpoint. |
 | `googlebooks-*.json` | **Hand-written** 2026-11-13 from the documented `volumes`, `series/get` and `series/membership/get` response shapes (English *Berserk Deluxe*). |
 | `hardcover-*.json` | **Hand-written** 2026-11-13 from Hardcover's GraphQL schema (`editions`, `book_series`, `series_by_pk`). |
+| `hardcover-isbn-9781421534152.json` | **Recorded** 2026-11-27 in production (API call log of batch 21): English *Claymore* 16, filed by Hardcover under a second Claymore series. |
 
 The Google Books and Hardcover files are hand-written because neither API answers
 without the user's key (Google Books returns `429` keyless). The IDs (`gbSeriesBerserkDx`,
